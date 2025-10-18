@@ -1,0 +1,10 @@
+# AutoHotkey MCP debug log
+# Shows recent high-level actions to assist with troubleshooting
+[2025-10-18T02:00:53.095Z] | server.initialize | START | Loading AutoHotkey documentation
+[2025-10-18T02:00:53.099Z] | server.initialize | SUCCESS | Documentation cache ready
+[2025-10-18T02:00:53.099Z] | server.start | START | Launching stdio transport (Claude Desktop)
+[2025-10-18T02:00:53.100Z] | server.start | SUCCESS | Stdio transport ready (Claude Desktop)
+[2025-10-18T02:00:53.106Z] | tools.list | START | Standard tool listing
+[2025-10-18T02:00:53.107Z] | tools.list | SUCCESS | Returned 29 tools | mode="stdio"
+[2025-10-18T02:00:53.112Z] | resources.list | START | Enumerating exposed resources
+[2025-10-18T02:00:53.112Z] | resources.list | SUCCESS | Returned 11 resources
