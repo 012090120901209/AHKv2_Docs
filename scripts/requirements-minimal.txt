@@ -1,0 +1,11 @@
+# Minimal dependencies - works without embeddings
+
+# Just for basic analysis and reorganization
+# (no external dependencies needed for scripts 1 and 2)
+
+# Add these if you want vectorization:
+# openai>=1.0.0
+# numpy>=1.24.0
+
+# Add this if you want ChromaDB:
+# chromadb>=0.4.0
