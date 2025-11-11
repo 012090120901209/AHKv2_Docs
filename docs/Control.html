@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Functions | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Functions for retrieving information about a control or for performing">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Control</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="control-functions">Control Functions</h1>
+<p>Functions for retrieving information about a control or for performing
+various operations on a control. Click on a function name for details.</p>
+<hr />
+<p>Function                                         Description</p>
+<hr />
+<p><a href="ControlAddItem.htm">ControlAddItem</a>             Adds the specified string as a new
+                                                   entry at the bottom of a ListBox or
+                                                   ComboBox.</p>
+<p><a href="ControlChooseIndex.htm">ControlChooseIndex</a>     Sets the selection in a ListBox,
+                                                   ComboBox or Tab control to be the
+                                                   Nth item.</p>
+<p><a href="ControlChooseString.htm">ControlChooseString</a>   Sets the selection in a ListBox or
+                                                   ComboBox to be the first entry
+                                                   whose leading part matches the
+                                                   specified string.</p>
+<p><a href="ControlClick.htm">ControlClick</a>                 Sends a mouse button or mouse wheel
+                                                   event to a control.</p>
+<p><a href="ControlDeleteItem.htm">ControlDeleteItem</a>       Deletes the specified entry number
+                                                   from a ListBox or ComboBox.</p>
+<p><a href="ControlFindItem.htm">ControlFindItem</a>           Returns the entry number of a
+                                                   ListBox or ComboBox that is a
+                                                   complete match for the specified
+                                                   string.</p>
+<p><a href="ControlFocus.htm">ControlFocus</a>                 Sets input focus to a given control
+                                                   on a window.</p>
+<p><a href="ControlGetChecked.htm">ControlGetChecked</a>       Returns a non-zero value if the
+                                                   checkbox or radio button is
+                                                   checked.</p>
+<p><a href="ControlGetChoice.htm">ControlGetChoice</a>         Returns the name of the currently
+                                                   selected entry in a ListBox or
+                                                   ComboBox.</p>
+<p><a href="ControlGetClassNN.htm">ControlGetClassNN</a>       Returns the ClassNN (class name and
+                                                   sequence number) of the specified
+                                                   control.</p>
+<p><a href="ControlGetEnabled.htm">ControlGetEnabled</a>       Returns a non-zero value if the
+                                                   specified control is enabled.</p>
+<p><a href="ControlGetFocus.htm">ControlGetFocus</a>           Retrieves which control of the
+                                                   target window has keyboard focus,
+                                                   if any.</p>
+<p><a href="ControlGetHwnd.htm">ControlGetHwnd</a>             Returns the unique ID number of the
+                                                   specified control.</p>
+<p><a href="ControlGetIndex.htm">ControlGetIndex</a>           Returns the index of the currently
+                                                   selected entry or tab in a ListBox,
+                                                   ComboBox or Tab control.</p>
+<p><a href="ControlGetItems.htm">ControlGetItems</a>           Returns an array of items/rows from
+                                                   a ListBox, ComboBox, or
+                                                   DropDownList.</p>
+<p><a href="ControlGetPos.htm">ControlGetPos</a>               Retrieves the position and size of
+                                                   a control.</p>
+<p><a href="ControlGetStyle.htm">ControlGetStyle\                                Returns an integer representing the
+  ControlGetExStyle</a>          style or extended style of the
+                                                   specified control.</p>
+<p><a href="ControlGetText.htm">ControlGetText</a>             Retrieves text from a control.</p>
+<p><a href="ControlGetVisible.htm">ControlGetVisible</a>       Returns a non-zero value if the
+                                                   specified control is visible.</p>
+<p><a href="ControlHide.htm">ControlHide</a>                   Hides the specified control.</p>
+<p><a href="ControlHideDropDown.htm">ControlHideDropDown</a>   Hides the drop-down list of a
+                                                   ComboBox control.</p>
+<p><a href="ControlMove.htm">ControlMove</a>                   Moves or resizes a control.</p>
+<p><a href="ControlSend.htm">ControlSend\                                    Sends simulated keystrokes or text
+  ControlSendText</a>                to a window or control.</p>
+<p><a href="ControlSetChecked.htm">ControlSetChecked</a>       Turns on (checks) or turns off
+                                                   (unchecks) a checkbox or radio
+                                                   button.</p>
+<p><a href="ControlSetEnabled.htm">ControlSetEnabled</a>       Enables or disables the specified
+                                                   control.</p>
+<p><a href="ControlSetStyle.htm">ControlSetStyle\                                Changes the style or extended style
+  ControlSetExStyle</a>          of the specified control,
+                                                   respectively.</p>
+<p><a href="ControlSetText.htm">ControlSetText</a>             Changes the text of a control.</p>
+<p><a href="ControlShow.htm">ControlShow</a>                   Shows the specified control if it
+                                                   was previously hidden.</p>
+<p><a href="ControlShowDropDown.htm">ControlShowDropDown</a>   Shows the drop-down list of a
+                                                   ComboBox control.</p>
+<p><a href="EditGetCurrentCol.htm">EditGetCurrentCol</a>       Returns the column number in an
+                                                   Edit control where the caret (text
+                                                   insertion point) resides.</p>
+<p><a href="EditGetCurrentLine.htm">EditGetCurrentLine</a>     Returns the line number in an Edit
+                                                   control where the caret (text
+                                                   insert point) resides.</p>
+<p><a href="EditGetLine.htm">EditGetLine</a>                   Returns the text of the specified
+                                                   line in an Edit control.</p>
+<p><a href="EditGetLineCount.htm">EditGetLineCount</a>         Returns the number of lines in an
+                                                   Edit control.</p>
+<p><a href="EditGetSelectedText.htm">EditGetSelectedText</a>   Returns the selected text in an
+                                                   Edit control.</p>
+<p><a href="EditPaste.htm">EditPaste</a>                       Pastes the specified string at the
+                                                   caret (text insertion point) in an
+                                                   Edit control.</p>
+<p><a href="ListViewGetContent.htm">ListViewGetContent</a>     Returns a list of items/rows from a
+                                                   ListView.</p>
+<hr />
+<h2 id="Parameter">The <em>Control</em> Parameter</h2>
+<p>Functions which operate on individual controls have a parameter named
+<em>Control</em> which supports a few different ways to identify the control.
+The <em>Control</em> parameter can be one of the following:</p>
+<p><strong>ClassNN</strong> (<a href="../Concepts.htm#strings">String</a>): The ClassNN (classname
+and instance number) of the control, which can be determined via Window
+Spy. For example \"Edit1\" is the first control with classname \"Edit\".</p>
+<p><strong>Text</strong> (<a href="../Concepts.htm#strings">String</a>): The control\'s text. The
+matching behavior is determined by
+<a href="SetTitleMatchMode.htm">SetTitleMatchMode</a>.</p>
+<p><strong>HWND</strong> (<a href="../Concepts.htm#numbers">Integer</a>): The control\'s HWND,
+which is typically retrieved via <a href="ControlGetHwnd.htm">ControlGetHwnd</a>,
+<a href="MouseGetPos.htm">MouseGetPos</a>, or <a href="DllCall.htm">DllCall</a>. This also
+works on hidden controls even when
+<a href="DetectHiddenWindows.htm">DetectHiddenWindows</a> is Off. Any subsequent
+window parameters are ignored.</p>
+<p><strong>Object:</strong> An object of any type with a <code>Hwnd</code> property, such as a
+<a href="GuiControl.htm">GuiControl</a>. A <a href="Error.htm#PropertyError">PropertyError</a>
+is thrown if the object has no <code>Hwnd</code> property, or
+<a href="Error.htm#TypeError">TypeError</a> if it does not return a pure integer.
+Any subsequent window parameters are ignored.</p>
+<p><strong>Omitted:</strong> A few functions are able to operate on either a control or
+a top-level window. Omitting the <em>Control</em> parameter causes the function
+to use the target window (specified by
+<em><a href="../misc/WinTitle.htm">WinTitle</a></em>) instead of one of its controls. For
+example, <a href="ControlSend.htm">ControlSend</a> can send keyboard messages
+directly to the window.</p>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>Typically one of the following errors may be thrown:</p>
+<ul>
+<li><a href="Error.htm#TargetError">TargetError</a>: The target window or control
+    could not be found.</li>
+<li><a href="Error.htm">Error</a> or <a href="Error.htm#OSError">OSError</a>: There was a
+    problem carring out the function\'s purpose, such as retrieving a
+    setting or applying a change.</li>
+<li><a href="Error.htm#ValueError">ValueError</a> or
+    <a href="Error.htm#TypeError">TypeError</a>: Invalid parameters were detected.</li>
+</ul>
+<h2 id="Remarks">Remarks</h2>
+<p>To improve reliability, a delay is done automatically after each use of
+a Control function that changes a control (except for
+<a href="ControlSetStyle.htm">ControlSetStyle</a> and
+<a href="ControlSetStyle.htm">ControlSetExStyle</a>). That delay can be changed via
+<a href="SetControlDelay.htm">SetControlDelay</a> or by assigning a value to
+<a href="../Variables.htm#ControlDelay">A_ControlDelay</a>. For details, see
+<a href="SetControlDelay.htm#Remarks">SetControlDelay remarks</a>.</p>
+<p>To discover the ClassNN or HWND of the control that the mouse is
+currently hovering over, use <a href="MouseGetPos.htm">MouseGetPos</a>.</p>
+<p>To retrieve an array of all controls in a window, use
+<a href="WinGetControls.htm">WinGetControls</a> or
+<a href="WinGetControlsHwnd.htm">WinGetControlsHwnd</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="SetControlDelay.htm">SetControlDelay</a>, <a href="Win.htm">Win functions</a>,
+<a href="GuiControl.htm">GuiControl object</a> (for controls created by the script)</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Control.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#control-functions">Control Functions</a><ul>
+<li><a href="#Parameter">The Control Parameter</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

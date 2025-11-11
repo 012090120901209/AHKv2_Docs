@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotstring | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Creates, modifies, enables, or disables a [hotstring](../Hotstrings.htm)">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Hotstring</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="hotstring">Hotstring</h1>
+<p>Creates, modifies, enables, or disables a <a href="../Hotstrings.htm">hotstring</a>
+while the script is running.</p>
+<pre class="codehilite"><code class="language-Syntax">Hotstring String , Replacement, OnOffToggle
+Hotstring NewOptions
+Hotstring SubFunction , Value1
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>String</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The hotstring\'s trigger string, preceded by <a href="../Hotstrings.htm">the usual
+colons</a> and <a href="../Hotstrings.htm#Options">option
+characters</a>. For example, <code>"::btw"</code> or
+<code>":*:]d"</code>.</p>
+<p><em>String</em> may be matched to an existing hotstring by considering
+<a href="../Hotstrings.htm#C">case-sensitivity (C)</a>, <a href="../Hotstrings.htm#Question">word-sensitivity
+(?)</a>, activation criteria (as set by
+<a href="_HotIf.htm">#HotIf</a> or <a href="HotIf.htm">HotIf</a>) and the trigger string.
+For example, <code>"::btw"</code> and <code>"::BTW"</code> match unless the case-sensitive
+mode was enabled as a default, while <code>":C:btw"</code> and <code>":C:BTW"</code> never
+match. The <code>C</code> and <code>?</code> options may be included in <em>String</em> or set as
+defaults by the <a href="_Hotstring.htm">#Hotstring</a> directive or a previous
+use of <em>NewOptions</em>.</p>
+<p>If the hotstring already exists, any options specified in <em>String</em>
+are put into effect, while all other options are left as is.
+However, since hotstrings with <code>C</code> or <code>?</code> are considered distinct
+from other hotstrings, it is not possible to add or remove these
+options. Instead, turn off the existing hotstring and create a new
+one.</p>
+<p>When a hotstring is first created -- either by the Hotstring
+function or the <a href="../Hotstrings.htm">double-colon syntax</a> in the
+script -- its trigger string and sequence of option characters
+becomes the permanent name of that hotstring as reflected by
+<a href="../Hotstrings.htm#ThisHotkey">ThisHotkey</a>. This name does not
+change even if the Hotstring function later accesses the hotstring
+with different option characters.</p>
+</dd>
+<dt>Replacement</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or <a href="../misc/Functor.htm">Function
+Object</a></p>
+<p>If omitted and <em>String</em> already exists as a hotstring, its
+replacement will not be changed. This is useful to change only the
+hotstring\'s options, or to turn it on or off. Otherwise, specify
+the replacement string or a callback.</p>
+<p>If <em>Replacement</em> is a function, it is called (as a new
+<a href="../misc/Threads.htm">thread</a>) when the hotstring triggers.</p>
+<p>The callback accepts one parameter and can be
+<a href="../Functions.htm#intro">defined</a> as follows:</p>
+<p><code>NoIndent
+MyCallback(HotstringName) { ...</code></p>
+<p>Although the name you give the parameter does not matter, it is
+assigned the <a href="../Hotstrings.htm#ThisHotkey">hotstring name</a>.</p>
+<p>You can omit the callback\'s parameter if the corresponding
+information is not needed, but in this case an asterisk must be
+specified, e.g. <code>MyCallback(*)</code>.</p>
+<p>Hotstrings defined with the <a href="../Hotstrings.htm">double-colon syntax</a>
+automatically use the parameter name <code>ThisHotkey</code>. Hotstrings can
+also be <a href="../Hotstrings.htm#Function">assigned a function name</a>
+without the Hotstring function.</p>
+<p>After reassigning the function of a hotstring, its original function
+can only be restored if it was <a href="../Hotstrings.htm#Function">given a
+name</a>.</p>
+<p><strong>Note:</strong> If this parameter is specified but the hotstring is
+disabled from a previous use of this function, the hotstring will
+remain disabled. To prevent this, specify <code>"On"</code> for <em>OnOffToggle</em>.</p>
+</dd>
+<dt>OnOffToggle</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>One of the following values:</p>
+<p><strong>On</strong> or <strong>1</strong> (true): Enables the hotstring.</p>
+<p><strong>Off</strong> or <strong>0</strong> (false): Disables the hotstring.</p>
+<p><strong>Toggle</strong> or <strong>-1</strong>: Sets the hotstring to the opposite state
+(enabled or disabled).</p>
+</dd>
+<dt>NewOptions</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>To set new default options for subsequently created hotstrings, pass
+the options to the Hotstring function without any leading or
+trailing colon. For example: <code>Hotstring "T"</code>.</p>
+<p>Turning on <a href="../Hotstrings.htm#C">case-sensitivity (C)</a> or
+<a href="../Hotstrings.htm#Question">word-sensitivity (?)</a> also affects
+which existing hotstrings will be found by any subsequent calls to
+the Hotstring function. For example, <code>Hotstring ":T:btw"</code> will find
+<code>::BTW</code> by default, but not if <code>Hotstring "C"</code> or
+<a href="_Hotstring.htm"><code>#Hotstring</code></a><code>C</code> is in effect. This can be undone
+or overridden by passing a mutually-exclusive option; for example,
+<code>C0</code> and <code>C1</code> override <code>C</code>.</p>
+</dd>
+<dt>SubFunction, Value1</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>These parameters are dependent upon each other and their usage is
+described below.</p>
+</dd>
+</dl>
+<h2 id="SubFunctions">Sub-functions</h2>
+<p>For <em>SubFunction</em>, specify one of the following:</p>
+<ul>
+<li><a href="#EndChars">EndChars</a>: Retrieves or modifies the set of ending
+    characters.</li>
+<li><a href="#MouseReset">MouseReset</a>: Controls whether mouse clicks reset the
+    hotstring recognizer.</li>
+<li><a href="#Reset">Reset</a>: Immediately resets the hotstring recognizer.</li>
+</ul>
+<h3 id="EndChars">EndChars</h3>
+<p>Retrieves or modifies the set of characters used as <a href="../Hotstrings.htm#EndChars">ending
+characters</a> by the hotstring recognizer.</p>
+<pre class="codehilite"><code class="language-Syntax">OldValue := Hotstring(&quot;EndChars&quot; , NewValue)
+</code></pre>
+
+<p>For example:</p>
+<pre class="codehilite"><code>prev_chars := Hotstring(&quot;EndChars&quot;, &quot;-()[]{}':;`&quot;/\,.?!`n`s`t&quot;)
+MsgBox &quot;The previous value was: &quot; prev_chars
+</code></pre>
+
+<p><a href="#EndChars">#Hotstring EndChars</a> also affects this setting.</p>
+<p>It is currently not possible to specify a different set of end
+characters for each hotstring.</p>
+<h3 id="MouseReset">MouseReset</h3>
+<p>Retrieves or modifies the global setting which controls whether mouse
+clicks reset the hotstring recognizer, as described
+<a href="../Hotstrings.htm#NoMouse">here</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">OldValue := Hotstring(&quot;MouseReset&quot; , NewValue)
+</code></pre>
+
+<p><em>NewValue</em> should be 1 (true) to enable mouse click detection and
+resetting of the hotstring recognizer, or 0 (false) to disable it. The
+return value is the setting which was in effect before the function was
+called.</p>
+<p>The <a href="InstallMouseHook.htm">mouse</a> hook may be installed or removed if
+justified by the changes made by this function.</p>
+<p><a href="_Hotstring.htm">#Hotstring NoMouse</a> also affects this setting, and is
+equivalent to specifying <code>false</code> for <em>NewValue</em>.</p>
+<h3 id="Reset">Reset</h3>
+<p>Immediately resets the hotstring recognizer.</p>
+<pre class="codehilite"><code class="language-Syntax">Hotstring &quot;Reset&quot;
+</code></pre>
+
+<p>In other words, the script will begin waiting for an entirely new
+hotstring, eliminating from consideration anything you previously typed.</p>
+<h2 id="Errors">Errors</h2>
+<p>This function throws an exception if the parameters are invalid or a
+memory allocation fails.</p>
+<p>A <a href="Error.htm#TargetError">TargetError</a> is thrown if <em>Replacement</em> is
+omitted and <em>String</em> is valid but does not match an existing hotstring.
+This can be utilized to test for the existence of a hotstring. For
+example:</p>
+<pre class="codehilite"><code>try
+    Hotstring &quot;::btw&quot;
+catch TargetError
+    MsgBox &quot;The hotstring does not exist or it has no variant for the current HotIf criteria.&quot;
+</code></pre>
+
+<h2 id="Remarks">Remarks</h2>
+<p>The <a href="HotIf.htm">current HotIf setting</a> determines the
+<a href="#variant">variant</a> of a hotstring upon which the Hotstring function
+will operate.</p>
+<p>If the script is <a href="Suspend.htm">suspended</a>, newly added/enabled
+hotstrings will also be suspended until the suspension is turned off
+(unless they are exempt as described in the <a href="Suspend.htm">Suspend</a>
+section).</p>
+<p>The <a href="InstallKeybdHook.htm">keyboard</a> and/or
+<a href="InstallMouseHook.htm">mouse</a> hooks will be installed or removed if
+justified by the changes made by this function.</p>
+<p>This function cannot directly enable or disable hotstrings in scripts
+other than its own.</p>
+<p>Once a script has at least one hotstring, it becomes
+<a href="../Scripts.htm#persistent">persistent</a>, meaning that
+<a href="ExitApp.htm">ExitApp</a> rather than <a href="Exit.htm">Exit</a> should be used to
+terminate it.</p>
+<h2 id="variant">Variant (Duplicate) Hotstrings</h2>
+<p>A particular hotstring can be created more than once if each definition
+has different <a href="HotIf.htm">HotIf</a> criteria,
+<a href="../Hotstrings.htm#C">case-sensitivity</a> (<code>C</code> vs. <code>C0</code>/<code>C1</code>), or
+<a href="../Hotstrings.htm#Question">word-sensitivity</a> (<code>?</code>). These are known as
+<em>hotstring variants</em>. For example:</p>
+<pre class="codehilite"><code>HotIfWinActive &quot;ahk_group CarForums&quot;
+Hotstring &quot;::btw&quot;, &quot;behind the wheel&quot;
+HotIfWinActive &quot;Inter-Office Chat&quot;
+Hotstring &quot;::btw&quot;, &quot;back to work&quot;
+HotIfWinActive
+Hotstring &quot;::btw&quot;, &quot;by the way&quot;
+</code></pre>
+
+<p>If more than one variant of a hotstring is eligible to fire, only the
+one created earliest will fire.</p>
+<p>For more information, see <a href="HotIf.htm">HotIf</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="../Hotstrings.htm">Hotstrings</a>, <a href="HotIf.htm">HotIf</a>,
+<a href="../Variables.htm#ThisHotkey">A_ThisHotkey</a>,
+<a href="_MaxThreadsPerHotkey.htm">#MaxThreadsPerHotkey</a>,
+<a href="Suspend.htm">Suspend</a>, <a href="../misc/Threads.htm">Threads</a>,
+<a href="Thread.htm">Thread</a>, <a href="Critical.htm">Critical</a>, <a href="Hotkey.htm">Hotkey
+function</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExHelper .ex}
+<a class="ex_number" href="#ExHelper"></a> Hotstring Helper. The following script might
+be useful if you are a heavy user of hotstrings. It\'s based on the v1
+script created by Andreas Borutta. By pressing [Win]{.kbd}+[H]{.kbd} (or
+another hotkey of your choice), the currently selected text can be
+turned into a hotstring. For example, if you have \"by the way\"
+selected in a word processor, pressing [Win]{.kbd}+[H]{.kbd} will prompt
+you for its abbreviation (e.g. btw), add the new hotstring to the script
+and activate it.</p>
+<pre class="codehilite"><code>#h::  ; Win+H hotkey
+{
+    ; Get the text currently selected. The clipboard is used instead of
+    ; EditGetSelectedText because it works in a greater variety of editors
+    ; (namely word processors). Save the current clipboard contents to be
+    ; restored later. Although this handles only plain text, it seems better
+    ; than nothing:
+    ClipboardOld := A_Clipboard
+    A_Clipboard := &quot;&quot; ; Must start off blank for detection to work.
+    Send &quot;^c&quot;
+    if !ClipWait(1)  ; ClipWait timed out.
+    {
+        A_Clipboard := ClipboardOld ; Restore previous contents of clipboard before returning.
+        return
+    }
+    ; Replace CRLF and/or LF with `n for use in a &quot;send-raw&quot; hotstring:
+    ; The same is done for any other characters that might otherwise
+    ; be a problem in raw mode:
+    ClipContent := StrReplace(A_Clipboard, &quot;``&quot;, &quot;````&quot;)  ; Do this replacement first to avoid interfering with the others below.
+    ClipContent := StrReplace(ClipContent, &quot;`r`n&quot;, &quot;``n&quot;)
+    ClipContent := StrReplace(ClipContent, &quot;`n&quot;, &quot;``n&quot;)
+    ClipContent := StrReplace(ClipContent, &quot;`t&quot;, &quot;``t&quot;)
+    ClipContent := StrReplace(ClipContent, &quot;`;&quot;, &quot;```;&quot;)
+    A_Clipboard := ClipboardOld  ; Restore previous contents of clipboard.
+    ShowInputBox(&quot;:T:::&quot; ClipContent)
+}
+
+ShowInputBox(DefaultValue)
+{
+    ; This will move the input box's caret to a more friendly position:
+    SetTimer MoveCaret, 10
+    ; Show the input box, providing the default hotstring:
+    IB := InputBox(&quot;
+    (
+    Type your abbreviation at the indicated insertion point. You can also edit the replacement text if you wish.
+
+    Example entry: :T:btw::by the way
+    )&quot;, &quot;New Hotstring&quot;,, DefaultValue)
+    if IB.Result = &quot;Cancel&quot;  ; The user pressed Cancel.
+        return
+
+    if RegExMatch(IB.Value, &quot;(?P&lt;Label&gt;:.*?:(?P&lt;Abbreviation&gt;.*?))::(?P&lt;Replacement&gt;.*)&quot;, &amp;Entered)
+    {
+        if !Entered.Abbreviation
+            MsgText := &quot;You didn't provide an abbreviation&quot;
+        else if !Entered.Replacement
+            MsgText := &quot;You didn't provide a replacement&quot;
+        else
+        {
+            Hotstring Entered.Label, Entered.Replacement  ; Enable the hotstring now.
+            FileAppend &quot;`n&quot; IB.Value, A_ScriptFullPath  ; Save the hotstring for later use.
+        }
+    }
+    else
+        MsgText := &quot;The hotstring appears to be improperly formatted&quot;
+
+    if IsSet(MsgText)
+    {
+        Result := MsgBox(MsgText &quot;. Would you like to try again?&quot;,, 4)
+        if Result = &quot;Yes&quot;
+            ShowInputBox(DefaultValue)
+    }
+
+    MoveCaret()
+    {
+        WinWait &quot;New Hotstring&quot;
+        ; Otherwise, move the input box's insertion point to where the user will type the abbreviation.
+        Send &quot;{Home}{Right 3}&quot;
+        SetTimer , 0
+    }
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Hotstring.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#hotstring">Hotstring</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#SubFunctions">Sub-functions</a><ul>
+<li><a href="#EndChars">EndChars</a></li>
+<li><a href="#MouseReset">MouseReset</a></li>
+<li><a href="#Reset">Reset</a></li>
+</ul>
+</li>
+<li><a href="#Errors">Errors</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#variant">Variant (Duplicate) Hotstrings</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

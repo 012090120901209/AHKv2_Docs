@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Specifies one or more [statements](../Concepts.htm#statement) to execute">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>If</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="if">If</h1>
+<p>Specifies one or more <a href="../Concepts.htm#statement">statements</a> to execute
+if an <a href="../Variables.htm#Expressions">expression</a> evaluates to true.</p>
+<pre class="codehilite"><code class="language-Syntax">If Expression
+{
+    Statements
+}
+</code></pre>
+
+<h2 id="Remarks">Remarks</h2>
+<p>If the <em>If</em> statement\'s expression evaluates to true (which is any
+result other than an empty string or the number 0), the line or
+<a href="Block.htm">block</a> underneath it is executed. Otherwise, if there is a
+corresponding <a href="Else.htm">Else</a> statement, execution jumps to the line or
+block underneath it.</p>
+<p>If an <em>If</em> owns more than one line, those lines must be enclosed in
+braces (to create a <a href="Block.htm">block</a>). However, if only one line
+belongs to an <em>If</em>, the braces are optional. See the examples at the
+bottom of this page.</p>
+<p>The space after <code>if</code> is optional if the expression starts with an
+open-parenthesis, as in <code>if(expression)</code>.</p>
+<p>The <a href="Block.htm#otb">One True Brace (OTB) style</a> may optionally be used.
+For example:</p>
+<pre class="codehilite"><code>if (x &lt; y) {
+    ; ...
+}
+if WinExist(&quot;Untitled - Notepad&quot;) {
+    WinActivate
+}
+if IsDone {
+    ; ...
+} else {
+    ; ...
+}
+</code></pre>
+
+<p>Unlike an <em>If</em> statement, an <a href="Else.htm">Else</a> statement supports any
+type of statement immediately to its right.</p>
+<h2 id="Related">Related</h2>
+<p><a href="../Variables.htm#Expressions">Expressions</a>, <a href="../Variables.htm#ternary">Ternary operator
+(a?b:c)</a>, <a href="Block.htm">Blocks</a>,
+<a href="Else.htm">Else</a>, <a href="While.htm">While-loop</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExOne .ex}
+<a class="ex_number" href="#ExOne"></a> If <code class="variable">A_Index</code> is greater than 100,
+return.</p>
+<pre class="codehilite"><code>if (A_Index &gt; 100)
+    return
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExMultiple .ex}
+<a class="ex_number" href="#ExMultiple"></a> If the result of <code>A_TickCount - StartTime</code>
+is greater than the result of <code>2*MaxTime + 100</code>, show \"Too much time
+has passed.\" and terminate the script.</p>
+<pre class="codehilite"><code>if (A_TickCount - StartTime &gt; 2*MaxTime + 100)
+{
+    MsgBox &quot;Too much time has passed.&quot;
+    ExitApp
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExComplex .ex}
+<a class="ex_number" href="#ExComplex"></a> This example is executed as follows:</p>
+<ol>
+<li>If <code class="variable">Color</code> is the word \"Blue\" or \"White\":<ol>
+<li>Show \"The color is one of the allowed values.\".</li>
+<li>Terminate the script.</li>
+</ol>
+</li>
+<li>Otherwise if <code class="variable">Color</code> is the word \"Silver\":<ol>
+<li>Show \"Silver is not an allowed color.\".</li>
+<li>Stop further checks.</li>
+</ol>
+</li>
+<li>Otherwise:<ol>
+<li>Show \"This color is not recognized.\".</li>
+<li>Terminate the script.</li>
+</ol>
+</li>
+</ol>
+<!-- -->
+
+<pre class="codehilite"><code>if (Color = &quot;Blue&quot; or Color = &quot;White&quot;)
+{
+    MsgBox &quot;The color is one of the allowed values.&quot;
+    ExitApp
+}
+else if (Color = &quot;Silver&quot;)
+{
+    MsgBox &quot;Silver is not an allowed color.&quot;
+    return
+}
+else
+{
+    MsgBox &quot;This color is not recognized.&quot;
+    ExitApp
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExMultiStatement .ex}
+<a class="ex_number" href="#ExMultiStatement"></a> A single
+<a href="../Variables.htm#comma">multi-statement</a> line does not need to be
+enclosed in braces.</p>
+<pre class="codehilite"><code>MyVar := 3
+if (MyVar &gt; 2)
+    MyVar++, MyVar := MyVar - 4, MyVar .= &quot; test&quot;
+MsgBox MyVar  ; Reports &quot;0 test&quot;.
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExIfBetween .ex}
+<a class="ex_number" href="#ExIfBetween"></a> Similar to AutoHotkey v1\'s <a href="https://www.autohotkey.com/docs/v1/lib/IfBetween.htm">If Var [not]
+between Lower and
+Upper</a>, the
+following examples check whether a <a href="../Variables.htm">variable\'s</a>
+contents are numerically or alphabetically between two values
+(inclusive).</p>
+<p>Checks whether <code class="variable">var</code> is in the range 1 to 5:</p>
+<pre class="codehilite"><code>if (var &gt;= 1 and var &lt;= 5)
+    MsgBox var &quot; is in the range 1 to 5, inclusive.&quot;
+</code></pre>
+
+<p>Checks whether <code class="variable">var</code> is in the range 0.0 to 1.0:</p>
+<pre class="codehilite"><code>if not (var &gt;= 0.0 and var &lt;= 1.0)
+    MsgBox var &quot; is not in the range 0.0 to 1.0, inclusive.&quot;
+</code></pre>
+
+<p>Checks whether <code class="variable">var</code> is between <code class="variable">VarLow</code> and
+<code class="variable">VarHigh</code> (inclusive):</p>
+<pre class="codehilite"><code>if (var &gt;= VarLow and var &lt;= VarHigh)
+    MsgBox var &quot; is between &quot; VarLow &quot; and &quot; VarHigh &quot;.&quot;
+</code></pre>
+
+<p>Checks whether <code class="variable">var</code> is alphabetically between the words blue
+and red (inclusive):</p>
+<pre class="codehilite"><code>if (StrCompare(var, &quot;blue&quot;) &gt;= 0) and (StrCompare(var, &quot;red&quot;) &lt;= 0)
+    MsgBox var &quot; is alphabetically between the words blue and red.&quot;
+</code></pre>
+
+<p>Allows the user to enter a number and checks whether it is in the range
+1 to 10:</p>
+<pre class="codehilite"><code>LowerLimit := 1
+UpperLimit := 10
+IB := InputBox(&quot;Enter a number between &quot; LowerLimit &quot; and &quot; UpperLimit)
+if not (IB.Value &gt;= LowerLimit and IB.Value &lt;= UpperLimit)
+    MsgBox &quot;Your input is not within the valid range.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExIfInContains .ex}
+<a class="ex_number" href="#ExIfInContains"></a> Similar to AutoHotkey v1\'s <a href="https://www.autohotkey.com/docs/v1/lib/IfIn.htm">If Var
+[not] in/contains
+MatchList</a>, the
+following examples check whether a <a href="../Variables.htm">variable\'s</a>
+contents match one of the items in a list.</p>
+<p>Checks whether <code class="variable">var</code> is the file extension exe, bat or com:</p>
+<pre class="codehilite"><code>if (var ~= &quot;i)\A(exe|bat|com)\z&quot;)
+    MsgBox &quot;The file extension is an executable type.&quot;
+</code></pre>
+
+<p>Checks whether <code class="variable">var</code> is the prime number 1, 2, 3, 5, 7 or 11:</p>
+<pre class="codehilite"><code>if (var ~= &quot;\A(1|2|3|5|7|11)\z&quot;)
+    MsgBox var &quot; is a small prime number.&quot;
+</code></pre>
+
+<p>Checks whether <code class="variable">var</code> contains the digit 1 or 3:</p>
+<pre class="codehilite"><code>if (var ~= &quot;1|3&quot;)
+    MsgBox &quot;Var contains the digit 1 or 3 (Var could be 1, 3, 10, 21, 23, etc.)&quot;
+</code></pre>
+
+<p>Checks whether <code class="variable">var</code> is one of the items in
+<code class="variable">MyItemList</code>:</p>
+<pre class="codehilite"><code>; Uncomment the following line if MyItemList contains RegEx chars except |
+; MyItemList := RegExReplace(MyItemList, &quot;[\Q\.*?+[{()^$\E]&quot;, &quot;\$0&quot;)
+if (var ~= &quot;i)\A(&quot; MyItemList &quot;)\z&quot;)
+    MsgBox var &quot; is in the list.&quot;
+</code></pre>
+
+<p>Allows the user to enter a string and checks whether it is the word yes
+or no:</p>
+<pre class="codehilite"><code>IB := InputBox(&quot;Enter YES or NO&quot;)
+if not (IB.Value ~= &quot;i)\A(yes|no)\z&quot;)
+    MsgBox &quot;Your input is not valid.&quot;
+</code></pre>
+
+<p>Checks whether <code class="variable">active_title</code> contains \"Address List.txt\"
+or \"Customer List.txt\" and checks whether it contains \"metapad\" or
+\"Notepad\":</p>
+<pre class="codehilite"><code>active_title := WinGetTitle(&quot;A&quot;)
+if (active_title ~= &quot;i)Address List\.txt|Customer List\.txt&quot;)
+    MsgBox &quot;One of the desired windows is active.&quot;
+if not (active_title ~= &quot;i)metapad|Notepad&quot;)
+    MsgBox &quot;But the file is not open in either Metapad or Notepad.&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/If.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#if">If</a><ul>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

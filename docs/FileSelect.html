@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileSelect | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Displays a standard dialog that allows the user to open or save file(s).">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>FileSelect</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="fileselect">FileSelect</h1>
+<p>Displays a standard dialog that allows the user to open or save file(s).</p>
+<pre class="codehilite"><code class="language-Syntax">SelectedFile := FileSelect(Options, RootDir\Filename, Title, Filter)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If blank or omitted, it defaults to zero, which is the same as
+having none of the options below. Otherwise, specify a number or one
+of the letters listed below, optionally followed by a number. For
+example, <code>"M"</code>, <code>1</code> and <code>"M1"</code> are all valid (but not equivalent).</p>
+<p><strong>D:</strong> Select Folder (Directory). Specify the letter D to allow the
+user to select a folder rather than a file. The dialog has most of
+the same features as when selecting a file, but does not support
+filters (<em>Filter</em> must be blank or omitted).</p>
+<p><strong>M:</strong> Multi-select. Specify the letter M to allow the user to
+select more than one file via shift-click, control-click, or other
+means. In this case, the return value is an <a href="Array.htm">Array</a>
+instead of a string. To extract the individual files, see the
+example at the bottom of this page.</p>
+<p><strong>S:</strong> Save dialog. Specify the letter S to cause the dialog to
+always contain a Save button instead of an Open button.</p>
+<p>The following numbers can be used. To put more than one of them into
+effect, add them up. For example, to use 1 and 2, specify the number
+3.</p>
+<p><strong>1:</strong> File Must Exist\
+<strong>2:</strong> Path Must Exist\
+<strong>8:</strong> Prompt to Create New File\
+<strong>16:</strong> Prompt to Overwrite File\
+<strong>32:</strong> Shortcuts (.lnk files) are selected as-is rather than being
+resolved to their targets. This option also prevents navigation into
+a folder via a folder shortcut.</p>
+<p>As the \"Prompt to Overwrite\" option is supported only by the Save
+dialog, specifying that option without the \"Prompt to Create\"
+option also puts the S option into effect. Similarly, the \"Prompt
+to Create\" option has no effect when the S option is present.
+Specifying the number 24 enables whichever type of prompt is
+supported by the dialog.</p>
+</dd>
+<dt>RootDir\Filename</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the starting directory will be a default that
+might depend on the OS version (it will likely be the directory most
+recently selected by the user during a prior use of FileSelect).
+Otherwise, specify one or both of the following:</p>
+<p><strong>RootDir:</strong> The root (starting) directory, which is assumed to be a
+subfolder in <a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an
+absolute path is not specified.</p>
+<p><strong>Filename:</strong> The default filename to initially show in the
+dialog\'s edit field. Only the naked filename (with no path) will be
+shown. To ensure that the dialog is properly shown, ensure that no
+illegal characters are present (such as <code>/&lt;|:"</code>).</p>
+<p>Examples:</p>
+<pre class="codehilite"><code>&quot;C:\My Pictures\Default Image Name.gif&quot;  ; Both RootDir and Filename are present.
+&quot;C:\My Pictures&quot;  ; Only RootDir is present.
+&quot;My Pictures&quot;  ; Only RootDir is present, and it's relative to the current working directory.
+&quot;My File&quot;  ; Only Filename is present (but if &quot;My File&quot; exists as a folder, it is assumed to be RootDir).
+</code></pre>
+
+</dd>
+<dt>Title</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, it defaults to
+<code>"Select File - "</code><a href="../Variables.htm#ScriptName"><code>A_ScriptName</code></a>
+(i.e. the name of the current script), unless the \"D\" option is
+present, in which case the word \"File\" is replaced with
+\"Folder\". Otherwise, specify the title of the file-selection
+window.</p>
+</dd>
+<dt>Filter</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the dialog will show all type of files and
+provide the \"All Files (*.*)\" option in the \"Files of type\"
+drop-down list.</p>
+<p>Otherwise, specify a string to indicate which types of files are
+shown by the dialog, e.g. <code>"Documents (*.txt)"</code>. To include more
+than one file extension in the filter, separate them with
+semicolons, e.g. <code>"Audio (*.wav; *.mp2; *.mp3)"</code>. In this case, the
+\"Files of type\" drop-down list has the specified string and \"All
+Files (*.*)\" as options.</p>
+<p>This parameter must be blank or omitted if the \"D\" option is
+present.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or <a href="Array.htm">Array</a></p>
+<p>If multi-select is not in effect, this function returns the full path
+and name of the single file or folder chosen by the user, or an empty
+string if the user cancels the dialog.</p>
+<p>If the M option (multi-select) is in effect, this function returns an
+array of items, where each item is the full path and name of a single
+file. The example at the bottom of this page demonstrates how to extract
+the files one by one. If the user cancels the dialog, the array is empty
+(has zero items).</p>
+<h2 id="Remarks">Remarks</h2>
+<p>A file-selection dialog usually looks like this:</p>
+<p><img alt="FileSelect" src="../static/dlg_file.png" /></p>
+<p>A GUI window may display a modal file-selection dialog by means of the
+<a href="Gui.htm#OwnDialogs">+OwnDialogs</a> option. A modal dialog prevents the
+user from interacting with the GUI window until the dialog is dismissed.</p>
+<h2 id="Related">Related</h2>
+<p><a href="DirSelect.htm">DirSelect</a>, <a href="MsgBox.htm">MsgBox</a>,
+<a href="InputBox.htm">InputBox</a>, <a href="ToolTip.htm">ToolTip</a>, <a href="Gui.htm">GUI</a>, <a href="../misc/CLSID-List.htm">CLSID
+List</a>, <a href="LoopParse.htm">parsing loop</a>,
+<a href="SplitPath.htm">SplitPath</a></p>
+<p>Also, the operating system offers standard dialog boxes that prompt the
+user to pick a font, color, or icon. These dialogs can be displayed via
+<a href="DllCall.htm">DllCall</a> in combination with
+<a href="https://learn.microsoft.com/previous-versions/windows/desktop/legacy/ms646914(v=vs.85)">comdlg32\ChooseFont</a>,
+<a href="https://learn.microsoft.com/previous-versions/windows/desktop/legacy/ms646912(v=vs.85)">comdlg32\ChooseColor</a>,
+or
+<a href="https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pickicondlg">shell32\PickIconDlg</a>.
+Search the forums for examples.</p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Allows the user to select an existing .txt or
+.doc file.</p>
+<pre class="codehilite"><code>SelectedFile := FileSelect(3, , &quot;Open a file&quot;, &quot;Text Documents (*.txt; *.doc)&quot;)
+if SelectedFile = &quot;&quot;
+    MsgBox &quot;The dialog was canceled.&quot;
+else
+    MsgBox &quot;The following file was selected:`n&quot; SelectedFile
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExMulti .ex}
+<a class="ex_number" href="#ExMulti"></a> Allows the user to select multiple existing
+files.</p>
+<pre class="codehilite"><code>SelectedFiles := FileSelect(&quot;M3&quot;)  ; M3 = Multiselect existing files.
+if SelectedFiles.Length = 0
+{
+    MsgBox &quot;The dialog was canceled.&quot;
+    return
+}
+for FileName in SelectedFiles
+{
+    Result := MsgBox(&quot;File #&quot; A_Index &quot; of &quot; SelectedFiles.Length &quot;:`n&quot; FileName &quot;`n`nContinue?&quot;,, &quot;YN&quot;)
+    if Result = &quot;No&quot;
+        break
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExFolder .ex}
+<a class="ex_number" href="#ExFolder"></a> Allows the user to select a folder.</p>
+<pre class="codehilite"><code>SelectedFolder := FileSelect(&quot;D&quot;, , &quot;Select a folder&quot;)
+if SelectedFolder = &quot;&quot;
+    MsgBox &quot;The dialog was canceled.&quot;
+else
+    MsgBox &quot;The following folder was selected:`n&quot; SelectedFolder
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/FileSelect.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#fileselect">FileSelect</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

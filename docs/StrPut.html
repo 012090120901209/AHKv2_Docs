@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrPut | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Copies a string to a memory address or buffer, optionally converting it">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>StrPut</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="strput">StrPut</h1>
+<p>Copies a string to a memory address or buffer, optionally converting it
+to a given code page.</p>
+<pre class="codehilite"><code class="language-Syntax">BytesWritten := StrPut(String, Target , Length, Encoding)
+BytesWritten := StrPut(String, Target , Encoding)
+ReqBufSize   := StrPut(String , Encoding)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>String</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Any string. If a number is given, it is automatically converted to a
+string.</p>
+<p><em>String</em> is assumed to be in the <a href="../Concepts.htm#string-encoding">native
+encoding</a>.</p>
+</dd>
+<dt>Target</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#objects">Object</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>A <a href="Buffer.htm">Buffer</a>-like object or memory address to which the
+string will be written.</p>
+<p>Any object which implements <a href="Buffer.htm#Ptr">Ptr</a> and
+<a href="Buffer.htm#Size">Size</a> properties may be used, but this function is
+optimized for the native <a href="Buffer.htm">Buffer</a> object. Passing an
+object with these properties ensures that the function does not
+write memory to an invalid location; doing so could cause crashes or
+other unpredictable behaviour.</p>
+<p><strong>Note:</strong> If conversion between code pages is necessary, the
+required buffer size may differ from the size of the source string.
+For such cases, call StrPut with two parameters to calculate the
+required size.</p>
+</dd>
+<dt>Length</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The maximum number of <a href="../Concepts.htm#character">characters</a> to
+write, including the
+<a href="../Concepts.htm#null-termination">null-terminator</a> if required.</p>
+<p>If <em>Length</em> is zero or less than the projected length after
+conversion (or the length of the source string if conversion is not
+required), an exception is thrown.</p>
+<p><em>Length</em> must not be omitted when <em>Target</em> is a plain memory
+address, unless the buffer size is known to be sufficient, such as
+if the buffer was allocated based on a previous call to StrPut with
+the same <em>String</em> and <em>Encoding</em>.</p>
+<p>If <em>Target</em> is an object, specifying a <em>Length</em> that exceeds the
+buffer size calculated from <em><code>Target</code></em><code>.Size</code> is considered an
+error, even if the converted string would fit within the buffer.</p>
+<p><strong>Note:</strong> When <em>Encoding</em> is specified, <em>Length</em> should be the size
+of the buffer (in characters), [not]{.underline} the length of
+<em>String</em> or a substring, as conversion may increase its length.</p>
+<p><strong>Note:</strong> <em>Length</em> is measured in characters, whereas buffer sizes
+are usually measured in bytes, as is StrPut\'s return value. To
+specify the buffer size in bytes, use a <a href="Buffer.htm">Buffer</a>-like
+object in the <em>Target</em> parameter.</p>
+</dd>
+<dt>Encoding</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, the string is simply copied or measured without any
+conversion taking place. Otherwise, specify the target encoding; for
+example, <code>"UTF-8"</code>, <code>"UTF-16"</code> or <code>"CP936"</code>. For numeric
+identifiers, the prefix \"CP\" can be omitted only in 4-parameter
+mode. Specify an empty string or <code>"CP0"</code> to use the system default
+ANSI code page.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>In 4- or 3-parameter mode, this function returns the number of bytes
+written. A null-terminator is written and included in the return value
+only when there is sufficient space; that is, it is omitted when
+<em>Length</em> or <em><code>Target</code></em><code>.Size</code> (multiplied by the size of a character)
+exactly equals the length of the converted string.</p>
+<p>In 2-parameter mode, this function returns the required buffer size in
+bytes, including space for the null-terminator.</p>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>A <a href="Error.htm#ValueError">ValueError</a> is thrown if invalid parameters are
+detected, such as if the converted string would be longer than allowed
+by <em>Length</em> or <em><code>Target</code></em><code>.Size</code>.</p>
+<p>An <a href="Error.htm#OSError">OSError</a> is thrown if the conversion could not be
+performed.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>Note that the <em>String</em> parameter is always assumed to use the <a href="../Concepts.htm#string-encoding">native
+encoding</a> of the current executable,
+whereas <em>Encoding</em> specifies the encoding of the string written to the
+given <em>Target</em>. If no <em>Encoding</em> is specified, the string is simply
+copied or measured without any conversion taking place.</p>
+<h2 id="Related">Related</h2>
+<p><a href="../Concepts.htm#string-encoding">String Encoding</a>,
+<a href="StrGet.htm">StrGet</a>, <a href="../Compat.htm">Binary Compatibility</a>,
+<a href="FileEncoding.htm">FileEncoding</a>, <a href="DllCall.htm">DllCall</a>, <a href="Buffer.htm">Buffer
+object</a>, <a href="VarSetStrCapacity.htm">VarSetStrCapacity</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExNumEnc .ex}
+<a class="ex_number" href="#ExNumEnc"></a> Either <em>Length</em> or <em>Encoding</em> may be specified
+directly after <em>Target</em>, but in those cases <em>Encoding</em> must be
+non-numeric.</p>
+<pre class="codehilite"><code>StrPut(str, address, &quot;cp0&quot;)  ; Code page 0, unspecified buffer size
+StrPut(str, address, n, 0)   ; Maximum n chars, code page 0
+StrPut(str, address, 0)      ; Unsupported (maximum 0 chars)
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExEncoding .ex}
+<a class="ex_number" href="#ExEncoding"></a> StrPut may be called once to calculate the
+required buffer size for a string in a particular encoding, then again
+to encode and write the string into the buffer. The process can be
+simplified by utilizing this function.</p>
+<pre class="codehilite"><code>; Returns a Buffer object containing the string.
+StrBuf(str, encoding)
+{
+    ; Calculate required size and allocate a buffer.
+    buf := Buffer(StrPut(str, encoding))
+    ; Copy or convert the string.
+    StrPut(str, buf, encoding)
+    return buf
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/StrPut.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#strput">StrPut</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

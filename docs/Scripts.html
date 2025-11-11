@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripts | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Related topics:">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Scripts</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="scripts">Scripts</h1>
+<p>Related topics:</p>
+<ul>
+<li><a href="Program.htm">Using the Program</a>: How to use AutoHotkey, in general.</li>
+<li><a href="Concepts.htm">Concepts and Conventions</a>: General explanation of
+    various concepts utilised by AutoHotkey.</li>
+<li><a href="Language.htm">Scripting Language</a>: Specific details about syntax
+    (how to write scripts).</li>
+</ul>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#auto">Script Startup (the Auto-execute Thread)</a>: Taking action
+    immediately upon starting the script, and changing default settings.</li>
+<li><a href="#continuation">Splitting a Long Line into a Series of Shorter
+    Ones</a>: This can improve a script\'s readability and
+    maintainability.</li>
+<li><a href="#lib">Script Library Folders</a></li>
+<li><a href="#ahk2exe">Convert a Script to an EXE (Ahk2Exe)</a>: Convert a .ahk
+    script into a .exe file that can run on any PC.</li>
+<li><a href="#cmd">Passing Command Line Parameters to a Script</a>: The variable
+    A_Args contains the incoming parameters.</li>
+<li><a href="#cp">Script File Codepage</a>: Using non-ASCII characters safely in
+    scripts.</li>
+<li><a href="#debug">Debugging a Script</a>: How to find the flaws in a misbehaving
+    script.</li>
+</ul>
+<h2 id="intro">Introduction</h2>
+<p>Each script is a plain text file containing lines to be executed by the
+program (AutoHotkey.exe). A script may also contain
+<a href="Hotkeys.htm">hotkeys</a> and <a href="Hotstrings.htm">hotstrings</a>, or even consist
+entirely of them. However, in the absence of hotkeys and hotstrings, a
+script will perform its functions sequentially from top to bottom the
+moment it is launched.</p>
+<p>The program loads the script into memory line by line. During loading,
+the script is <a href="misc/Performance.htm">optimized</a> and validated. Any
+syntax errors will be displayed, and they must be corrected before the
+script can run.</p>
+<h2 id="auto">Script Startup (the Auto-execute Thread)</h2>
+<p>After the script has been loaded, the <em>auto-execute thread</em> begins
+executing at the script\'s top line, and continues until instructed to
+stop, such as by <a href="lib/Return.htm">Return</a>, <a href="lib/ExitApp.htm">ExitApp</a> or
+<a href="lib/Exit.htm">Exit</a>. The physical end of the script also acts as
+<a href="lib/Exit.htm">Exit</a>.</p>
+<p>The script will terminate after completing startup if it lacks
+<a href="Hotkeys.htm">hotkeys</a>, <a href="Hotstrings.htm">hotstrings</a>, visible
+<a href="lib/Gui.htm">GUIs</a>, active <a href="lib/SetTimer.htm">timers</a>, <a href="lib/OnClipboardChange.htm">clipboard
+monitors</a> and
+<a href="lib/InputHook.htm">InputHooks</a>, and has not called the
+<a href="lib/Persistent.htm">Persistent</a> function. Otherwise, it will stay
+running in an idle state, responding to events such as
+<a href="Hotkeys.htm">hotkeys</a>, <a href="Hotstrings.htm">hotstrings</a>, <a href="lib/GuiOnEvent.htm">GUI
+events</a>, <a href="lib/Menu.htm">custom menu items</a>, and
+<a href="lib/SetTimer.htm">timers</a>. If these conditions change after startup
+completes (for example, the last timer is disabled), the script may exit
+when the last running thread completes or the last GUI closes.</p>
+<p>Whenever any new <a href="misc/Threads.htm">thread</a> is launched (whether by a
+<a href="Hotkeys.htm">hotkey</a>, <a href="Hotstrings.htm">hotstring</a>,
+<a href="lib/SetTimer.htm">timer</a>, or some other event), the following settings
+are copied from the auto-execute thread. If not set by the auto-execute
+thread, the standard defaults will apply (as documented on each of the
+following pages): <a href="lib/CoordMode.htm">CoordMode</a>,
+<a href="lib/Critical.htm">Critical</a>,
+<a href="lib/DetectHiddenText.htm">DetectHiddenText</a>,
+<a href="lib/DetectHiddenWindows.htm">DetectHiddenWindows</a>,
+<a href="lib/FileEncoding.htm">FileEncoding</a>, <a href="lib/ListLines.htm">ListLines</a>,
+<a href="lib/SendLevel.htm">SendLevel</a>, <a href="lib/SendMode.htm">SendMode</a>,
+<a href="lib/SetControlDelay.htm">SetControlDelay</a>,
+<a href="lib/SetDefaultMouseSpeed.htm">SetDefaultMouseSpeed</a>,
+<a href="lib/SetKeyDelay.htm">SetKeyDelay</a>,
+<a href="lib/SetMouseDelay.htm">SetMouseDelay</a>,
+<a href="lib/SetRegView.htm">SetRegView</a>,
+<a href="lib/SetStoreCapsLockMode.htm">SetStoreCapsLockMode</a>,
+<a href="lib/SetTitleMatchMode.htm">SetTitleMatchMode</a>,
+<a href="lib/SetWinDelay.htm">SetWinDelay</a>, and <a href="lib/Thread.htm">Thread</a>.</p>
+<p>Each <a href="misc/Threads.htm">thread</a> retains its own collection of the above
+settings, so changes made to those settings will not affect other
+threads.</p>
+<p>The \"default setting\" for one of the above functions usually refers to
+the current setting of the auto-execute thread, which starts out the
+same as the program-defined default setting.</p>
+<p>Traditionally, the top of the script has been referred to as the
+<em>auto-execute section</em>. However, the auto-execute thread is not limited
+to just the top of the script. Any functions which are called on the
+auto-execute thread may also affect the default settings. As directives
+and function, hotkey, hotstring and class definitions are skipped when
+encountered during execution, it is possible for startup code to be
+placed throughout each file. For example, a global variable used by a
+group of hotkeys may be initialized above (or even below) those hotkeys
+rather than at the top of the script.</p>
+<h2 id="continuation">Splitting a Long Line into a Series of Shorter Ones</h2>
+<p>Long lines can be divided up into a collection of smaller ones to
+improve readability and maintainability. This does not reduce the
+script\'s execution speed because such lines are merged in memory the
+moment the script launches.</p>
+<p>There are three methods, and they can generally be used in combination:</p>
+<ul>
+<li><a href="#continuation-line">Continuation operator</a>: Start or end a line
+    with an expression operator to join it to the previous or next line.</li>
+<li><a href="#continuation-expr">Continuation by enclosure</a>: A sub-expression
+    enclosed in (), [] or {} can automatically span multiple lines in
+    most cases.</li>
+<li><a href="#continuation-section">Continuation section</a>: Mark a group of lines
+    to be merged together, with additional options such as what text (or
+    code) to insert between lines.</li>
+</ul>
+<p><strong>Continuation operator:</strong> A line that starts with a comma or any other
+<a href="Variables.htm#Operators">expression operator</a> (except ++ and --) is
+automatically merged with the line directly above it. Similarly, a line
+that ends with an expression operator is automatically merged with the
+line below it. In the following example, the second line is appended to
+the first because it begins with a comma:</p>
+<pre class="codehilite"><code>FileAppend &quot;This is the text to append.`n&quot;   ; A comment is allowed here.
+    , A_ProgramFiles &quot;\SomeApplication\LogFile.txt&quot;  ; Comment.
+</code></pre>
+
+<p>Similarly, the following lines would get merged into a single line
+because the last two start with \"and\" or \"or\":</p>
+<pre class="codehilite"><code>if Color = &quot;Red&quot; or Color = &quot;Green&quot;  or Color = &quot;Blue&quot;   ; Comment.
+    or Color = &quot;Black&quot; or Color = &quot;Gray&quot; or Color = &quot;White&quot;   ; Comment.
+    and ProductIsAvailableInColor(Product, Color)   ; Comment.
+</code></pre>
+
+<p>The <a href="Variables.htm#ternary">ternary operator</a> is also a good candidate:</p>
+<pre class="codehilite"><code>ProductIsAvailable := (Color = &quot;Red&quot;)
+    ? false  ; We don't have any red products, so don't bother calling the function.
+    : ProductIsAvailableInColor(Product, Color)
+</code></pre>
+
+<p>The following examples are equivalent to those above:</p>
+<pre class="codehilite"><code>FileAppend &quot;This is the text to append.`n&quot;,   ; A comment is allowed here.
+    A_ProgramFiles &quot;\SomeApplication\LogFile.txt&quot;  ; Comment.
+
+if Color = &quot;Red&quot; or Color = &quot;Green&quot;  or Color = &quot;Blue&quot; or   ; Comment.
+    Color = &quot;Black&quot; or Color = &quot;Gray&quot; or Color = &quot;White&quot; and   ; Comment.
+    ProductIsAvailableInColor(Product, Color)   ; Comment.
+
+ProductIsAvailable := (Color = &quot;Red&quot;) ?
+    false : ; We don't have any red products, so don't bother calling the function.
+    ProductIsAvailableInColor(Product, Color)
+</code></pre>
+
+<p>Although the indentation used in the examples above is optional, it
+might improve clarity by indicating which lines belong to ones above
+them. Also, blank lines or <a href="Language.htm#comments">comments</a> may be
+added between or at the end of any of the lines in the above examples.</p>
+<p>A continuation operator cannot be used with an auto-replace hotstring or
+directive other than <a href="lib/_HotIf.htm">#HotIf</a>.</p>
+<p><strong>Continuation by enclosure:</strong> If a line contains an expression or
+function/property definition with an unclosed <code>(</code>/<code>[</code>/<code>{</code>, it is joined
+with subsequent lines until the number of opening and closing symbols
+balances out. In other words, a sub-expression enclosed in parentheses,
+brackets or braces can automatically span multiple lines in most cases.
+For example:</p>
+<pre class="codehilite"><code>myarray := [
+  &quot;item 1&quot;,
+  &quot;item 2&quot;,
+]
+MsgBox(
+    &quot;The value of item 2 is &quot; myarray[2],
+    &quot;Title&quot;,
+    &quot;ok iconi&quot;
+    )
+</code></pre>
+
+<p>Continuation expressions may contain both types of
+<a href="Language.htm#comments">comments</a>.</p>
+<p>Continuation expressions may contain normal <a href="#continuation-section">continuation
+sections</a>. Therefore, as with any line containing
+an expression, if a line begins with a non-escaped open parenthesis
+(<code>(</code>), it is considered to be the start of a continuation section unless
+there is a closing parenthesis (<code>)</code>) on the same line.</p>
+<p>Quoted strings cannot span multiple lines using this method alone.
+However, see above.</p>
+<p>Continuation by enclosure can be combined with a continuation operator.
+For example:</p>
+<pre class="codehilite"><code>myarray :=  ; The assignment operator causes continuation.
+[  ; Brackets enclose the following two lines.
+  &quot;item 1&quot;,
+  &quot;item 2&quot;,
+]
+</code></pre>
+
+<p>Brace (<code>{</code>) at the end of a line does not cause continuation if the
+program determines that it should be interpreted as the beginning of a
+block (<a href="lib/Block.htm#otb">OTB style</a>) rather than the start of an
+<a href="Language.htm#object-literal">object literal</a>. Specifically (in
+descending order of precedence):</p>
+<ul>
+<li>A brace is never interpreted as the beginning of a block if it is
+    preceded by an unclosed <code>(</code>/<code>[</code>/<code>{</code>, since that would produce an
+    invalid expression. For example, the brace in <code>If ({</code> is the start
+    of an object literal.</li>
+<li>An object literal cannot legally follow <code>)</code> or <code>]</code>, so if the brace
+    follows either of those symbols (excluding whitespace), it is
+    interpreted as the beginning of a block (such as for a function or
+    property definition).</li>
+<li>For <a href="Language.htm#control-flow">control flow statements</a> which
+    require a body (and therefore support OTB), the brace can be the
+    start of an object literal only if it is preceded by an operator,
+    such as <code>:= {</code> or <code>for x</code><strong><code>in</code></strong><code>{</code>. In particular, the brace in
+    <code>Loop {</code> is always block-begin, and <code>If {</code> and <code>While {</code> are always
+    errors.</li>
+</ul>
+<p>A brace can be safely used for line continuation with any function call,
+expression or control flow statement which does not require a body. For
+example:</p>
+<pre class="codehilite"><code>myfn() {
+    return {
+        key: &quot;value&quot;
+    }
+}
+</code></pre>
+
+<p><strong>Continuation section:</strong> This method should be used to merge a large
+number of lines or when the lines are not suitable for the other
+methods. Although this method is especially useful for <a href="Hotstrings.htm">auto-replace
+hotstrings</a>, it can also be used with any
+<a href="Variables.htm#Expressions">expression</a>. For example:</p>
+<pre class="codehilite"><code>; EXAMPLE #1:
+Var := &quot;
+(
+A line of text.
+By default, the hard carriage return (Enter) between the previous line and this one will be stored.
+    This line is indented with a tab; by default, that tab will also be stored.
+Additionally, &quot;quote marks&quot; are automatically escaped when appropriate.
+)&quot;
+
+; EXAMPLE #2:
+FileAppend &quot;
+(
+Line 1 of the text.
+Line 2 of the text. By default, a linefeed (`n) is present between lines.
+)&quot;, A_Desktop &quot;\My File.txt&quot;
+</code></pre>
+
+<p>In the examples above, a series of lines is bounded at the top and
+bottom by a pair of parentheses. This is known as a <em>continuation
+section</em>. Notice that any code after the closing parenthesis is also
+joined with the other lines (without any delimiter), but the opening and
+closing parentheses are not included.</p>
+<p>If the line above the continuation section ends with a
+<a href="Concepts.htm#names">name</a> character and the section does not start
+inside a quoted string, a single space is automatically inserted to
+separate the name from the contents of the continuation section.</p>
+<p>Quote marks are automatically escaped (i.e. they are interpreted as
+literal characters) if the continuation section starts inside a quoted
+string, as in the examples above. Otherwise, quote marks act as they do
+normally; that is, continuation sections can contain expressions with
+quoted strings.</p>
+<p>By default, leading spaces or tabs are omitted based on the indentation
+of the first line inside the continuation section. If the first line
+mixes spaces and tabs, only the first type of character is treated as
+indentation. If any line is indented less than the first line or with
+the wrong characters, all leading whitespace on that line is left as is.</p>
+<p>By default, trailing spaces or tabs are omitted.</p>
+<p>The default behavior of a continuation section can be overridden by
+including one or more of the following options to the right of the
+section\'s opening parenthesis. If more than one option is present,
+separate each one from the previous with a space. For example:
+<code class="no-highlight">( LTrim Join|</code>.</p>
+<p><strong>Join</strong><em>String</em>: Specifies how lines should be connected together. If
+this option is not used, each line except the last will be followed by a
+linefeed character (`n). If <em>String</em> is omitted, lines are connected
+directly to each other without any characters in between. Otherwise,
+specify for <em>String</em> a string of up to 15 characters. For example,
+<code>Join`s</code> would insert a space after each line except the last.
+Another example is <code>Join`r`n</code>, which inserts CR+LF between lines.
+Similarly, <code>Join|</code> inserts a pipe between lines. To have the final line
+in the section also ended by <em>String</em>, include a blank line immediately
+above the section\'s closing parenthesis.</p>
+<p><strong>LTrim:</strong> Omits all spaces and tabs at the beginning of each line. This
+is usually unnecessary because of the <a href="#continuation_defaults">default \"smart\"
+behaviour</a>.</p>
+<p><strong>LTrim0</strong> (LTrim followed by a zero): Turns off the omission of spaces
+and tabs from the beginning of each line.</p>
+<p><strong>RTrim0</strong> (RTrim followed by a zero): Turns off the omission of spaces
+and tabs from the end of each line.</p>
+<p><strong>Comments</strong> (or <strong>Comment</strong> or <strong>Com</strong> or <strong>C</strong>): Allows <a href="Language.htm#comments">semicolon
+comments</a> inside the continuation section (but
+not <code>/*..*/</code>). Such comments (along with any spaces and tabs to their
+left) are entirely omitted from the joined result rather than being
+treated as literal text. Each comment can appear to the right of a line
+or on a new line by itself.</p>
+<p><strong>`</strong> (accent): Treats each backtick character literally rather than as
+an <a href="misc/EscapeChar.htm">escape character</a>. This also prevents the
+translation of any explicitly specified escape sequences such as
+<code>`r</code> and <code>`t</code>.</p>
+<p><strong>(</strong> or <strong>)</strong>: If an opening or closing parenthesis appears to the
+right of the initial opening parenthesis (except as a parameter of the
+<a href="#Join">Join</a> option), the line is reinterpreted as an expression
+instead of the beginning of a continuation section. This enables
+expressions like <code>(x.y)[z]()</code> to be used at the start of a line, and
+also allows <a href="#continuation-expr">multi-line expressions</a> to start with a
+line like <code>((</code> or <code>(MyFunc(</code>.</p>
+<h3 id="continuation-remarks">Remarks</h3>
+<p><a href="misc/EscapeChar.htm">Escape sequences</a> such as `n (linefeed) and `t
+(tab) are supported inside the continuation section except when the
+<a href="#accent">accent (`) option</a> has been specified.</p>
+<p>When the <a href="#CommentOption">comment option</a> is absent, semicolon and
+/*..*/ comments are not supported within the interior of a
+continuation section because they are seen as literal text. However,
+comments can be included on the bottom and top lines of the section. For
+example:</p>
+<pre class="codehilite"><code>FileAppend &quot;   ; Comment.
+; Comment.
+( LTrim Join    ; Comment.
+     ; This is not a comment; it is literal. Include the word Comments in the line above to make it a comment.
+)&quot;, &quot;C:\File.txt&quot;   ; Comment.
+</code></pre>
+
+<p>As a consequence of the above, semicolons never need to be
+<a href="misc/EscapeChar.htm">escaped</a> within a continuation section.</p>
+<p>Since a closing parenthesis indicates the end of a continuation section,
+to have a line start with literal closing parenthesis, precede it with
+an accent/backtick: <code>`)</code>. However, this cannot be combined with the
+<a href="#accent">accent (`) option</a>.</p>
+<p>A continuation section can be immediately followed by a line containing
+the open-parenthesis of another continuation section. This allows the
+options mentioned above to be varied during the course of building a
+single line.</p>
+<p>The piecemeal construction of a continuation section by means of
+<a href="lib/_Include.htm">#Include</a> is not supported.</p>
+<h2 id="lib">Script Library Folders</h2>
+<p>The library folders provide a few standard locations to keep shared
+scripts which other scripts utilise by means of
+<a href="lib/_Include.htm">#Include</a>. A library script typically contains a
+function or class which is designed to be used and reused in this
+manner. Placing library scripts in one of these locations makes it
+easier to write scripts that can be shared with others and work across
+multiple setups. The library locations are:</p>
+<pre class="codehilite"><code>A_ScriptDir &quot;\Lib\&quot;  ; Local library.
+A_MyDocuments &quot;\AutoHotkey\Lib\&quot;  ; User library.
+&quot;directory-of-the-currently-running-AutoHotkey.exe\Lib\&quot;  ; Standard library.
+</code></pre>
+
+<p>The library folders are searched in the order shown above.</p>
+<p>For example, if a script includes the line <code>#Include &lt;MyLib&gt;</code>, the
+program searches for a file named \"MyLib.ahk\" in the local library. If
+not found there, it searches for it in the user library, and then the
+standard library. If a match is still not found and the library\'s name
+contains an underscore (e.g. <code>MyPrefix_MyFunc</code>), the program searches
+again with just the prefix (e.g. <code>MyPrefix.ahk</code>).</p>
+<p>Although by convention a library file generally contains only a single
+function or class of the same name as its filename, it may also contain
+private functions that are called only by it. However, such functions
+should have fairly distinct names because they will still be in the
+global namespace; that is, they will be callable from anywhere in the
+script.</p>
+<h2 id="ahk2exe">Convert a Script to an EXE (Ahk2Exe)</h2>
+<p>A script compiler (courtesy of fincs, with additions by TAC109) is
+available as a separate automatic download.</p>
+<p>Once a script is compiled, it becomes a standalone executable; that is,
+AutoHotkey.exe is not required in order to run the script. The
+compilation process creates an executable file which contains the
+following: the AutoHotkey interpreter, the script, any files it
+<a href="lib/_Include.htm">includes</a>, and any files it has incorporated via the
+<a href="lib/FileInstall.htm">FileInstall</a> function. Additional files can be
+included using <a href="misc/Ahk2ExeDirectives.htm">compiler directives</a>.</p>
+<p>The same compiler is used for v1.1 and v2 scripts. The compiler
+distinguishes script versions by checking the major version of the base
+file supplied.</p>
+<h3 id="ahk2exe-toc">Compiler Topics</h3>
+<ul>
+<li><a href="#ahk2exe-run">Running the Compiler</a></li>
+<li><a href="#ahk2exe-base">Base Executable File</a></li>
+<li><a href="#CompilerDirectives">Script Compiler Directives</a></li>
+<li><a href="#mpress">Compressing Compiled Scripts</a></li>
+<li><a href="#information">Background Information</a></li>
+</ul>
+<h3 id="ahk2exe-run">Running the Compiler</h3>
+<p>Ahk2Exe can be used in the following ways:</p>
+<ul>
+<li>
+<p><strong>GUI Interface:</strong> Run the \"Convert .ahk to .exe\" item in the
+    Start Menu. (After invoking the GUI, there may be a pause before the
+    window is shown; see <a href="#information">Background Information</a> for more
+    details.)</p>
+</li>
+<li>
+<p><strong>Right-click:</strong> Within an open Explorer window, right-click any
+    .ahk file and select \"Compile Script\" (only available if the
+    script compiler option was chosen when AutoHotkey was installed).
+    This creates an EXE file of the same base filename as the script,
+    which appears after a short time in the same directory. Note: The
+    EXE file is produced using the same custom icon, .bin file and
+    <a href="#mpress">compression</a> setting that were last saved in Method #1
+    above, or as specified by any relevant <a href="misc/Ahk2ExeDirectives.htm">compiler
+    directive</a> in the script.</p>
+</li>
+<li>
+<p>::: {#ahk2exeCmd}
+    <strong>Command Line:</strong> The compiler can be run from the command line by
+    using the parameters shown below. If any command line parameters are
+    used, the script is compiled immediately unless
+    <code class="no-highlight">/gui</code> is used. All parameters are optional, except
+    that there must be one <code class="no-highlight">/gui</code> or <code class="no-highlight">/in</code>
+    parameter.</p>
+<hr />
+<p>Parameter pair                      Meaning</p>
+<hr />
+<p>/in <em>script_name</em>                   The path and name of the script to compile. This is mandatory if any other parameters
+                                      are used, unless <code class="no-highlight">/gui</code> is used.</p>
+<p>/out <em>exe_name</em>                     The path\name of the output .exe to be created. Default is the directory\base_name
+                                      of the input file plus extension of .exe, or any relevant <a href="misc/Ahk2ExeDirectives.htm">compiler
+                                      directive</a> in the script.</p>
+<p>/icon <em>icon_name</em>                   The icon file to be used. Default is the last icon saved in the GUI interface, or any
+                                      <a href="misc/Ahk2ExeDirectives.htm#SetMainIcon">SetMainIcon</a> compiler directive in the
+                                      script.</p>
+<p>/base <em>file_name</em>                   The base file to be used (a .bin or .exe file). The major version of the base file
+                                      used must be the same as the version of the script to be compiled. Default is the
+                                      last base file name saved in the GUI interface, or any
+                                      <a href="misc/Ahk2ExeDirectives.htm#Bin">Base</a> compiler directive in the script.</p>
+<p>/resourceid <em>name</em>                  Assigns a non-standard resource ID to be used for the main script for compilations
+                                      which use an <a href="#SlashBase">.exe base file</a> (see <a href="Program.htm#embedded-scripts">Embedded
+                                      Scripts</a>). Numeric resource IDs should consist of a
+                                      hash sign (#) followed by a decimal number. Default is #1, or any
+                                      <a href="misc/Ahk2ExeDirectives.htm#ResourceID">ResourceID</a> compiler directive in the script.</p>
+<p>/cp <em>codepage</em>                      Overrides the default codepage used to read script files. For a list of possible
+                                      values, see <a href="https://learn.microsoft.com/windows/win32/intl/code-page-identifiers">Code Page
+                                      Identifiers</a>.
+                                      Note that Unicode scripts should begin with a byte-order-mark (BOM), rendering the
+                                      use of this parameter unnecessary.</p>
+<p>/compress <em>n</em>                       <a href="#mpress">Compress</a> the exe? 0 = no, 1 = use MPRESS if present, 2 = use UPX if
+                                      present. Default is the last setting saved in the GUI interface.</p>
+<p>/gui                                Shows the GUI instead of immediately compiling. The other parameters can be used to
+                                      override the settings last saved in the GUI. <code>/in</code> is optional in this case.</p>
+<p>/silent [verbose]                 Disables all message boxes and instead outputs errors to the standard error stream
+                                      (stderr); or to the standard output stream (stdout) if stderr fails. Other messages
+                                      are also output to stdout. Optionally enter the word <code>verbose</code> to output status
+                                      messages to stdout as well.</p>
+<p><strong>Deprecated:</strong>\                    The path\name of AutoHotkey.exe to be used as a utility when compiling the script.
+  /ahk <em>file_name</em>                    </p>
+<p><strong>Deprecated:</strong>\                    <a href="#mpress">Compress</a> the exe with MPRESS? 0 = no, 1 = yes. Default is the last setting
+  /mpress <em>0or1</em>                      used in the GUI interface.</p>
+<p><strong>Deprecated:</strong>\                    The .bin file to be used. Default is the last .bin file name saved in the GUI
+  /bin <em>file_name</em>                    interface.</p>
+<hr />
+<p>For example:</p>
+<p><code>no-highlight
+Ahk2Exe.exe /in "MyScript.ahk" /icon "MyIcon.ico"</code>
+:::</p>
+</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>Parameters containing spaces must be enclosed in double quotes.</li>
+<li>Compiling does not typically improve the performance of a script.</li>
+<li><a href="lib/_NoTrayIcon.htm">#NoTrayIcon</a> and
+    <a href="Variables.htm#AllowMainWindow">A_AllowMainWindow</a> affect the
+    behavior of compiled scripts.</li>
+<li>The built-in variable <a href="Variables.htm#IsCompiled">A_IsCompiled</a>
+    contains 1 if the script is running in compiled form, otherwise 0.</li>
+<li>When parameters are passed to Ahk2Exe, a message indicating the
+    success or failure of the compiling process is written to stdout.
+    Although the message will not appear at the command prompt, it can
+    be \"caught\" by means such as redirecting output to a file.</li>
+<li>Additionally in the case of a failure, Ahk2Exe has exit codes
+    indicating the kind of error that occurred. These error codes can be
+    found at <a href="https://github.com/AutoHotkey/Ahk2Exe/blob/master/ErrorCodes.md">GitHub
+    (ErrorCodes.md)</a>.</li>
+</ul>
+<p>The compiler\'s source code and newer versions can be found at
+<a href="https://github.com/AutoHotkey/Ahk2Exe">GitHub</a>.</p>
+<h3 id="ahk2exe-base">Base Executable File</h3>
+<p>Each compiled script .exe is based on an executable file which
+implements the interpreter. The base files included in the Compiler
+directory have the \".bin\" extension; these are versions of the
+interpreter which do not include the capability to load external script
+files. Instead, the program looks for a Win32 (RCDATA) resource named
+\"&gt;AUTOHOTKEY SCRIPT\&lt;\" and loads that, or fails if it is not found.</p>
+<p>The standard AutoHotkey executable files can also be used as the base of
+a compiled script, by embedding a Win32 (RCDATA) resource with ID 1.
+(Additional scripts can be added with the
+<a href="misc/Ahk2ExeDirectives.htm#AddResource">AddResource</a> compiler
+directive.) This allows the compiled script .exe to be used with the
+<a href="#SlashScript">/script</a> switch to execute scripts other than the main
+embedded script. For more details, see <a href="Program.htm#embedded-scripts">Embedded
+Scripts</a>.</p>
+<h3 id="CompilerDirectives">Script Compiler Directives</h3>
+<p>Script compiler directives allow the user to specify details of how a
+script is to be compiled. Some of the features are:</p>
+<ul>
+<li>Ability to change the version information (such as the name,
+    description, version...).</li>
+<li>Ability to add resources to the compiled script.</li>
+<li>Ability to tweak several miscellaneous aspects of compilation.</li>
+<li>Ability to remove code sections from the compiled script and vice
+    versa.</li>
+</ul>
+<p>See <a href="misc/Ahk2ExeDirectives.htm">Script Compiler Directives</a> for more
+details.</p>
+<h3 id="mpress">Compressing Compiled Scripts</h3>
+<p>Ahk2Exe optionally uses MPRESS or UPX freeware to compress compiled
+scripts. If <strong>MPRESS.exe</strong> and/or <strong>UPX.exe</strong> has been copied to the
+\"Compiler\" subfolder where AutoHotkey was installed, either can be
+used to compress the .exe as directed by the <code>/compress</code> parameter or
+the GUI setting.</p>
+<p><strong>MPRESS:</strong> <a href="https://www.autohotkey.com/mpress/mpress_web.htm">archived official
+website</a> (downloads
+and information) | <a href="https://www.autohotkey.com/mpress/mpress.219.zip">direct
+download</a> (95 KB)</p>
+<p><strong>UPX:</strong> <a href="https://upx.github.io/">official website</a> (downloads and
+information)</p>
+<p><strong>Note:</strong> While compressing the script executable prevents casual
+inspection of the script\'s source code using a plain text editor like
+Notepad or a PE resource editor, it does not prevent the source code
+from being extracted by tools dedicated to that purpose.</p>
+<h3 id="information">Background Information</h3>
+<p>The following folder structure is supported, where the running version
+of <code>Ahk2Exe.exe</code> is in the first \Compiler directory shown below:</p>
+<pre class="codehilite"><code class="language-no-highlight">\AutoHotkey 
+   AutoHotkeyA32.exe 
+   AutoHotkeyU32.exe
+   AutoHotkeyU64.exe
+   \Compiler
+      Ahk2Exe.exe  ; the master version of Ahk2Exe
+      ANSI 32-bit.bin
+      Unicode 32-bit.bin
+      Unicode 64-bit.bin
+   \AutoHotkey v2.0-a135
+      AutoHotkey32.exe
+      AutoHotkey64.exe
+      \Compiler
+   \v2.0-beta.1
+      AutoHotkey32.exe
+      AutoHotkey64.exe
+</code></pre>
+
+<p>The base file search algorithm runs for a short amount of time when
+Ahk2Exe starts, and works as follows:</p>
+<p>Qualifying AutoHotkey .exe files and all .bin files are searched for in
+the compiler\'s directory, the compiler\'s parent directory, and any of
+the compiler\'s sibling directories with directory names that start with
+<code>AutoHotkey</code> or <code>V</code>, but do not start with <code>AutoHotkey_H</code>. The selected
+directories are searched recursively. Any AutoHotkey.exe files found are
+excluded, leaving files such as AutoHotkeyA32.exe, AutoHotkey64.exe,
+etc. plus all .bin files found. All .exe files that are included must
+have a name starting with <code>AutoHotkey</code> and a file description containing
+the word <code>AutoHotkey</code>, and must have a version of
+<code class="no-highlight">1.1.34+</code> or <code class="no-highlight">2.0-a135+</code>.</p>
+<p>A version of the AutoHotkey interpreter is also needed (as a utility)
+for a successful compile, and one is selected using a similar algorithm.
+In most cases the version of the interpreter used will match the version
+of the base file selected by the user for the compile.</p>
+<h2 id="cmd">Passing Command Line Parameters to a Script</h2>
+<p>Scripts support command line parameters. The format is:</p>
+<pre class="codehilite"><code>AutoHotkey.exe [Switches] [Script Filename] [Script Parameters]
+</code></pre>
+
+<p>And for compiled scripts, the format is:</p>
+<pre class="codehilite"><code>CompiledScript.exe [Switches] [Script Parameters]
+</code></pre>
+
+<p><strong>Switches:</strong> Zero or more of the following:</p>
+<p>+-----------------------+-----------------------+-----------------------+
+| Switch                | Meaning               | Works compiled?       |
++=======================+=======================+=======================+
+| /force                | Launch                | Yes                   |
+|                       | unconditionally,      |                       |
+|                       | skipping any warning  |                       |
+|                       | dialogs. This has the |                       |
+|                       | same effect as        |                       |
+|                       | <a href="lib/             |                       |
+|                       | _SingleInstance.htm">#SingleInstance      |                       |
+|                       | Off</a>. |                       |
++-----------------------+-----------------------+-----------------------+
+| /restart              | Indicate that the     | Yes                   |
+|                       | script is being       |                       |
+|                       | restarted and should  |                       |
+|                       | attempt to close a    |                       |
+|                       | previous instance of  |                       |
+|                       | the script (this is   |                       |
+|                       | also used by the      |                       |
+|                       | <a href="lib/Reload.htm">Re                   |                       |
+|                       | load</a> |                       |
+|                       | function,             |                       |
+|                       | internally).          |                       |
++-----------------------+-----------------------+-----------------------+
+| /ErrorStdOut\         | Send syntax errors    | No                    |
+| \                     | that prevent a script |                       |
+| /E                    | from launching to the |                       |
+| rrorStdOut=<em>Encoding</em> | standard error stream |                       |
+|                       | (stderr) rather than  |                       |
+|                       | displaying a dialog.  |                       |
+|                       | See                   |                       |
+|                       | <a href="|                       |
+|                       | lib/_ErrorStdOut.htm">#ErrorStdOut</a> |                       |
+|                       | for details.          |                       |
+|                       |                       |                       |
+|                       | An                    |                       |
+|                       | <a href="|                       |
+|                       | lib/FileEncoding.htm">encoding</a> |                       |
+|                       | can optionally be     |                       |
+|                       | specified. For        |                       |
+|                       | example,              |                       |
+|                       | <code class="no-highlight">/ErrorStdOut=        |                       |
+|                       | UTF-8</code> |                       |
+|                       | encodes messages as   |                       |
+|                       | UTF-8 before writing  |                       |
+|                       | them to stderr.       |                       |
++-----------------------+-----------------------+-----------------------+
+| /Debug                | Connect to a          | No                    |
+|                       | debugging client. For |                       |
+|                       | more details, see     |                       |
+|                       | <a href="#idebug">Interactive          |                       |
+|                       | Debugging</a>.  |                       |
++-----------------------+-----------------------+-----------------------+
+| /CP<em>n</em>                | Overrides the default | No                    |
+|                       | codepage used to read |                       |
+|                       | script files. For     |                       |
+|                       | more details, see     |                       |
+|                       | <a href="#cp">Script File          |                       |
+|                       | Codepage</a>.       |                       |
++-----------------------+-----------------------+-----------------------+
+| /Validate             | AutoHotkey loads the  | No                    |
+|                       | script and then exits |                       |
+|                       | instead of running    |                       |
+|                       | it.                   |                       |
+|                       |                       |                       |
+|                       | By default, load-time |                       |
+|                       | errors and warnings   |                       |
+|                       | are displayed as      |                       |
+|                       | usual. The            |                       |
+|                       | <a href="#ErrorStdOut">/Error               |                       |
+|                       | StdOut</a> |                       |
+|                       | switch can be used to |                       |
+|                       | suppress or capture   |                       |
+|                       | any error messages.   |                       |
+|                       |                       |                       |
+|                       | The process exit code |                       |
+|                       | is zero if the script |                       |
+|                       | successfully loaded,  |                       |
+|                       | or non-zero if there  |                       |
+|                       | was an error.         |                       |
++-----------------------+-----------------------+-----------------------+
+| /iLib <em>\"OutFile\"</em>   | <strong>Deprecated:</strong>       | No                    |
+|                       | Equivalent to         |                       |
+|                       | <a href="#validate">/                    |                       |
+|                       | validate</a>; |                       |
+|                       | use that instead.     |                       |
+|                       |                       |                       |
+|                       | <em>\"OutFile\"</em> must be |                       |
+|                       | specified but is      |                       |
+|                       | ignored. In previous  |                       |
+|                       | versions of           |                       |
+|                       | AutoHotkey, filenames |                       |
+|                       | of auto-included      |                       |
+|                       | files were written to |                       |
+|                       | the file specified by |                       |
+|                       | <em>OutFile</em>, formatted  |                       |
+|                       | as #Include           |                       |
+|                       | directives.           |                       |
++-----------------------+-----------------------+-----------------------+
+| /include              | <a href="lib/_Include.htm">Includ               | No                    |
+| <em>\"IncFile\"</em>         | es</a> |                       |
+|                       | a file prior to the   |                       |
+|                       | main script. Only a   |                       |
+|                       | single file can be    |                       |
+|                       | included by this      |                       |
+|                       | method. When the      |                       |
+|                       | script is             |                       |
+|                       | <a href="lib/Reload.htm">reloa                |                       |
+|                       | ded</a>, |                       |
+|                       | this switch is        |                       |
+|                       | automatically passed  |                       |
+|                       | to the new instance.  |                       |
++-----------------------+-----------------------+-----------------------+
+| /script               | When used with a      | N/A                   |
+|                       | compiled script based |                       |
+|                       | on an .exe file, this |                       |
+|                       | switch causes the     |                       |
+|                       | program to ignore the |                       |
+|                       | main embedded script. |                       |
+|                       | This allows a         |                       |
+|                       | compiled script .exe  |                       |
+|                       | to execute external   |                       |
+|                       | script files or       |                       |
+|                       | embedded scripts      |                       |
+|                       | other than the main   |                       |
+|                       | one. Other switches   |                       |
+|                       | not normally          |                       |
+|                       | supported by compiled |                       |
+|                       | scripts can be used   |                       |
+|                       | but must be listed to |                       |
+|                       | the right of this     |                       |
+|                       | switch. For example:  |                       |
+|                       |                       |                       |
+|                       | <code>no-highlight      |                       |
+|                       | Compil                |                       |
+|                       | edScript.exe /script  |                       |
+|                       | /ErrorStdOut MyScript |                       |
+|                       | .ahk "Script's arg 1" |                       |
+|                       |</code>                   |                       |
+|                       |                       |                       |
+|                       | If the current        |                       |
+|                       | executable file does  |                       |
+|                       | not have an embedded  |                       |
+|                       | script, this switch   |                       |
+|                       | is permitted but has  |                       |
+|                       | no effect.            |                       |
+|                       |                       |                       |
+|                       | This switch is not    |                       |
+|                       | supported by compiled |                       |
+|                       | scripts which are     |                       |
+|                       | based on a .bin file. |                       |
+|                       |                       |                       |
+|                       | See also: <a href="#ahk2exe-base">Base       |                       |
+|                       | Executable File       |                       |
+|                       | (Ahk                  |                       |
+|                       | 2Exe)</a> |                       |
++-----------------------+-----------------------+-----------------------+</p>
+<p><strong>Script Filename:</strong> This can be omitted if there are no <em>Script
+Parameters</em>. If omitted, it defaults to the path and name of the
+<a href="Variables.htm#AhkPath">AutoHotkey executable</a>, replacing \".exe\" with
+\".ahk\". For example, if you rename AutoHotkey.exe to MyScript.exe, it
+will attempt to load MyScript.ahk. If you run AutoHotkey32.exe without
+parameters, it will attempt to load AutoHotkey32.ahk.</p>
+<p>Specify an asterisk (*) for the filename to read the script text from
+standard input (stdin). This also puts the following into effect:</p>
+<ul>
+<li>The <a href="Variables.htm#InitialWorkingDir">initial working directory</a> is
+    used as <a href="Variables.htm#ScriptDir">A_ScriptDir</a> and to locate the
+    <a href="#lib">local Lib folder</a>.</li>
+<li><a href="Variables.htm#ScriptName">A_ScriptName</a> and
+    <a href="Variables.htm#ScriptFullPath">A_ScriptFullPath</a> both contain
+    \"*\".</li>
+<li><a href="lib/_SingleInstance.htm">#SingleInstance</a> is off by default.</li>
+</ul>
+<p>For an example, see <a href="lib/Run.htm#ExecScript">ExecScript()</a>.</p>
+<p>If the current executable file has <a href="Program.htm#embedded-scripts">embedded
+scripts</a>, this parameter can be an
+asterisk followed by the resource name or ID of an embedded script. For
+compiled scripts (i.e. if an embedded script with the ID #1 exists),
+this parameter must be preceded by the <code>/script</code> switch.</p>
+<p><strong>Script Parameters:</strong> The string(s) you want to pass into the script,
+with each separated from the next by one or more spaces. Any parameter
+that contains spaces should be enclosed in quotation marks. If you want
+to pass an empty string as a parameter, specify two consecutive
+quotation marks. A literal quotation mark may be passed in by preceding
+it with a backslash (\\"). Consequently, any trailing slash in a quoted
+parameter (such as \"C:\My Documents[\\"]{.red}) is treated as a
+literal quotation mark (that is, the script would receive the string
+C:\My Documents[\"]{.red}). To remove such quotes, use
+<code>A_Args[1] :=</code><a href="lib/StrReplace.htm"><code>StrReplace</code></a><code>(A_Args[1], '"')</code></p>
+<p>Incoming parameters, if present, are stored as an array in the built-in
+variable <strong>A_Args</strong>, and can be accessed using <a href="Objects.htm#Usage_Simple_Arrays">array
+syntax</a>. <code>A_Args[1]</code> contains the first
+parameter. The following example exits the script when too few
+parameters are passed to it:</p>
+<pre class="codehilite"><code>if A_Args.Length &lt; 3
+{
+    MsgBox &quot;This script requires at least 3 parameters but it only received &quot; A_Args.Length &quot;.&quot;
+    ExitApp
+}
+</code></pre>
+
+<p>If the number of parameters passed into a script varies (perhaps due to
+the user dragging and dropping a set of files onto a script), the
+following example can be used to extract them one by one:</p>
+<pre class="codehilite"><code>for n, param in A_Args  ; For each parameter:
+{
+    MsgBox &quot;Parameter number &quot; n &quot; is &quot; param &quot;.&quot;
+}
+</code></pre>
+
+<p>If the parameters are file names, the following example can be used to
+convert them to their case-corrected long names (as stored in the file
+system), including complete/absolute path:</p>
+<pre class="codehilite"><code>for n, GivenPath in A_Args  ; For each parameter (or file dropped onto a script):
+{
+    Loop Files, GivenPath, &quot;FD&quot;  ; Include files and directories.
+        LongPath := A_LoopFileFullPath
+    MsgBox &quot;The case-corrected long path name of file`n&quot; GivenPath &quot;`nis:`n&quot; LongPath
+}
+</code></pre>
+
+<h2 id="cp">Script File Codepage</h2>
+<p>In order for non-ASCII characters to be read correctly from file, the
+encoding used when the file was saved (typically by the text editor)
+must match what AutoHotkey uses when it reads the file. If it does not
+match, characters will be decoded incorrectly. AutoHotkey uses the
+following rules to decide which encoding to use:</p>
+<ul>
+<li>If the file begins with a UTF-8 or UTF-16 (LE) byte order mark, the
+    appropriate codepage is used and the <a href="#CPn">/CP<em>n</em></a> switch is
+    ignored.</li>
+<li>If the <a href="#CPn">/CP<em>n</em></a> switch is passed on the command-line, codepage
+    <em>n</em> is used. For a list of possible values, see <a href="https://learn.microsoft.com/windows/win32/intl/code-page-identifiers">Code Page
+    Identifiers</a>.</li>
+<li>In all other cases, UTF-8 is used (this default differs from
+    AutoHotkey v1).</li>
+</ul>
+<p>Note that this applies only to script files loaded by AutoHotkey, not to
+file I/O within the script itself. <a href="lib/FileEncoding.htm">FileEncoding</a>
+controls the default encoding of files read or written by the script,
+while <a href="lib/IniRead.htm">IniRead</a> and <a href="lib/IniWrite.htm">IniWrite</a> always
+deal in UTF-16 or ANSI.</p>
+<p>As all text is converted (where necessary) to the <a href="Compat.htm#Format">native string
+format</a>, characters which are invalid or don\'t exist
+in the native codepage are replaced with a placeholder: \'�\'. This
+should only occur if there are encoding errors in the script file or the
+codepages used to save and load the file don\'t match.</p>
+<p><a href="lib/RegWrite.htm">RegWrite</a> may be used to set the default for scripts
+launched from Explorer (e.g. by double-clicking a file):</p>
+<pre class="codehilite"><code>; Uncomment the appropriate line below or leave them all commented to
+;   reset to the default of the current build.  Modify as necessary:
+; codepage := 0        ; System default ANSI codepage
+; codepage := 65001    ; UTF-8
+; codepage := 1200     ; UTF-16
+; codepage := 1252     ; ANSI Latin 1; Western European (Windows)
+if (codepage != &quot;&quot;)
+    codepage := &quot; /CP&quot; . codepage
+cmd := Format('&quot;{1}&quot;{2} &quot;%1&quot; %*', A_AhkPath, codepage)
+key := &quot;AutoHotkeyScript\Shell\Open\Command&quot;
+if A_IsAdmin    ; Set for all users.
+    RegWrite cmd, &quot;REG_SZ&quot;, &quot;HKCR\&quot; key
+else            ; Set for current user only.
+    RegWrite cmd, &quot;REG_SZ&quot;, &quot;HKCU\Software\Classes\&quot; key
+</code></pre>
+
+<p>This assumes AutoHotkey has already been installed. Results may be less
+than ideal if it has not.</p>
+<h2 id="debug">Debugging a Script</h2>
+<p>Built-in functions such as <a href="lib/ListVars.htm">ListVars</a> and
+<a href="lib/Pause.htm">Pause</a> can help you debug a script. For example, the
+following two lines, when temporarily inserted at carefully chosen
+positions, create \"break points\" in the script:</p>
+<pre class="codehilite"><code>ListVars
+Pause
+</code></pre>
+
+<p>When the script encounters these two lines, it will display the current
+contents of all variables for your inspection. When you\'re ready to
+resume, un-pause the script via the File or Tray menu. The script will
+then continue until reaching the next \"break point\" (if any).</p>
+<p>It is generally best to insert these \"break points\" at positions where
+the active window does not matter to the script, such as immediately
+before a WinActivate function. This allows the script to properly resume
+operation when you un-pause it.</p>
+<p>The following functions are also useful for debugging:
+<a href="lib/ListLines.htm">ListLines</a>, <a href="lib/KeyHistory.htm">KeyHistory</a>, and
+<a href="lib/OutputDebug.htm">OutputDebug</a>.</p>
+<p>Some common errors, such as typos and missing \"global\" declarations,
+can be detected by <a href="lib/_Warn.htm">enabling warnings</a>.</p>
+<h3 id="idebug">Interactive Debugging</h3>
+<p>Interactive debugging is possible with a supported <a href="AHKL_DBGPClients.htm">DBGp
+client</a>. Typically the following actions are
+possible:</p>
+<ul>
+<li>Set and remove breakpoints on lines - pause execution when a
+    <a href="https://en.wikipedia.org/wiki/Breakpoint">breakpoint</a> is reached.</li>
+<li>Step through code line by line - step into, over or out of
+    functions.</li>
+<li>Inspect all variables or a specific variable.</li>
+<li>View the stack of running threads and functions.</li>
+</ul>
+<p>Note that this functionality is disabled for compiled scripts which are
+<a href="#ahk2exe-base">based on a BIN file</a>. For compiled scripts based on an
+EXE file, /debug must be specified after <a href="#SlashScript">/script</a>.</p>
+<p>To enable interactive debugging, first launch a supported debugger
+client then launch the script with the <strong>/Debug</strong> command-line switch.</p>
+<pre class="codehilite"><code class="language-Syntax">AutoHotkey.exe /Debug[=SERVER:PORT] ...
+</code></pre>
+
+<p><em>SERVER</em> and <em>PORT</em> may be omitted. For example, the following are
+equivalent:</p>
+<pre class="codehilite"><code class="language-no-highlight">AutoHotkey /Debug &quot;myscript.ahk&quot;
+AutoHotkey /Debug=localhost:9000 &quot;myscript.ahk&quot;
+</code></pre>
+
+<p>To attach the debugger to a script which is already running, send it a
+message as shown below:</p>
+<pre class="codehilite"><code>ScriptPath := &quot;&quot; ; SET THIS TO THE FULL PATH OF THE SCRIPT
+A_DetectHiddenWindows := true
+if WinExist(ScriptPath &quot; ahk_class AutoHotkey&quot;)
+    ; Optional parameters:
+    ;   wParam  = the IPv4 address of the debugger client, as a 32-bit integer.
+    ;   lParam  = the port which the debugger client is listening on.
+    PostMessage DllCall(&quot;RegisterWindowMessage&quot;, &quot;Str&quot;, &quot;AHK_ATTACH_DEBUGGER&quot;)
+</code></pre>
+
+<p>Once the debugger client is connected, it may detach without terminating
+the script by sending the \"detach\" DBGp command.</p>
+<h2 id="Script_Showcase">Script Showcase</h2>
+<p>See <a href="scripts/">this page</a> for some useful scripts.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Scripts.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#scripts">Scripts</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#auto">Script Startup (the Auto-execute Thread)</a></li>
+<li><a href="#continuation">Splitting a Long Line into a Series of Shorter Ones</a><ul>
+<li><a href="#continuation-remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#lib">Script Library Folders</a></li>
+<li><a href="#ahk2exe">Convert a Script to an EXE (Ahk2Exe)</a><ul>
+<li><a href="#ahk2exe-toc">Compiler Topics</a></li>
+<li><a href="#ahk2exe-run">Running the Compiler</a></li>
+<li><a href="#ahk2exe-base">Base Executable File</a></li>
+<li><a href="#CompilerDirectives">Script Compiler Directives</a></li>
+<li><a href="#mpress">Compressing Compiled Scripts</a></li>
+<li><a href="#information">Background Information</a></li>
+</ul>
+</li>
+<li><a href="#cmd">Passing Command Line Parameters to a Script</a></li>
+<li><a href="#cp">Script File Codepage</a></li>
+<li><a href="#debug">Debugging a Script</a><ul>
+<li><a href="#idebug">Interactive Debugging</a></li>
+</ul>
+</li>
+<li><a href="#Script_Showcase">Script Showcase</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

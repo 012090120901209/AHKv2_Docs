@@ -1,0 +1,267 @@
+/* Markdown Content Styles */
+
+.markdown-body {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.markdown-body > *:first-child {
+    margin-top: 0 !important;
+}
+
+.markdown-body > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Headings */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    position: relative;
+    scroll-margin-top: calc(var(--navbar-height) + 1rem);
+}
+
+.markdown-body h1:hover .header-anchor,
+.markdown-body h2:hover .header-anchor,
+.markdown-body h3:hover .header-anchor,
+.markdown-body h4:hover .header-anchor,
+.markdown-body h5:hover .header-anchor,
+.markdown-body h6:hover .header-anchor {
+    opacity: 1;
+}
+
+.header-anchor {
+    position: absolute;
+    left: -1.5rem;
+    opacity: 0;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: opacity var(--transition);
+}
+
+.header-anchor:hover {
+    color: var(--primary);
+}
+
+/* Paragraphs */
+.markdown-body p {
+    margin: 1rem 0;
+}
+
+/* Lists */
+.markdown-body ul,
+.markdown-body ol {
+    padding-left: 2rem;
+    margin: 1rem 0;
+}
+
+.markdown-body li {
+    margin: 0.5rem 0;
+}
+
+.markdown-body li > p {
+    margin: 0.5rem 0;
+}
+
+/* Tables */
+.markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    display: block;
+}
+
+.markdown-body thead {
+    background-color: var(--surface);
+}
+
+.markdown-body th,
+.markdown-body td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.markdown-body th {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.markdown-body tr:nth-child(even) {
+    background-color: var(--surface);
+}
+
+/* Blockquotes */
+.markdown-body blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid var(--primary);
+    background-color: var(--surface);
+    border-radius: 0 6px 6px 0;
+}
+
+.markdown-body blockquote p {
+    margin: 0.5rem 0;
+}
+
+/* Horizontal Rule */
+.markdown-body hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+}
+
+/* Links */
+.markdown-body a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition);
+}
+
+.markdown-body a:hover {
+    border-bottom-color: var(--primary);
+}
+
+/* Images */
+.markdown-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Code Blocks */
+.markdown-body pre {
+    position: relative;
+    background-color: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.markdown-body pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1.7;
+}
+
+/* Copy Button */
+.code-block-wrapper {
+    position: relative;
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all var(--transition);
+}
+
+.code-block-wrapper:hover .copy-button {
+    opacity: 1;
+}
+
+.copy-button:hover {
+    background-color: var(--background);
+    color: var(--text-primary);
+}
+
+.copy-button.copied {
+    background-color: var(--secondary);
+    color: white;
+    border-color: var(--secondary);
+}
+
+/* Admonitions */
+.admonition {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid;
+    border-radius: 0 6px 6px 0;
+}
+
+.admonition-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admonition.note {
+    border-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.admonition.tip {
+    border-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.admonition.warning {
+    border-color: #f59e0b;
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+.admonition.danger {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Definition Lists */
+.markdown-body dl {
+    margin: 1rem 0;
+}
+
+.markdown-body dt {
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.markdown-body dd {
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+}
+
+/* Task Lists */
+.markdown-body .task-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.markdown-body .task-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.markdown-body .task-list-item input[type="checkbox"] {
+    margin-top: 0.375rem;
+}
+
+/* Footnotes */
+.markdown-body .footnotes {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}

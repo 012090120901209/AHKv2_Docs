@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Object | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="``` NoIndent">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>File</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="file-object">File Object</h1>
+<pre class="codehilite"><code class="language-NoIndent">class File extends Object
+</code></pre>
+
+<p>Provides an interface for file input/output, such as reading or writing
+text or retrieving its length. <a href="FileOpen.htm">FileOpen</a> returns an
+object of this type.</p>
+<p>\"FileObj\" is used below as a placeholder for any File object, as
+\"File\" is the class itself.</p>
+<p>In addition to the methods and property inherited from
+<a href="Object.htm">Object</a>, File objects have the following predefined methods
+and properties.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a>:<ul>
+<li><a href="#Read">Read</a>: Reads a string of characters from the file and
+    advances the file pointer.</li>
+<li><a href="#Write">Write</a>: Writes a string of characters to the file and
+    advances the file pointer.</li>
+<li><a href="#ReadLine">ReadLine</a>: Reads a line of text from the file and
+    advances the file pointer.</li>
+<li><a href="#WriteLine">WriteLine</a>: Writes a line of text to the file and
+    advances the file pointer.</li>
+<li><a href="#ReadNum">Read<em>NumType</em></a>: Reads a number from the file and
+    advances the file pointer.</li>
+<li><a href="#WriteNum">Write<em>NumType</em></a>: Writes a number to the file and
+    advances the file pointer.</li>
+<li><a href="#RawRead">RawRead</a>: Reads raw binary data from the file into
+    memory and advances the file pointer.</li>
+<li><a href="#RawWrite">RawWrite</a>: Writes raw binary data to the file and
+    advances the file pointer.</li>
+<li><a href="#Seek">Seek</a>: Moves the file pointer.</li>
+<li><a href="#Close">Close</a>: Closes the file, flushes any data in the cache
+    to disk and releases the share locks.</li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a>:<ul>
+<li><a href="#Pos">Pos</a>: Retrieves or sets the position of the file pointer.</li>
+<li><a href="#Length">Length</a>: Retrieves or sets the size of the file.</li>
+<li><a href="#AtEOF">AtEOF</a>: Retrieves a non-zero number if the file pointer
+    has reached the end of the file.</li>
+<li><a href="#Encoding">Encoding</a>: Retrieves or sets the text encoding used
+    by this file object.</li>
+<li><a href="#Handle">Handle</a>: Retrieves a system file handle, intended for
+    use with DllCall.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Methods">Methods</h2>
+<p>::: {#Read .methodShort}</p>
+<h3 id="read">Read</h3>
+<p>Reads a string of characters from the file and advances the file
+pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">String := FileObj.Read(Characters)
+</code></pre>
+
+<h4 id="Read_Parameters">Parameters</h4>
+<dl>
+<dt>Characters</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, the rest of the file is read and returned as one string.
+Otherwise, specify the maximum number of characters to read. If the
+File object was created from a handle to a non-seeking device such
+as a console buffer or pipe, omitting this parameter may cause the
+method to fail or return only what data is currently available.</p>
+</dd>
+</dl>
+<h4 id="Read_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>This method returns the string of characters that were read.
+:::</p>
+<p>::: {#Write .methodShort}</p>
+<h3 id="write">Write</h3>
+<p>Writes a string of characters to the file and advances the file pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">BytesWritten := FileObj.Write(String)
+</code></pre>
+
+<h4 id="Write_Parameters">Parameters</h4>
+<dl>
+<dt>String</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The string to write.</p>
+</dd>
+</dl>
+<h4 id="Write_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This method returns the number of bytes (not characters) that were
+written.
+:::</p>
+<p>::: {#ReadLine .methodShort}</p>
+<h3 id="readline">ReadLine</h3>
+<p>Reads a line of text from the file and advances the file pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">TextLine := FileObj.ReadLine()
+</code></pre>
+
+<h4 id="ReadLine_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>This method returns a line of text, excluding the line ending.</p>
+<h4 id="ReadLine_Remarks">Remarks</h4>
+<p>Lines up to 65,534 characters long can be read. If the length of a line
+exceeds this, the remainder of the line is returned by subsequent calls
+to this method.
+:::</p>
+<p>::: {#WriteLine .methodShort}</p>
+<h3 id="writeline">WriteLine</h3>
+<p>Writes a line of text to the file and advances the file pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">BytesWritten := FileObj.WriteLine(String)
+</code></pre>
+
+<h4 id="WriteLine_Parameters">Parameters</h4>
+<dl>
+<dt>String</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, an empty line will be written. Otherwise,
+specify the string to write, which is always followed by <code>`n</code> or
+<code>`r`n</code>, depending on the EOL flags used to open the file.</p>
+</dd>
+</dl>
+<h4 id="WriteLine_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This method returns the number of bytes (not characters) that were
+written.
+:::</p>
+<p>::: {#ReadNum .methodShort}</p>
+<h3 id="readnumtype">Read<em>NumType</em></h3>
+<p>Reads a number from the file and advances the file pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">Num := FileObj.ReadNumType()
+</code></pre>
+
+<p><em>NumType</em> is either UInt, Int, Int64, Short, UShort, Char, UChar,
+Double, or Float. These type names have the same meanings as with
+<a href="DllCall.htm#types">DllCall</a>.</p>
+<h4 id="ReadNum_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a>,
+<a href="../Concepts.htm#numbers">Float</a> or <a href="../Concepts.htm#nothing">String
+(empty)</a></p>
+<p>On success, this method returns a number. On failure, it returns an
+empty string.</p>
+<h4 id="ReadNum_Remarks">Remarks</h4>
+<p>If the number of bytes read is non-zero but less than the size of
+<em>NumType</em>, the missing bytes are assumed to be zero.
+:::</p>
+<p>::: {#WriteNum .methodShort}</p>
+<h3 id="writenumtype">Write<em>NumType</em></h3>
+<p>Writes a number to the file and advances the file pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">BytesWritten := FileObj.WriteNumType(Num)
+</code></pre>
+
+<p><em>NumType</em> is either UInt, Int, Int64, Short, UShort, Char, UChar,
+Double, or Float. These type names have the same meanings as with
+<a href="DllCall.htm#types">DllCall</a>.</p>
+<h4 id="WriteNum_Parameters">Parameters</h4>
+<dl>
+<dt>Num</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a> or
+<a href="../Concepts.htm#numbers">Float</a></p>
+<p>The number to write.</p>
+</dd>
+</dl>
+<h4 id="WriteNum_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This method returns the number of bytes that were written. For example,
+<code>FileObj.WriteUInt(42)</code> returns 4 if successful.
+:::</p>
+<p>::: {#RawRead .methodShort}</p>
+<h3 id="rawread">RawRead</h3>
+<p>Reads raw binary data from the file into memory and advances the file
+pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">BytesRead := FileObj.RawRead(Buffer , Bytes)
+</code></pre>
+
+<h4 id="RawRead_Parameters">Parameters</h4>
+<dl>
+<dt>Buffer</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#objects">Object</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The <a href="Buffer.htm">Buffer</a>-like object or memory address which will
+receive the data.</p>
+<p>Reading into a <a href="Buffer.htm">Buffer</a> is recommended. If <em>Bytes</em> is
+omitted, it defaults to the size of the buffer. An exception is
+thrown if <em>Bytes</em> exceeds the size of the buffer.</p>
+<p>If a memory address is passed, <em>Bytes</em> must also be specified.</p>
+</dd>
+<dt>Bytes</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The maximum number of bytes to read. This is optional when <em>Buffer</em>
+is an object; otherwise, it is required.</p>
+</dd>
+</dl>
+<h4 id="RawRead_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This method returns the number of bytes that were read.
+:::</p>
+<p>::: {#RawWrite .methodShort}</p>
+<h3 id="rawwrite">RawWrite</h3>
+<p>Writes raw binary data to the file and advances the file pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">BytesWritten := FileObj.RawWrite(Data , Bytes)
+</code></pre>
+
+<h4 id="RawWrite_Parameters">Parameters</h4>
+<dl>
+<dt>Data</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#objects">Object</a>,
+<a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>A <a href="Buffer.htm">Buffer</a>-like object or string containing binary data,
+or a memory address. If an object or string is specified, <em>Bytes</em> is
+optional and defaults to the size of the buffer or string.
+Otherwise, <em>Bytes</em> must also be specified.</p>
+</dd>
+<dt>Bytes</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The number of bytes to write. This is optional when <em>Data</em> is an
+object or string; otherwise, it is required.</p>
+</dd>
+</dl>
+<h4 id="RawWrite_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This method returns the number of bytes that were written.
+:::</p>
+<p>::: {#Seek .methodShort}</p>
+<h3 id="seek">Seek</h3>
+<p>Moves the file pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">IsMoved := FileObj.Seek(Distance , Origin)
+</code></pre>
+
+<h4 id="Seek_Parameters">Parameters</h4>
+<dl>
+<dt>Distance</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>Distance to move, in bytes. Lower values are closer to the beginning
+of the file.</p>
+</dd>
+<dt>Origin</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 2 when <em>Distance</em> is negative and 0
+otherwise. Otherwise, specify one of the following numbers to
+indicate the starting point for the file pointer move:</p>
+<ul>
+<li>0 (SEEK_SET): Beginning of the file. <em>Distance</em> must be zero or
+    greater.</li>
+<li>1 (SEEK_CUR): Current position of the file pointer.</li>
+<li>2 (SEEK_END): End of the file. <em>Distance</em> should usually be
+    negative.</li>
+</ul>
+</dd>
+</dl>
+<h4 id="Seek_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#boolean">Integer (boolean)</a></p>
+<p>On success, this method returns 1 (true). On failure, it returns 0
+(false).</p>
+<h4 id="Seek_Remarks">Remarks</h4>
+<p>This method is equivalent to <code>FileObj.Pos := Distance</code>, if <em>Distance</em> is
+not negative and <em>Origin</em> is omitted or 0 (SEEK_SET).
+:::</p>
+<p>::: {#Close .methodShort}</p>
+<h3 id="close">Close</h3>
+<p>Closes the file, flushes any data in the cache to disk and releases the
+share locks.</p>
+<pre class="codehilite"><code class="language-Syntax">FileObj.Close()
+</code></pre>
+
+<p>Although the file is closed automatically when the object is freed, it
+is recommended to close the file as soon as possible.
+:::</p>
+<h2 id="Properties">Properties</h2>
+<p>::: {#Pos .methodShort}</p>
+<h3 id="pos">Pos</h3>
+<p>Retrieves or sets the position of the file pointer.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentPos := FileObj.Pos
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">FileObj.Pos := NewPos
+</code></pre>
+
+<p><em>CurrentPos</em> and <em>NewPos</em> are a byte offset from the beginning of the
+file, where 0 is the first byte. When data is written to or read from
+the file, the file pointer automatically moves to the next byte after
+that data.</p>
+<p>This property is equivalent to <code>FileObj.Seek(NewPos)</code>.
+:::</p>
+<p>::: {#Length .methodShort}</p>
+<h3 id="length">Length</h3>
+<p>Retrieves or sets the size of the file.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentSize := FileObj.Length
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">FileObj.Length := NewSize
+</code></pre>
+
+<p><em>CurrentSize</em> and <em>NewSize</em> are the size of the file, in bytes.</p>
+<p>This property should be used only with an actual file. If the File
+object was created from a handle to a pipe, it may return the amount of
+data currently available in the pipe\'s internal buffer, but this
+behaviour is not guaranteed.
+:::</p>
+<p>::: {#AtEOF .methodShort}</p>
+<h3 id="ateof">AtEOF</h3>
+<p>Retrieves a non-zero number if the file pointer has reached the end of
+the file, otherwise zero.</p>
+<pre class="codehilite"><code class="language-Syntax">IsAtEOF := FileObj.AtEOF
+</code></pre>
+
+<p>This property should be used only with an actual file. If the File
+object was created from a handle to a non-seeking device such as a
+console buffer or pipe, the returned value may not be meaningful, as
+such devices do not logically have an \"end of file\".
+:::</p>
+<p>::: {#Encoding .methodShort}</p>
+<h3 id="encoding">Encoding</h3>
+<p>Retrieves or sets the text encoding used by this file object.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentEncoding := FileObj.Encoding
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">FileObj.Encoding := NewEncoding
+</code></pre>
+
+<p><em>NewEncoding</em> may be a numeric code page identifier (see <a href="https://learn.microsoft.com/windows/win32/intl/code-page-identifiers">Microsoft
+Docs</a>)
+or one of the following strings.</p>
+<p><em>CurrentEncoding</em> is one of the following strings:</p>
+<ul>
+<li><code class="no-highlight">UTF-8</code>: Unicode UTF-8, equivalent to CP65001.</li>
+<li><code class="no-highlight">UTF-16</code>: Unicode UTF-16 with little endian byte
+    order, equivalent to CP1200.</li>
+<li><code>CP</code><em><code>nnn</code></em>: a code page with numeric identifier <em>nnn</em>.</li>
+</ul>
+<p><em>CurrentEncoding</em> is never a value with the <code>-RAW</code> suffix, regardless of
+how the file was opened or whether it contains a byte order mark (BOM).
+Setting <em>NewEncoding</em> never causes a BOM to be added or removed, as the
+BOM is normally written to the file when it is first created.</p>
+<p>Setting <em>NewEncoding</em> to <code class="no-highlight">UTF-8-RAW</code> or
+<code class="no-highlight">UTF-16-RAW</code> is valid, but the <code>-RAW</code> suffix is ignored.
+This only applies to <code>FileObj.Encoding</code>, not <a href="FileOpen.htm">FileOpen</a>.
+:::</p>
+<p>::: {#Handle .methodShort}</p>
+<h3 id="handle">Handle</h3>
+<p>Returns a system file handle, intended for use with
+<a href="DllCall.htm">DllCall</a>. See
+<a href="https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createfilea">CreateFile</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">Handle := FileObj.Handle
+</code></pre>
+
+<p>File objects internally buffer reads or writes. If data has been written
+into the object\'s internal buffer, it is committed to disk before the
+handle is returned. If the buffer contains data read from file, it is
+discarded and the actual file pointer is reset to the logical position
+indicated by the <a href="#Pos">Pos</a> property.
+:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/File.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#file-object">File Object</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#Methods">Methods</a><ul>
+<li><a href="#read">Read</a><ul>
+<li><a href="#Read_Parameters">Parameters</a></li>
+<li><a href="#Read_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#write">Write</a><ul>
+<li><a href="#Write_Parameters">Parameters</a></li>
+<li><a href="#Write_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#readline">ReadLine</a><ul>
+<li><a href="#ReadLine_Return_Value">Return Value</a></li>
+<li><a href="#ReadLine_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#writeline">WriteLine</a><ul>
+<li><a href="#WriteLine_Parameters">Parameters</a></li>
+<li><a href="#WriteLine_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#readnumtype">ReadNumType</a><ul>
+<li><a href="#ReadNum_Return_Value">Return Value</a></li>
+<li><a href="#ReadNum_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#writenumtype">WriteNumType</a><ul>
+<li><a href="#WriteNum_Parameters">Parameters</a></li>
+<li><a href="#WriteNum_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#rawread">RawRead</a><ul>
+<li><a href="#RawRead_Parameters">Parameters</a></li>
+<li><a href="#RawRead_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#rawwrite">RawWrite</a><ul>
+<li><a href="#RawWrite_Parameters">Parameters</a></li>
+<li><a href="#RawWrite_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#seek">Seek</a><ul>
+<li><a href="#Seek_Parameters">Parameters</a></li>
+<li><a href="#Seek_Return_Value">Return Value</a></li>
+<li><a href="#Seek_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#close">Close</a></li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a><ul>
+<li><a href="#pos">Pos</a></li>
+<li><a href="#length">Length</a></li>
+<li><a href="#ateof">AtEOF</a></li>
+<li><a href="#encoding">Encoding</a></li>
+<li><a href="#handle">Handle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

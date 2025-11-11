@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Any | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="`Any` is the class at the root of AutoHotkey\'s type hierarchy. All">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Any</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="any">Any</h1>
+<p><code>Any</code> is the class at the root of AutoHotkey\'s type hierarchy. All
+other types are a sub-type of Any.</p>
+<p><code>Any.Prototype</code> defines methods and properties that are applicable to
+all values and objects (currently excluding <a href="ComValue.htm">ComValue</a> and
+derived types) unless overridden. The prototype object itself is
+natively an <a href="Object.htm">Object</a>, but has no <code>base</code> and therefore does
+not identify as an instance of Object.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a>:<ul>
+<li><a href="#GetMethod">GetMethod</a>: Retrieves the implementation function
+    of a method.</li>
+<li><a href="#HasBase">HasBase</a>: Returns true if the specified base object
+    is in the value\'s chain of base objects.</li>
+<li><a href="#HasMethod">HasMethod</a>: Returns true if the value has a method
+    by this name.</li>
+<li><a href="#HasProp">HasProp</a>: Returns true if the value has a property by
+    this name.</li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a>:<ul>
+<li><a href="#Base">Base</a>: Retrieves the value\'s base object.</li>
+</ul>
+</li>
+<li><a href="#Functions">Functions</a>:<ul>
+<li><a href="#GetBase">ObjGetBase</a>: Returns the value\'s base object.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Methods">Methods</h2>
+<p>::: {#GetMethod .methodShort}</p>
+<h3 id="getmethod">GetMethod</h3>
+<p>Retrieves the implementation function of a method.</p>
+<pre class="codehilite"><code class="language-Syntax">Value.GetMethod(Name, ParamCount)
+</code></pre>
+
+<p>This method is exactly equivalent to
+<code>GetMethod(Value, Name, ParamCount)</code>, unless overridden.
+:::</p>
+<p>::: {#HasBase .methodShort}</p>
+<h3 id="hasbase">HasBase</h3>
+<p>Returns true if the specified <a href="../Objects.htm#delegation">base object</a>
+is in the value\'s chain of base objects, otherwise false.</p>
+<pre class="codehilite"><code class="language-Syntax">Value.HasBase(BaseObj)
+</code></pre>
+
+<p>This method is exactly equivalent to <code>HasBase(Value, BaseObj)</code>, unless
+overridden.
+:::</p>
+<p>::: {#HasMethod .methodShort}</p>
+<h3 id="hasmethod">HasMethod</h3>
+<p>Returns true if the value has a method by this name, otherwise false.</p>
+<pre class="codehilite"><code class="language-Syntax">Value.HasMethod(Name, ParamCount)
+</code></pre>
+
+<p>This method is exactly equivalent to
+<code>HasMethod(Value, Name, ParamCount)</code>, unless overridden.
+:::</p>
+<p>::: {#HasProp .methodShort}</p>
+<h3 id="hasprop">HasProp</h3>
+<p>Returns true if the value has a property by this name, otherwise false.</p>
+<pre class="codehilite"><code class="language-Syntax">Value.HasProp(Name)
+</code></pre>
+
+<p>This method is exactly equivalent to <code>HasProp(Value, Name)</code>, unless
+overridden.
+:::</p>
+<h2 id="Properties">Properties</h2>
+<p>::: {#Base .methodShort}</p>
+<h3 id="base">Base</h3>
+<p>Retrieves the value\'s <a href="../Objects.htm#delegation">base object</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">BaseObj := Value.Base
+</code></pre>
+
+<p>For <a href="../Objects.htm#primitive">primitive values</a>, the return value is
+the pre-defined prototype object corresponding to <code>Type(Value)</code>.</p>
+<p>See also: <a href="#GetBase">ObjGetBase</a>, <a href="Object.htm#SetBase">ObjSetBase</a>,
+<a href="Object.htm#Base">Obj.Base</a>
+:::</p>
+<h2 id="Functions">Functions</h2>
+<h3 id="GetBase">ObjGetBase</h3>
+<p>Returns the value\'s <a href="../Objects.htm#delegation">base object</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">BaseObj := ObjGetBase(Value)
+</code></pre>
+
+<p>No <a href="../Objects.htm#Meta_Functions">meta-functions</a> or <a href="../Objects.htm#Custom_Classes_property">property
+functions</a> are called.
+Overriding the <a href="#Base">Base</a> property does not affect the behaviour of
+this function.</p>
+<p>If there is no base, the return value is an empty string. Only the Any
+prototype itself has no base.</p>
+<p>See also: <a href="#Base">Base</a>, <a href="Object.htm#SetBase">ObjSetBase</a>,
+<a href="Object.htm#Base">Obj.Base</a></p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Any.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#any">Any</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#Methods">Methods</a><ul>
+<li><a href="#getmethod">GetMethod</a></li>
+<li><a href="#hasbase">HasBase</a></li>
+<li><a href="#hasmethod">HasMethod</a></li>
+<li><a href="#hasprop">HasProp</a></li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a><ul>
+<li><a href="#base">Base</a></li>
+</ul>
+</li>
+<li><a href="#Functions">Functions</a><ul>
+<li><a href="#GetBase">ObjGetBase</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

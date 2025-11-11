@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run / RunWait | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Runs an external program. Unlike Run, RunWait will wait until the">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Run</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="run-runwait">Run / RunWait</h1>
+<p>Runs an external program. Unlike Run, RunWait will wait until the
+program finishes before continuing.</p>
+<pre class="codehilite"><code class="language-Syntax">Run Target , WorkingDir, Options, &amp;OutputVarPID
+ExitCode := RunWait(Target , WorkingDir, Options, &amp;OutputVarPID)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Target</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A document, URL, executable file (.exe, .com, .bat, etc.), shortcut
+(.lnk), <a href="#CLSID">CLSID</a>, or <a href="#verbs">system verb</a> to launch (see
+remarks). If <em>Target</em> is a local file and no path was specified with
+it, how the file is located typically depends on the type of file
+and other conditions. See <a href="#Interpretation_of_Target">Interpretation of
+Target</a> for details.</p>
+<p>To pass parameters, add them immediately after the program or
+document name as follows:</p>
+<pre class="codehilite"><code>Run 'MyProgram.exe Param1 Param2'
+</code></pre>
+
+<p>If the program/document name or a parameter contains spaces, it is
+safest to enclose it in double quotes as follows (even though it may
+work without them in some cases):</p>
+<pre class="codehilite"><code>Run '&quot;My Program.exe&quot; &quot;param with spaces&quot;'
+</code></pre>
+
+</dd>
+<dt>WorkingDir</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the script\'s own working directory
+(<a href="../Variables.htm#WorkingDir">A_WorkingDir</a>) will be used.
+Otherwise, specify the initial working directory to be used by the
+new process. This typically also affects relative paths in <em>Target</em>,
+but interpretation of command-line parameters depends on the target
+program.</p>
+</dd>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, <em>Target</em> will be launched normally. Otherwise,
+specify one or more of the following options:</p>
+<p><strong>Max:</strong> launch maximized</p>
+<p><strong>Min:</strong> launch minimized</p>
+<p><strong>Hide:</strong> launch hidden (cannot be used in combination with either
+of the above)</p>
+<p><strong>Note:</strong> Some applications (e.g. Calc.exe) do not obey the
+requested startup state and thus Max/Min/Hide will have no effect.</p>
+</dd>
+<dt>&amp;OutputVarPID</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#variable-references">VarRef</a></p>
+<p>If omitted, the corresponding value will not be stored. Otherwise,
+specify a reference to the output variable in which to store the
+newly launched program\'s unique <a href="../misc/WinTitle.htm#ahk_pid">Process ID
+(PID)</a>. The variable will be made
+blank if the PID could not be determined, which usually happens if a
+system verb, document, or shortcut is launched rather than a direct
+executable file. RunWait also supports this parameter, though its
+<em>OutputVarPID</em> must be checked in <a href="../misc/Threads.htm">another
+thread</a> (otherwise, the PID will be invalid
+because the process will have terminated by the time the line
+following RunWait executes).</p>
+<p>After the Run function retrieves a PID, any windows to be created by
+the process might not exist yet. To wait for at least one window to
+be created, use <a href="WinWait.htm"><code>WinWait</code></a><code>"ahk_pid " OutputVarPID</code>.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>Unlike Run, RunWait will wait until <em>Target</em> is closed or exits, at
+which time the return value will be the program\'s exit code (as a
+signed 32-bit integer). Some programs will appear to return immediately
+even though they are still running; these programs spawn another
+process.</p>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>If <em>Target</em> cannot be launched, an exception is thrown (that is, an
+error window is displayed) and the current thread is exited, unless the
+error is caught by a <a href="Try.htm">Try</a>/<a href="Catch.htm">Catch</a> statement. For
+example:</p>
+<pre class="codehilite"><code>try
+    Run &quot;NonExistingFile&quot;
+catch
+    MsgBox &quot;File does not exist.&quot;
+</code></pre>
+
+<p>The built-in variable <a href="../Variables.htm#LastError">A_LastError</a> is set
+to the result of the operating system\'s GetLastError() function.</p>
+<h2 id="Interpretation_of_Target">Interpretation of Target</h2>
+<p>Run/RunWait itself does not interpret command-line parameters or search
+for the target file. Instead, it attempts to execute the target as
+follows:</p>
+<ul>
+<li>If no verb is specified, <em>Target</em> is passed as-is to the
+    <em>lpCommandLine</em> parameter of
+    <a href="https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw">CreateProcess</a>.</li>
+<li>If a verb is specified or CreateProcess fails, and
+    <a href="RunAs.htm">RunAs</a> is not in effect,
+    <a href="https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellexecuteexw">ShellExecuteEx</a>
+    is attempted.</li>
+</ul>
+<p>If <em>Target</em> specifies a name but not a directory, the system will search
+for and launch the file if it is integrated (\"known\"), e.g. by being
+contained in one of the PATH folders. The exact search order depends on
+whether CreateProcess and/or ShellExecuteEx is called. If CreateProcess
+is called, the application directory (which contains the AutoHotkey
+interpreter or compiled script) takes precedence over the working
+directory specified by <em>WorkingDir</em>. To avoid this, specify the
+directory; e.g. <code>.\program.exe</code>.</p>
+<p>When ShellExecuteEx is being attempted, <em>Target</em> is interpreted as
+follows:</p>
+<ul>
+<li>The substring of <em>Target</em> ending at the first space or tab may be
+    either a <a href="#verbs">predefined verb name</a> or an asterisk followed by a
+    verb name. If present, the optional asterisk, verb name and a single
+    delimiting space or tab are excluded from further consideration.
+    Verb names containing spaces or tabs are not supported, but symbols
+    such as hyphen are permitted.</li>
+<li>If a leading double-quote mark is present, the substring between
+    that and the next double-quote mark is considered to be the target
+    file or action.</li>
+<li>Otherwise, the first substring which ends at a space and is either
+    an existing file (specified by absolute path or relative to
+    <em>WorkingDir</em>) or ends in .exe, .bat, .com, .cmd or .hta is
+    considered the action. This allows file types such as .ahk, .vbs or
+    .lnk to accept parameters while still allowing \"known\" executables
+    such as wordpad.exe to be launched without an absolute path.</li>
+<li>A single delimiting space is ignored, if present, and the remainder
+    of <em>Target</em> is passed as-is to CreateProcess or ShellExecuteEx as
+    command-line parameters.</li>
+</ul>
+<h2 id="Remarks">Remarks</h2>
+<p>When running a program via <a href="../Variables.htm#ComSpec">ComSpec</a> (cmd.exe)
+-- perhaps because you need to redirect the program\'s input or output
+-- if the path or name of the executable contains spaces, the entire
+string should be enclosed in an outer pair of quotes. In the following
+example, the outer quotes are highlighted in yellow:</p>
+<pre class="codehilite"><code>Run A_ComSpec ' /c &quot;&quot;C:\My Utility.exe&quot; &quot;param 1&quot; &quot;second param&quot; &gt;&quot;C:\My File.txt&quot;&quot;'
+</code></pre>
+
+<p>Performance may be slightly improved if <em>Target</em> is an exact path, e.g.
+<code>Run 'C:\Windows\Notepad.exe "C:\My Documents\Test.txt"'</code> rather than
+<code>Run "C:\My Documents\Test.txt"</code>.</p>
+<p>Special <a href="../misc/CLSID-List.htm">CLSIDs</a> may be opened via Run. Most of
+them can be opened by using the shell: prefix. Some can be opened
+without it. For example:</p>
+<pre class="codehilite"><code>Run &quot;shell:::{D20EA4E1-3957-11D2-A40B-0C5020524153}&quot;  ; Windows Tools.
+Run &quot;::{20D04FE0-3AEA-1069-A2D8-08002B30309D}&quot;  ; This PC (formerly My Computer or Computer).
+Run &quot;::{645FF040-5081-101B-9F08-00AA002F954E}&quot;  ; Recycle Bin.
+</code></pre>
+
+<p>System verbs correspond to actions available in a file\'s right-click
+menu in the Explorer. If a file is launched without a verb, the default
+verb (usually \"open\") for that particular file type will be used. If
+specified, the verb should be followed by the name of the target file.
+The following verbs are currently supported:</p>
+<p>+-----------------------------------+-----------------------------------+
+| Verb                              | Description                       |
++===================================+===================================+
+| *<em>verb</em>                          | Any system-defined or custom      |
+|                                   | verb. For example:                |
+|                                   | <code>R                                |
+|                                   | un "*Compile " A_ScriptFullPath</code>. |
+|                                   | The <a href="#RunAs">*RunAs</a> verb may be |
+|                                   | used in place of the <em>Run as      |
+|                                   | administrator</em> right-click menu   |
+|                                   | item.                             |
++-----------------------------------+-----------------------------------+
+| properties                        | Displays the Explorer\'s          |
+|                                   | properties window for the         |
+|                                   | indicated file. For example:      |
+|                                   | <code>R                                |
+|                                   | un 'properties "C:\My File.txt"'</code> |
+|                                   |                                   |
+|                                   | <strong>Note:</strong> The properties window   |
+|                                   | will automatically close when the |
+|                                   | script terminates. To prevent     |
+|                                   | this, use <a href="WinWait.htm">WinWait</a>  |
+|                                   | to wait for the window to appear, |
+|                                   | then use                          |
+|                                   | <a href="WinWaitClose.htm">WinWaitClose</a>  |
+|                                   | to wait for the user to close it. |
++-----------------------------------+-----------------------------------+
+| find                              | Opens an instance of the          |
+|                                   | Explorer\'s Search Companion or   |
+|                                   | Find File window at the indicated |
+|                                   | folder. For example:              |
+|                                   | <code>Run "find D:\"</code>                  |
++-----------------------------------+-----------------------------------+
+| explore                           | Opens an instance of Explorer at  |
+|                                   | the indicated folder. For         |
+|                                   | example:                          |
+|                                   | <code>Run "explore " A_ProgramFiles</code>.  |
++-----------------------------------+-----------------------------------+
+| edit                              | Opens the indicated file for      |
+|                                   | editing. It might not work if the |
+|                                   | indicated file\'s type does not   |
+|                                   | have an \"edit\" action           |
+|                                   | associated with it. For example:  |
+|                                   | <code>Run 'edit "C:\My File.txt"'</code>     |
++-----------------------------------+-----------------------------------+
+| open                              | Opens the indicated file          |
+|                                   | (normally not needed because it   |
+|                                   | is the default action for most    |
+|                                   | file types). For example:         |
+|                                   | <code>Run 'open "My File.txt"'</code>.       |
++-----------------------------------+-----------------------------------+
+| print                             | Prints the indicated file with    |
+|                                   | the associated application, if    |
+|                                   | any. For example:                 |
+|                                   | <code>Run 'print "My File.txt"'</code>       |
++-----------------------------------+-----------------------------------+</p>
+<p>While RunWait is in a waiting state, new <a href="../misc/Threads.htm">threads</a>
+can be launched via <a href="../Hotkeys.htm">hotkey</a>, <a href="Menu.htm">custom menu
+item</a>, or <a href="SetTimer.htm">timer</a>.</p>
+<h2 id="RunAs">Run as Administrator</h2>
+<p>For an executable file, the <em>*RunAs</em> verb is equivalent to selecting
+<em>Run as administrator</em> from the right-click menu of the file. For
+example, the following code attempts to restart the current script as
+admin:</p>
+<pre class="codehilite"><code>full_command_line := DllCall(&quot;GetCommandLine&quot;, &quot;str&quot;)
+
+if not (A_IsAdmin or RegExMatch(full_command_line, &quot; /restart(?!\S)&quot;))
+{
+    try
+    {
+        if A_IsCompiled
+            Run '*RunAs &quot;' A_ScriptFullPath '&quot; /restart'
+        else
+            Run '*RunAs &quot;' A_AhkPath '&quot; /restart &quot;' A_ScriptFullPath '&quot;'
+    }
+    ExitApp
+}
+
+MsgBox &quot;A_IsAdmin: &quot; A_IsAdmin &quot;`nCommand line: &quot; full_command_line
+</code></pre>
+
+<p>If the user cancels the <a href="https://en.wikipedia.org/wiki/User_Account_Control">User Account Control
+(UAC)</a> dialog or Run
+fails for some other reason, the script will simply exit.</p>
+<p>Using <a href="../Scripts.htm#SlashR">/restart</a> ensures that a <a href="_SingleInstance.htm">single
+instance</a> prompt is not shown if the new instance
+of the script starts before ExitApp is called.</p>
+<p>If UAC is disabled, <em>*RunAs</em> will launch the process without elevating
+it. Checking for <code>/restart</code> in the command line ensures that the script
+does not enter a runaway loop in that case. Note that <code>/restart</code> is a
+built-in switch, so is not included in the <a href="../Scripts.htm#cmd_args">array of command-line
+parameters</a>.</p>
+<p>The example can be modified to fit the script\'s needs:</p>
+<ul>
+<li>If the script absolutely requires admin rights, check
+    <a href="../Variables.htm#IsAdmin">A_IsAdmin</a> a second time in case
+    <em>*RunAs</em> failed to elevate the script (i.e. because UAC is
+    disabled).</li>
+<li>To keep the script running even if the user cancels the UAC prompt,
+    move <a href="ExitApp.htm">ExitApp</a> into the try block.</li>
+<li>To keep the script running even if it failed to restart (i.e.
+    because the script file has been changed or deleted), remove ExitApp
+    and use RunWait instead of Run. On success, <code>/restart</code> causes the
+    new instance to terminate the old one. On failure, the new instance
+    exits and RunWait returns.</li>
+</ul>
+<p>AutoHotkey\'s installer registers the <em>RunAs</em> verb for <em>.ahk</em> files,
+which allows <code>Run "*RunAs script.ahk"</code> to launch a script as admin.</p>
+<h2 id="Related">Related</h2>
+<p><a href="RunAs.htm">RunAs</a>, <a href="Process.htm">Process functions</a>, <a href="Exit.htm">Exit</a>,
+<a href="../misc/CLSID-List.htm">CLSID List</a>, <a href="DllCall.htm">DllCall</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Run is able to launch Windows system programs
+from any directory. Note that executable file extensions such as .exe
+can be omitted.</p>
+<pre class="codehilite"><code>Run &quot;notepad&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExURL .ex}
+<a class="ex_number" href="#ExURL"></a> Run is able to launch URLs:</p>
+<p>The following opens an internet address in the user\'s default web
+browser.</p>
+<pre class="codehilite"><code>Run &quot;https://www.google.com&quot;
+</code></pre>
+
+<p>The following opens the default e-mail application with the recipient
+filled in.</p>
+<pre class="codehilite"><code>Run &quot;mailto:someone@somedomain.com&quot;
+</code></pre>
+
+<p>The following does the same as above, plus the subject and body.</p>
+<pre class="codehilite"><code>Run &quot;mailto:someone@somedomain.com?subject=This is the subject line&amp;body=This is the message body's text.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExErrorLevel .ex}
+<a class="ex_number" href="#ExErrorLevel"></a> Opens a document in a maximized
+application and displays a custom error message on failure.</p>
+<pre class="codehilite"><code>try Run(&quot;ReadMe.doc&quot;, , &quot;Max&quot;)
+if A_LastError
+    MsgBox &quot;The document could not be launched.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExVerb .ex}
+<a class="ex_number" href="#ExVerb"></a> Runs the dir command in minimized state and
+stores the output in a text file. After that, the text file and its
+properties dialog will be opened.</p>
+<pre class="codehilite"><code>RunWait A_ComSpec &quot; /c dir C:\ &gt;&gt;C:\DirTest.txt&quot;, , &quot;Min&quot;
+Run &quot;C:\DirTest.txt&quot;
+Run &quot;properties C:\DirTest.txt&quot;
+Persistent  ; Keep the script from exiting, otherwise the properties dialog will close.
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExCLSID .ex}
+<a class="ex_number" href="#ExCLSID"></a> Run is able to launch
+<a href="../misc/CLSID-List.htm">CLSIDs</a>:</p>
+<p>The following opens the Recycle Bin.</p>
+<pre class="codehilite"><code>Run &quot;::{645FF040-5081-101B-9F08-00AA002F954E}&quot;
+</code></pre>
+
+<p>The following opens This PC (formerly My Computer or Computer).</p>
+<pre class="codehilite"><code>Run &quot;::{20D04FE0-3AEA-1069-A2D8-08002B30309D}&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExMultipleCmds .ex}
+<a class="ex_number" href="#ExMultipleCmds"></a> To run multiple commands consecutively,
+use \"&amp;&amp;\" between each.</p>
+<pre class="codehilite"><code>Run A_ComSpec &quot;/c dir /b &gt; C:\list.txt &amp;&amp; type C:\list.txt &amp;&amp; pause&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExStdOut .ex}
+<a class="ex_number" href="#ExStdOut"></a> The following custom functions can be used to
+run a command and retrieve its output or to run multiple commands in one
+go and retrieve their output. For the WshShell object, see <a href="https://learn.microsoft.com/previous-versions/aew9yb99(v=vs.85)">Microsoft
+Docs</a>.</p>
+<pre class="codehilite"><code>MsgBox RunWaitOne(&quot;dir &quot; A_ScriptDir)
+
+MsgBox RunWaitMany(&quot;
+(
+echo Put your commands here,
+echo each one will be run,
+echo and you'll get the output.
+)&quot;)
+
+RunWaitOne(command) {
+    shell := ComObject(&quot;WScript.Shell&quot;)
+    ; Execute a single command via cmd.exe
+    exec := shell.Exec(A_ComSpec &quot; /C &quot; command)
+    ; Read and return the command's output
+    return exec.StdOut.ReadAll()
+}
+
+RunWaitMany(commands) {
+    shell := ComObject(&quot;WScript.Shell&quot;)
+    ; Open cmd.exe with echoing of commands disabled
+    exec := shell.Exec(A_ComSpec &quot; /Q /K echo off&quot;)
+    ; Send the commands to execute, separated by newline
+    exec.StdIn.WriteLine(commands &quot;`nexit&quot;)  ; Always exit at the end!
+    ; Read and return the output of all commands
+    return exec.StdOut.ReadAll()
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExecScript .ex}
+<a class="ex_number" href="#ExecScript"></a> Executes the given code as a new AutoHotkey
+process.</p>
+<pre class="codehilite"><code>ExecScript(Script, Wait:=true)
+{
+    shell := ComObject(&quot;WScript.Shell&quot;)
+    exec := shell.Exec(&quot;AutoHotkey.exe /ErrorStdOut *&quot;)
+    exec.StdIn.Write(Script)
+    exec.StdIn.Close()
+    if Wait
+        return exec.StdOut.ReadAll()
+}
+
+; Example:
+ib := InputBox(&quot;Enter an expression to evaluate as a new script.&quot;,,, 'Ord(&quot;*&quot;)')
+if ib.result = &quot;Cancel&quot;
+    return
+result := ExecScript('FileAppend ' ib.value ', &quot;*&quot;')
+MsgBox &quot;Result: &quot; result
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Run.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#run-runwait">Run / RunWait</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Interpretation_of_Target">Interpretation of Target</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#RunAs">Run as Administrator</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop Files | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Retrieves the specified files or folders, one at a time.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>LoopFiles</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="loop-files">Loop Files</h1>
+<p>Retrieves the specified files or folders, one at a time.</p>
+<pre class="codehilite"><code class="language-Syntax">Loop Files FilePattern , Mode
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>FilePattern</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name of a single file or folder, or a wildcard pattern such as
+<code>"C:\Temp\*.tmp"</code>. <em>FilePattern</em> is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified.</p>
+<p>Both asterisks (<code>*</code>) and question marks (<code>?</code>) are supported as
+wildcards. <code>*</code> matches zero or more characters and <code>?</code> matches any
+single character. Usage examples:</p>
+<ul>
+<li><code>*.*</code> or <code>*</code> matches all files.</li>
+<li><code>*.htm</code> matches files with the extension .htm, .html, etc.</li>
+<li><code>*.</code> matches files without an extension.</li>
+<li><code>log?.txt</code> matches e.g. log1.txt but not log10.txt.</li>
+<li><code>*report*</code> matches any filename containing the word \"report\".</li>
+</ul>
+<p>A match occurs when the pattern appears in either the file\'s
+long/normal name or its <a href="#LoopFileShortName">8.3 short name</a>.</p>
+<p>If this parameter is a single file or folder (i.e. no wildcards) and
+<em>Mode</em> includes R, more than one match will be found if the
+specified file name appears in more than one of the folders being
+searched.</p>
+<p>Patterns longer than 259 characters may fail to find any files due
+to <a href="../misc/LongPaths.htm">system limitations (MAX_PATH)</a>. This
+limit can be bypassed by using the <code>\\?\</code> <a href="../misc/LongPaths.htm#prefix">long path
+prefix</a>, with some stipulations.</p>
+</dd>
+<dt>Mode</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, only files are included and subdirectories are
+not recursed into. Otherwise, specify one or more of the following
+letters:</p>
+<ul>
+<li>D = Include directories (folders).</li>
+<li>F = Include files. If both F and D are omitted, files are
+    included but not folders.</li>
+<li>R = Recurse into subdirectories (subfolders). All subfolders
+    will be recursed into, not just those whose names match
+    <em>FilePattern</em>. If R is omitted, files and folders in subfolders
+    are not included.</li>
+</ul>
+</dd>
+</dl>
+<h2 id="Special_Variables">Special Variables Available Inside a File Loop</h2>
+<p>The following variables exist within any file loop. If an inner file
+loop is enclosed by an outer file loop, the innermost loop\'s file will
+take precedence:</p>
+<p>+-----------------------------------+-----------------------------------+
+| Variable                          | Description                       |
++===================================+===================================+
+| A_LoopFileName                    | The name of the file or folder    |
+|                                   | currently retrieved (without the  |
+|                                   | path).                            |
++-----------------------------------+-----------------------------------+
+| A_LoopFileExt                     | The file\'s extension (e.g. TXT,  |
+|                                   | DOC, or EXE). The period (.) is   |
+|                                   | not included.                     |
++-----------------------------------+-----------------------------------+
+| A_LoopFilePath                    | The path and name of the          |
+|                                   | file/folder currently retrieved.  |
+|                                   | If <em>FilePattern</em> contains a       |
+|                                   | relative path rather than an      |
+|                                   | absolute path, the path here will |
+|                                   | also be relative. In addition,    |
+|                                   | any short (8.3) folder names in   |
+|                                   | <em>FilePattern</em> will still be short |
+|                                   | (see next item to get the long    |
+|                                   | version).                         |
++-----------------------------------+-----------------------------------+
+| A_LoopFileFullPath                | This is different than            |
+|                                   | A_LoopFilePath in the following   |
+|                                   | ways: 1) It always contains the   |
+|                                   | absolute/complete path of the     |
+|                                   | file even if <em>FilePattern</em>        |
+|                                   | contains a relative path; 2) Any  |
+|                                   | short (8.3) folder names in       |
+|                                   | <em>FilePattern</em> itself are          |
+|                                   | converted to their long names; 3) |
+|                                   | Characters in <em>FilePattern</em> are   |
+|                                   | converted to uppercase or         |
+|                                   | lowercase to match the case       |
+|                                   | stored in the file system. This   |
+|                                   | is useful for converting file     |
+|                                   | names -- such as those passed    |
+|                                   | into a script as command line     |
+|                                   | parameters -- to their exact     |
+|                                   | path names as shown by Explorer.  |
++-----------------------------------+-----------------------------------+
+| A_LoopFileShortPath               | The 8.3 short path and name of    |
+|                                   | the file/folder currently         |
+|                                   | retrieved. For example:           |
+|                                   | C:\MYDOCU\~1\ADDRES\~1.txt. If  |
+|                                   | <em>FilePattern</em> contains a relative |
+|                                   | path rather than an absolute      |
+|                                   | path, the path here will also be  |
+|                                   | relative.                         |
+|                                   |                                   |
+|                                   | To retrieve the complete 8.3 path |
+|                                   | and name for a single file or     |
+|                                   | folder, follow this example:      |
+|                                   |                                   |
+|                                   |     Loop Files, "                 |
+|                                   | C:\My Documents\Address List.txt" |
+|                                   |         Sho                       |
+|                                   | rtPathName := A_LoopFileShortPath |
+|                                   |                                   |
+|                                   | <strong>Note:</strong> This variable will be   |
+|                                   | [blank]{.underline} if the file   |
+|                                   | does not have a short name, which |
+|                                   | can happen on systems where       |
+|                                   | NtfsDisable8dot3NameCreation has  |
+|                                   | been set in the registry. It will |
+|                                   | also be blank if <em>FilePattern</em>    |
+|                                   | contains a relative path and the  |
+|                                   | body of the loop uses             |
+|                                   | <a href="SetWorkingDir.htm">                                 |
+|                                   | SetWorkingDir</a> |
+|                                   | to switch away from the working   |
+|                                   | directory in effect for the loop  |
+|                                   | itself.                           |
++-----------------------------------+-----------------------------------+
+| A_LoopFileShortName               | The 8.3 short name or alternate   |
+|                                   | name of the file. If the file     |
+|                                   | doesn\'t have one (due to the     |
+|                                   | long name being shorter than 8.3  |
+|                                   | or perhaps because short-name     |
+|                                   | generation is disabled on an NTFS |
+|                                   | file system), <em>A_LoopFileName</em>    |
+|                                   | will be retrieved instead.        |
++-----------------------------------+-----------------------------------+
+| A_LoopFileDir                     | The path of the directory in      |
+|                                   | which <em>A_LoopFileName</em> resides.   |
+|                                   | If <em>FilePattern</em> contains a       |
+|                                   | relative path rather than an      |
+|                                   | absolute path, the path here will |
+|                                   | also be relative. A root          |
+|                                   | directory will not contain a      |
+|                                   | trailing backslash. For example:  |
+|                                   | C:                                |
++-----------------------------------+-----------------------------------+
+| A_LoopFileTimeModified            | The time the file was last        |
+|                                   | modified. Format                  |
+|                                   | <a href="FileSetTime.htm">YY                               |
+|                                   | YYMMDDHH24MISS</a>. |
++-----------------------------------+-----------------------------------+
+| A_LoopFileTimeCreated             | The time the file was created.    |
+|                                   | Format                            |
+|                                   | <a href="FileSetTime.htm">YY                               |
+|                                   | YYMMDDHH24MISS</a>. |
++-----------------------------------+-----------------------------------+
+| A_LoopFileTimeAccessed            | The time the file was last        |
+|                                   | accessed. Format                  |
+|                                   | <a href="FileSetTime.htm">YY                               |
+|                                   | YYMMDDHH24MISS</a>. |
++-----------------------------------+-----------------------------------+
+| A_LoopFileAttrib                  | The                               |
+|                                   | <a href="FileGetAttrib.htm">attributes</a>   |
+|                                   | of the file currently retrieved.  |
++-----------------------------------+-----------------------------------+
+| A_LoopFileSize                    | The size in bytes of the file     |
+|                                   | currently retrieved. Files larger |
+|                                   | than 4 gigabytes are also         |
+|                                   | supported.                        |
++-----------------------------------+-----------------------------------+
+| A_LoopFileSizeKB                  | The size in Kbytes of the file    |
+|                                   | currently retrieved, rounded down |
+|                                   | to the nearest integer.           |
++-----------------------------------+-----------------------------------+
+| A_LoopFileSizeMB                  | The size in Mbytes of the file    |
+|                                   | currently retrieved, rounded down |
+|                                   | to the nearest integer.           |
++-----------------------------------+-----------------------------------+</p>
+<h2 id="Remarks">Remarks</h2>
+<p>A file loop is useful when you want to operate on a collection of files
+and/or folders, one at a time.</p>
+<p>All matching files are retrieved, including hidden files. By contrast,
+OS features such as the DIR command omit hidden files by default. To
+avoid processing hidden, system, and/or read-only files, use something
+like the following inside the loop:</p>
+<pre class="codehilite"><code>if A_LoopFileAttrib ~= &quot;[HRS]&quot;  ; Skip any file that is either H (Hidden), R (Read-only), or S (System). See ~= operator.
+    continue  ; Skip this file and move on to the next one.
+</code></pre>
+
+<p>To retrieve files\' relative paths instead of absolute paths during a
+recursive search, use <a href="SetWorkingDir.htm">SetWorkingDir</a> to change to
+the base folder prior to the loop, and then omit the path from the loop
+(e.g. <code>Loop Files, "*.*", "R"</code>). That will cause
+<a href="#LoopFilePath">A_LoopFilePath</a> to contain the file\'s path relative to
+the base folder.</p>
+<p>A file loop can disrupt itself if it creates or renames files or folders
+within its own purview. For example, if it renames files via
+<a href="FileMove.htm">FileMove</a> or other means, each such file might be found
+twice: once as its old name and again as its new name. To work around
+this, rename the files only after creating a list of them. For example:</p>
+<pre class="codehilite"><code>FileList := &quot;&quot;
+Loop Files, &quot;*.jpg&quot;
+    FileList .= A_LoopFileName &quot;`n&quot;
+Loop Parse, FileList, &quot;`n&quot;
+    FileMove A_LoopField, &quot;renamed_&quot; A_LoopField
+</code></pre>
+
+<p>Files in an NTFS file system are probably always retrieved in
+alphabetical order. Files in other file systems are retrieved in no
+particular order. To ensure a particular ordering, use the
+<a href="Sort.htm">Sort</a> function as shown in the Examples section below.</p>
+<p>File patterns longer than 259 characters are supported only when at
+least one of the following is true:</p>
+<ul>
+<li>The system has <a href="../misc/LongPaths.htm">long path support</a> enabled
+    (requires Windows 10 version 1607 or later).</li>
+<li>The <code>\\?\</code> <a href="../misc/LongPaths.htm#prefix">long path prefix</a> is used
+    (caveats apply).</li>
+</ul>
+<p>In all other cases, file patterns longer than 259 characters will not
+find any files or folders. This limit applies both to <em>FilePattern</em> and
+any temporary pattern used during recursion into a subfolder.</p>
+<p>The One True Brace (OTB) style may optionally be used, which allows the
+open-brace to appear on the same line rather than underneath. For
+example: <code>Loop Files "*.txt", "R" {</code>.</p>
+<p>See <a href="Loop.htm">Loop</a> for information about <a href="Block.htm">Blocks</a>,
+<a href="Break.htm">Break</a>, <a href="Continue.htm">Continue</a>, and the A_Index variable
+(which exists in every type of loop).</p>
+<p>The loop may optionally be followed by an <a href="Else.htm">Else</a> statement,
+which is executed if no matching files or directories were found (i.e.
+the loop had zero iterations).</p>
+<p>The functions <a href="FileGetAttrib.htm">FileGetAttrib</a>,
+<a href="FileGetSize.htm">FileGetSize</a>, <a href="FileGetTime.htm">FileGetTime</a>,
+<a href="FileGetVersion.htm">FileGetVersion</a>,
+<a href="FileSetAttrib.htm">FileSetAttrib</a>, and <a href="FileSetTime.htm">FileSetTime</a>
+can be used in a file loop without their Filename/FilePattern parameter.</p>
+<h2 id="Related">Related</h2>
+<p><a href="Loop.htm">Loop</a>, <a href="Break.htm">Break</a>, <a href="Continue.htm">Continue</a>,
+<a href="Block.htm">Blocks</a>, <a href="SplitPath.htm">SplitPath</a>,
+<a href="FileSetAttrib.htm">FileSetAttrib</a>, <a href="FileSetTime.htm">FileSetTime</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Reports the full path of each text file located
+in a directory and in its subdirectories.</p>
+<pre class="codehilite"><code>Loop Files, A_ProgramFiles &quot;\*.txt&quot;, &quot;R&quot;  ; Recurse into subfolders.
+{
+    Result := MsgBox(&quot;Filename = &quot; A_LoopFilePath &quot;`n`nContinue?&quot;,, &quot;y/n&quot;)
+    if Result = &quot;No&quot;
+        break
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExSize .ex}
+<a class="ex_number" href="#ExSize"></a> Calculates the size of a folder, including the
+files in all its subfolders.</p>
+<pre class="codehilite"><code>FolderSizeKB := 0
+WhichFolder := DirSelect()  ; Ask the user to pick a folder.
+Loop Files, WhichFolder &quot;\*.*&quot;, &quot;R&quot;
+    FolderSizeKB += A_LoopFileSizeKB
+MsgBox &quot;Size of &quot; WhichFolder &quot; is &quot; FolderSizeKB &quot; KB.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExSortName .ex}
+<a class="ex_number" href="#ExSortName"></a> Retrieves file names sorted by name (see
+next example to sort by date).</p>
+<pre class="codehilite"><code>FileList := &quot;&quot;  ; Initialize to be blank.
+Loop Files, &quot;C:\*.*&quot;
+    FileList .= A_LoopFileName &quot;`n&quot;
+FileList := Sort(FileList, &quot;R&quot;)  ; The R option sorts in reverse order. See Sort for other options.
+Loop Parse, FileList, &quot;`n&quot;
+{
+    if A_LoopField = &quot;&quot;  ; Ignore the blank item at the end of the list.
+        continue
+    Result := MsgBox(&quot;File number &quot; A_Index &quot; is &quot; A_LoopField &quot;.  Continue?&quot;,, &quot;y/n&quot;)
+    if Result = &quot;No&quot;
+        break
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExSortDate .ex}
+<a class="ex_number" href="#ExSortDate"></a> Retrieves file names sorted by modification
+date.</p>
+<pre class="codehilite"><code>FileList := &quot;&quot;
+Loop Files, A_MyDocuments &quot;\Photos\*.*&quot;, &quot;FD&quot;  ; Include Files and Directories
+    FileList .= A_LoopFileTimeModified &quot;`t&quot; A_LoopFileName &quot;`n&quot;
+FileList := Sort(FileList)  ; Sort by date.
+Loop Parse, FileList, &quot;`n&quot;
+{
+    if A_LoopField = &quot;&quot; ; Omit the last linefeed (blank item) at the end of the list.
+        continue
+    FileItem := StrSplit(A_LoopField, A_Tab)  ; Split into two parts at the tab char.
+    Result := MsgBox(&quot;The next file (modified at &quot; FileItem[1] &quot;) is:`n&quot; FileItem[2] &quot;`n`nContinue?&quot;,, &quot;y/n&quot;)
+    if Result = &quot;No&quot;
+        break
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExFileCopy .ex}
+<a class="ex_number" href="#ExFileCopy"></a> Copies only the source files that are newer
+than their counterparts in the destination. Call this function with a
+source pattern like \"A:\Scripts\*.ahk\" and an <strong>existing</strong>
+destination directory like \"B:\Script Backup\".</p>
+<pre class="codehilite"><code>CopyIfNewer(SourcePattern, Dest)
+{
+    Loop Files, SourcePattern
+    {
+        copy_it := false
+        if !FileExist(Dest &quot;\&quot; A_LoopFileName)  ; Always copy if target file doesn't yet exist.
+            copy_it := true
+        else
+        {
+            time := FileGetTime(Dest &quot;\&quot; A_LoopFileName)
+            time := DateDiff(time, A_LoopFileTimeModified, &quot;Seconds&quot;)  ; Subtract the source file's time from the destination's.
+            if time &lt; 0  ; Source file is newer than destination file.
+                copy_it := true
+        }
+        if copy_it
+        {
+            try
+                FileCopy A_LoopFilePath, Dest &quot;\&quot; A_LoopFileName, 1   ; Copy with overwrite=yes
+            catch
+                MsgBox 'Could not copy &quot;' A_LoopFilePath '&quot; to &quot;' Dest '\' A_LoopFileName '&quot;.'
+        }
+    }
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExLongPath .ex}
+<a class="ex_number" href="#ExLongPath"></a> Converts filenames passed in via
+command-line parameters to long names, complete path, and correct
+uppercase/lowercase characters as stored in the file system.</p>
+<pre class="codehilite"><code>for GivenPath in A_Args  ; For each parameter (or file dropped onto a script):
+{
+    Loop Files, GivenPath, &quot;FD&quot;  ; Include files and directories.
+        LongPath := A_LoopFilePath
+    MsgBox &quot;The case-corrected long path name of file`n&quot; GivenPath &quot;`nis:`n&quot; LongPath
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/LoopFiles.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#loop-files">Loop Files</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Special_Variables">Special Variables Available Inside a File Loop</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

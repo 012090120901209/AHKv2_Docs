@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DirCopy | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Copies a folder along with all its sub-folders and files (similar to">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>DirCopy</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="dircopy">DirCopy</h1>
+<p>Copies a folder along with all its sub-folders and files (similar to
+xcopy) or the entire contents of an archive file such as ZIP.</p>
+<pre class="codehilite"><code class="language-Syntax">DirCopy Source, Dest , Overwrite
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Source</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Name of the source directory (with no trailing backslash), which is
+assumed to be in <a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an
+absolute path isn\'t specified. For example: C:\My Folder</p>
+<p>If supported by the OS, <em>Source</em> can also be the path of an archive
+file, in which case its contents will be copied to the destination
+directory. ZIP files are always supported. TAR files require at
+least Windows 10 (1803) build 17063. RAR, 7z, gz and others require
+at least Windows 11 23H2 (which uses
+<a href="https://github.com/libarchive/libarchive">libarchive</a>, where all
+supported formats are listed).</p>
+</dd>
+<dt>Dest</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Name of the destination directory (with no trailing baskslash),
+which is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified. For example: C:\Copy of My Folder</p>
+</dd>
+<dt>Overwrite</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 0. Otherwise, specify one of the
+following numbers to indicate whether to overwrite files if they
+already exist:</p>
+<p><strong>0:</strong> Do not overwrite existing files. The operation will fail and
+have no effect if <em>Dest</em> already exists as a file or directory.</p>
+<p><strong>1:</strong> Overwrite existing files. However, any files or subfolders
+inside <em>Dest</em> that do not have a counterpart in <em>Source</em> will not be
+deleted.</p>
+<p>Other values are reserved for future use.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An exception is thrown if an error occurs.</p>
+<p>If the source directory contains any saved webpages consisting of a
+<em>PageName.htm</em> file and a corresponding directory named
+<em>PageName_files</em>, an exception may be thrown even when the copy is
+successful.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>If the destination directory structure doesn\'t exist it will be created
+if possible.</p>
+<p>Since the operation will recursively copy a folder along with all its
+subfolders and files, the result of copying a folder to a destination
+somewhere inside itself is undefined. To work around this, first copy it
+to a destination outside itself, then use <a href="DirMove.htm">DirMove</a> to move
+that copy to the desired location.</p>
+<p>DirCopy copies a single folder. To instead copy the contents of a folder
+(all its files and subfolders), see the examples section of
+<a href="FileCopy.htm">FileCopy</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="DirMove.htm">DirMove</a>, <a href="FileCopy.htm">FileCopy</a>,
+<a href="FileMove.htm">FileMove</a>, <a href="FileDelete.htm">FileDelete</a>, <a href="LoopFiles.htm">file
+loops</a>, <a href="DirSelect.htm">DirSelect</a>,
+<a href="SplitPath.htm">SplitPath</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Copies a directory to a new location.</p>
+<pre class="codehilite"><code>DirCopy &quot;C:\My Folder&quot;, &quot;C:\Copy of My Folder&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExDirSelect .ex}
+<a class="ex_number" href="#ExDirSelect"></a> Prompts the user to copy a folder.</p>
+<pre class="codehilite"><code>SourceFolder := DirSelect(, 3, &quot;Select the folder to copy&quot;)
+if SourceFolder = &quot;&quot;
+    return
+; Otherwise, continue.
+TargetFolder := DirSelect(, 3, &quot;Select the folder IN WHICH to create the duplicate folder.&quot;)
+if TargetFolder = &quot;&quot;
+    return
+; Otherwise, continue.
+Result := MsgBox(&quot;A copy of the folder '&quot; SourceFolder &quot;' will be put into '&quot; TargetFolder &quot;'. Continue?&quot;,, 4)
+if Result = &quot;No&quot;
+    return
+SplitPath SourceFolder, &amp;SourceFolderName  ; Extract only the folder name from its full path.
+try
+    DirCopy SourceFolder, TargetFolder &quot;\&quot; SourceFolderName
+catch
+    MsgBox &quot;The folder could not be copied, perhaps because a folder of that name already exists in '&quot; TargetFolder &quot;'.&quot;
+return
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/DirCopy.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#dircopy">DirCopy</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

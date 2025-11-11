@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Start Guide - AutoHotkey Documentation Database | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="## 🎬 See It In Action">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>QUICK_START</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="quick-start-guide-autohotkey-documentation-database">Quick Start Guide - AutoHotkey Documentation Database</h1>
+<h2 id="see-it-in-action">🎬 See It In Action</h2>
+<p>Run the live demo (no database required):</p>
+<pre class="codehilite"><code class="language-bash">python3 demo_standalone.py
+</code></pre>
+
+<p>This demo:
+- ✅ Parses actual markdown files
+- ✅ Extracts functions, objects, methods
+- ✅ Shows what the database contains
+- ✅ Simulates SQL queries
+- ✅ Real data, real results!</p>
+<hr />
+<h2 id="set-up-full-database">🚀 Set Up Full Database</h2>
+<h3 id="option-1-docker-recommended-5-minutes">Option 1: Docker (Recommended - 5 minutes)</h3>
+<pre class="codehilite"><code class="language-bash">cd database
+./init_db.sh
+</code></pre>
+
+<p><strong>Done!</strong> Database is ready at <code>localhost:5432</code></p>
+<h3 id="option-2-local-postgresql-10-minutes">Option 2: Local PostgreSQL (10 minutes)</h3>
+<pre class="codehilite"><code class="language-bash"># 1. Install PostgreSQL
+sudo apt-get install postgresql  # Ubuntu/Debian
+brew install postgresql          # macOS
+
+# 2. Create database
+createdb ahk_docs
+
+# 3. Load schema
+psql -d ahk_docs &lt; database/schema.sql
+
+# 4. Install Python dependencies
+pip install psycopg2-binary
+
+# 5. Load data
+python3 database/load_data.py .
+</code></pre>
+
+<hr />
+<h2 id="query-the-database">💻 Query the Database</h2>
+<h3 id="interactive-python-shell">Interactive Python Shell</h3>
+<pre class="codehilite"><code class="language-bash">python3 database/query_db.py
+</code></pre>
+
+<pre class="codehilite"><code>&gt; search array methods
+&gt; function StrSplit
+&gt; object Array
+&gt; list functions
+&gt; examples Array Object
+&gt; stats
+&gt; quit
+</code></pre>
+
+<h3 id="command-line">Command Line</h3>
+<pre class="codehilite"><code class="language-bash"># Search
+python3 database/query_db.py search &quot;window activation&quot;
+
+# Get function
+python3 database/query_db.py function StrSplit
+
+# Get object
+python3 database/query_db.py object Array
+
+# Statistics
+python3 database/query_db.py stats
+</code></pre>
+
+<h3 id="sql-queries">SQL Queries</h3>
+<pre class="codehilite"><code class="language-bash">psql -h localhost -p 5432 -U postgres -d ahk_docs
+</code></pre>
+
+<pre class="codehilite"><code class="language-sql">-- Search
+SELECT * FROM search_documents('array methods');
+
+-- Function details
+SELECT * FROM v_functions_complete WHERE function_name = 'StrSplit';
+
+-- Object details
+SELECT * FROM v_objects_complete WHERE object_name = 'Array';
+
+-- Most referenced docs
+SELECT title, COUNT(*) as refs
+FROM documents d
+JOIN links l ON d.id = l.target_document_id
+GROUP BY d.id, title
+ORDER BY refs DESC
+LIMIT 10;
+</code></pre>
+
+<h3 id="python-api">Python API</h3>
+<pre class="codehilite"><code class="language-python">from database.query_db import AHKDocsDB
+
+db = AHKDocsDB()
+
+# Search
+results = db.search('window activation', limit=10)
+for r in results:
+    print(f&quot;{r['title']}: {r['snippet']}&quot;)
+
+# Get function
+func = db.get_function('StrSplit')
+print(f&quot;Syntax: {func['syntax']}&quot;)
+print(f&quot;Returns: {func['return_type']}&quot;)
+for param in func['parameters']:
+    print(f&quot;  - {param['name']}: {param['type']}&quot;)
+
+# Get object
+obj = db.get_object('Array')
+print(f&quot;Methods: {obj['methods']}&quot;)
+print(f&quot;Properties: {obj['properties']}&quot;)
+
+# Code examples
+examples = db.get_code_examples('Array Object')
+for ex in examples:
+    print(ex['code'])
+
+# Statistics
+stats = db.get_statistics()
+print(f&quot;Documents: {stats['total_documents']}&quot;)
+print(f&quot;Functions: {stats['total_functions']}&quot;)
+print(f&quot;Objects: {stats['total_objects']}&quot;)
+
+db.close()
+</code></pre>
+
+<hr />
+<h2 id="whats-in-the-database">📊 What's In The Database</h2>
+<p>After loading all 413 files:</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Contents</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>documents</strong></td>
+<td>All markdown files</td>
+<td>413</td>
+</tr>
+<tr>
+<td><strong>sections</strong></td>
+<td>Document sections</td>
+<td>~2,000</td>
+</tr>
+<tr>
+<td><strong>functions</strong></td>
+<td>Function definitions</td>
+<td>~200</td>
+</tr>
+<tr>
+<td><strong>function_parameters</strong></td>
+<td>Parameters</td>
+<td>~800</td>
+</tr>
+<tr>
+<td><strong>objects</strong></td>
+<td>Objects/classes</td>
+<td>~30</td>
+</tr>
+<tr>
+<td><strong>object_methods</strong></td>
+<td>Methods</td>
+<td>~150</td>
+</tr>
+<tr>
+<td><strong>object_properties</strong></td>
+<td>Properties</td>
+<td>~100</td>
+</tr>
+<tr>
+<td><strong>code_examples</strong></td>
+<td>Code blocks</td>
+<td>~800</td>
+</tr>
+<tr>
+<td><strong>links</strong></td>
+<td>Internal/external links</td>
+<td>~3,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="common-queries">🔍 Common Queries</h2>
+<h3 id="find-functions">Find Functions</h3>
+<pre class="codehilite"><code class="language-sql">-- All functions
+SELECT function_name, return_type FROM v_functions_complete;
+
+-- Functions with specific parameter
+SELECT f.function_name
+FROM functions f
+JOIN function_parameters fp ON f.id = fp.function_id
+WHERE fp.param_name ILIKE '%string%';
+
+-- Functions returning arrays
+SELECT function_name FROM functions WHERE return_type = 'Array';
+</code></pre>
+
+<h3 id="find-objects">Find Objects</h3>
+<pre class="codehilite"><code class="language-sql">-- All objects
+SELECT object_name, extends FROM v_objects_complete;
+
+-- Objects with specific method
+SELECT o.object_name, om.method_name
+FROM objects o
+JOIN object_methods om ON o.id = om.object_id
+WHERE om.method_name ILIKE '%push%';
+</code></pre>
+
+<h3 id="search-documentation">Search Documentation</h3>
+<pre class="codehilite"><code class="language-sql">-- Full-text search
+SELECT * FROM search_documents('gui button click', NULL, NULL, 10);
+
+-- Search only functions
+SELECT * FROM search_documents('string split', 'function', NULL, 5);
+
+-- Search in category
+SELECT * FROM search_documents('window', NULL, 'functions', 10);
+</code></pre>
+
+<h3 id="code-examples">Code Examples</h3>
+<pre class="codehilite"><code class="language-sql">-- Find examples with specific code
+SELECT d.title, ce.code
+FROM code_examples ce
+JOIN documents d ON ce.document_id = d.id
+WHERE ce.code ILIKE '%MsgBox%'
+LIMIT 10;
+
+-- Documents with most examples
+SELECT d.title, COUNT(*) as example_count
+FROM code_examples ce
+JOIN documents d ON ce.document_id = d.id
+GROUP BY d.id, d.title
+ORDER BY example_count DESC
+LIMIT 10;
+</code></pre>
+
+<h3 id="link-analysis">Link Analysis</h3>
+<pre class="codehilite"><code class="language-sql">-- Most referenced documents
+SELECT d.title, COUNT(*) as references
+FROM documents d
+JOIN links l ON d.id = l.target_document_id
+WHERE l.is_external = false
+GROUP BY d.id, d.title
+ORDER BY references DESC
+LIMIT 20;
+
+-- Broken links
+SELECT d.title, l.link_url
+FROM links l
+JOIN documents d ON l.source_document_id = d.id
+WHERE l.is_external = false AND l.target_document_id IS NULL;
+</code></pre>
+
+<hr />
+<h2 id="integration-examples">🛠️ Integration Examples</h2>
+<h3 id="flask-web-api">Flask Web API</h3>
+<pre class="codehilite"><code class="language-python">from flask import Flask, jsonify, request
+from database.query_db import AHKDocsDB
+
+app = Flask(__name__)
+db = AHKDocsDB()
+
+@app.route('/api/search')
+def search():
+    query = request.args.get('q', '')
+    results = db.search(query, limit=20)
+    return jsonify(results)
+
+@app.route('/api/function/&lt;name&gt;')
+def get_function(name):
+    func = db.get_function(name)
+    return jsonify(func) if func else ('Not found', 404)
+
+@app.route('/api/object/&lt;name&gt;')
+def get_object(name):
+    obj = db.get_object(name)
+    return jsonify(obj) if obj else ('Not found', 404)
+
+if __name__ == '__main__':
+    app.run(port=5000)
+</code></pre>
+
+<h3 id="rag-system">RAG System</h3>
+<pre class="codehilite"><code class="language-python">from database.query_db import AHKDocsDB
+import openai
+
+def get_ahk_answer(question: str) -&gt; str:
+    &quot;&quot;&quot;Get answer from documentation using RAG.&quot;&quot;&quot;
+
+    # Get relevant docs
+    db = AHKDocsDB()
+    results = db.search(question, limit=5)
+
+    # Build context
+    context = &quot;\n\n&quot;.join([
+        f&quot;# {r['title']}\n{r['snippet']}&quot;
+        for r in results
+    ])
+
+    # Query LLM
+    response = openai.ChatCompletion.create(
+        model=&quot;gpt-4&quot;,
+        messages=[
+            {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are an AutoHotkey expert. Answer based on the provided documentation.&quot;},
+            {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;Documentation:\n{context}\n\nQuestion: {question}&quot;}
+        ]
+    )
+
+    db.close()
+    return response.choices[0].message.content
+
+# Use it
+answer = get_ahk_answer(&quot;How do I create an array and add items to it?&quot;)
+print(answer)
+</code></pre>
+
+<h3 id="static-site-generator">Static Site Generator</h3>
+<pre class="codehilite"><code class="language-python">from database.query_db import AHKDocsDB
+from pathlib import Path
+
+db = AHKDocsDB()
+
+# Generate pages for all functions
+functions = db.list_functions(limit=1000)
+for func in functions:
+    # Get full details
+    details = db.get_function(func['function_name'])
+
+    # Generate HTML
+    html = generate_function_page(details)
+
+    # Save
+    output_path = Path(f&quot;site/functions/{func['function_name']}.html&quot;)
+    output_path.parent.mkdir(exist_ok=True)
+    output_path.write_text(html)
+
+print(f&quot;Generated {len(functions)} function pages&quot;)
+</code></pre>
+
+<hr />
+<h2 id="docker-commands">🐳 Docker Commands</h2>
+<pre class="codehilite"><code class="language-bash"># Start database
+docker-compose up -d
+
+# Stop database
+docker-compose down
+
+# View logs
+docker-compose logs -f postgres
+
+# Access PostgreSQL shell
+docker-compose exec postgres psql -U postgres -d ahk_docs
+
+# Access pgAdmin (web UI)
+# Open http://localhost:5050
+# Email: admin@ahkdocs.local
+# Password: admin
+
+# Backup database
+docker-compose exec postgres pg_dump -U postgres ahk_docs &gt; backup.sql
+
+# Restore database
+docker-compose exec -T postgres psql -U postgres ahk_docs &lt; backup.sql
+
+# Reset (delete all data)
+docker-compose down -v
+./init_db.sh
+</code></pre>
+
+<hr />
+<h2 id="file-structure">📁 File Structure</h2>
+<pre class="codehilite"><code>/database/
+├── schema.sql              # Database schema (17KB)
+├── load_data.py            # Data loader (21KB)
+├── query_db.py             # Python API (15KB)
+├── query_examples.sql      # 50+ example queries (12KB)
+├── init_db.sh              # Setup script
+├── docker-compose.yml      # Docker config
+├── requirements.txt        # Python deps
+└── README.md               # Full documentation (13KB)
+
+/scripts/
+└── (vectorization scripts for embeddings)
+
+demo_standalone.py          # Live demo (no database required)
+DATABASE_SUMMARY.md         # Overview
+QUICK_START.md              # This file
+</code></pre>
+
+<hr />
+<h2 id="what-to-do-next">🎯 What to Do Next</h2>
+<h3 id="1-try-the-demo">1. Try the Demo</h3>
+<pre class="codehilite"><code class="language-bash">python3 demo_standalone.py
+</code></pre>
+
+<h3 id="2-set-up-database">2. Set Up Database</h3>
+<pre class="codehilite"><code class="language-bash">cd database &amp;&amp; ./init_db.sh
+</code></pre>
+
+<h3 id="3-try-some-queries">3. Try Some Queries</h3>
+<pre class="codehilite"><code class="language-bash">python3 database/query_db.py
+</code></pre>
+
+<h3 id="4-build-your-application">4. Build Your Application</h3>
+<ul>
+<li>Use Python API</li>
+<li>Create web interface</li>
+<li>Build RAG system</li>
+<li>Generate static site</li>
+<li>Power IDE autocomplete</li>
+</ul>
+<hr />
+<h2 id="tips">💡 Tips</h2>
+<ol>
+<li><strong>Performance</strong>: Database queries are fast (1-50ms)</li>
+<li><strong>Search</strong>: Use <code>search_documents()</code> function for best results</li>
+<li><strong>Examples</strong>: See <code>database/query_examples.sql</code> for 50+ queries</li>
+<li><strong>API</strong>: Use <code>query_db.py</code> as starting point for your app</li>
+<li><strong>Export</strong>: Can export to JSON, CSV, or other formats</li>
+</ol>
+<hr />
+<h2 id="troubleshooting">🆘 Troubleshooting</h2>
+<h3 id="connection-refused">"Connection refused"</h3>
+<pre class="codehilite"><code class="language-bash"># Check PostgreSQL is running
+docker-compose ps
+# Or
+sudo systemctl status postgresql
+</code></pre>
+
+<h3 id="module-not-found">"Module not found"</h3>
+<pre class="codehilite"><code class="language-bash"># Install dependencies
+pip install -r database/requirements.txt
+</code></pre>
+
+<h3 id="permission-denied">"Permission denied"</h3>
+<pre class="codehilite"><code class="language-bash"># Make scripts executable
+chmod +x database/*.sh database/*.py
+</code></pre>
+
+<h3 id="database-not-loading">Database not loading</h3>
+<pre class="codehilite"><code class="language-bash"># Check logs
+docker-compose logs postgres
+
+# Reset and retry
+docker-compose down -v
+./database/init_db.sh
+</code></pre>
+
+<hr />
+<h2 id="documentation">📚 Documentation</h2>
+<ul>
+<li><strong>DATABASE_SUMMARY.md</strong> - Quick overview</li>
+<li><strong>database/README.md</strong> - Complete guide (13KB)</li>
+<li><strong>database/query_examples.sql</strong> - 50+ SQL examples</li>
+<li><strong>database/schema.sql</strong> - Full schema with comments</li>
+<li><strong>VECTORIZATION_ANSWER.md</strong> - Vector database option</li>
+<li><strong>scripts/README.md</strong> - Vectorization scripts</li>
+</ul>
+<hr />
+<h2 id="summary">✨ Summary</h2>
+<p>You have <strong>two powerful options</strong>:</p>
+<h3 id="postgresql-database-this-guide">PostgreSQL Database (This Guide)</h3>
+<p>✅ Structured SQL queries
+✅ Full-text search
+✅ Relational data
+✅ Perfect for: APIs, websites, analytics</p>
+<h3 id="vector-database-see-scripts">Vector Database (See scripts/)</h3>
+<p>✅ Semantic search
+✅ AI embeddings
+✅ Perfect for: RAG, LLM apps</p>
+<h3 id="or-use-both">Or Use Both!</h3>
+<p>The PostgreSQL schema supports vector embeddings.
+Combine SQL queries with semantic search!</p>
+<hr />
+<p><strong>Start now</strong>: <code>python3 demo_standalone.py</code> 🚀</p>
+<p>All the code is ready to use. Just run it!</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/QUICK_START.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#quick-start-guide-autohotkey-documentation-database">Quick Start Guide - AutoHotkey Documentation Database</a><ul>
+<li><a href="#see-it-in-action">🎬 See It In Action</a></li>
+<li><a href="#set-up-full-database">🚀 Set Up Full Database</a><ul>
+<li><a href="#option-1-docker-recommended-5-minutes">Option 1: Docker (Recommended - 5 minutes)</a></li>
+<li><a href="#option-2-local-postgresql-10-minutes">Option 2: Local PostgreSQL (10 minutes)</a></li>
+</ul>
+</li>
+<li><a href="#query-the-database">💻 Query the Database</a><ul>
+<li><a href="#interactive-python-shell">Interactive Python Shell</a></li>
+<li><a href="#command-line">Command Line</a></li>
+<li><a href="#sql-queries">SQL Queries</a></li>
+<li><a href="#python-api">Python API</a></li>
+</ul>
+</li>
+<li><a href="#whats-in-the-database">📊 What's In The Database</a></li>
+<li><a href="#common-queries">🔍 Common Queries</a><ul>
+<li><a href="#find-functions">Find Functions</a></li>
+<li><a href="#find-objects">Find Objects</a></li>
+<li><a href="#search-documentation">Search Documentation</a></li>
+<li><a href="#code-examples">Code Examples</a></li>
+<li><a href="#link-analysis">Link Analysis</a></li>
+</ul>
+</li>
+<li><a href="#integration-examples">🛠️ Integration Examples</a><ul>
+<li><a href="#flask-web-api">Flask Web API</a></li>
+<li><a href="#rag-system">RAG System</a></li>
+<li><a href="#static-site-generator">Static Site Generator</a></li>
+</ul>
+</li>
+<li><a href="#docker-commands">🐳 Docker Commands</a></li>
+<li><a href="#file-structure">📁 File Structure</a></li>
+<li><a href="#what-to-do-next">🎯 What to Do Next</a><ul>
+<li><a href="#1-try-the-demo">1. Try the Demo</a></li>
+<li><a href="#2-set-up-database">2. Set Up Database</a></li>
+<li><a href="#3-try-some-queries">3. Try Some Queries</a></li>
+<li><a href="#4-build-your-application">4. Build Your Application</a></li>
+</ul>
+</li>
+<li><a href="#tips">💡 Tips</a></li>
+<li><a href="#troubleshooting">🆘 Troubleshooting</a><ul>
+<li><a href="#connection-refused">"Connection refused"</a></li>
+<li><a href="#module-not-found">"Module not found"</a></li>
+<li><a href="#permission-denied">"Permission denied"</a></li>
+<li><a href="#database-not-loading">Database not loading</a></li>
+</ul>
+</li>
+<li><a href="#documentation">📚 Documentation</a></li>
+<li><a href="#summary">✨ Summary</a><ul>
+<li><a href="#postgresql-database-this-guide">PostgreSQL Database (This Guide)</a></li>
+<li><a href="#vector-database-see-scripts">Vector Database (See scripts/)</a></li>
+<li><a href="#or-use-both">Or Use Both!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editors with AutoHotkey Support | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Any text editor can be used to edit an AutoHotkey script, but editors">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Editors</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="editors-with-autohotkey-support">Editors with AutoHotkey Support</h1>
+<p>Any text editor can be used to edit an AutoHotkey script, but editors
+which are (or can be configured to be) more AutoHotkey-aware tend to
+make reading, editing and testing scripts much easier. AutoHotkey-aware
+editors may provide:</p>
+<ul>
+<li>Syntax highlighting, like what is used in this documentation. With
+    syntax highlighting, words, symbols and segments of code are
+    colour-coded to indicate their meaning. For instance, literal text,
+    comments and variable names are displayed in different colours.</li>
+<li>Auto-complete, which typically offers a list of suggestions when you
+    start typing the name of a known function or variable.</li>
+<li>Calltips may show you what the parameters are for a function while
+    you are writing code to call the function.</li>
+<li><a href="../Scripts.htm#idebug">Interactive debugging</a>, such as to step
+    through the script line by line and inspect variables at each step,
+    or to view and modify variables or objects, beyond what
+    <a href="../lib/ListVars.htm">ListVars</a> allows.</li>
+</ul>
+<p>Recommendations:</p>
+<ul>
+<li>SciTE4AutoHotkey is simple to install, relatively light-weight, and
+    fully supports AutoHotkey v1 and v2 without further configuration.</li>
+<li>VS Code (plus extensions) provides an even higher level of support
+    and a wider range of features, but can be heavy on resources.</li>
+</ul>
+<h2 id="SciTE4AutoHotkey">SciTE4AutoHotkey</h2>
+<p>SciTE4AutoHotkey is a custom version of the text editor known as SciTE.
+Its features include:</p>
+<ul>
+<li>Syntax highlighting</li>
+<li>Auto-complete</li>
+<li>Calltips</li>
+<li>Smart auto-indent</li>
+<li>Code folding</li>
+<li>Interactive debugging</li>
+<li>Running the script by pressing a hotkey</li>
+<li>Other tools for AutoHotkey scripting</li>
+</ul>
+<p>SciTE4AutoHotkey can be found here:
+<a href="https://www.autohotkey.com/scite4ahk/">https://www.autohotkey.com/scite4ahk/</a></p>
+<h2 id="Visual_Studio_Code_VS_Code">Visual Studio Code (VS Code)</h2>
+<p>Visual Studio Code can be configured with a high level of support for
+AutoHotkey by installing extensions.</p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp">AutoHotkey2 Language
+Support</a>
+provides many features, including:</p>
+<ul>
+<li>Syntax highlighting</li>
+<li>Auto-complete</li>
+<li>Calltips</li>
+<li>Smart auto-indent</li>
+<li>Code folding</li>
+<li>Running the script by pressing a hotkey</li>
+<li>Real-time diagnostics (detecting common errors)</li>
+<li>Formatting/tidying code</li>
+</ul>
+<p>Additional notes:</p>
+<ul>
+<li>This extension only supports AutoHotkey v2, but can also detect v1
+    scripts and automatically switch over to a v1 extension if one is
+    installed.</li>
+<li>This extension can also be used with other editors, such as <strong>vim</strong>,
+    <strong>neovim</strong> and <strong>Sublime Text 4</strong>. For details, see <a href="https://github.com/thqby/vscode-autohotkey2-lsp#use-in-other-editors">Use in other
+    editors</a>.
+    However, VS Code likely provides the best experience, with easiest
+    setup.</li>
+</ul>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=zero-plusplus.vscode-autohotkey-debug">vscode-autohotkey-debug</a>
+provides support for interactive debugging of v1 and v2 scripts.</p>
+<h2 id="Notepad++">Notepad++</h2>
+<p>Notepad++ can be configured to support the following features:</p>
+<ul>
+<li>Syntax highlighting</li>
+<li>Auto-complete</li>
+<li>Code folding</li>
+<li>Running the script by pressing a hotkey</li>
+</ul>
+<p>See <a href="https://www.autohotkey.com/boards/viewtopic.php?f=88&amp;t=50">Setup Notepad++ for
+AutoHotkey</a>
+for instructions.</p>
+<h2 id="Notepad4">Notepad4</h2>
+<p>Notepad4 supports the following for AutoHotkey v2 by default:</p>
+<ul>
+<li>Syntax highlighting</li>
+<li>Auto-complete</li>
+<li>Auto-indent</li>
+<li>Code folding</li>
+<li>Running the script by pressing a hotkey</li>
+</ul>
+<p>It is available here: <a href="https://github.com/zufuliu/notepad4">https://github.com/zufuliu/notepad4</a></p>
+<h2 id="Others_editors">Others editors</h2>
+<p>For help finding or configuring other editors, try the <a href="https://www.autohotkey.com/boards/viewforum.php?f=60">Editors
+sub-forum</a>.</p>
+<p>To get an editor added to this page, post in the <a href="https://www.autohotkey.com/boards/viewforum.php?f=86">Suggestions
+sub-forum</a> or open
+an Issue or Pull Request at
+<a href="https://github.com/AutoHotkey/AutoHotkeyDocs/">GitHub</a>.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Editors.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#editors-with-autohotkey-support">Editors with AutoHotkey Support</a><ul>
+<li><a href="#SciTE4AutoHotkey">SciTE4AutoHotkey</a></li>
+<li><a href="#Visual_Studio_Code_VS_Code">Visual Studio Code (VS Code)</a></li>
+<li><a href="#Notepad++">Notepad++</a></li>
+<li><a href="#Notepad4">Notepad4</a></li>
+<li><a href="#Others_editors">Others editors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

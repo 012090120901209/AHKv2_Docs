@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Waits the specified amount of time before continuing.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Sleep</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="sleep">Sleep</h1>
+<p>Waits the specified amount of time before continuing.</p>
+<pre class="codehilite"><code class="language-Syntax">Sleep Delay
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Delay</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The amount of time to pause (in milliseconds) between 0 and
+2147483647 (24 days).</p>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>Due to the granularity of the OS\'s time-keeping system, <em>Delay</em> is
+typically rounded up to the nearest multiple of 10 or 15.6 milliseconds
+(depending on the type of hardware and drivers installed). To achieve a
+shorter delay, see <a href="#ExShorterSleep">Examples</a>.</p>
+<p>The actual delay time might wind up being longer than what was requested
+if the CPU is under load. This is because the OS gives each needy
+process a slice of CPU time (typically 20 milliseconds) before giving
+another timeslice to the script.</p>
+<p>A delay of 0 yields the remainder of the script\'s current timeslice to
+any other processes that need it (as long as they are not significantly
+lower in <a href="ProcessSetPriority.htm">priority</a> than the script). Thus, a
+delay of 0 produces an actual delay between 0 and 20 ms (or more),
+depending on the number of needy processes (if there are no needy
+processes, there will be no delay at all). However, a <em>Delay</em> of 0
+should always wind up being shorter than any longer <em>Delay</em> would have
+been.</p>
+<p>While sleeping, new <a href="../misc/Threads.htm">threads</a> can be launched via
+<a href="../Hotkeys.htm">hotkey</a>, <a href="Menu.htm">custom menu item</a>, or
+<a href="SetTimer.htm">timer</a>.</p>
+<p><strong>Sleep -1:</strong> A delay of -1 does not sleep but instead makes the script
+immediately check its message queue. This can be used to force any
+pending <a href="../misc/Threads.htm">interruptions</a> to occur at a specific
+place rather than somewhere more random. See <a href="Critical.htm">Critical</a>
+for more details.</p>
+<h2 id="Related">Related</h2>
+<p><a href="SetKeyDelay.htm">SetKeyDelay</a>, <a href="SetMouseDelay.htm">SetMouseDelay</a>,
+<a href="SetControlDelay.htm">SetControlDelay</a>, <a href="SetWinDelay.htm">SetWinDelay</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Waits 1 second before continuing execution.</p>
+<pre class="codehilite"><code>Sleep 1000
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExExpr .ex}
+<a class="ex_number" href="#ExExpr"></a> Waits 30 minutes before continuing execution.</p>
+<pre class="codehilite"><code>MyVar := 30 * 60000 ; 30 means minutes and times 60000 gives the time in milliseconds.
+Sleep MyVar ; Sleep for 30 minutes.
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExShorterSleep .ex}
+<a class="ex_number" href="#ExShorterSleep"></a> Demonstrates how to sleep for less time
+than the normal 10 or 15.6 milliseconds. Note: While a script like this
+is running, the entire operating system and all applications are
+affected by timeBeginPeriod below.</p>
+<pre class="codehilite"><code>SleepDuration := 1  ; This can sometimes be finely adjusted (e.g. 2 is different than 3) depending on the value below.
+TimePeriod := 3 ; Try 7 or 3.  See comment below.
+; On a PC whose sleep duration normally rounds up to 15.6 ms, try TimePeriod=7 to allow
+; somewhat shorter sleeps, and try TimePeriod=3 or less to allow the shortest possible sleeps.
+
+DllCall(&quot;Winmm\timeBeginPeriod&quot;, &quot;UInt&quot;, TimePeriod)  ; Affects all applications, not just this script's DllCall(&quot;Sleep&quot;...), but does not affect SetTimer.
+Iterations := 50
+StartTime := A_TickCount
+
+Loop Iterations
+    DllCall(&quot;Sleep&quot;, &quot;UInt&quot;, SleepDuration)  ; Must use DllCall instead of the Sleep function.
+
+DllCall(&quot;Winmm\timeEndPeriod&quot;, &quot;UInt&quot;, TimePeriod)  ; Should be called to restore system to normal.
+MsgBox &quot;Sleep duration = &quot; . (A_TickCount - StartTime) / Iterations
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Sleep.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#sleep">Sleep</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

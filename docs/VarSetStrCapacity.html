@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VarSetStrCapacity | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Enlarges a variable\'s holding capacity or frees its memory. This is not">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>VarSetStrCapacity</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="varsetstrcapacity">VarSetStrCapacity</h1>
+<p>Enlarges a variable\'s holding capacity or frees its memory. This is not
+normally needed, but may be used with <a href="DllCall.htm">DllCall</a> or
+<a href="SendMessage.htm">SendMessage</a> or to optimize repeated concatenation.</p>
+<pre class="codehilite"><code class="language-Syntax">GrantedCapacity := VarSetStrCapacity(&amp;TargetVar , RequestedCapacity)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>&amp;TargetVar</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#variable-references">VarRef</a></p>
+<p>A reference to a variable. For example:
+<code>VarSetStrCapacity(&amp;MyVar, 1000)</code>. This can also be a dynamic
+variable such as <code>Array%i%</code> or a <a href="../Functions.htm#ByRef">function\'s ByRef
+parameter</a>.</p>
+</dd>
+<dt>RequestedCapacity</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, the variable\'s current capacity will be returned and
+its contents will not be altered. Otherwise, anything currently in
+the variable is lost (the variable becomes blank).</p>
+<p>Specify for <em>RequestedCapacity</em> the number of characters that the
+variable should be able to hold after the adjustment.
+<em>RequestedCapacity</em> does not include the internal zero terminator.
+For example, specifying 1 would allow the variable to hold up to one
+character in addition to its internal terminator. Note: the variable
+will auto-expand if the script assigns it a larger value later.</p>
+<p>Since this function is often called simply to ensure the variable
+has a certain minimum capacity, for performance reasons, it shrinks
+the variable only when <em>RequestedCapacity</em> is 0. In other words, if
+the variable\'s capacity is already greater than
+<em>RequestedCapacity</em>, it will not be reduced (but the variable will
+still made blank for consistency).</p>
+<p>Therefore, to explicitly shrink a variable, first free its memory
+with <code>VarSetStrCapacity(&amp;Var, 0)</code> and then use
+<code>VarSetStrCapacity(&amp;Var, NewCapacity)</code> -- or simply let it
+auto-expand from zero as needed.</p>
+<p>For performance reasons, freeing a variable whose previous capacity
+was less than 64 characters might have no effect because its memory
+is of a permanent type. In this case, the current capacity will be
+returned rather than 0.</p>
+<p>For performance reasons, the memory of a variable whose capacity is
+less than 4096 bytes is not freed by storing an empty string in it
+(e.g. <code>Var := ""</code>). However, <code>VarSetStrCapacity(&amp;Var, 0)</code> does free
+it.</p>
+<p>Specify -1 for <em>RequestedCapacity</em> to update the variable\'s
+internally-stored string length to the length of its current
+contents. This is useful in cases where the string has been altered
+indirectly, such as by passing its <a href="StrPtr.htm">address</a> via
+<a href="DllCall.htm">DllCall</a> or <a href="SendMessage.htm">SendMessage</a>. In this
+mode, VarSetStrCapacity returns the length rather than the capacity.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This function returns the number of characters that <em>TargetVar</em> can now
+hold, which will be greater than or equal to <em>RequestedCapacity</em>.</p>
+<h2 id="Failure">Failure</h2>
+<p>An exception is thrown under any of the following conditions:</p>
+<ul>
+<li><em>TargetVar</em> is not a valid variable reference. It is not possible to
+    pass an <a href="../Objects.htm#Usage_Objects">object property</a> or <a href="../Variables.htm#BuiltIn">built-in
+    variable</a> by reference, and therefore not
+    valid to pass one to this function.</li>
+<li>The requested capacity is too large to fit within any single
+    contiguous memory block available to the script. In rare cases, this
+    may be due to the system running out of memory.</li>
+<li><em>RequestedCapacity</em> is less than -1 or greater than the capacity
+    theoretically supported by the current platform.</li>
+</ul>
+<h2 id="Remarks">Remarks</h2>
+<p>The <a href="Buffer.htm">Buffer</a> object offers superior clarity and flexibility
+when dealing with binary data, structures, DllCall and similar. For
+instance, a Buffer object can be assigned to a property or array element
+or be passed to or returned from a function without copying its
+contents.</p>
+<p>This function can be used to enhance performance when building a string
+by means of gradual concatenation. This is because multiple automatic
+resizings can be avoided when you have some idea of what the string\'s
+final length will be. In such a case, <em>RequestedCapacity</em> need not be
+accurate: if the capacity is too small, performance is still improved
+and the variable will begin auto-expanding when the capacity has been
+exhausted. If the capacity is too large, some of the memory is wasted,
+but only temporarily because all the memory can be freed after the
+operation by means of <code>VarSetStrCapacity(&amp;Var, 0)</code> or <code>Var := ""</code>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="Buffer.htm">Buffer object</a>, <a href="DllCall.htm">DllCall</a>,
+<a href="NumPut.htm">NumPut</a>, <a href="NumGet.htm">NumGet</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExConcat .ex}
+<a class="ex_number" href="#ExConcat"></a> Optimize by ensuring <em>MyVar</em> has plenty of
+space to work with.</p>
+<pre class="codehilite"><code>VarSetStrCapacity(&amp;MyVar, 5120000)  ; ~10 MB
+Loop
+{
+    ; ...
+    MyVar .= StringToConcatenate
+    ; ...
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExDllCall .ex}
+<a class="ex_number" href="#ExDllCall"></a> Use a variable to receive a string from an
+external function via <a href="DllCall.htm">DllCall</a>. (Note that the use of a
+<a href="Buffer.htm#ExString">Buffer object</a> may be preferred; in particular,
+when dealing with non-Unicode strings.)</p>
+<pre class="codehilite"><code>max_chars := 10
+
+Loop 2
+{
+    ; Allocate space for use with DllCall.
+    VarSetStrCapacity(&amp;buf, max_chars)
+
+    if (A_Index = 1)
+        ; Alter the variable indirectly via DllCall.
+        DllCall(&quot;wsprintf&quot;, &quot;Ptr&quot;, StrPtr(buf), &quot;Str&quot;, &quot;0x%08x&quot;, &quot;UInt&quot;, 4919, &quot;CDecl&quot;)
+    else
+        ; Use &quot;str&quot; to update the length automatically:
+        DllCall(&quot;wsprintf&quot;, &quot;Str&quot;, buf, &quot;Str&quot;, &quot;0x%08x&quot;, &quot;UInt&quot;, 4919, &quot;CDecl&quot;)
+
+    ; Concatenate a string to demonstrate why the length needs to be updated:
+    wrong_str := buf . &quot;&lt;end&gt;&quot;
+    wrong_len := StrLen(buf)
+
+    ; Update the variable's length.
+    VarSetStrCapacity(&amp;buf, -1)
+
+    right_str := buf . &quot;&lt;end&gt;&quot;
+    right_len := StrLen(buf)
+
+    MsgBox
+    (
+    &quot;Before updating
+      String: &quot; wrong_str &quot;
+      Length: &quot; wrong_len &quot;
+
+    After updating
+      String: &quot; right_str &quot;
+      Length: &quot; right_len
+    )
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/VarSetStrCapacity.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#varsetstrcapacity">VarSetStrCapacity</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Failure">Failure</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

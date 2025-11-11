@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Object | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="``` NoIndent">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Array</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="array-object">Array Object</h1>
+<pre class="codehilite"><code class="language-NoIndent">class Array extends Object
+</code></pre>
+
+<p>An <strong>Array</strong> object contains a list or sequence of values.</p>
+<p>Values are addressed by their position within the array (known as an
+<em>array index</em>), where position 1 is the first element.</p>
+<p>Arrays are often created by enclosing a list of values in brackets. For
+example:</p>
+<pre class="codehilite"><code>veg := [&quot;Asparagus&quot;, &quot;Broccoli&quot;, &quot;Cucumber&quot;]
+Loop veg.Length
+    MsgBox veg[A_Index]
+</code></pre>
+
+<p>A negative index can be used to address elements in reverse, so -1 is
+the last element, -2 is the second last element, and so on.</p>
+<p>Attempting to use an array index which is out of bounds (such as zero,
+or if its absolute value is greater than the <a href="#Length">Length</a> of the
+array) is considered an error and will cause an
+<a href="Error.htm#IndexError">IndexError</a> to be thrown. The best way to add new
+elements to the array is to call <a href="#InsertAt">InsertAt</a> or <a href="#Push">Push</a>.
+For example:</p>
+<pre class="codehilite"><code>users := Array()
+users.Push(A_UserName)
+MsgBox users[1]
+</code></pre>
+
+<p>An array can also be extended by assigning a larger value to
+<a href="#Length">Length</a>. This changes which indices are valid, but <a href="#Has">Has</a>
+will show that the new elements have no value. Elements without a value
+are typically used for <a href="../Functions.htm#VariadicCall">variadic calls</a>
+or by <a href="../Functions.htm#Variadic">variadic functions</a>, but can be used
+for any purpose.</p>
+<p>\"ArrayObj\" is used below as a placeholder for any Array object, as
+\"Array\" is the class itself.</p>
+<p>In addition to the methods and property inherited from
+<a href="Object.htm">Object</a>, Array objects have the following predefined
+methods and properties.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#StaticMethods">Static Methods</a>:<ul>
+<li><a href="#Call">Call</a>: Creates a new Array containing the specified
+    values.</li>
+</ul>
+</li>
+<li><a href="#Methods">Methods</a>:<ul>
+<li><a href="#Clone">Clone</a>: Returns a shallow copy of an array.</li>
+<li><a href="#Delete">Delete</a>: Removes the value of an array element,
+    leaving the index without a value.</li>
+<li><a href="#Get">Get</a>: Returns the value at a given index, or a default
+    value.</li>
+<li><a href="#Has">Has</a>: Returns a non-zero number if the index is valid and
+    there is a value at that position.</li>
+<li><a href="#InsertAt">InsertAt</a>: Inserts one or more values at a given
+    position.</li>
+<li><a href="#Pop">Pop</a>: Removes and returns the last array element.</li>
+<li><a href="#Push">Push</a>: Appends values to the end of an array.</li>
+<li><a href="#RemoveAt">RemoveAt</a>: Removes items from an array.</li>
+<li><a href="#__New">__New</a>: Appends items. Equivalent to Push.</li>
+<li><a href="#__Enum">__Enum</a>: Enumerates array elements.</li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a>:<ul>
+<li><a href="#Length">Length</a>: Retrieves or sets the length of an array.</li>
+<li><a href="#Capacity">Capacity</a>: Retrieves or sets the current capacity of
+    an array.</li>
+<li><a href="#Default">Default</a>: Defines the default value returned when an
+    element with no value is requested.</li>
+<li><a href="#__Item">__Item</a>: Retrieves or sets the value of an array
+    element.</li>
+</ul>
+</li>
+</ul>
+<h2 id="StaticMethods">Static Methods</h2>
+<p>::: {#Call .methodShort}</p>
+<h3 id="call">Call</h3>
+<p>Creates a new Array containing the specified values.</p>
+<pre class="codehilite"><code class="language-Syntax">ArrayObj := Array(Value, Value2, ..., ValueN)
+ArrayObj := Array.Call(Value, Value2, ..., ValueN)
+</code></pre>
+
+<p>Parameters are defined by <a href="#__New">__New</a>.
+:::</p>
+<h2 id="Methods">Methods</h2>
+<p>::: {#Clone .methodShort}</p>
+<h3 id="clone">Clone</h3>
+<p>Returns a shallow copy of an array.</p>
+<pre class="codehilite"><code class="language-Syntax">Clone := ArrayObj.Clone()
+</code></pre>
+
+<p>All array elements are copied to the new array. Object <em>references</em> are
+copied (like with a normal assignment), not the objects themselves.</p>
+<p>Own properties, own methods and base are copied as per
+<a href="Object.htm#Clone">Obj.Clone</a>.
+:::</p>
+<p>::: {#Delete .methodShort}</p>
+<h3 id="delete">Delete</h3>
+<p>Removes the value of an array element, leaving the index without a
+value.</p>
+<pre class="codehilite"><code class="language-Syntax">RemovedValue := ArrayObj.Delete(Index)
+</code></pre>
+
+<h4 id="Delete_Parameters">Parameters</h4>
+<dl>
+<dt>Index</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>A valid array index.</p>
+</dd>
+</dl>
+<h4 id="Delete_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#values">Any</a></p>
+<p>This method returns the removed value (blank if none).</p>
+<h4 id="Delete_Remarks">Remarks</h4>
+<p>This method does not affect the <a href="#Length">Length</a> of the array.</p>
+<p>A <a href="Error.htm#ValueError">ValueError</a> is thrown if <em>Index</em> is out of
+range.
+:::</p>
+<p>::: {#Get .methodShort}</p>
+<h3 id="get">Get</h3>
+<p>Returns the value at a given index, or a default value.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := ArrayObj.Get(Index , Default)
+</code></pre>
+
+<p>This method does the following:</p>
+<ul>
+<li>Throw an <a href="Error.htm#IndexError">IndexError</a> if <em>Index</em> is zero or
+    out of range.</li>
+<li>Return the value at <em>Index</em>, if there is one (see <a href="#Has">Has</a>).</li>
+<li>Return the value of the <em>Default</em> parameter, if specified.</li>
+<li>Return the value of <code>ArrayObj.Default</code>, if defined.</li>
+<li>Throw an <a href="Error.htm#UnsetError">UnsetItemError</a>.</li>
+</ul>
+<p>When <em>Default</em> is omitted, this is equivalent to <code>ArrayObj[Index]</code>,
+except that <a href="#__Item">__Item</a> is not called.
+:::</p>
+<p>::: {#Has .methodShort}</p>
+<h3 id="has">Has</h3>
+<p>Returns a non-zero number if the index is valid and there is a value at
+that position.</p>
+<pre class="codehilite"><code class="language-Syntax">HasIndex := ArrayObj.Has(Index)
+</code></pre>
+
+<p>:::</p>
+<p>::: {#InsertAt .methodShort}</p>
+<h3 id="insertat">InsertAt</h3>
+<p>Inserts one or more values at a given position.</p>
+<pre class="codehilite"><code class="language-Syntax">ArrayObj.InsertAt(Index, Value1 , Value2, ... ValueN)
+</code></pre>
+
+<h4 id="InsertAt_Parameters">Parameters</h4>
+<dl>
+<dt>Index</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The position to insert <em>Value1</em> at. Subsequent values are inserted
+at Index+1, Index+2, etc. Specifying an index of 0 is the same as
+specifying <a href="#Length">Length</a> + 1.</p>
+</dd>
+<dt>Value1 ...</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#values">Any</a></p>
+<p>One or more values to insert. To insert an array of values, pass
+<a href="../Functions.htm#VariadicCall"><code>theArray*</code></a> as the last parameter.</p>
+</dd>
+</dl>
+<h4 id="InsertAt_Remarks">Remarks</h4>
+<p>InsertAt is the counterpart of <a href="#RemoveAt">RemoveAt</a>.</p>
+<p>Any items previously at or to the right of <em>Index</em> are shifted to the
+right. Missing parameters are also inserted, but without a value. For
+example:</p>
+<pre class="codehilite"><code>x := []
+x.InsertAt(1, &quot;A&quot;, &quot;B&quot;) ; =&gt;  [&quot;A&quot;, &quot;B&quot;]
+x.InsertAt(2, &quot;C&quot;)      ; =&gt;  [&quot;A&quot;, &quot;C&quot;, &quot;B&quot;]
+
+; Missing elements are preserved:
+x := [&quot;A&quot;, , &quot;C&quot;]
+x.InsertAt(2, &quot;B&quot;)      ; =&gt;  [&quot;A&quot;, &quot;B&quot;,    , &quot;C&quot;]
+
+x := [&quot;C&quot;]
+x.InsertAt(1, , &quot;B&quot;)    ; =&gt;  [   , &quot;B&quot;, &quot;C&quot;]
+</code></pre>
+
+<p>A <a href="Error.htm#ValueError">ValueError</a> is thrown if <em>Index</em> is less than
+<code>-ArrayObj.Length</code> or greater than <code>ArrayObj.Length + 1</code>. For example,
+with an array of 3 items, <em>Index</em> must be between -3 and 4, inclusive.
+:::</p>
+<p>::: {#Pop .methodShort}</p>
+<h3 id="pop">Pop</h3>
+<p>Removes and returns the last array element.</p>
+<pre class="codehilite"><code class="language-Syntax">RemovedValue := ArrayObj.Pop()
+</code></pre>
+
+<p>All of the following are equivalent:</p>
+<pre class="codehilite"><code>RemovedValue := ArrayObj.Pop()
+RemovedValue := ArrayObj.RemoveAt(ArrayObj.Length)
+RemovedValue := ArrayObj.RemoveAt(-1)
+</code></pre>
+
+<p>If the array is empty (<a href="#Length">Length</a> is 0), an <a href="Error.htm">Error</a> is
+thrown.
+:::</p>
+<p>::: {#Push .methodShort}</p>
+<h3 id="push">Push</h3>
+<p>Appends values to the end of an array.</p>
+<pre class="codehilite"><code class="language-Syntax">ArrayObj.Push(Value, Value2, ..., ValueN)
+</code></pre>
+
+<h4 id="Push_Parameters">Parameters</h4>
+<dl>
+<dt>Value ...</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#values">Any</a></p>
+<p>One or more values to insert. To insert an array of values, pass
+<a href="../Functions.htm#VariadicCall"><code>theArray*</code></a> as the last parameter.
+:::</p>
+</dd>
+</dl>
+<p>::: {#RemoveAt .methodShort}</p>
+<h3 id="removeat">RemoveAt</h3>
+<p>Removes items from an array.</p>
+<pre class="codehilite"><code class="language-Syntax">RemovedValue := ArrayObj.RemoveAt(Index)
+ArrayObj.RemoveAt(Index, Length)
+</code></pre>
+
+<h4 id="RemoveAt_Parameters">Parameters</h4>
+<dl>
+<dt>Index</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The index of the value or values to remove.</p>
+</dd>
+<dt>Length</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, one item is removed. Otherwise, specify the length of
+the range of values to remove.</p>
+</dd>
+</dl>
+<h4 id="RemoveAt_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#values">Any</a></p>
+<p>If <em>Length</em> is omitted, the removed value is returned (blank if none).
+Otherwise there is no return value.</p>
+<h4 id="RemoveAt_Remarks">Remarks</h4>
+<p>RemoveAt is the counterpart of <a href="#InsertAt">InsertAt</a>.</p>
+<p>A <a href="Error.htm#ValueError">ValueError</a> is thrown if the range indicated by
+<em>Index</em> and <em>Length</em> is not entirely within the array\'s current bounds.</p>
+<p>The remaining items to the right of <em>Pos</em> are shifted to the left by
+<em>Length</em> (or 1 if omitted). For example:</p>
+<pre class="codehilite"><code>x := [&quot;A&quot;, &quot;B&quot;]
+MsgBox x.RemoveAt(1)  ; A
+MsgBox x[1]           ; B
+
+x := [&quot;A&quot;, , &quot;C&quot;]
+MsgBox x.RemoveAt(1, 2)  ; 1
+MsgBox x[1]              ; C
+</code></pre>
+
+<p>:::</p>
+<p>::: {#__New .methodShort}</p>
+<h3 id="__new">__New</h3>
+<p>Appends items. Equivalent to <a href="#Push">Push</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">ArrayObj.__New(Value, Value2, ..., ValueN)
+</code></pre>
+
+<p>This method exists to support <a href="#Call">Call</a>, and is not intended to be
+called directly. See <a href="../Objects.htm#Custom_NewDelete">Construction and
+Destruction</a>.
+:::</p>
+<p>::: {#__Enum .methodShort}</p>
+<h3 id="__enum">__Enum</h3>
+<p>Enumerates array elements.</p>
+<pre class="codehilite"><code class="language-Syntax">For Value in ArrayObj
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">For Index, Value in ArrayObj
+</code></pre>
+
+<p>Returns a new <a href="Enumerator.htm">enumerator</a>. This method is typically not
+called directly. Instead, the array object is passed directly to a
+<a href="For.htm">for-loop</a>, which calls __Enum once and then calls the
+enumerator once for each iteration of the loop. Each call to the
+enumerator returns the next array element. The for-loop\'s variables
+correspond to the enumerator\'s parameters, which are:</p>
+<dl>
+<dt>Index</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The array index, typically the same as
+<a href="../Variables.htm#Index">A_Index</a>. This is present only in the
+two-parameter mode.</p>
+</dd>
+<dt>Value</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#values">Any</a></p>
+<p>The value (if there is no value, <em>Value</em> becomes
+<a href="../Concepts.htm#uninitialized-variables">uninitialized</a>).
+:::</p>
+</dd>
+</dl>
+<h2 id="Properties">Properties</h2>
+<p>::: {#Length .methodShort}</p>
+<h3 id="length">Length</h3>
+<p>Retrieves or sets the length of an array.</p>
+<pre class="codehilite"><code class="language-Syntax">Length := ArrayObj.Length
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">ArrayObj.Length := Length
+</code></pre>
+
+<p>The length includes elements which have no value. Increasing the length
+changes which indices are considered valid, but the new elements have no
+value (as indicated by <a href="#Has">Has</a>). Decreasing the length truncates the
+array.</p>
+<pre class="codehilite"><code>MsgBox [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;].Length  ;  3
+MsgBox [&quot;A&quot;,    , &quot;C&quot;].Length  ;  3
+</code></pre>
+
+<p>:::</p>
+<p>::: {#Capacity .methodShort}</p>
+<h3 id="capacity">Capacity</h3>
+<p>Retrieves or sets the current capacity of an array.</p>
+<pre class="codehilite"><code class="language-Syntax">MaxItems := ArrayObj.Capacity
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">ArrayObj.Capacity := MaxItems
+</code></pre>
+
+<p><em>MaxItems</em> is an <a href="../Concepts.htm#numbers">integer</a> representing the
+maximum number of elements the array should be able to contain before it
+must be automatically expanded. If setting a value less than
+<a href="#Length">Length</a>, elements are removed.
+:::</p>
+<p>::: {#Default .methodShort}</p>
+<h3 id="default">Default</h3>
+<p>Defines the default value returned when an element with no value is
+requested.</p>
+<pre class="codehilite"><code class="language-Syntax">ArrayObj.Default := Value
+</code></pre>
+
+<p>This property actually doesn\'t exist by default, but can be defined by
+the script. If defined, its value is returned by <a href="#__Item">__Item</a> or
+<a href="#Get">Get</a> if the requested element has no value, instead of throwing
+an <a href="Error.htm#UnsetError">UnsetItemError</a>. It can be implemented by any
+of the normal means, including a <a href="Object.htm#DefineProp">dynamic
+property</a> or
+<a href="../Objects.htm#Meta_Functions">meta-function</a>, but determining which
+key was queried would require overriding <a href="#__Item">__Item</a> or
+<a href="#Get">Get</a> instead.</p>
+<p>Setting a default value does not prevent an error from being thrown when
+the index is out of range.
+:::</p>
+<p>::: {#__Item .methodShort}</p>
+<h3 id="__item">__Item</h3>
+<p>Retrieves or sets the value of an array element.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := ArrayObj[Index]
+Value := ArrayObj.__Item[Index]
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">ArrayObj[Index] := Value
+ArrayObj.__Item[Index] := Value
+</code></pre>
+
+<p><em>Index</em> is an <a href="../Concepts.htm#numbers">integer</a> representing a valid
+array index; that is, an integer with absolute value between 1 and
+<a href="#Length">Length</a> (inclusive). A negative index can be used to address
+elements in reverse, so that -1 is the last element, -2 is the second
+last element, and so on. Attempting to use an index which is out of
+bounds (such as zero, or if its absolute value is greater than the
+<a href="#Length">Length</a> of the array) is considered an error and will cause an
+<a href="Error.htm#IndexError">IndexError</a> to be thrown.</p>
+<p>The property name __Item is typically omitted, as shown above, but is
+used when overriding the property.
+:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Array.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#array-object">Array Object</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#StaticMethods">Static Methods</a><ul>
+<li><a href="#call">Call</a></li>
+</ul>
+</li>
+<li><a href="#Methods">Methods</a><ul>
+<li><a href="#clone">Clone</a></li>
+<li><a href="#delete">Delete</a><ul>
+<li><a href="#Delete_Parameters">Parameters</a></li>
+<li><a href="#Delete_Return_Value">Return Value</a></li>
+<li><a href="#Delete_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#get">Get</a></li>
+<li><a href="#has">Has</a></li>
+<li><a href="#insertat">InsertAt</a><ul>
+<li><a href="#InsertAt_Parameters">Parameters</a></li>
+<li><a href="#InsertAt_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#pop">Pop</a></li>
+<li><a href="#push">Push</a><ul>
+<li><a href="#Push_Parameters">Parameters</a></li>
+</ul>
+</li>
+<li><a href="#removeat">RemoveAt</a><ul>
+<li><a href="#RemoveAt_Parameters">Parameters</a></li>
+<li><a href="#RemoveAt_Return_Value">Return Value</a></li>
+<li><a href="#RemoveAt_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#__new">__New</a></li>
+<li><a href="#__enum">__Enum</a></li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a><ul>
+<li><a href="#length">Length</a></li>
+<li><a href="#capacity">Capacity</a></li>
+<li><a href="#default">Default</a></li>
+<li><a href="#__item">__Item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

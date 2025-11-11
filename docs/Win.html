@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win Functions | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Functions for retrieving information about one or more windows or for">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Win</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="win-functions">Win Functions</h1>
+<p>Functions for retrieving information about one or more windows or for
+performing various operations on a window. Click on a function name for
+details.</p>
+<hr />
+<p>Function                                       Description</p>
+<hr />
+<p><a href="WinActivate.htm">WinActivate</a>                 Activates the specified window.</p>
+<p><a href="WinActivateBottom.htm">WinActivateBottom</a>     Same as
+                                                 <a href="WinActivate.htm">WinActivate</a>
+                                                 except that it activates the
+                                                 bottommost matching window rather
+                                                 than the topmost.</p>
+<p><a href="WinActive.htm">WinActive</a>                     Checks if the specified window
+                                                 exists and is currently active
+                                                 (foremost).</p>
+<p><a href="WinClose.htm">WinClose</a>                       Closes the specified window.</p>
+<p><a href="WinExist.htm">WinExist</a>                       Checks if the specified window
+                                                 exists.</p>
+<p><a href="WinGetClass.htm">WinGetClass</a>                 Retrieves the specified window\'s
+                                                 class name.</p>
+<p><a href="WinGetClientPos.htm">WinGetClientPos</a>         Retrieves the position and size of
+                                                 the specified window\'s client
+                                                 area.</p>
+<p><a href="WinGetControls.htm">WinGetControls</a>           Returns an array of names
+                                                 (ClassNNs) for all controls in the
+                                                 specified window.</p>
+<p><a href="WinGetControlsHwnd.htm">WinGetControlsHwnd</a>   Returns an array of unique ID
+                                                 numbers (HWNDs) for all controls in
+                                                 the specified window.</p>
+<p><a href="WinGetCount.htm">WinGetCount</a>                 Returns the number of existing
+                                                 windows that match the specified
+                                                 criteria.</p>
+<p><a href="WinGetID.htm">WinGetID</a>                       Returns the unique ID number (HWND)
+                                                 of the specified window.</p>
+<p><a href="WinGetIDLast.htm">WinGetIDLast</a>               Returns the unique ID number (HWND)
+                                                 of the last/bottommost window if
+                                                 there is more than one match.</p>
+<p><a href="WinGetList.htm">WinGetList</a>                   Returns an array of unique ID
+                                                 numbers (HWNDs) for all existing
+                                                 windows that match the specified
+                                                 criteria.</p>
+<p><a href="WinGetMinMax.htm">WinGetMinMax</a>               Returns a non-zero number if the
+                                                 specified window is maximized or
+                                                 minimized.</p>
+<p><a href="WinGetPID.htm">WinGetPID</a>                     Returns the Process ID number (PID)
+                                                 of the specified window.</p>
+<p><a href="WinGetPos.htm">WinGetPos</a>                     Retrieves the position and size of
+                                                 the specified window.</p>
+<p><a href="WinGetProcessName.htm">WinGetProcessName</a>     Returns the name of the process
+                                                 that owns the specified window.</p>
+<p><a href="WinGetProcessPath.htm">WinGetProcessPath</a>     Returns the full path and name of
+                                                 the process that owns the specified
+                                                 window.</p>
+<p><a href="WinGetStyle.htm">WinGetStyle\                                  Returns the style or extended style
+  WinGetExStyle</a>                (respectively) of the specified
+                                                 window.</p>
+<p><a href="WinGetText.htm">WinGetText</a>                   Retrieves the text from the
+                                                 specified window.</p>
+<p><a href="WinGetTitle.htm">WinGetTitle</a>                 Retrieves the title of the
+                                                 specified window.</p>
+<p><a href="WinGetTransColor.htm">WinGetTransColor</a>       Returns the color that is marked
+                                                 transparent in the specified
+                                                 window.</p>
+<p><a href="WinGetTransparent.htm">WinGetTransparent</a>     Returns the degree of transparency
+                                                 of the specified window.</p>
+<p><a href="WinHide.htm">WinHide</a>                         Hides the specified window.</p>
+<p><a href="WinKill.htm">WinKill</a>                         Forces the specified window to
+                                                 close.</p>
+<p><a href="WinMaximize.htm">WinMaximize</a>                 Enlarges the specified window to
+                                                 its maximum size.</p>
+<p><a href="WinMinimize.htm">WinMinimize</a>                 Collapses the specified window into
+                                                 a button on the task bar.</p>
+<p><a href="WinMinimizeAll.htm">WinMinimizeAll\                               Minimizes or unminimizes all
+  WinMinimizeAllUndo</a>        windows.</p>
+<p><a href="WinMove.htm">WinMove</a>                         Changes the position and/or size of
+                                                 the specified window.</p>
+<p><a href="WinMoveBottom.htm">WinMoveBottom</a>             Sends the specified window to the
+                                                 bottom of stack; that is, beneath
+                                                 all other windows.</p>
+<p><a href="WinMoveTop.htm">WinMoveTop</a>                   Brings the specified window to the
+                                                 top of the stack without explicitly
+                                                 activating it.</p>
+<p><a href="WinRedraw.htm">WinRedraw</a>                     Redraws the specified window.</p>
+<p><a href="WinRestore.htm">WinRestore</a>                   Unminimizes or unmaximizes the
+                                                 specified window if it is minimized
+                                                 or maximized.</p>
+<p><a href="WinSetAlwaysOnTop.htm">WinSetAlwaysOnTop</a>     Makes the specified window stay on
+                                                 top of all other windows (except
+                                                 other always-on-top windows).</p>
+<p><a href="WinSetEnabled.htm">WinSetEnabled</a>             Enables or disables the specified
+                                                 window.</p>
+<p><a href="WinSetRegion.htm">WinSetRegion</a>               Changes the shape of the specified
+                                                 window to be the specified
+                                                 rectangle, ellipse, or polygon.</p>
+<p><a href="WinSetStyle.htm">WinSetStyle\                                  Changes the style or extended style
+  WinSetExStyle</a>                of the specified window,
+                                                 respectively.</p>
+<p><a href="WinSetTitle.htm">WinSetTitle</a>                 Changes the title of the specified
+                                                 window.</p>
+<p><a href="WinSetTransColor.htm">WinSetTransColor</a>       Makes all pixels of the chosen
+                                                 color invisible inside the
+                                                 specified window.</p>
+<p><a href="WinSetTransparent.htm">WinSetTransparent</a>     Makes the specified window
+                                                 semi-transparent.</p>
+<p><a href="WinShow.htm">WinShow</a>                         Unhides the specified window.</p>
+<p><a href="WinWait.htm">WinWait</a>                         Waits until the specified window
+                                                 exists.</p>
+<p><a href="WinWaitActive.htm">WinWaitActive\                                Waits until the specified window is
+  WinWaitNotActive</a>           active or not active.</p>
+<p><a href="WinWaitClose.htm">WinWaitClose</a>               Waits until no matching windows can
+                                                 be found.</p>
+<hr />
+<h2 id="Remarks">Remarks</h2>
+<p>To discover the unique ID number of the window that the mouse is
+currently hovering over, use <a href="MouseGetPos.htm">MouseGetPos</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="SetWinDelay.htm">SetWinDelay</a>, <a href="Control.htm">Control functions</a>, <a href="Gui.htm">Gui
+object</a> (for windows created by the script)</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Win.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#win-functions">Win Functions</a><ul>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

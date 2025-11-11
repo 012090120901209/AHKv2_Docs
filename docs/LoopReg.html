@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop Reg | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Retrieves the contents of the specified registry subkey, one item at a">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>LoopReg</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="loop-reg">Loop Reg</h1>
+<p>Retrieves the contents of the specified registry subkey, one item at a
+time.</p>
+<pre class="codehilite"><code class="language-Syntax">Loop Reg KeyName , Mode
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>KeyName</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The full name of the registry key, e.g.
+<code>"HKLM\Software\SomeApplication"</code>.</p>
+<p>This must start with HKEY_LOCAL_MACHINE (or HKLM), HKEY_USERS (or
+HKU), HKEY_CURRENT_USER (or HKCU), HKEY_CLASSES_ROOT (or HKCR), or
+HKEY_CURRENT_CONFIG (or HKCC).</p>
+<p>To access a <a href="#remote">remote registry</a>, prepend the computer name
+and a backslash, e.g. <code>"\\workstation01\HKLM"</code>.</p>
+</dd>
+<dt>Mode</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, only values are included and subkeys are not
+recursed into. Otherwise, specify one or more of the following
+letters:</p>
+<ul>
+<li>K = Include keys.</li>
+<li>V = Include values. Values are also included if both K and V are
+    omitted.</li>
+<li>R = Recurse into subkeys. If R is omitted, keys and values
+    within subkeys of <em>KeyName</em> are not included.</li>
+</ul>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>A registry loop is useful when you want to operate on a collection
+registry values or subkeys, one at a time. The values and subkeys are
+retrieved in reverse order (bottom to top) so that
+<a href="RegDelete.htm">RegDelete</a> and <a href="RegDeleteKey.htm">RegDeleteKey</a> can be
+used inside the loop without disrupting the loop.</p>
+<p>The following variables exist within any registry loop. If an inner
+registry loop is enclosed by an outer registry loop, the innermost
+loop\'s registry item will take precedence:</p>
+<p>Variable                Description</p>
+<hr />
+<p>A_LoopRegName           Name of the currently retrieved item, which can be either a value name or the name of a subkey. Value names displayed by Windows RegEdit as \"(Default)\" will be retrieved if a value has been assigned to them, but A_LoopRegName will be blank for them.
+  A_LoopRegType           The type of the currently retrieved item, which is one of the following words: KEY (i.e. the currently retrieved item is a subkey not a value), REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD, REG_QWORD, REG_BINARY, REG_LINK, REG_RESOURCE_LIST, REG_FULL_RESOURCE_DESCRIPTOR, REG_RESOURCE_REQUIREMENTS_LIST, REG_DWORD_BIG_ENDIAN (probably rare on most Windows hardware). It will be empty if the currently retrieved item is of an unknown type.
+  A_LoopRegKey            The full name of the key which contains the current loop item. For remote registry access, this value will [not]{.underline} include the computer name.
+  A_LoopRegTimeModified   The time the current subkey or any of its values was last modified. Format <a href="FileSetTime.htm">YYYYMMDDHH24MISS</a>. This variable will be empty if the currently retrieved item is not a subkey (i.e. <em>A_LoopRegType</em> is not the word KEY).</p>
+<p>When used inside a registry loop, the following functions can be used in
+a simplified way to indicate that the currently retrieved item should be
+operated upon:</p>
+<hr />
+<p>Syntax                                    Description</p>
+<hr />
+<p><code>Value :=</code><a href="RegRead.htm"><code>RegRead</code></a><code>()</code>   Reads the current item. If the
+                                            current item is a key, an exception
+                                            is thrown.</p>
+<p><a href="RegWrite.htm"><code>RegWrite</code></a><code>Value</code>\       Writes to the current item. If
+  <a href="RegWrite.htm"><code>RegWrite</code></a>                <em>Value</em> is omitted, the item will
+                                            be made 0 or blank depending on its
+                                            type. If the current item is a key,
+                                            an exception is thrown and the
+                                            registry is not modified.</p>
+<p><a href="RegDelete.htm"><code>RegDelete</code></a>              Deletes the current item if it is a
+                                            value. If the current item is a
+                                            key, its default value will be
+                                            deleted instead.</p>
+<p><a href="RegDeleteKey.htm"><code>RegDeleteKey</code></a>        Deletes the current item if it is a
+                                            key. If the current item is a
+                                            value, the key which <em>contains</em>
+                                            that value will be deleted,
+                                            including all subkeys and values.</p>
+<p><code>RegCreateKey</code>                            Targets a key as described above
+                                            for RegDeleteKey. If the key is
+                                            deleted during the loop,
+                                            RegCreateKey can be used to
+                                            recreate it. Otherwise,
+                                            RegCreateKey merely verifies that
+                                            the script has write access to the
+                                            key.</p>
+<hr />
+<p>When accessing a remote registry (via the <em>KeyName</em> parameter described
+above), the following notes apply:</p>
+<ul>
+<li>The target machine must be running the Remote Registry service.</li>
+<li>Access to a remote registry may fail if the target computer is not
+    in the same domain as yours or the local or remote username lacks
+    sufficient permissions (however, see below for possible
+    workarounds).</li>
+<li>Depending on your username\'s domain, workgroup, and/or permissions,
+    you may have to connect to a shared device, such as by mapping a
+    drive, prior to attempting remote registry access. Making such a
+    connection -- using a remote username and password that has
+    permission to access or edit the registry -- may as a side-effect
+    enable remote registry access.</li>
+<li>If you\'re already connected to the target computer as a different
+    user (for example, a mapped drive via user Guest), you may have to
+    terminate that connection to allow the remote registry feature to
+    reconnect and re-authenticate you as your own currently logged-on
+    username.</li>
+</ul>
+<p>The One True Brace (OTB) style may optionally be used, which allows the
+open-brace to appear on the same line rather than underneath. For
+example: <code>Loop Reg "HKLM\Software\AutoHotkey", "V" {</code>.</p>
+<p>See <a href="Loop.htm">Loop</a> for information about <a href="Block.htm">Blocks</a>,
+<a href="Break.htm">Break</a>, <a href="Continue.htm">Continue</a>, and the A_Index variable
+(which exists in every type of loop).</p>
+<p>The loop may optionally be followed by an <a href="Else.htm">Else</a> statement,
+which is executed if no registry items of the specified type were found
+(i.e. the loop had zero iterations).</p>
+<h2 id="Related">Related</h2>
+<p><a href="Loop.htm">Loop</a>, <a href="Break.htm">Break</a>, <a href="Continue.htm">Continue</a>,
+<a href="Block.htm">Blocks</a>, <a href="RegRead.htm">RegRead</a>, <a href="RegWrite.htm">RegWrite</a>,
+<a href="RegDelete.htm">RegDelete</a>, <a href="RegDeleteKey.htm">RegDeleteKey</a>,
+<a href="SetRegView.htm">SetRegView</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Retrieves the contents of the specified
+registry subkey, one item at a time.</p>
+<pre class="codehilite"><code>Loop Reg, &quot;HKEY_LOCAL_MACHINE\Software\SomeApplication&quot;
+    MsgBox A_LoopRegName
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExRegDelete .ex}
+<a class="ex_number" href="#ExRegDelete"></a> Deletes Internet Explorer\'s history of
+URLs typed by the user.</p>
+<pre class="codehilite"><code>Loop Reg, &quot;HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\TypedURLs&quot;
+    RegDelete
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExTest .ex}
+<a class="ex_number" href="#ExTest"></a> A working test script.</p>
+<pre class="codehilite"><code>Loop Reg, &quot;HKCU\Software\Microsoft\Windows&quot;, &quot;R KV&quot;  ; Recursively retrieve keys and values.
+{
+    if A_LoopRegType = &quot;key&quot;
+        value := &quot;&quot;
+    else
+    {
+        try
+            value := RegRead()
+        catch
+            value := &quot;*error*&quot;
+    }
+    Result := MsgBox(A_LoopRegName &quot; = &quot; value &quot; (&quot; A_LoopRegType &quot;)`n`nContinue?&quot;,, &quot;y/n&quot;)
+}
+Until Result = &quot;No&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExRegSearch .ex}
+<a class="ex_number" href="#ExRegSearch"></a> Recursively searches the entire registry
+for particular value(s).</p>
+<pre class="codehilite"><code>RegSearch(&quot;Notepad&quot;)
+
+RegSearch(Target)
+{
+    Loop Reg, &quot;HKEY_LOCAL_MACHINE&quot;, &quot;KVR&quot;
+    {
+        if !CheckThisRegItem()  ; It told us to stop.
+            return
+    }
+    Loop Reg, &quot;HKEY_USERS&quot;, &quot;KVR&quot;
+    {
+        if !CheckThisRegItem()  ; It told us to stop.
+            return
+    }
+    Loop Reg, &quot;HKEY_CURRENT_CONFIG&quot;, &quot;KVR&quot;
+    {
+        if !CheckThisRegItem()  ; It told us to stop.
+            return
+    }
+    ; Note: I believe HKEY_CURRENT_USER does not need to be searched if
+    ; HKEY_USERS is being searched. Similarly, HKEY_CLASSES_ROOT provides a
+    ; combined view of keys from HKEY_LOCAL_MACHINE and HKEY_CURRENT_USER, so
+    ; searching all three isn't necessary.
+
+    CheckThisRegItem()
+    {
+        if A_LoopRegType = &quot;KEY&quot;  ; Remove these two lines if you want to check key names too.
+            return true
+        try
+            RegValue := RegRead()
+        catch
+            return true
+        if InStr(RegValue, Target)
+        {
+            Result := MsgBox(
+            (
+            &quot;The following match was found:
+            &quot; A_LoopRegKey &quot;\&quot; A_LoopRegName &quot;
+            Value = &quot; RegValue &quot;
+
+            Continue?&quot;
+            ),, &quot;y/n&quot;)
+            if Result = &quot;No&quot;
+                return false  ; Tell our caller to stop searching.
+        }
+        return true
+    }
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/LoopReg.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#loop-reg">Loop Reg</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

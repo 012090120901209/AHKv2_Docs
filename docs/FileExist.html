@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileExist | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Checks for the existence of a file or folder and returns its attributes.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>FileExist</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="fileexist">FileExist</h1>
+<p>Checks for the existence of a file or folder and returns its attributes.</p>
+<pre class="codehilite"><code class="language-Syntax">AttributeString := FileExist(FilePattern)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>FilePattern</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name of a single file or folder, or a wildcard pattern such as
+<code>"C:\Temp\*.tmp"</code>. <em>FilePattern</em> is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified.</p>
+<p>Both asterisks (<code>*</code>) and question marks (<code>?</code>) are supported as
+wildcards. <code>*</code> matches zero or more characters and <code>?</code> matches any
+single character. Usage examples:</p>
+<ul>
+<li><code>*.*</code> or <code>*</code> matches all files.</li>
+<li><code>*.htm</code> matches files with the extension .htm, .html, etc.</li>
+<li><code>*.</code> matches files without an extension.</li>
+<li><code>log?.txt</code> matches e.g. log1.txt but not log10.txt.</li>
+<li><code>*report*</code> matches any filename containing the word \"report\".</li>
+</ul>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>This function returns the attributes of the first matching file or
+folder. This string is a subset of <code>RASHNDOCTL</code>, where each letter means
+the following:</p>
+<ul>
+<li>R = READONLY</li>
+<li>A = ARCHIVE</li>
+<li>S = SYSTEM</li>
+<li>H = HIDDEN</li>
+<li>N = NORMAL</li>
+<li>D = DIRECTORY</li>
+<li>O = OFFLINE</li>
+<li>C = COMPRESSED</li>
+<li>T = TEMPORARY</li>
+<li>L = REPARSE_POINT (typically a symbolic link)</li>
+</ul>
+<p>If the file has no attributes (rare), \"X\" is returned. If no file or
+folder is found, an empty string is returned.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>Note that a wildcard check like <code>InStr(FileExist("MyFolder\*"), "D")</code>
+with <em>MyFolder</em> containing files and subfolders will only tell you
+whether the [first]{.underline} matching file is a folder, not whether a
+folder exists. To check for the latter, use <a href="DirExist.htm">DirExist</a>,
+e.g. <code>DirExist("MyFolder\*")</code>.</p>
+<p>Unlike <a href="FileGetAttrib.htm">FileGetAttrib</a>, FileExist supports wildcard
+patterns and always returns a non-empty value if a matching file exists.</p>
+<p>Since an empty string is seen as \"false\", the function\'s return value
+can always be used as a quasi-boolean value. For example, the statement
+<code>if FileExist("C:\My File.txt")</code> would be true if the file exists and
+false otherwise.</p>
+<p>Since <em>FilePattern</em> may contain wildcards, FileExist may be unsuitable
+for validating a file path which is to be used with another function or
+program. For example, <code>FileExist("*.txt")</code> may return attributes even
+though \"*.txt\" is not a valid filename. In such cases,
+<a href="FileGetAttrib.htm">FileGetAttrib</a> is preferred.</p>
+<h2 id="Related">Related</h2>
+<p><a href="DirExist.htm">DirExist</a>, <a href="FileGetAttrib.htm">FileGetAttrib</a>, <a href="LoopFiles.htm">file
+loops</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExDrive .ex}
+<a class="ex_number" href="#ExDrive"></a> Shows a message box if the D drive does exist.</p>
+<pre class="codehilite"><code>if FileExist(&quot;D:\&quot;)
+    MsgBox &quot;The drive exists.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExPattern .ex}
+<a class="ex_number" href="#ExPattern"></a> Shows a message box if at least one text file
+does exist in a directory.</p>
+<pre class="codehilite"><code>if FileExist(&quot;D:\Docs\*.txt&quot;)
+    MsgBox &quot;At least one .txt file exists.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExNot .ex}
+<a class="ex_number" href="#ExNot"></a> Shows a message box if a file does
+[not]{.underline} exist.</p>
+<pre class="codehilite"><code>if not FileExist(&quot;C:\Temp\FlagFile.txt&quot;)
+    MsgBox &quot;The target file does not exist.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExAttr .ex}
+<a class="ex_number" href="#ExAttr"></a> Demonstrates how to check a file for a specific
+attribute.</p>
+<pre class="codehilite"><code>if InStr(FileExist(&quot;C:\My File.txt&quot;), &quot;H&quot;)
+    MsgBox &quot;The file is hidden.&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/FileExist.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#fileexist">FileExist</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

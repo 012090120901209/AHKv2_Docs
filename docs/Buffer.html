@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffer Object | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="``` NoIndent">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Buffer</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="buffer-object">Buffer Object</h1>
+<pre class="codehilite"><code class="language-NoIndent">class Buffer extends Object
+</code></pre>
+
+<p>Encapsulates a block of memory for use with advanced techniques such as
+DllCall, structures, StrPut and raw file I/O.</p>
+<p>Buffer objects are typically created by calling <a href="#Call">Buffer()</a>, but
+can also be returned by <a href="FileRead.htm">FileRead</a> with the \"RAW\"
+option.</p>
+<pre class="codehilite"><code>BufferObj := Buffer(ByteCount)
+</code></pre>
+
+<p><a href="ClipboardAll.htm">ClipboardAll</a> returns a sub-type of Buffer, also
+named ClipboardAll.</p>
+<pre class="codehilite"><code>class ClipboardAll extends Buffer
+</code></pre>
+
+<p>\"BufferObj\" is used below as a placeholder for any Buffer object, as
+\"Buffer\" is the class itself.</p>
+<p>In addition to the methods and property inherited from
+<a href="Object.htm">Object</a>, Buffer objects have the following predefined
+properties.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#like">Buffer-like Objects</a></li>
+<li><a href="#StaticMethods">Static Methods</a>:<ul>
+<li><a href="#Call">Call</a>: Creates a new Buffer object.</li>
+</ul>
+</li>
+<li><a href="#Methods">Methods</a>:<ul>
+<li><a href="#__New">__New</a>: Allocates or reallocates the buffer and
+    optionally fills it.</li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a>:<ul>
+<li><a href="#Ptr">Ptr</a>: Retrieves the buffer\'s current memory address.</li>
+<li><a href="#Size">Size</a>: Retrieves or sets the buffer\'s size, in bytes.</li>
+</ul>
+</li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+<h2 id="like">Buffer-like Objects</h2>
+<p>Some built-in functions accept a Buffer object in place of an address -
+see the <a href="#Related">Related</a> section for links. These functions also
+accept any other object which has <a href="#Ptr">Ptr</a> and <a href="#Size">Size</a>
+properties, but are optimized for the native Buffer object.</p>
+<p>In most cases, passing a Buffer object is safer than passing an address,
+as the function can read the <a href="#Size">buffer size</a> to ensure that it does
+not attempt to access any memory location outside of the buffer. One
+exception is that <a href="DllCall.htm">DllCall</a> calls functions outside of the
+program; in those cases, it may be necessary to explicitly pass the
+<a href="#Size">buffer size</a> to the function.</p>
+<h2 id="StaticMethods">Static Methods</h2>
+<p>::: {#Call .methodShort}</p>
+<h3 id="call">Call</h3>
+<p>Creates a new Buffer object.</p>
+<pre class="codehilite"><code class="language-Syntax">BufferObj := Buffer(ByteCount, FillByte)
+BufferObj := Buffer.Call(ByteCount, FillByte)
+</code></pre>
+
+<h4 id="Call_Parameters">Parameters</h4>
+<dl>
+<dt>ByteCount</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The number of bytes to allocate. Corresponds to
+<a href="#Size">Buffer.Size</a>.</p>
+<p>If omitted, the Buffer is created with a null (zero) <a href="#Ptr">Ptr</a> and
+zero <a href="#Size">Size</a>.</p>
+</dd>
+<dt>FillByte</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>Specify a number between 0 and 255 to set each byte in the buffer to
+that number.</p>
+<p>This should generally be omitted in cases where the buffer will be
+written into without first being read, as it has a time-cost
+proportionate to the number of bytes. If omitted, the memory of the
+buffer is not initialized; the value of each byte is arbitrary.</p>
+</dd>
+</dl>
+<h4 id="Call_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>This method or function returns a Buffer object.</p>
+<h4 id="Call_Remarks">Remarks</h4>
+<p>A <a href="Error.htm#MemoryError">MemoryError</a> is thrown if the memory could not
+be allocated, such as if <em>ByteCount</em> is unexpectedly large or the system
+is low on virtual memory.</p>
+<p>Parameters are defined by <a href="#__New">__New</a>.
+:::</p>
+<h2 id="Methods">Methods</h2>
+<p>::: {#__New .methodShort}</p>
+<h3 id="__new">__New</h3>
+<p>Allocates or reallocates the buffer and optionally fills it.</p>
+<pre class="codehilite"><code class="language-Syntax">BufferObj.__New(ByteCount, FillByte)
+</code></pre>
+
+<p>This method exists to support <a href="#Call">Call</a>, and is not usually called
+directly. See <a href="../Objects.htm#Custom_NewDelete">Construction and
+Destruction</a>.</p>
+<p>Specify <em>ByteCount</em> to allocate, reallocate or free the buffer. This is
+equivalent to assigning <a href="#Size">Size</a>.</p>
+<p>Specify <em>FillByte</em> to fill the buffer with the given numeric byte value,
+overwriting any existing content.</p>
+<p>If both parameters are omitted, this method has no effect.
+:::</p>
+<h2 id="Properties">Properties</h2>
+<p>::: {#Ptr .methodShort}</p>
+<h3 id="ptr">Ptr</h3>
+<p>Retrieves the buffer\'s current memory address.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentPtr := BufferObj.Ptr
+</code></pre>
+
+<p><em>CurrentPtr</em> is an <a href="../Concepts.htm#numbers">integer</a> representing the
+buffer\'s current memory address. This address becomes invalid when the
+buffer is freed or reallocated. Invalid addresses must not be used. The
+buffer is not freed until the Buffer object\'s <a href="../Objects.htm#Reference_Counting">reference
+count</a> reaches zero, but it is
+reallocated when its <a href="#Size">Size</a> is changed.
+:::</p>
+<p>::: {#Size .methodShort}</p>
+<h3 id="size">Size</h3>
+<p>Retrieves or sets the buffer\'s size, in bytes.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentByteCount := BufferObj.Size
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">BufferObj.Size := NewByteCount
+</code></pre>
+
+<p><em>CurrentByteCount</em> and <em>NewByteCount</em> are an
+<a href="../Concepts.htm#numbers">integer</a> representing the buffer\'s size, in
+bytes. The buffer\'s address typically changes whenever its size is
+changed. If the size is decreased, the data within the buffer is
+truncated, but the remaining bytes are preserved. If the size is
+increased, all data is preserved and the values of any new bytes are
+arbitrary (they are not initialized, for performance reasons).</p>
+<p>A <a href="Error.htm#MemoryError">MemoryError</a> is thrown if the memory could not
+be allocated, such as if <em>NewByteCount</em> is unexpectedly large or the
+system is low on virtual memory.</p>
+<p><em>CurrentByteCount</em> is always the exact value it was given either by
+<a href="#__New">__New</a> or by a previous assignment.
+:::</p>
+<h2 id="Related">Related</h2>
+<p><a href="DllCall.htm">DllCall</a>, <a href="NumPut.htm">NumPut</a>, <a href="NumGet.htm">NumGet</a>,
+<a href="StrPut.htm">StrPut</a>, <a href="StrGet.htm">StrGet</a>,
+<a href="File.htm#RawRead">File.RawRead</a>, <a href="File.htm#RawWrite">File.RawWrite</a>,
+<a href="ClipboardAll.htm">ClipboardAll</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExString .ex}
+<a class="ex_number" href="#ExString"></a> Uses a Buffer to receive a string from an
+external function via <a href="DllCall.htm">DllCall</a>.</p>
+<pre class="codehilite"><code>max_chars := 11
+
+; Allocate a buffer for use with the Unicode version of wsprintf.
+bufW := Buffer(max_chars*2)
+
+; Print a UTF-16 string into the buffer with wsprintfW().
+DllCall(&quot;wsprintfW&quot;, &quot;Ptr&quot;, bufW, &quot;Str&quot;, &quot;0x%08x&quot;, &quot;UInt&quot;, 4919, &quot;CDecl&quot;)
+
+; Retrieve the string from bufW and show it.
+MsgBox StrGet(bufW, &quot;UTF-16&quot;)  ; Or just StrGet(bufW).
+
+; Allocate a buffer for use with the ANSI version of wsprintf.
+bufA := Buffer(max_chars)
+
+; Print an ANSI string into the buffer with wsprintfA().
+DllCall(&quot;wsprintfA&quot;, &quot;Ptr&quot;, bufA, &quot;AStr&quot;, &quot;0x%08x&quot;, &quot;UInt&quot;, 4919, &quot;CDecl&quot;)
+
+; Retrieve the string from bufA (converted to the native format), and show it.
+MsgBox StrGet(bufA, &quot;CP0&quot;)
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Buffer.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#buffer-object">Buffer Object</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#like">Buffer-like Objects</a></li>
+<li><a href="#StaticMethods">Static Methods</a><ul>
+<li><a href="#call">Call</a><ul>
+<li><a href="#Call_Parameters">Parameters</a></li>
+<li><a href="#Call_Return_Value">Return Value</a></li>
+<li><a href="#Call_Remarks">Remarks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Methods">Methods</a><ul>
+<li><a href="#__new">__New</a></li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a><ul>
+<li><a href="#ptr">Ptr</a></li>
+<li><a href="#size">Size</a></li>
+</ul>
+</li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

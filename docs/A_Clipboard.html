@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A_Clipboard | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="*A_Clipboard* is a [built-in">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>A_Clipboard</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="a_clipboard">A_Clipboard</h1>
+<p><em>A_Clipboard</em> is a <a href="../Concepts.htm#built-in-variables">built-in
+variable</a> that reflects the current
+contents of the Windows clipboard if those contents can be expressed as
+text.</p>
+<p>Each line of text on <em>A_Clipboard</em> typically ends with carriage return
+and linefeed (CR+LF), which can be expressed in the script as
+<code>`r`n</code>. Files (such as those copied from an open Explorer window via
+[Ctrl]{.kbd}+[C]{.kbd}) are considered to be text: They are
+automatically converted to their filenames (with full path) whenever
+<em>A_Clipboard</em> is referenced in the script. To extract the files one by
+one, follow this example:</p>
+<pre class="codehilite"><code>Loop Parse A_Clipboard, &quot;`n&quot;, &quot;`r&quot;
+{
+    Result := MsgBox(&quot;File number &quot; A_Index &quot; is &quot; A_LoopField &quot;.`n`nContinue?&quot;,, 4)
+    if Result = &quot;No&quot;
+        break
+}
+</code></pre>
+
+<p>To arrange the filenames in alphabetical order, use the <a href="Sort.htm">Sort</a>
+function. To write the filenames on the clipboard to a file, use
+<a href="FileAppend.htm"><code>FileAppend</code></a><code>A_Clipboard "`r`n", "C:\My File.txt"</code>.
+To change how long the script will keep trying to open the clipboard --
+such as when it is in use by another application -- use
+<a href="_ClipboardTimeout.htm">#ClipboardTimeout</a>.</p>
+<p><a href="ClipWait.htm">ClipWait</a> may be used to detect when the clipboard
+contains data (optionally including non-text data):</p>
+<pre class="codehilite"><code>A_Clipboard := &quot;&quot;  ; Start off empty to allow ClipWait to detect when the text has arrived.
+Send &quot;^c&quot;
+ClipWait  ; Wait for the clipboard to contain text.
+MsgBox &quot;Control-C copied the following contents to the clipboard:`n`n&quot; A_Clipboard
+</code></pre>
+
+<h2 id="Related">Related</h2>
+<ul>
+<li><a href="ClipboardAll.htm">ClipboardAll</a>: For operating upon everything on
+    the clipboard (such as pictures and formatting).</li>
+<li><a href="OnClipboardChange.htm">OnClipboardChange</a>: For detecting and
+    responding to clipboard changes.</li>
+</ul>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExNew .ex}
+<a class="ex_number" href="#ExNew"></a> Gives the clipboard entirely new contents.</p>
+<pre class="codehilite"><code>A_Clipboard := &quot;my text&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExEmpty .ex}
+<a class="ex_number" href="#ExEmpty"></a> Empties the clipboard.</p>
+<pre class="codehilite"><code>A_Clipboard := &quot;&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExPlain .ex}
+<a class="ex_number" href="#ExPlain"></a> Converts any copied files, HTML, or other
+formatted text to plain text.</p>
+<pre class="codehilite"><code>A_Clipboard := A_Clipboard
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExAppend .ex}
+<a class="ex_number" href="#ExAppend"></a> Appends some text to the clipboard.</p>
+<pre class="codehilite"><code>A_Clipboard .= &quot; Text to append.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExReplace .ex}
+<a class="ex_number" href="#ExReplace"></a> Replaces all occurrences of ABC with DEF
+(also converts the clipboard to plain text).</p>
+<pre class="codehilite"><code>A_Clipboard := StrReplace(A_Clipboard, &quot;ABC&quot;, &quot;DEF&quot;)
+</code></pre>
+
+<p>:::</p>
+<p><strong>Clipboard utilities written in AutoHotkey v1:</strong></p>
+<ul>
+<li><a href="https://www.autohotkey.com/board/topic/2515-">Deluxe Clipboard</a>:
+    Provides unlimited number of private, named clipboards to Copy, Cut,
+    Paste, Append or CutAppend of selected text.</li>
+<li><a href="https://www.autohotkey.com/board/topic/4567-">ClipStep</a>: Control
+    multiple clipboards using only the keyboard\'s
+    [Ctrl]{.kbd}-[X]{.kbd}-[C]{.kbd}-[V]{.kbd}.</li>
+</ul>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/A_Clipboard.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#a_clipboard">A_Clipboard</a><ul>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

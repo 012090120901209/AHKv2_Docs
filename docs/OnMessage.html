@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnMessage | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Registers a [function](../Functions.htm) to be called automatically">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>OnMessage</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="onmessage">OnMessage</h1>
+<p>Registers a <a href="../Functions.htm">function</a> to be called automatically
+whenever the script receives the specified message.</p>
+<pre class="codehilite"><code class="language-Syntax">OnMessage MsgNumber, Callback , MaxThreads
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>MsgNumber</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The number of the message to monitor or query, which should be
+between 0 and 4294967295 (0xFFFFFFFF). If you do not wish to monitor
+a <a href="../misc/SendMessageList.htm">system message</a> (that is, one below
+0x0400), it is best to choose a number greater than 4096 (0x1000) to
+the extent you have a choice. This reduces the chance of interfering
+with messages used internally by current and future versions of
+AutoHotkey.</p>
+</dd>
+<dt>Callback</dt>
+<dd>
+<p>Type: <a href="../misc/Functor.htm">Function Object</a></p>
+<p>The function to call.</p>
+<p>The callback accepts four parameters and can be
+<a href="../Functions.htm#intro">defined</a> as follows:</p>
+<p><code>NoIndent
+MyCallback(wParam, lParam, msg, hwnd) { ...</code></p>
+<p>Although the names you give the parameters do not matter, the
+following values are sequentially assigned to them:</p>
+<ol>
+<li>The message\'s WPARAM value.</li>
+<li>The message\'s LPARAM value.</li>
+<li>The message number, which is useful in cases where a callback
+    monitors more than one message.</li>
+<li>The HWND (unique ID) of the window or control to which the
+    message was sent. The HWND can be used directly in a <a href="../misc/WinTitle.htm#ahk_id">WinTitle
+    parameter</a>.</li>
+</ol>
+<p>You can omit one or more parameters from the end of the callback\'s
+parameter list if the corresponding information is not needed, but
+in this case an asterisk must be specified as the final parameter,
+e.g. <code>MyCallback(Param1, *)</code>.</p>
+<p>WPARAM and LPARAM are unsigned 32-bit integers (from 0 to 2^32^-1)
+or signed 64-bit integers (from -2^63^ to 2^63^-1) depending on
+whether the exe running the script is 32-bit or 64-bit. For 32-bit
+scripts, if an incoming parameter is intended to be a signed
+integer, any negative numbers can be revealed by following this
+example:</p>
+<pre class="codehilite"><code>if (A_PtrSize = 4 &amp;&amp; wParam &gt; 0x7FFFFFFF)  ; Checking A_PtrSize ensures the script is 32-bit.
+    wParam := -(~wParam) - 1
+</code></pre>
+
+</dd>
+<dt>MaxThreads</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 1, meaning the callback is limited to one
+<a href="../misc/Threads.htm">thread</a> at a time. This is usually best
+because otherwise, the script would process messages out of
+chronological order whenever the callback interrupts itself.
+Therefore, as an alternative to <em>MaxThreads</em>, consider using
+<em>Critical</em> as described <a href="#Critical">below</a>.</p>
+<p>If the callback directly or indirectly causes the message to be sent
+again while the callback is still running, it is necessary to
+specify a <em>MaxThreads</em> value greater than 1 or less than -1 to allow
+the callback to be called for the new message (if desired). Messages
+sent (not posted) by the script\'s own process to itself cannot be
+delayed or buffered.</p>
+<p>Specify 0 to unregister the previously registered callback
+identified by <em>Callback</em>.</p>
+<p>By default, when multiple callbacks are registered for a single
+<em>MsgNumber</em>, they are called in the order that they were registered.
+To register a callback to be called before any previously registered
+callbacks, specify a negative value for <em>MaxThreads</em>. For example,
+<code>OnMessage Msg, Fn, -2</code> registers <code>Fn</code> to be called before any other
+callbacks previously registered for <em>Msg</em>, and allows <em>Fn</em> a maximum
+of 2 threads. However, if the callback is already registered, the
+order will not change unless it is unregistered and then
+re-registered.</p>
+</dd>
+</dl>
+<h2 id="Usage">Usage</h2>
+<p>Any number of callbacks can monitor a given <em>MsgNumber</em>.</p>
+<p>Either of these two lines registers a callback to be called
+[after]{.underline} any previously registered callbacks:</p>
+<pre class="codehilite"><code>OnMessage MsgNumber, Callback     ; Option 1 - omit MaxThreads
+OnMessage MsgNumber, Callback, 1  ; Option 2 - specify MaxThreads 1
+</code></pre>
+
+<p>This registers a callback to be called [before]{.underline} any
+previously registered callbacks:</p>
+<pre class="codehilite"><code>OnMessage MsgNumber, Callback, -1
+</code></pre>
+
+<p>To unregister a callback, specify 0 for <em>MaxThreads</em>:</p>
+<pre class="codehilite"><code>OnMessage MsgNumber, Callback, 0
+</code></pre>
+
+<h2 id="Additional_Information_Available_to_the_Callback">Additional Information Available to the Callback</h2>
+<p>In addition to the received parameters mentioned above, the callback may
+also consult the built-in variable <strong>A_EventInfo</strong>, which contains 0 if
+the message was sent via SendMessage. If sent via PostMessage, it
+contains the <a href="../Variables.htm#TickCount">tick-count time</a> the message
+was posted.</p>
+<p>A callback\'s <a href="../misc/WinTitle.htm#LastFoundWindow">last found window</a>
+starts off as the parent window to which the message was sent (even if
+it was sent to a control). If the window is hidden but not a GUI window
+(such as the <a href="../Program.htm#main-window">script\'s main window</a>), turn
+on <a href="DetectHiddenWindows.htm">DetectHiddenWindows</a> before using it. For
+example:</p>
+<pre class="codehilite"><code>DetectHiddenWindows True
+MsgParentWindow := WinExist()  ; This stores the unique ID of the window to which the message was sent.
+</code></pre>
+
+<h2 id="What_the_Callback_Should_Return">What the Callback Should Return</h2>
+<p>If a callback uses <a href="Return.htm">Return</a> without any parameters, or it
+specifies a blank value such as \"\" (or it never uses Return at all),
+the incoming message goes on to be processed normally when the callback
+finishes. The same thing happens if the callback <a href="Exit.htm">exits</a> or
+causes a runtime error such as <a href="Run.htm">running</a> a nonexistent file. By
+contrast, returning an integer causes it to be sent immediately as a
+reply; that is, the program does not process the message any further.
+For example, a callback monitoring WM_LBUTTONDOWN (0x0201) may return an
+integer to prevent the target window from being notified that a mouse
+click has occurred. In many cases (such as a message arriving via
+<a href="PostMessage.htm">PostMessage</a>), it does not matter which integer is
+returned; but if in doubt, 0 is usually safest.</p>
+<p>The range of valid return values depends on whether the exe running the
+script is 32-bit or 64-bit. Non-empty return values must be between
+-2^31^ and 2^32^-1 for 32-bit scripts
+(<a href="../Variables.htm#PtrSize"><code>A_PtrSize</code></a><code>= 4</code>) and between -2^63^ and
+2^63^-1 for 64-bit scripts
+(<a href="../Variables.htm#PtrSize"><code>A_PtrSize</code></a><code>= 8</code>).</p>
+<p>If there are multiple callbacks monitoring a given message number, they
+are called one by one until one returns a non-empty value.</p>
+<h2 id="Remarks">General Remarks</h2>
+<p>Unlike a normal function-call, the arrival of a monitored message calls
+the callback as a new <a href="../misc/Threads.htm">thread</a>. Because of this,
+the callback starts off fresh with the default values for settings such
+as <a href="SendMode.htm">SendMode</a> and
+<a href="DetectHiddenWindows.htm">DetectHiddenWindows</a>. These defaults can be
+changed during <a href="../Scripts.htm#auto">script startup</a>.</p>
+<p>Messages sent to a control (rather than being posted) are not monitored
+because the system routes them directly to the control behind the
+scenes. This is seldom an issue for system-generated messages because
+most of them are posted.</p>
+<p>If the script is intended to stay running in an idle state to monitor
+for incoming messages, it may be necessary to call the
+<a href="Persistent.htm">Persistent</a> function to prevent the script from
+exiting. OnMessage does not automatically make the script persistent, as
+it is sometimes unnecessary or undesired. For instance, when OnMessage
+is used to monitor input to a GUI window (such as in the <a href="#ExLButtonDown">WM_LBUTTONDOWN
+example</a>), it is often more appropriate to allow the
+script to exit automatically when the last GUI window is closed.</p>
+<p>If a message arrives while its callback is still running due to a
+previous arrival of the same message, by default the callback will not
+be called again; instead, the message will be treated as unmonitored. If
+this is undesirable, there are multiple ways it can be avoided:</p>
+<ul>
+<li>If the message is posted rather than sent and has a number greater
+    than 0x0311, it can be buffered until its callback completes by
+    specifying <a href="Critical.htm">Critical</a> as the first line of the
+    callback. Alternatively, <a href="Thread.htm#Interrupt">Thread Interrupt</a>
+    can achieve the same effect as long as it lasts long enough for the
+    callback to finish.</li>
+<li>Using <a href="Critical.htm">Critical</a> to increase the <a href="Critical.htm#Interval">message check
+    interval</a> gives the callback more time to
+    complete before any messages are dispatched. An interval greater
+    than 16 may be needed for reliability. Due to the granularity of the
+    system timer (usually 15.6 milliseconds), the default interval for
+    non-Critical threads (5 milliseconds) might appear to pass the
+    instant after the callback starts.</li>
+<li>Ensuring that the callback returns quickly reduces the risk that
+    messages will be missed due to <em>MaxThreads</em>. One way to do this is
+    to have it queue up a future thread by <a href="PostMessage.htm">posting</a> to
+    its own script a monitored message number greater than 0x0311. That
+    message\'s callback should use <a href="Critical.htm">Critical</a> as its first
+    line to ensure that its messages are buffered. Alternatively, a
+    <a href="SetTimer.htm">timer</a> can be used to queue up a future thread.</li>
+<li>Specifying a higher value for <a href="#MaxThreads"><em>MaxThreads</em></a> allows the
+    callback to be interrupted to process the newly-received message.</li>
+</ul>
+<p>If a monitored message that is numerically greater than 0x0311 is posted
+while the script is <a href="../misc/Threads.htm#Interrupt">uninterruptible</a>,
+the message is buffered; that is, its callback is not called until the
+script becomes interruptible. However, messages which are sent rather
+than posted cannot be buffered as they must provide a return value.
+Posted messages also might not be buffered when a modal message loop is
+running, such as for a system dialog, ListView drag-drop operation or
+menu.</p>
+<p>If a monitored message arrives and is not buffered, its callback is
+called immediately even if the thread is
+<a href="../misc/Threads.htm#Interrupt">uninterruptible</a> when the message is
+received.</p>
+<p>The <a href="../misc/Threads.htm">priority</a> of OnMessage threads is always 0.
+Consequently, no messages are monitored or buffered when the current
+thread\'s priority is higher than 0.</p>
+<p>Caution should be used when monitoring system messages (those below
+0x0400). For example, if a callback does not finish quickly, the
+response to the message might take longer than the system expects, which
+might cause side-effects. Unwanted behavior may also occur if a callback
+returns an integer to suppress further processing of a message, but the
+system expected different processing or a different response.</p>
+<p>When the script is displaying a system dialog such as
+<a href="MsgBox.htm">MsgBox</a>, any message posted to a control is not monitored.
+For example, if the script is displaying a message box and the user
+clicks a button in a GUI window, the WM_LBUTTONDOWN message is sent
+directly to the button without calling the callback.</p>
+<p>Although an external program may post messages directly to a script\'s
+thread via PostThreadMessage() or other API call, this is not
+recommended because the messages would be lost if the script is
+displaying a system window such as a <a href="MsgBox.htm">message box</a>. Instead,
+it is usually best to post or send the messages to the <a href="../Program.htm#main-window">script\'s main
+window</a> or one of its GUI windows.</p>
+<h2 id="Related">Related</h2>
+<p><a href="CallbackCreate.htm">CallbackCreate</a>, <a href="OnExit.htm">OnExit</a>,
+<a href="OnClipboardChange.htm">OnClipboardChange</a>,
+<a href="PostMessage.htm">PostMessage</a>, <a href="SendMessage.htm">SendMessage</a>,
+<a href="../Functions.htm">Functions</a>, <a href="../misc/SendMessageList.htm">Windows
+Messages</a>, <a href="../misc/Threads.htm">Threads</a>,
+<a href="Critical.htm">Critical</a>, <a href="DllCall.htm">DllCall</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExLButtonDown .ex}
+<a class="ex_number" href="#ExLButtonDown"></a> Monitors mouse clicks in a GUI window.
+Related topic: <a href="GuiOnEvent.htm#ContextMenu">ContextMenu</a> event</p>
+<pre class="codehilite"><code>MyGui := Gui(, &quot;Example Window&quot;)
+MyGui.Add(&quot;Text&quot;,, &quot;Click anywhere in this window.&quot;)
+MyGui.Add(&quot;Edit&quot;, &quot;w200&quot;)
+MyGui.Show()
+OnMessage 0x0201, WM_LBUTTONDOWN
+
+WM_LBUTTONDOWN(wParam, lParam, msg, hwnd)
+{
+    X := lParam &amp; 0xFFFF
+    Y := lParam &gt;&gt; 16
+    Control := &quot;&quot;
+    thisGui := GuiFromHwnd(hwnd)
+    thisGuiControl := GuiCtrlFromHwnd(hwnd)
+    if thisGuiControl
+    {
+        thisGui := thisGuiControl.Gui
+        Control := &quot;`n(in control &quot; . thisGuiControl.ClassNN . &quot;)&quot;
+    }
+    ToolTip &quot;You left-clicked in Gui window '&quot; thisGui.Title &quot;' at client coordinates &quot; X &quot;x&quot; Y &quot;.&quot; Control
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExShutdown .ex}
+<a class="ex_number" href="#ExShutdown"></a> Detects system shutdown/logoff and allows
+the user to abort it. On Windows Vista and later, the system displays a
+user interface showing which program is blocking shutdown/logoff and
+allowing the user to force shutdown/logoff. On older OSes, the script
+displays a confirmation prompt. Related topic: <a href="OnExit.htm">OnExit</a></p>
+<pre class="codehilite"><code>; The following DllCall is optional: it tells the OS to shut down this script first (prior to all other applications).
+DllCall(&quot;kernel32.dll\SetProcessShutdownParameters&quot;, &quot;UInt&quot;, 0x4FF, &quot;UInt&quot;, 0)
+OnMessage(0x0011, On_WM_QUERYENDSESSION)
+Persistent
+
+On_WM_QUERYENDSESSION(wParam, lParam, *)
+{
+    ENDSESSION_LOGOFF := 0x80000000
+    if (lParam &amp; ENDSESSION_LOGOFF)  ; User is logging off.
+        EventType := &quot;Logoff&quot;
+    else  ; System is either shutting down or restarting.
+        EventType := &quot;Shutdown&quot;
+    try
+    {
+        ; Set a prompt for the OS shutdown UI to display.  We do not display
+        ; our own confirmation prompt because we have only 5 seconds before
+        ; the OS displays the shutdown UI anyway.  Also, a program without
+        ; a visible window cannot block shutdown without providing a reason.
+        BlockShutdown(&quot;Example script attempting to prevent &quot; EventType &quot;.&quot;)
+        return false
+    }
+    catch
+    {
+        ; ShutdownBlockReasonCreate is not available, so this is probably
+        ; Windows XP, 2003 or 2000, where we can actually prevent shutdown.
+        Result := MsgBox(EventType &quot; in progress. Allow it?&quot;,, &quot;YN&quot;)
+        if (Result = &quot;Yes&quot;)
+            return true  ; Tell the OS to allow the shutdown/logoff to continue.
+        else
+            return false  ; Tell the OS to abort the shutdown/logoff.
+    }
+}
+
+BlockShutdown(Reason)
+{
+    ; If your script has a visible GUI, use it instead of A_ScriptHwnd.
+    DllCall(&quot;ShutdownBlockReasonCreate&quot;, &quot;ptr&quot;, A_ScriptHwnd, &quot;wstr&quot;, Reason)
+    OnExit StopBlockingShutdown
+}
+
+StopBlockingShutdown(*)
+{
+    OnExit StopBlockingShutdown, 0
+    DllCall(&quot;ShutdownBlockReasonDestroy&quot;, &quot;ptr&quot;, A_ScriptHwnd)
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExCustom .ex}
+<a class="ex_number" href="#ExCustom"></a> Receives a custom message and up to two
+numbers from some other script or program (to send strings rather than
+numbers, see the example after this one).</p>
+<pre class="codehilite"><code>OnMessage 0x5555, MsgMonitor
+Persistent
+
+MsgMonitor(wParam, lParam, msg, *)
+{
+    ; Since returning quickly is often important, it is better to use ToolTip than
+    ; something like MsgBox that would prevent the callback from finishing:
+    ToolTip &quot;Message &quot; msg &quot; arrived:`nWPARAM: &quot; wParam &quot;`nLPARAM: &quot; lParam
+}
+
+; The following could be used inside some other script to run the callback inside the above script:
+SetTitleMatchMode 2
+DetectHiddenWindows True
+if WinExist(&quot;Name of Receiving Script.ahk ahk_class AutoHotkey&quot;)
+    PostMessage 0x5555, 11, 22  ; The message is sent to the &quot;last found window&quot; due to WinExist above.
+DetectHiddenWindows False  ; Must not be turned off until after PostMessage.
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExSendString .ex}
+<a class="ex_number" href="#ExSendString"></a> Sends a string of any length from one
+script to another. To use this, save and run both of the following
+scripts then press [Win]{.kbd}+[Space]{.kbd} to show an input box that
+will prompt you to type in a string. Both scripts must use the same
+<a href="../Concepts.htm#native-encoding">native encoding</a>.</p>
+<p>Save the following script as <strong>Receiver.ahk</strong> then launch it.</p>
+<pre class="codehilite"><code>#SingleInstance
+OnMessage 0x004A, Receive_WM_COPYDATA  ; 0x004A is WM_COPYDATA
+Persistent
+
+Receive_WM_COPYDATA(wParam, lParam, msg, hwnd)
+{
+    StringAddress := NumGet(lParam, 2*A_PtrSize, &quot;Ptr&quot;)  ; Retrieves the CopyDataStruct's lpData member.
+    CopyOfData := StrGet(StringAddress)  ; Copy the string out of the structure.
+    ; Show it with ToolTip vs. MsgBox so we can return in a timely fashion:
+    ToolTip A_ScriptName &quot;`nReceived the following string:`n&quot; CopyOfData
+    return true  ; Returning 1 (true) is the traditional way to acknowledge this message.
+}
+</code></pre>
+
+<p>Save the following script as <strong>Sender.ahk</strong> then launch it. After that,
+press the [Win]{.kbd}+[Space]{.kbd} hotkey.</p>
+<pre class="codehilite"><code>TargetScriptTitle := &quot;Receiver.ahk ahk_class AutoHotkey&quot;
+
+#space::  ; Win+Space hotkey. Press it to show an input box for entry of a message string.
+{
+    ib := InputBox(&quot;Enter some text to Send:&quot;, &quot;Send text via WM_COPYDATA&quot;)
+    if ib.Result = &quot;Cancel&quot;  ; User pressed the Cancel button.
+        return
+    result := Send_WM_COPYDATA(ib.Value, TargetScriptTitle)
+    if result = &quot;&quot;
+        MsgBox &quot;SendMessage failed or timed out. Does the following WinTitle exist?:`n&quot; TargetScriptTitle
+    else if (result = 0)
+        MsgBox &quot;Message sent but the target window responded with 0, which may mean it ignored it.&quot;
+}
+
+Send_WM_COPYDATA(StringToSend, TargetScriptTitle)
+; This function sends the specified string to the specified window and returns the reply.
+; The reply is 1 if the target window processed the message, or 0 if it ignored it.
+{
+    CopyDataStruct := Buffer(3*A_PtrSize)  ; Set up the structure's memory area.
+    ; First set the structure's cbData member to the size of the string, including its zero terminator:
+    SizeInBytes := (StrLen(StringToSend) + 1) * 2
+    NumPut( &quot;Ptr&quot;, SizeInBytes  ; OS requires that this be done.
+          , &quot;Ptr&quot;, StrPtr(StringToSend)  ; Set lpData to point to the string itself.
+          , CopyDataStruct, A_PtrSize)
+    Prev_DetectHiddenWindows := A_DetectHiddenWindows
+    Prev_TitleMatchMode := A_TitleMatchMode
+    DetectHiddenWindows True
+    SetTitleMatchMode 2
+    TimeOutTime := 4000  ; Optional. Milliseconds to wait for response from receiver.ahk. Default is 5000
+    ; Must use SendMessage not PostMessage.
+    RetValue := SendMessage(0x004A, 0, CopyDataStruct,, TargetScriptTitle,,,, TimeOutTime) ; 0x004A is WM_COPYDATA.
+    DetectHiddenWindows Prev_DetectHiddenWindows  ; Restore original setting for the caller.
+    SetTitleMatchMode Prev_TitleMatchMode         ; Same.
+    return RetValue  ; Return SendMessage's reply back to our caller.
+}
+</code></pre>
+
+<p>:::</p>
+<p>See the <a href="../scripts/index.htm#WinLIRC">WinLIRC client script</a> for a
+demonstration of how to use OnMessage to receive notification when data
+has arrived on a network connection.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/OnMessage.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#onmessage">OnMessage</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Usage">Usage</a></li>
+<li><a href="#Additional_Information_Available_to_the_Callback">Additional Information Available to the Callback</a></li>
+<li><a href="#What_the_Callback_Should_Return">What the Callback Should Return</a></li>
+<li><a href="#Remarks">General Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

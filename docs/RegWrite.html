@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegWrite | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Writes a value to the registry.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>RegWrite</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="regwrite">RegWrite</h1>
+<p>Writes a value to the registry.</p>
+<pre class="codehilite"><code class="language-Syntax">RegWrite Value, ValueType, KeyName , ValueName
+RegWrite Value , ValueType, , ValueName
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Value</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The value to be written. Long text values can be broken up into
+several shorter lines by means of a <a href="../Scripts.htm#continuation">continuation
+section</a>, which might improve
+readability and maintainability.</p>
+</dd>
+<dt>ValueType</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Must be either REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD, or
+REG_BINARY.</p>
+<p><em>ValueType</em> can be omitted only if <em>KeyName</em> is omitted and the
+current <a href="LoopReg.htm">registry loop</a> item is a value, as noted
+below.</p>
+</dd>
+<dt>KeyName</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The full name of the registry key, e.g.
+<code>"HKLM\Software\SomeApplication"</code>.</p>
+<p>This must start with HKEY_LOCAL_MACHINE (or HKLM), HKEY_USERS (or
+HKU), HKEY_CURRENT_USER (or HKCU), HKEY_CLASSES_ROOT (or HKCR), or
+HKEY_CURRENT_CONFIG (or HKCC).</p>
+<p>To access a <a href="LoopReg.htm#remote">remote registry</a>, prepend the
+computer name and a backslash, e.g. <code>"\\workstation01\HKLM"</code>.</p>
+<p><em>KeyName</em> can be omitted only if a <a href="LoopReg.htm">registry loop</a> is
+running, in which case it defaults to the key of the current loop
+item. If the item is a subkey, the full name of that subkey is used
+by default. If the item is a value, <em>ValueType</em> and <em>ValueName</em>
+default to the type and name of that value, but can be overridden.</p>
+</dd>
+<dt>ValueName</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the key\'s default value will be used (except
+as noted above), which is the value displayed as \"(Default)\" by
+RegEdit. Otherwise, specify the name of the value that will be
+written to.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An <a href="Error.htm#OSError">OSError</a> is thrown on failure.</p>
+<p><a href="../Variables.htm#LastError">A_LastError</a> is set to the result of the
+operating system\'s GetLastError() function.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>If <em>KeyName</em> specifies a subkey which does not exist, RegWrite attempts
+to create it (along with its ancestors, if necessary). Although RegWrite
+can write directly into a root key, some operating systems might refuse
+to write into HKEY_CURRENT_USER\'s top level.</p>
+<p>To create a key without writing any values to it, use
+<a href="RegCreateKey.htm">RegCreateKey</a>.</p>
+<p>If <em>ValueType</em> is REG_DWORD, <em>Value</em> should be between -2147483648 and
+4294967295 (0xFFFFFFFF). In the registry, REG_DWORD values are always
+expressed as positive decimal numbers. To read it as a negative number
+with means such as <a href="RegRead.htm">RegRead</a>, convert it to a signed 32-bit
+integer by using <code>OutputVar := OutputVar &lt;&lt; 32 &gt;&gt; 32</code> or similar.</p>
+<p>When writing a REG_BINARY key, use a string of hex characters, e.g. the
+REG_BINARY value of 01,a9,ff,77 can be written by using the string
+01A9FF77.</p>
+<p>When writing a REG_MULTI_SZ key, you must separate each component from
+the next with a linefeed character (`n). The last component may
+optionally end with a linefeed as well. No blank components are allowed.
+In other words, do not specify two linefeeds in a row (`n`n) because
+that will result in a shorter-than-expected value being written to the
+registry.</p>
+<p>To retrieve and operate upon multiple registry keys or values, consider
+using a <a href="LoopReg.htm">registry loop</a>.</p>
+<p>For details about how to access the registry of a remote computer, see
+the remarks in <a href="LoopReg.htm#remote">registry loop</a>.</p>
+<p>To read and write entries from the 64-bit sections of the registry in a
+32-bit script or vice versa, use <a href="SetRegView.htm">SetRegView</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="RegCreateKey.htm">RegCreateKey</a>, <a href="RegDelete.htm">RegDelete</a>,
+<a href="RegDeleteKey.htm">RegDeleteKey</a>, <a href="RegRead.htm">RegRead</a>, <a href="LoopReg.htm">registry
+loop</a>, <a href="SetRegView.htm">SetRegView</a>,
+<a href="IniWrite.htm">IniWrite</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Writes a string to the registry.</p>
+<pre class="codehilite"><code>RegWrite &quot;Test Value&quot;, &quot;REG_SZ&quot;, &quot;HKEY_LOCAL_MACHINE\SOFTWARE\TestKey&quot;, &quot;MyValueName&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExBinary .ex}
+<a class="ex_number" href="#ExBinary"></a> Writes binary data to the registry.</p>
+<pre class="codehilite"><code>RegWrite &quot;01A9FF77&quot;, &quot;REG_BINARY&quot;, &quot;HKEY_CURRENT_USER\Software\TEST_APP&quot;, &quot;TEST_NAME&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExMulti .ex}
+<a class="ex_number" href="#ExMulti"></a> Writes a multi-line string to the registry.</p>
+<pre class="codehilite"><code>RegWrite &quot;Line1`nLine2&quot;, &quot;REG_MULTI_SZ&quot;, &quot;HKEY_CURRENT_USER\Software\TEST_APP&quot;, &quot;TEST_NAME&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/RegWrite.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#regwrite">RegWrite</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

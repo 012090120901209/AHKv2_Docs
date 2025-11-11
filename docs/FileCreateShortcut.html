@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileCreateShortcut | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Creates a shortcut (.lnk) file.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>FileCreateShortcut</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="filecreateshortcut">FileCreateShortcut</h1>
+<p>Creates a shortcut (.lnk) file.</p>
+<pre class="codehilite"><code class="language-Syntax">FileCreateShortcut Target, LinkFile , WorkingDir, Args, Description, IconFile, ShortcutKey, IconNumber, RunState
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Target</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Name of the file that the shortcut refers to, which should include
+an absolute path unless the file is integrated with the system (e.g.
+Notepad.exe). The file does not have to exist at the time the
+shortcut is created; however, if it does not, some systems might
+<a href="https://devblogs.microsoft.com/oldnewthing/20180509-00/?p=98715">alter the path in unexpected
+ways</a>.</p>
+</dd>
+<dt>LinkFile</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Name of the shortcut file to be created, which is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified. Be sure to include the <strong>.lnk</strong> extension. The
+destination directory must already exist. If the file already
+exists, it will be overwritten.</p>
+</dd>
+<dt>WorkingDir</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, <em>LinkFile</em> will have a blank \"Start in\" field
+and the system will provide a default working directory when the
+shortcut is launched. Otherwise, specify the directory that will
+become <em>Target</em>\'s current working directory when the shortcut is
+launched.</p>
+</dd>
+<dt>Args</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, <em>Target</em> will be launched without parameters.
+Otherwise, specify the parameters that will be passed to <em>Target</em>
+when it is launched. Separate parameters with spaces. If a parameter
+contains spaces, enclose it in double quotes.</p>
+</dd>
+<dt>Description</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, <em>LinkFile</em> will have no description. Otherwise,
+specify comments that describe the shortcut (used by the OS to
+display a tooltip, etc.)</p>
+</dd>
+<dt>IconFile</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, <em>LinkFile</em> will have <em>Target</em>\'s icon.
+Otherwise, specify the full path and name of the icon to be
+displayed for <em>LinkFile</em>. It must either be an .ICO file or the very
+first icon of an EXE or DLL file.</p>
+</dd>
+<dt>ShortcutKey</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, <em>LinkFile</em> will have no shortcut key.
+Otherwise, specify a single letter, number, or the name of a single
+key from the <a href="../KeyList.htm">key list</a> (mouse buttons and other
+non-standard keys might not be supported). Do [not]{.underline}
+include modifier symbols. Currently, all shortcut keys are created
+as [Ctrl]{.kbd}+[Alt]{.kbd} shortcuts. For example, if the letter B
+is specified for this parameter, the shortcut key will be
+[Ctrl]{.kbd}+[Alt]{.kbd}+[B]{.kbd}.</p>
+</dd>
+<dt>IconNumber</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 1. Otherwise, specify the number of the
+icon to be used in <em>IconFile</em>. For example, 2 is the second icon.</p>
+</dd>
+<dt>RunState</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 1. Otherwise, specify one of the
+following digits to launch <em>Target</em> minimized or maximized:</p>
+<ul>
+<li>1 = Normal</li>
+<li>3 = Maximized</li>
+<li>7 = Minimized</li>
+</ul>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An exception is thrown on failure.</p>
+<h2 id="Remarks">Remarks</h2>
+<p><em>Target</em> might not need to include a path if the target file resides in
+one of the folders listed in the system\'s PATH <a href="../Concepts.htm#environment-variables">environment
+variable</a>.</p>
+<p>The shortcut key (<em>ShortcutKey</em>) of a newly created shortcut will have
+no effect unless the shortcut file resides on the desktop or somewhere
+in the Start Menu. If the shortcut key you choose is already in use,
+your new shortcut takes precedence.</p>
+<p>An alternative way to create a shortcut to a URL is the following
+example, which creates a special URL shortcut. Change the first two
+parameters to suit your preferences:</p>
+<pre class="codehilite"><code>IniWrite &quot;https://www.google.com&quot;, &quot;C:\My Shortcut.url&quot;, &quot;InternetShortcut&quot;, &quot;URL&quot;
+</code></pre>
+
+<p>The following may be optionally added to assign an icon to the above:</p>
+<pre class="codehilite"><code>IniWrite &lt;IconFile&gt;, &quot;C:\My Shortcut.url&quot;, &quot;InternetShortcut&quot;, &quot;IconFile&quot;
+IniWrite 0, &quot;C:\My Shortcut.url&quot;, &quot;InternetShortcut&quot;, &quot;IconIndex&quot;
+</code></pre>
+
+<p>In the above, replace <code>0</code> with the index of the icon (0 is used for the
+first icon) and replace <code>&lt;IconFile&gt;</code> with a URL, EXE, DLL, or ICO file.
+Examples: <code>"C:\Icons.dll"</code>, <code>"C:\App.exe"</code>,
+<code>"https://www.somedomain.com/ShortcutIcon.ico"</code></p>
+<p>The operating system will treat a .URL file created by the above as a
+real shortcut even though it is a plain text file rather than a .LNK
+file.</p>
+<h2 id="Related">Related</h2>
+<p><a href="FileGetShortcut.htm">FileGetShortcut</a>, <a href="FileAppend.htm">FileAppend</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> The letter \"i\" in the last parameter makes
+the shortcut key be [Ctrl]{.kbd}+[Alt]{.kbd}+[I]{.kbd}.</p>
+<pre class="codehilite"><code>FileCreateShortcut &quot;Notepad.exe&quot;, A_Desktop &quot;\My Shortcut.lnk&quot;, &quot;C:\&quot;, A_ScriptFullPath, &quot;My Description&quot;, &quot;C:\My Icon.ico&quot;, &quot;i&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/FileCreateShortcut.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#filecreateshortcut">FileCreateShortcut</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

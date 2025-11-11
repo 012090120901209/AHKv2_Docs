@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComObjQuery | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Queries a COM object for an interface or service.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ComObjQuery</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="comobjquery">ComObjQuery</h1>
+<p>Queries a COM object for an interface or service.</p>
+<pre class="codehilite"><code class="language-Syntax">InterfaceComObj := ComObjQuery(ComObj, SID, IID)
+InterfaceComObj := ComObjQuery(ComObj, IID)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>ComObj</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#objects">Object</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>A COM wrapper object, an interface pointer, or an object with a
+<code>Ptr</code> property which returns an interface pointer. See
+<a href="ComValue.htm">ComValue</a> for details.</p>
+</dd>
+<dt>IID</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>An interface identifier (GUID) in the form
+\"{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\".</p>
+</dd>
+<dt>SID</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A service identifier in the same form as IID.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>This function returns a COM wrapper object of type dependent on the IID
+parameter.</p>
+<p>IID             Class                                     Variant Type                                    Description</p>
+<hr />
+<p>IID_IDispatch   <code style="white-space:nowrap">ComObject</code>   Allows the script to call properties and methods of the object using normal }   [VT_DISPATCH (9)]{style="white-space:nowrap"<a href="../Objects.htm#Usage_Objects">object syntax</a>.
+  Any other IID   <code style="white-space:nowrap">ComValue</code>   Provides only a }    [VT_UNKNOWN (13)]{style="white-space:nowrap"<code>Ptr</code> property, which allows the object to be passed to <a href="DllCall.htm">DllCall</a> or <a href="ComCall.htm">ComCall</a>.</p>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An exception is thrown on failure, such as if the interface is not
+supported.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>In its two-parameter mode, this function is equivalent to
+<a href="https://learn.microsoft.com/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(refiid_void)">IUnknown::QueryInterface</a>.
+When SID and IID are both specified, it internally queries for the
+<a href="https://learn.microsoft.com/previous-versions/windows/internet-explorer/ie-developer/platform-apis/cc678965(v=vs.85)">IServiceProvider</a>
+interface, then calls
+<a href="https://learn.microsoft.com/previous-versions/windows/internet-explorer/ie-developer/platform-apis/cc678966(v=vs.85)">IServiceProvider::QueryService</a>.</p>
+<p><a href="ComCall.htm">ComCall</a> can be used to call native interface methods.</p>
+<h2 id="Related">Related</h2>
+<p><a href="ComCall.htm">ComCall</a>, <a href="ComObject.htm">ComObject</a>,
+<a href="ComObjGet.htm">ComObjGet</a>, <a href="ComObjActive.htm">ComObjActive</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExClassName .ex}
+<a class="ex_number" href="#ExClassName"></a> Determines the class name of an object.</p>
+<pre class="codehilite"><code>obj := ComObject(&quot;Scripting.Dictionary&quot;)
+
+MsgBox &quot;Interface name: &quot; ComObjType(obj, &quot;name&quot;)
+
+IID_IProvideClassInfo := &quot;{B196B283-BAB4-101A-B69C-00AA00341D07}&quot;
+
+; Request the object's IProvideClassInfo interface.
+try
+    pci := ComObjQuery(obj, IID_IProvideClassInfo)
+catch
+{
+    MsgBox &quot;IProvideClassInfo interface not supported.&quot;
+    return
+}
+
+; Call GetClassInfo to retrieve a pointer to the ITypeInfo interface.
+ComCall(3, pci, &quot;ptr*&quot;, &amp;ti := 0)
+
+; Wrap ti to ensure automatic cleanup.
+ti := ComValue(13, ti)
+
+; Call GetDocumentation to get the object's full type name.
+ComCall(12, ti, &quot;int&quot;, -1, &quot;ptr*&quot;, &amp;pname := 0, &quot;ptr&quot;, 0, &quot;ptr&quot;, 0, &quot;ptr&quot;, 0)
+
+; Convert the BSTR pointer to a usable string.
+name := StrGet(pname, &quot;UTF-16&quot;)
+
+; Clean up.
+DllCall(&quot;oleaut32\SysFreeString&quot;, &quot;ptr&quot;, pname)
+pci := ti := &quot;&quot;
+
+; Display the type name!
+MsgBox &quot;Class name: &quot; name
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExIE .ex}
+<a class="ex_number" href="#ExIE"></a> Automates an existing Internet Explorer window.</p>
+<pre class="codehilite"><code>sURL := &quot;https://www.autohotkey.com/boards/&quot;
+if WebBrowser := GetWebBrowser()
+    WebBrowser.Navigate(sURL)
+
+GetWebBrowser()
+{
+    ; Get a raw pointer to the document object of the top-most IE window.
+    static msg := DllCall(&quot;RegisterWindowMessage&quot;, &quot;Str&quot;, &quot;WM_HTML_GETOBJECT&quot;)
+    lResult := SendMessage(msg, 0, 0, &quot;Internet Explorer_Server1&quot;, &quot;ahk_class IEFrame&quot;)
+    if !lResult
+        return  ; IE not found.
+    static IID_IHTMLDocument2 := GUID(&quot;{332C4425-26CB-11D0-B483-00C04FD90119}&quot;)
+    static VT_UNKNOWN := 13
+    DllCall(&quot;oleacc\ObjectFromLresult&quot;, &quot;Ptr&quot;, lResult
+        , &quot;Ptr&quot;, IID_IHTMLDocument2, &quot;Ptr&quot;, 0
+        , &quot;Ptr*&quot;, pdoc := ComValue(VT_UNKNOWN, 0))
+
+    ; Query for the WebBrowserApp service. In this particular case,
+    ; the SID and IID are the same, but it isn't always this way.
+    static IID_IWebBrowserApp := &quot;{0002DF05-0000-0000-C000-000000000046}&quot;
+    static SID_SWebBrowserApp := IID_IWebBrowserApp
+    pweb := ComObjQuery(pdoc, SID_SWebBrowserApp, IID_IWebBrowserApp)
+
+    ; Return the WebBrowser object as IDispatch for usability.
+    ; This works only because IWebBrowserApp is derived from IDispatch.
+    ; pweb will release its ptr automatically, so AddRef to counter that.
+    ObjAddRef(pweb.ptr)
+    static VT_DISPATCH := 9
+    return ComValue(VT_DISPATCH, pweb.ptr)
+}
+
+GUID(sGUID) ; Converts a string to a binary GUID and returns it in a Buffer.
+{
+    GUID := Buffer(16, 0)
+    if DllCall(&quot;ole32\CLSIDFromString&quot;, &quot;WStr&quot;, sGUID, &quot;Ptr&quot;, GUID) &lt; 0
+        throw ValueError(&quot;Invalid parameter #1&quot;, -1, sGUID)
+    return GUID
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ComObjQuery.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#comobjquery">ComObjQuery</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>
