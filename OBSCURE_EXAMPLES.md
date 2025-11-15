@@ -2,9 +2,44 @@
 
 A collection of creative, lesser-known script examples demonstrating advanced AutoHotkey v2 capabilities.
 
+## 📑 Table of Contents
+
+- [Input & Keyboard](#-input--keyboard) - 4 examples
+- [System & Windows](#%EF%B8%8F-system--windows) - 4 examples
+- [Clipboard & Text](#-clipboard--text) - 3 examples
+- [GUI & Visualization](#-gui--visualization) - 3 examples
+- [Advanced Techniques](#-advanced-techniques) - 6 examples
+- [Game & Input](#-game--input) - 2 examples
+- [Sound & Media](#-sound--media) - 2 examples
+- [Network & IPC](#-network--ipc) - 2 examples
+- [Debug & Development](#-debug--development) - 4 examples
+- [Additional Categories](#-additional-categories)
+- [Script Combination Ideas](#-script-combination-ideas)
+- [Key Techniques Demonstrated](#-key-techniques-demonstrated)
+
+## 🚀 How to Use These Examples
+
+**Difficulty Levels:**
+- 🟢 **Beginner** - Easy to understand and modify, minimal AHK knowledge needed
+- 🟡 **Intermediate** - Requires understanding of AHK concepts (objects, callbacks, etc.)
+- 🔴 **Advanced** - Complex code requiring deep AHK knowledge and Windows API familiarity
+
+**Usage Types:**
+- 💾 **Standalone** - Save as `.ahk` file and run directly
+- 🧩 **Snippet** - Copy into an existing script
+- ⚙️ **Needs Setup** - Requires additional configuration or files
+
+**Tips:**
+- Most examples can be modified to suit your needs
+- Check the 📚 "See also" references for related documentation
+- Start with 🟢 Beginner examples if you're new to these concepts
+
+---
+
 ## 🎯 Input & Keyboard
 
-### 1. **Typo Autocorrector with Learning**
+### 1. **Typo Autocorrector with Learning** 🟡 Intermediate
+💾 Standalone | 📚 [InputHook](InputHook.md) · [Map](Map.md) · [SendInput](Send.md)
 ```ahk
 ; Automatically fixes common typos and learns new corrections
 typoMap := Map("teh", "the", "seperate", "separate", "recieve", "receive")
@@ -25,7 +60,8 @@ CheckTypo(char) {
 }
 ```
 
-### 2. **Keystroke Rhythm Analyzer**
+### 2. **Keystroke Rhythm Analyzer** 🟢 Beginner
+💾 Standalone | 📚 [Map](Map.md) · [Hotkeys](Hotkeys.md)
 ```ahk
 ; Measures typing speed and rhythm patterns
 keyTimes := Map()
@@ -47,7 +83,9 @@ keyTimes := Map()
 }
 ```
 
-### 3. **Context-Aware Hotstring Engine**
+### 3. **Context-Aware Hotstring Engine** 🟢 Beginner
+💾 Standalone | 📚 [Hotstrings](Hotstrings.md) · [WinActive](WinActive.md)
+
 ```ahk
 ; Hotstrings that change based on active window
 ::btw::
@@ -482,7 +520,6 @@ CheckJoystick() {
 ~RButton::
 {
     static path := []
-    path := []
 
     SetTimer(RecordPath, 50)
     KeyWait("RButton")
@@ -583,9 +620,9 @@ CreateNamedPipe() {
 }
 ```
 
-### 26. **HTTP Server Response Handler**
+### 26. **HTTP Client Request Handler**
 ```ahk
-; Simple HTTP server using COM
+; Simple HTTP client using COM
 server := ComObject("WinHttp.WinHttpRequest.5.1")
 server.Open("GET", "http://api.example.com/data")
 server.Send()
