@@ -100,7 +100,7 @@ EndKeys
     *EndKeys* uses a format similar to the [Send](Send.htm) function.
     For example, specifying `{Enter}.{Esc}` would cause either
     [Enter]{.kbd}, [.]{.kbd}, or [Esc]{.kbd} to terminate the Input. To
-    use the braces themselves as end keys, specify `{{}` and/or `{}}`.
+    use the braces themselves as end keys, specify `{ {` and/or `} }`.
 
     To use [Ctrl]{.kbd}, [Alt]{.kbd}, or [Shift]{.kbd} as end keys,
     specify the left and/or right version of the key, not the neutral
@@ -248,7 +248,7 @@ Keys
 
     A list of keys. Braces are used to enclose key names, virtual key
     codes or scan codes, similar to the [Send](Send.htm) function. For
-    example, `{Enter}.{{}` would apply to [Enter]{.kbd}, [.]{.kbd} and
+    example, `{Enter}.{ {` would apply to [Enter]{.kbd}, [.]{.kbd} and
     [{]{.kbd}. Specifying a key by name, by `{vkNN}` or by `{scNNN}` may
     produce three different results; see below for details.
 

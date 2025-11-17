@@ -318,7 +318,7 @@ replacement, e.g. `` :*:btw::by the way`s ``.
 For an auto-replace hotstring which doesn\'t use the [Text](#T) or
 [Raw](#raw) mode, sending a `{` alone, or one preceded only by
 white-space, requires it being enclosed in a pair of brackets, for
-example `:*:brace::{{}` and `:*:space_brace:: {{}`. Otherwise it is
+example `:*:brace::{ {` and `:*:space_brace:: { {`. Otherwise it is
 interpreted as the opening brace for the hotstring\'s function to
 support the [OTB (One True Brace) style](lib/Block.htm#otb).
 
