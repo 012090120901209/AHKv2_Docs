@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstallKeybdHook | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Installs or uninstalls the keyboard hook.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>InstallKeybdHook</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="installkeybdhook">InstallKeybdHook</h1>
+<p>Installs or uninstalls the keyboard hook.</p>
+<pre class="codehilite"><code class="language-Syntax">InstallKeybdHook Install, Force
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Install</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#boolean">Boolean</a></p>
+<p>If omitted, it defaults to true.</p>
+<p>If <strong>true</strong>, the hook is required to be installed.</p>
+<p>If <strong>false</strong>, any requirement previously set by this function is
+removed, potentially uninstalling the hook.</p>
+</dd>
+<dt>Force</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#boolean">Boolean</a></p>
+<p>If omitted, it defaults to false.</p>
+<p>If <strong>false</strong>, an internal variable is updated to indicate whether
+the hook is required by the script, but there might be no immediate
+change if the hook is required for some other purpose.</p>
+<p>If <strong>true</strong> and <em>Install</em> is true, the hook is uninstalled and
+reinstalled. This has the effect of giving it precedence over any
+hooks previously installed by other processes. If the system has
+stopped calling the hook due to an unresponsive program,
+reinstalling the hook might get it working again.</p>
+<p>If <strong>true</strong> and <em>Install</em> is false, the hook is uninstalled even if
+needed for some other purpose. If a <a href="../Hotkeys.htm">hotkey</a>,
+<a href="../Hotstrings.htm">hotstring</a> or <a href="InputHook.htm">InputHook</a>
+requires the hook, it will stop working until the hook is
+reinstalled. The hook may be reinstalled explicitly by calling this
+function, or automatically as a side-effect of enabling or disabling
+a hotkey or calling some other function which requires the hook.</p>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>The keyboard hook monitors keystrokes for the purpose of activating
+<a href="../Hotstrings.htm">hotstrings</a> and any keyboard
+<a href="../Hotkeys.htm">hotkeys</a> not supported by RegisterHotkey (which is a
+function built into the operating system). It also supports a few other
+features such as the <a href="InputHook.htm">InputHook</a> function.</p>
+<p>AutoHotkey does not install the keyboard and mouse hooks unconditionally
+because together they consume at least 500 KB of memory. Therefore, the
+keyboard hook is normally installed only when the script contains one of
+the following: 1) <a href="../Hotstrings.htm">hotstrings</a>; 2) one or more
+<a href="../Hotkeys.htm">hotkeys</a> that require the keyboard hook (most do not);
+3) <a href="SetNumScrollCapsLockState.htm">SetCaps/Scroll/NumLock
+AlwaysOn/AlwaysOff</a>; 4) active <a href="InputHook.htm">Input
+hooks</a>.</p>
+<p>By contrast, the InstallKeybdHook function can be used to
+unconditionally install the keyboard hook, which has benefits including:</p>
+<ul>
+<li><a href="KeyHistory.htm">KeyHistory</a> can be used to display the last 20
+    keystrokes (for debugging purposes).</li>
+<li>The physical state of the modifier keys can be tracked reliably,
+    which removes the need for
+    <a href="A_HotkeyModifierTimeout.htm">A_HotkeyModifierTimeout</a> and may
+    improve the reliability with which <a href="Send.htm">Send</a> restores the
+    modifier keys to their proper states after temporarily releasing
+    them.</li>
+<li><a href="GetKeyState.htm">GetKeyState</a> can retrieve the physical state of a
+    key.</li>
+<li><a href="../Variables.htm#TimeIdleKeyboard">A_TimeIdleKeyboard</a> and
+    <a href="../Variables.htm#TimeIdlePhysical">A_TimeIdlePhysical</a> can work
+    correctly (ignoring mouse input or artificial input, respectively).</li>
+<li>Mouse hotkeys which use the Alt modifier (such as <code>!LButton::</code>) can
+    suppress the window menu more efficiently, by sending only one <a href="A_MenuMaskKey.htm">menu
+    mask key</a> when the Alt key is released, instead
+    of sending one each time the button is clicked.</li>
+</ul>
+<p>Keyboard hotkeys which do not require the hook will use the <em>reg</em> method
+even if the InstallKeybdHook function is used. By contrast, applying the
+<a href="_UseHook.htm">#UseHook</a> directive or the <a href="../Hotkeys.htm#prefixdollar">\$
+prefix</a> to a keyboard hotkey forces it to
+require the hook, which causes the hook to be installed if the hotkey is
+enabled.</p>
+<p>You can determine whether a script is using the hook via the
+<a href="KeyHistory.htm">KeyHistory</a> function or menu item. You can determine
+which hotkeys are using the hook via the <a href="ListHotkeys.htm">ListHotkeys</a>
+function or menu item.</p>
+<h2 id="Related">Related</h2>
+<p><a href="InstallMouseHook.htm">InstallMouseHook</a>, <a href="_UseHook.htm">#UseHook</a>,
+<a href="Hotkey.htm">Hotkey</a>, <a href="InputHook.htm">InputHook</a>,
+<a href="KeyHistory.htm">KeyHistory</a>, <a href="../Hotstrings.htm">Hotstrings</a>,
+<a href="GetKeyState.htm">GetKeyState</a>, <a href="KeyWait.htm">KeyWait</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Installs the keyboard hook unconditionally.</p>
+<pre class="codehilite"><code>InstallKeybdHook
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/InstallKeybdHook.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#installkeybdhook">InstallKeybdHook</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotIf / HotIfWin\... | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Specifies the criteria for subsequently created or modified [hotkey">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>HotIf</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="hotif-hotifwin">HotIf / HotIfWin...</h1>
+<p>Specifies the criteria for subsequently created or modified <a href="Hotkey.htm#variant">hotkey
+variants</a> and <a href="Hotstring.htm#variant">hotstring
+variants</a>.</p>
+<h2 id="If">HotIf</h2>
+<pre class="codehilite"><code class="language-Syntax">HotIf &quot;Expression&quot;
+HotIf Callback
+</code></pre>
+
+<h3 id="HotIf_Parameters">Parameters</h3>
+<dl>
+<dt>\"Expression\"</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If omitted, blank criteria will be set (turns off
+context-sensitivity). Otherwise, the criteria will be set to an
+existing <a href="_HotIf.htm">#HotIf</a> expression. The expression is usually
+written as a <a href="../Language.htm#strings">quoted string</a>, but can also
+be a variable or expression which returns text matching a #HotIf
+expression.</p>
+<p><strong>Note:</strong> The HotIf function uses the string that you pass to it,
+not the original source code. <a href="../misc/EscapeChar.htm">Escape
+sequences</a> are resolved when the script
+loads, so only the resulting characters are considered; for example,
+<code>HotIf 'x = "`t"'</code> and <code>HotIf 'x = "' A_Tab '"'</code> both correspond
+to <code>#HotIf x = "`t"</code>.</p>
+<p>For an example, see <a href="_HotIf.htm#ExDynamic">#HotIf example #5</a>.</p>
+</dd>
+<dt>Callback</dt>
+<dd>
+<p>Type: <a href="../misc/Functor.htm">Function Object</a></p>
+<p>If omitted, blank criteria will be set (turns off
+context-sensitivity). Otherwise, the criteria will be set to a given
+function object. Subsequently-created hotkeys and hotstrings will
+only execute if the callback returns a non-zero number. This is like
+<code>HotIf "Expression"</code>, except that each hotkey and hotstring can have
+many <a href="Hotkey.htm#variant">hotkey variants</a> or <a href="Hotstring.htm#variant">hotstring
+variants</a> (one per object).</p>
+<p>The callback accepts one parameter and can be
+<a href="../Functions.htm#intro">defined</a> as follows:</p>
+<p><code>NoIndent
+MyCallback(HotkeyName) { ...</code></p>
+<p>Although the name you give the parameter does not matter, it is
+assigned the <a href="../Hotkeys.htm#ThisHotkey">hotkey name</a> or <a href="../Hotstrings.htm#ThisHotkey">hotstring
+name</a>.</p>
+<p>You can omit the callback\'s parameter if the corresponding
+information is not needed, but in this case an asterisk must be
+specified, e.g. <code>MyCallback(*)</code>.</p>
+<p>Once passed to the HotIf function, the object will never be deleted
+(but memory will be reclaimed by the OS when the process exits).</p>
+<p>For an example, see <a href="#ExHotIfCallback">example #2</a> below or <a href="Hotkey.htm#ExampleIfFn">Hotkey
+example #6</a>.</p>
+</dd>
+</dl>
+<h2 id="IfWin">HotIfWin...</h2>
+<pre class="codehilite"><code class="language-Syntax">HotIfWinActive WinTitle, WinText
+HotIfWinExist WinTitle, WinText
+HotIfWinNotActive WinTitle, WinText
+HotIfWinNotExist WinTitle, WinText
+</code></pre>
+
+<h3 id="HotIfWin_Parameters">Parameters</h3>
+<dl>
+<dt>WinTitle, WinText</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If both are omitted, blank criteria will be set (turns off
+context-sensitivity). Otherwise, specify for <em>WinTitle</em> a <a href="../misc/WinTitle.htm">window
+title or other criteria</a> to identify the
+target window and/or for <em>WinText</em> a substring from a single text
+element of the target window (as revealed by the included Window Spy
+utility). Depending on which function is called, affected hotkeys
+and hotstrings are in effect only while the target window is active,
+exists, is not active, or does not exist.</p>
+<p>Since the parameters are evaluated before the function is called,
+any variable reference becomes permanent at that moment. In other
+words, subsequent changes to the contents of the variable are not
+seen by existing hotkeys and hotstrings.</p>
+<p><em>WinTitle</em> and <em>WinText</em> have the same meaning as for
+<a href="WinActive.htm">WinActive</a> or <a href="WinExist.htm">WinExist</a>, but only
+strings can be used, and they are evaluated according to the default
+settings for <a href="SetTitleMatchMode.htm">SetTitleMatchMode</a> and
+<a href="DetectHiddenWindows.htm">DetectHiddenWindows</a> as set by the
+<a href="../Scripts.htm#auto">auto-execute thread</a>.</p>
+<p>For an example, see <a href="#ExHotIfWin">example #1</a> below.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An exception is thrown if HotIf\'s parameter is invalid, such as if it
+does not match an existing expression or is not a valid callback
+function.</p>
+<h2 id="remarks">General Remarks</h2>
+<p>The HotIf and HotIfWin functions allow context-sensitive
+<a href="../Hotkeys.htm">hotkeys</a> and <a href="../Hotstrings.htm">hotstrings</a> to be
+created and modified while the script is running (by contrast, the
+<a href="_HotIf.htm">#HotIf</a> directive is positional and takes effect before the
+script begins executing). For example:</p>
+<pre class="codehilite"><code>HotIfWinActive &quot;ahk_class Notepad&quot;
+Hotkey &quot;^!e&quot;, MyFuncForNotepad  ; Creates a hotkey that works only in Notepad.
+</code></pre>
+
+<p>Using HotIf or one of the HotIfWin functions puts context sensitivity
+into effect for all subsequently created <a href="../Hotkeys.htm">hotkeys</a> and
+<a href="../Hotstrings.htm">hotstrings</a> in the current
+<a href="../misc/Threads.htm">thread</a>, and affects which hotkey or hotstring
+variants the <a href="Hotkey.htm">Hotkey</a> or <a href="Hotstring.htm">Hotstring</a> function
+modifies. Only the most recent call to the HotIf or HotIfWin function in
+the current thread will be in effect.</p>
+<p>To turn off context sensitivity (such as to make subsequently-created
+hotkeys and hotstrings work in all windows), call HotIf or one of the
+HotIfWin functions but omit the parameters. For example: <code>HotIf</code> or
+<code>HotIfWinActive</code>.</p>
+<p>Before HotIf or one of the HotIfWin functions is used in a hotkey or
+hotstring <a href="../misc/Threads.htm">thread</a>, the <a href="Hotkey.htm">Hotkey</a> and
+<a href="Hotstring.htm">Hotstring</a> functions default to the same context as the
+hotkey or hotstring that launched the thread. In other words,
+<code>Hotkey A_ThisHotkey, "Off"</code> turns off the current hotkey even if it is
+context-sensitive. All other threads default to creating or modifying
+global hotkeys and hotstrings, unless that default is overridden by
+using HotIf or one of the HotIfWin functions during <a href="../Scripts.htm#auto">script
+startup</a>.</p>
+<p>When a mouse or keyboard hotkey is disabled via HotIf, one of the
+HotIfWin functions, or the <a href="_HotIf.htm">#HotIf</a> directive, it performs
+its native function; that is, it passes through to the active window as
+though there is no such hotkey. However, controller hotkeys always pass
+through, whether they are disabled or not.</p>
+<h2 id="Related">Related</h2>
+<p><a href="../Hotkeys.htm">Hotkeys</a>, <a href="../Hotstrings.htm">Hotstrings</a>, <a href="Hotkey.htm">Hotkey
+function</a>, <a href="Hotstring.htm">Hotstring function</a>,
+<a href="_HotIf.htm">#HotIf</a>, <a href="../misc/Threads.htm">Threads</a></p>
+<h2 id="examples">Examples</h2>
+<p>::: {#ExHotIfWin .ex}
+<a class="ex_number" href="#ExHotIfWin"></a> Similar to [#HotIf example</p>
+<h1 id="1_hotifhtmexbasic-this-creates-two-hotkeys-and-one-hotstring">1](_HotIf.htm#ExBasic), this creates two hotkeys and one hotstring</h1>
+<p>which only work when Notepad is active, and one hotkey which works for
+any window except Notepad. The main difference is that this example
+creates context-sensitive hotkeys and hotstrings at runtime, while the</p>
+<h1 id="hotif-example-creates-them-at-loadtime">HotIf example creates them at loadtime.</h1>
+<pre class="codehilite"><code>HotIfWinActive &quot;ahk_class Notepad&quot;
+Hotkey &quot;^!a&quot;, ShowMsgBox
+Hotkey &quot;#c&quot;, ShowMsgBox
+Hotstring &quot;::btw&quot;, &quot;This replacement text will occur only in Notepad.&quot;
+HotIfWinActive
+Hotkey &quot;#c&quot;, (*) =&gt; MsgBox(&quot;You pressed Win-C in a window other than Notepad.&quot;)
+
+ShowMsgBox(HotkeyName)
+{
+    MsgBox &quot;You pressed &quot; HotkeyName &quot; while Notepad is active.&quot;
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExHotIfCallback .ex}
+<a class="ex_number" href="#ExHotIfCallback"></a> Similar to the example above, but with
+a callback.</p>
+<pre class="codehilite"><code>HotIf MyCallback
+Hotkey &quot;^!a&quot;, ShowMsgBox
+Hotkey &quot;#c&quot;, ShowMsgBox
+Hotstring &quot;::btw&quot;, &quot;This replacement text will occur only in Notepad.&quot;
+HotIf
+Hotkey &quot;#c&quot;, (*) =&gt; MsgBox(&quot;You pressed Win-C in a window other than Notepad.&quot;)
+
+MyCallback(*)
+{
+    if WinActive(&quot;ahk_class Notepad&quot;)
+        return true
+    else
+        return false
+}
+
+ShowMsgBox(HotkeyName)
+{
+    MsgBox &quot;You pressed &quot; HotkeyName &quot; while Notepad is active.&quot;
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/HotIf.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#hotif-hotifwin">HotIf / HotIfWin...</a><ul>
+<li><a href="#If">HotIf</a><ul>
+<li><a href="#HotIf_Parameters">Parameters</a></li>
+</ul>
+</li>
+<li><a href="#IfWin">HotIfWin...</a><ul>
+<li><a href="#HotIfWin_Parameters">Parameters</a></li>
+</ul>
+</li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#remarks">General Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul>
+</li>
+<li><a href="#1_hotifhtmexbasic-this-creates-two-hotkeys-and-one-hotstring">1](_HotIf.htm#ExBasic), this creates two hotkeys and one hotstring</a></li>
+<li><a href="#hotif-example-creates-them-at-loadtime">HotIf example creates them at loadtime.</a></li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

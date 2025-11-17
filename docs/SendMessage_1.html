@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostMessage / SendMessage Tutorial [by Rajat] | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="This page explains how to send messages to a window or its controls via">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>SendMessage_1</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="postmessage-sendmessage-tutorial-by-rajatheadnote">PostMessage / SendMessage Tutorial [by Rajat]{.headnote}</h1>
+<p>This page explains how to send messages to a window or its controls via
+<a href="../lib/PostMessage.htm">PostMessage</a> or
+<a href="../lib/SendMessage.htm">SendMessage</a> and will answer some questions
+like:</p>
+<ul>
+<li>\"How do I press a button on a minimized window?\"</li>
+<li>\"How do I select a menu item when
+    <a href="../lib/MenuSelect.htm">MenuSelect</a> doesn\'t work with it?!\"</li>
+<li>\"This is a skinnable window.... how do I send a command that works
+    every time?\"</li>
+<li>\"and what about <strong>hidden</strong> windows?!\"</li>
+</ul>
+<p>Requirements: Winspector Spy (<a href="https://www.softpedia.com/get/Security/Security-Related/Winspector.shtml">can be found
+here</a>)</p>
+<p>As a first example, note that <a href="../lib/MenuSelect.htm">MenuSelect</a> fails
+to work with the menu bar on Outlook Express\'s \"New Message\" window.
+In other words, this code will not work:</p>
+<pre class="codehilite"><code>MenuSelect &quot;New Message&quot;,, &quot;&amp;Insert&quot;, &quot;&amp;Picture...&quot;
+</code></pre>
+
+<p>But <a href="../lib/PostMessage.htm">PostMessage</a> can get the job done:</p>
+<pre class="codehilite"><code>PostMessage 0x0111, 40239, 0, , &quot;New Message&quot;
+</code></pre>
+
+<p>Works like a charm! But what the heck is that? 0x0111 is the hex code of
+<a href="SendMessageList.htm">wm_command message</a> and 40239 is the code that
+this particular window understands as menu-item \'Insert Picture\'
+selection. Now let me tell you how to find a value such as 40239:</p>
+<ol>
+<li>Open Winspector Spy and a \"New Message\" window.</li>
+<li>Drag the crosshair from Winspector Spy\'s window to \"New Message\"
+    window\'s titlebar (the portion not covered by Winspector Spy\'s
+    overlay).</li>
+<li>Right click the selected window in the list on left and select
+    \'Messages\'.</li>
+<li>Right click the blank window and select \'Edit message filter\'.</li>
+<li>Press the \'filter all\' button and then dbl click \'wm_command\' on
+    the list on left. This way you will only monitor this message.</li>
+<li>Now go to the \"New Message\" window and select from its menu bar:
+    Insert &gt; Picture.</li>
+<li>Come back to Winspector Spy and press the traffic light button to
+    pause monitoring.</li>
+<li>Expand the wm_command messages that\'ve accumulated (forget others
+    if any).</li>
+<li>What you want to look for (usually) is a code 0 message. sometimes
+    there are wm_command messages saying \'win activated\' or \'win
+    destroyed\' and other stuff.. not needed. You\'ll find that there\'s
+    a message saying \'Control ID: 40239\' ...that\'s it!</li>
+<li>Now put that in the above function and you\'ve got it! It\'s the
+    wParam value.</li>
+</ol>
+<p>For the next example I\'m taking Paint because possibly everyone will
+have that. Now let\'s say it\'s an app where you have to select a tool
+from a toolbar using AutoHotkey; say the dropper tool is to be selected.</p>
+<p>What will you do? Most probably a mouse click at the toolbar button,
+right? But toolbars can be moved and hidden! This one can be
+moved/hidden too. So if the target user has done any of this then your
+script will fail at that point. But the following function will still
+work:</p>
+<pre class="codehilite"><code>PostMessage 0x0111, 639,,, &quot;Untitled - Paint&quot;
+</code></pre>
+
+<p>Another advantage to <a href="../lib/PostMessage.htm">PostMessage</a> is that the
+Window can be in the background; by contrast, sending mouse clicks would
+require it to be active.</p>
+<p>Here are some more examples. Note: I\'m using WinXP Pro (SP1) ... if
+you use a different OS then your params may change (only applicable to
+apps like Wordpad and Notepad that come with windows; for others the
+params shouldn\'t vary):</p>
+<pre class="codehilite"><code>;makes writing color teal in Wordpad
+PostMessage 0x0111, 32788, 0, , &quot;Document - WordPad&quot;
+
+;opens about box in Notepad
+PostMessage 0x0111, 65, 0, , &quot;Untitled - Notepad&quot;
+
+;toggles word-wrap in Notepad
+PostMessage 0x0111, 32, 0, , &quot;Untitled - Notepad&quot;
+
+;play/pause in Windows Media Player
+PostMessage 0x0111, 32808, 0, , &quot;Windows Media Player&quot;
+
+;suspend the hotkeys of a running AHK script
+DetectHiddenWindows True
+; Use 65306 to Pause and 65303 to Reload instead of Suspend. (see FAQ)
+PostMessage 0x0111, 65305,,, &quot;MyScript.ahk - AutoHotkey&quot;
+
+; Press CapsLock and Numpad2 to reload all AutoHotkey scripts
+CapsLock &amp; Numpad2::
+ReloadAllAhkScripts(ThisHotkey)
+{
+    DetectHiddenWindows True
+    for hwnd in WinGetList(&quot;ahk_class AutoHotkey&quot;)
+    {
+        if (hwnd = A_ScriptHwnd)  ; ignore the current window for reloading
+            continue
+        PostMessage 0x0111, 65303,,, hwnd
+    }
+    Reload
+}
+</code></pre>
+
+<p>This above was for PostMessage. <a href="../lib/SendMessage.htm">SendMessage</a>
+works the same way but additionally waits for a return value, which can
+be used for things such as getting the currently playing track in Winamp
+(see <a href="Winamp.htm">Automating Winamp</a> for an example).</p>
+<p>Here are some more notes:</p>
+<ul>
+<li>The note above regarding OS being XP and msg values changing with
+    different OSes is purely cautionary. if you\'ve found a msg that
+    works on your system (with a certain version of a software) then you
+    can be sure it\'ll work on another system too with the same version
+    of the software. In addition, most apps keep these msg values the
+    same even on different versions of themselves (e.g. Windows Media
+    Player and Winamp).</li>
+<li>If you\'ve set the filter to show only wm_command in Winspector Spy
+    and still you\'re getting a flood of messages then right click that
+    message and select hide (msg name)... you don\'t want to have a
+    look at a msg that appears without you interacting with the target
+    software.</li>
+<li>The right pointing arrow in Winspector Spy shows the msg values and
+    the blurred left pointing arrows show the returned value. A 0 (zero)
+    value can by default safely be taken as \'no error\'.</li>
+<li>For posting to hidden windows add this to script:
+    <code>DetectHiddenWindows True</code></li>
+</ul>
+<p>Note: There are apps with which this technique doesn\'t work. I\'ve had
+mixed luck with VB and Delphi apps. This technique is best used with C,
+C++ apps. With VB apps the \'LParam\' of the same function keeps
+changing from one run to another. With Delphi apps... the GUI of some
+apps doesn\'t even use wm_command. It probably uses mouse pos &amp; clicks.</p>
+<p>Go and explore.... and share your experiences in the AutoHotkey Forum.
+Feedback is welcome!</p>
+<p>This tutorial is not meant for total newbies (no offense meant) since
+these functions are considered advanced features. So if after reading
+the above you\'ve not made heads or tails of it, please forget it.</p>
+<p>-Rajat</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/SendMessage_1.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#postmessage-sendmessage-tutorial-by-rajatheadnote">PostMessage / SendMessage Tutorial [by Rajat]{.headnote}</a></li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

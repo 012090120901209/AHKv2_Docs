@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remapping a Controller to Keyboard or Mouse | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="## Table of Contents {#toc}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>RemapController</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="remapping-a-controller-to-keyboard-or-mouse">Remapping a Controller to Keyboard or Mouse</h1>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#imp">Important Notes</a></li>
+<li><a href="#button">Making a Controller Button Send Keystrokes or Mouse
+    Clicks</a><ul>
+<li><a href="#different-approaches">Different Approaches</a></li>
+<li><a href="#auto-repeating-controller-buttons">Auto-repeating a Keystroke</a></li>
+<li><a href="#context-sensitive-controller-buttons">Context-sensitive Controller
+    Buttons</a></li>
+<li><a href="#using-a-controller-as-a-mouse">Using a Controller as a Mouse</a></li>
+</ul>
+</li>
+<li><a href="#axis">Making Other Controller Controls Send Keystrokes or Mouse
+    Clicks</a><ul>
+<li><a href="#controller-axes">Controller Axes</a></li>
+<li><a href="#controller-pov-hat">Controller POV Hat</a></li>
+<li><a href="#auto-repeating-other">Auto-repeating a Keystroke</a></li>
+</ul>
+</li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#related">Related Topics</a></li>
+</ul>
+<h2 id="imp">Important Notes</h2>
+<ul>
+<li>For historical reasons, the following button and control names begin
+    with <code>Joy</code>, which stands for joystick. However, they usually also
+    work for other game controllers such as gamepads or steering wheels.</li>
+<li>Although a controller button or axis can be remapped to become a key
+    or mouse button, it cannot be remapped to some other controller
+    button or axis. That would be possible only with the help of a
+    controller emulator such as
+    <a href="https://sourceforge.net/projects/vjoystick/">vJoy</a>.</li>
+<li>AutoHotkey identifies each button on a controller with a unique
+    number between 1 and 32. To determine these numbers, use the
+    <a href="../scripts/index.htm#ControllerTest">controller test script</a>.</li>
+<li>For Xbox controller 2013 and newer (anything newer than the Xbox 360
+    controller), Joy1 to Joy32 hotkeys will only work if a window owned
+    by the script is active, such as a <a href="../lib/MsgBox.htm">message box</a>,
+    <a href="../lib/Gui.htm">GUI</a>, or the <a href="../Program.htm#main-window">script\'s main
+    window</a>. This limitation also applies to
+    <a href="../lib/GetKeyState.htm">GetKeyState</a> for Joy1 to Joy32 and JoyX,
+    JoyY, JoyZ, JoyR, JoyU, JoyPOV (and possibly JoyV), but not for
+    JoyName, JoyButtons, JoyAxes and JoyInfo. To detect those controller
+    inputs for other active windows, use the <a href="https://www.autohotkey.com/boards/viewtopic.php?f=83&amp;t=106254">XInput.ahk
+    library</a>.</li>
+</ul>
+<h2 id="button">Making a Controller Button Send Keystrokes or Mouse Clicks</h2>
+<h3 id="different-approaches">Different Approaches</h3>
+<p>Below are three approaches, starting at the simplest and ending with the
+most complex. The most complex method works in the broadest variety of
+circumstances (such as games that require a key or mouse button to be
+held down).</p>
+<h4 id="Method_1">Method #1</h4>
+<p>This method sends simple keystrokes and mouse clicks. For example:</p>
+<pre class="codehilite"><code>Joy1::Send &quot;{Left}&quot;  ; Have button #1 send a left-arrow keystroke.
+Joy2::Click  ; Have button #2 send a click of left mouse button.
+Joy3::Send &quot;a{Esc}{Space}{Enter}&quot;  ; Have button #3 send the letter &quot;a&quot; followed by Escape, Space, and Enter.
+Joy4::Send &quot;Sincerely,{Enter}John Smith&quot;  ; Have button #4 send a two-line signature.
+</code></pre>
+
+<p>To have a button perform more than one line, put them <em>beneath</em> the
+button name and enclose them in braces. For example:</p>
+<pre class="codehilite"><code>Joy5::
+{
+    Run &quot;notepad&quot;
+    WinWait &quot;Untitled - Notepad&quot;
+    WinActivate
+    Send &quot;This is the text that will appear in Notepad.{Enter}&quot;
+}
+</code></pre>
+
+<p>For details, see <a href="../howto/WriteHotkeys.htm">How to Write Hotkeys</a>.</p>
+<p>See the <a href="../KeyList.htm">Key List</a> for the complete list of keys and
+mouse/controller buttons.</p>
+<h4 id="Method_2">Method #2</h4>
+<p>This method is necessary in cases where a key or mouse button must be
+held down for the entire time that you\'re holding down a controller
+button. The following example makes the controller\'s second button
+become the left-arrow key:</p>
+<pre class="codehilite"><code>Joy2::
+{
+    Send &quot;{Left down}&quot;  ; Hold down the left-arrow key.
+    KeyWait &quot;Joy2&quot;  ; Wait for the user to release the controller button.
+    Send &quot;{Left up}&quot;  ; Release the left-arrow key.
+}
+</code></pre>
+
+<h4 id="Method_3">Method #3</h4>
+<p>This method is necessary in cases where you have more than one
+controller hotkey of the type described in Method #2, and you sometimes
+press and release such hotkeys simultaneously. The following example
+makes the controller\'s third button become the left mouse button:</p>
+<pre class="codehilite"><code>Joy3::
+{
+    Send &quot;{LButton down}&quot;   ; Hold down the left mouse button.
+    SetTimer WaitForButtonUp3, 10
+}
+
+WaitForButtonUp3()
+{
+    if GetKeyState(&quot;Joy3&quot;)  ; The button is still, down, so keep waiting.
+        return
+    ; Otherwise, the button has been released.
+    Send &quot;{LButton up}&quot;  ; Release the left mouse button.
+    SetTimer , 0
+}
+</code></pre>
+
+<h3 id="auto-repeating-controller-buttons">Auto-repeating a Keystroke</h3>
+<p>Some programs or games might require a key to be sent repeatedly (as
+though you are holding it down on the keyboard). The following example
+achieves this by sending spacebar keystrokes repeatedly while you hold
+down the controller\'s second button:</p>
+<pre class="codehilite"><code>Joy2::
+{
+    Send &quot;{Space down}&quot;   ; Press the spacebar down.
+    SetTimer WaitForJoy2, 30  ; Reduce the number 30 to 20 or 10 to send keys faster. Increase it to send slower.
+}
+
+WaitForJoy2()
+{
+    if not GetKeyState(&quot;Joy2&quot;)  ; The button has been released.
+    {
+        Send &quot;{Space up}&quot;  ; Release the spacebar.
+        SetTimer , 0  ; Stop monitoring the button.
+        return
+    }
+    ; Since above didn't &quot;return&quot;, the button is still being held down.
+    Send &quot;{Space down}&quot;  ; Send another Spacebar keystroke.
+}
+</code></pre>
+
+<h3 id="context-sensitive-controller-buttons">Context-sensitive Controller Buttons</h3>
+<p>The <a href="../lib/_HotIf.htm">#HotIf</a> directive can be used to make selected
+controller buttons perform a different action (or none at all) depending
+on any condition, such as the type of window that is active.</p>
+<h3 id="using-a-controller-as-a-mouse">Using a Controller as a Mouse</h3>
+<p>The <a href="../scripts/index.htm#ControllerMouse">Controller-To-Mouse script</a>
+converts a controller into a mouse by remapping its buttons and axis
+control.</p>
+<h2 id="axis">Making Other Controller Controls Send Keystrokes or Mouse Clicks</h2>
+<p>To have a script respond to movement of a stick\'s axis or POV hat, use
+<a href="../lib/SetTimer.htm">SetTimer</a> and
+<a href="../lib/GetKeyState.htm">GetKeyState</a>.</p>
+<h3 id="controller-axes">Controller Axes</h3>
+<p>The following example makes the stick\'s X and Y axes behave like the
+arrow key cluster on a keyboard (left, right, up, and down):</p>
+<pre class="codehilite"><code>SetTimer WatchAxis, 5
+
+WatchAxis()
+{
+    static KeyToHoldDown := &quot;&quot;
+    JoyX := GetKeyState(&quot;JoyX&quot;)  ; Get position of X axis.
+    JoyY := GetKeyState(&quot;JoyY&quot;)  ; Get position of Y axis.
+    KeyToHoldDownPrev := KeyToHoldDown  ; Prev now holds the key that was down before (if any).
+
+    if JoyX &gt; 70
+        KeyToHoldDown := &quot;Right&quot;
+    else if JoyX &lt; 30
+        KeyToHoldDown := &quot;Left&quot;
+    else if JoyY &gt; 70
+        KeyToHoldDown := &quot;Down&quot;
+    else if JoyY &lt; 30
+        KeyToHoldDown := &quot;Up&quot;
+    else
+        KeyToHoldDown := &quot;&quot;
+
+    if KeyToHoldDown = KeyToHoldDownPrev  ; The correct key is already down (or no key is needed).
+        return  ; Do nothing.
+
+    ; Otherwise, release the previous key and press down the new key:
+    SetKeyDelay -1  ; Avoid delays between keystrokes.
+    if KeyToHoldDownPrev   ; There is a previous key to release.
+        Send &quot;{&quot; KeyToHoldDownPrev &quot; up}&quot;  ; Release it.
+    if KeyToHoldDown   ; There is a key to press down.
+        Send &quot;{&quot; KeyToHoldDown &quot; down}&quot;  ; Press it down.
+}
+</code></pre>
+
+<h3 id="controller-pov-hat">Controller POV Hat</h3>
+<p>The following example makes the controller\'s POV hat behave like the
+arrow key cluster on a keyboard; that is, the POV hat will send arrow
+keystrokes (left, right, up, and down):</p>
+<pre class="codehilite"><code>SetTimer WatchPOV, 5
+
+WatchPOV()
+{
+    static KeyToHoldDown := &quot;&quot;
+    POV := GetKeyState(&quot;JoyPOV&quot;)  ; Get position of the POV control.
+    KeyToHoldDownPrev := KeyToHoldDown  ; Prev now holds the key that was down before (if any).
+
+; Some controllers might have a smooth/continous POV rather than one in fixed increments.
+    ; To support them all, use a range:
+    if POV &lt; 0   ; No angle to report
+        KeyToHoldDown := &quot;&quot;
+    else if POV &gt; 31500                ; 315 to 360 degrees: Forward
+        KeyToHoldDown := &quot;Up&quot;
+    else if POV &gt;= 0 and POV &lt;= 4500      ; 0 to 45 degrees: Forward
+        KeyToHoldDown := &quot;Up&quot;
+    else if POV &gt;= 4501 and POV &lt;= 13500  ; 45 to 135 degrees: Right
+        KeyToHoldDown := &quot;Right&quot;
+    else if POV &gt;= 13501 and POV &lt;= 22500 ; 135 to 225 degrees: Down
+        KeyToHoldDown := &quot;Down&quot;
+    else                                  ; 225 to 315 degrees: Left
+        KeyToHoldDown := &quot;Left&quot;
+
+    if KeyToHoldDown = KeyToHoldDownPrev  ; The correct key is already down (or no key is needed).
+        return  ; Do nothing.
+
+    ; Otherwise, release the previous key and press down the new key:
+    SetKeyDelay -1  ; Avoid delays between keystrokes.
+    if KeyToHoldDownPrev   ; There is a previous key to release.
+        Send &quot;{&quot; KeyToHoldDownPrev &quot; up}&quot;  ; Release it.
+    if KeyToHoldDown   ; There is a key to press down.
+        Send &quot;{&quot; KeyToHoldDown &quot; down}&quot;  ; Press it down.
+}
+</code></pre>
+
+<h3 id="auto-repeating-other">Auto-repeating a Keystroke</h3>
+<p>Both examples above can be modified to send the key repeatedly rather
+than merely holding it down (that is, they can mimic physically holding
+down a key on the keyboard). To do this, replace the following line:</p>
+<pre class="codehilite"><code>return  ; Do nothing.
+</code></pre>
+
+<p>With the following:</p>
+<pre class="codehilite"><code>{
+    if KeyToHoldDown
+        Send &quot;{&quot; KeyToHoldDown &quot; down}&quot;  ; Auto-repeat the keystroke.
+    return
+}
+</code></pre>
+
+<h2 id="Remarks">Remarks</h2>
+<p>A controller other than first may be used by preceding the button or
+axis name with the number of the controller. For example, <code>2Joy1</code> would
+be the second controller\'s first button.</p>
+<p>To find other useful controller scripts, visit the <a href="https://www.autohotkey.com/boards/">AutoHotkey
+forum</a>. A keyword search such as
+<em>Controller and GetKeyState and Send</em> is likely to produce topics of
+interest.</p>
+<h2 id="related">Related Topics</h2>
+<ul>
+<li><a href="../scripts/index.htm#ControllerMouse">Controller-To-Mouse script (using a controller as a
+    mouse)</a></li>
+<li><a href="../KeyList.htm#Controller">List of controller buttons, axes, and
+    controls</a></li>
+<li><a href="../lib/GetKeyState.htm">GetKeyState</a></li>
+<li><a href="Remap.htm">Remapping the keyboard and mouse</a></li>
+</ul>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/RemapController.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#remapping-a-controller-to-keyboard-or-mouse">Remapping a Controller to Keyboard or Mouse</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#imp">Important Notes</a></li>
+<li><a href="#button">Making a Controller Button Send Keystrokes or Mouse Clicks</a><ul>
+<li><a href="#different-approaches">Different Approaches</a><ul>
+<li><a href="#Method_1">Method #1</a></li>
+<li><a href="#Method_2">Method #2</a></li>
+<li><a href="#Method_3">Method #3</a></li>
+</ul>
+</li>
+<li><a href="#auto-repeating-controller-buttons">Auto-repeating a Keystroke</a></li>
+<li><a href="#context-sensitive-controller-buttons">Context-sensitive Controller Buttons</a></li>
+<li><a href="#using-a-controller-as-a-mouse">Using a Controller as a Mouse</a></li>
+</ul>
+</li>
+<li><a href="#axis">Making Other Controller Controls Send Keystrokes or Mouse Clicks</a><ul>
+<li><a href="#controller-axes">Controller Axes</a></li>
+<li><a href="#controller-pov-hat">Controller POV Hat</a></li>
+<li><a href="#auto-repeating-other">Auto-repeating a Keystroke</a></li>
+</ul>
+</li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#related">Related Topics</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

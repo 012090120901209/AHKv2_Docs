@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MouseMove | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Moves the mouse cursor.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>MouseMove</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="mousemove">MouseMove</h1>
+<p>Moves the mouse cursor.</p>
+<pre class="codehilite"><code class="language-Syntax">MouseMove X, Y , Speed, Relative
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>X, Y</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The X and Y coordinates to move the mouse to. Coordinates are
+relative to the active window\'s client area unless
+<a href="CoordMode.htm">CoordMode</a> was used to change that.</p>
+</dd>
+<dt>Speed</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, the default speed (as set by
+<a href="SetDefaultMouseSpeed.htm">SetDefaultMouseSpeed</a> or 2 otherwise)
+will be used. Otherwise, specify the speed to move the mouse in the
+range 0 (fastest) to 100 (slowest). A speed of 0 will move the mouse
+instantly.</p>
+<p><em>Speed</em> is ignored for the modes <a href="SendMode.htm#Input">SendInput</a> and
+<a href="SendMode.htm#Play">SendPlay</a>; they move the mouse instantaneously
+(though <a href="SetMouseDelay.htm">SetMouseDelay</a> has a mode that applies
+to SendPlay). To visually move the mouse more slowly -- such as a
+script that performs a demonstration for an audience -- use
+<a href="Send.htm#Click"><code>SendEvent "{Click 100 200}"</code></a> or
+<a href="SendMode.htm"><code>SendMode</code></a><code>"Event"</code> (optionally in conjuction with
+<a href="BlockInput.htm">BlockInput</a>).</p>
+</dd>
+<dt>Relative</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the X and Y coordinates will be used for
+absolute positioning. Otherwise, specify the following letter:</p>
+<p><strong>R:</strong> The X and Y coordinates will be treated as offsets from the
+current mouse position. In other words, the cursor will be moved
+from its current position by X pixels to the right (left if
+negative) and Y pixels down (up if negative).</p>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>This function uses the sending method set by <a href="SendMode.htm">SendMode</a>.</p>
+<p>The <a href="SendMode.htm#Play">SendPlay mode</a> is able to successfully generate
+mouse events in a broader variety of games than the other modes. In
+addition, some applications and games may have trouble tracking the
+mouse if it moves too quickly. The <em>Speed</em> parameter or
+<a href="SetDefaultMouseSpeed.htm">SetDefaultMouseSpeed</a> can be used to reduce
+the speed (in <a href="SendMode.htm#Event">SendEvent mode</a> only).</p>
+<p>The <a href="BlockInput.htm">BlockInput</a> function can be used to prevent any
+physical mouse activity by the user from disrupting the simulated mouse
+events produced by the mouse functions. However, this is generally not
+needed for the modes <a href="SendMode.htm#Input">SendInput</a> and
+<a href="SendMode.htm#Play">SendPlay</a> because they automatically postpone the
+user\'s physical mouse activity until afterward.</p>
+<p>There is an automatic delay after every movement of the mouse (except
+for <a href="SendMode.htm#Input">SendInput mode</a>). Use
+<a href="SetMouseDelay.htm">SetMouseDelay</a> to change the length of the delay.</p>
+<p>The following is an alternate way to move the mouse cursor that may work
+better in certain multi-monitor configurations:</p>
+<pre class="codehilite"><code>DllCall(&quot;SetCursorPos&quot;, &quot;int&quot;, 100, &quot;int&quot;, 400)  ; The first number is the X-coordinate and the second is the Y (relative to the screen).
+</code></pre>
+
+<p>On a related note, the mouse cursor can be temporarily hidden via the
+<a href="DllCall.htm#ExHideCursor">hide-cursor example</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="CoordMode.htm">CoordMode</a>, <a href="SendMode.htm">SendMode</a>,
+<a href="SetDefaultMouseSpeed.htm">SetDefaultMouseSpeed</a>,
+<a href="SetMouseDelay.htm">SetMouseDelay</a>, <a href="Click.htm">Click</a>,
+<a href="MouseClick.htm">MouseClick</a>, <a href="MouseClickDrag.htm">MouseClickDrag</a>,
+<a href="MouseGetPos.htm">MouseGetPos</a>, <a href="BlockInput.htm">BlockInput</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Moves the mouse cursor to a new position.</p>
+<pre class="codehilite"><code>MouseMove 200, 100
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExAdvanced .ex}
+<a class="ex_number" href="#ExAdvanced"></a> Moves the mouse cursor slowly (speed 50 vs.
+2) by 20 pixels to the right and 30 pixels down from its current
+location.</p>
+<pre class="codehilite"><code>MouseMove 20, 30, 50, &quot;R&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/MouseMove.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#mousemove">MouseMove</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

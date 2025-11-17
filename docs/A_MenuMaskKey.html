@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A_MenuMaskKey | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="*A_MenuMaskKey* is a [built-in">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>A_MenuMaskKey</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="a_menumaskkey">A_MenuMaskKey</h1>
+<p><em>A_MenuMaskKey</em> is a <a href="../Concepts.htm#built-in-variables">built-in
+variable</a> that controls which key is
+used to mask Win or Alt keyup events.</p>
+<p><em>A_MenuMaskKey</em> can be used to get or set a
+<a href="../Concepts.htm#strings">string</a> representing a vkNNscNNN sequence
+identifying the virtual key code (NN) and scan code (NNN), in
+hexadecimal. If blank, masking is disabled.</p>
+<p>The script can also assign a <a href="../KeyList.htm">key name</a>,
+<a href="../KeyList.htm#vk">vkNN</a> sequence or <a href="../KeyList.htm#sc">scNNN</a>
+sequence, in which case generally either the VK or SC code is left as
+zero until the key is sent, then determined automatically. Assigning
+<code>"vk00sc000"</code> disables masking and is equivalent to assigning <code>""</code>.</p>
+<p>The returned string is always a vkNNscNNN sequence if enabled or blank
+if disabled, regardless of how it was assigned. All vkNNscNNN sequences
+and all non-zero vkNN or scNNN sequences are permitted, but some
+combinations may fail to suppress the menu. Any other invalid keys cause
+a <a href="Error.htm#ValueError">ValueError</a> to be thrown.</p>
+<p>The default setting is vk11sc01D (the left Ctrl key).</p>
+<h2 id="Remarks">Remarks</h2>
+<p>The mask key is sent automatically to prevent the Start menu or the
+active window\'s menu bar from activating at unexpected times.</p>
+<p>This variable can be used to change the mask key to a key with fewer
+side effects. Good candidates are virtual key codes which generally have
+no effect, such as vkE8, which Microsoft documents as \"unassigned\", or
+vkFF, which is reserved to mean \"no mapping\" (a key which has no
+function). Some values, such as zero VK with non-zero SC, may fail to
+suppress the Start menu. Key codes are not required to match an existing
+key.</p>
+<p><strong>Note:</strong> Microsoft can assign an effect to an unassigned key code at
+any time. For example, vk07 was once undefined and safe to use, but
+since Windows 10 1909 it is reserved for opening the game bar.</p>
+<p>This setting is global, meaning that it needs to be specified only once
+to affect the behavior of the entire script.</p>
+<p><strong>Hotkeys:</strong> If a hotkey is implemented using the keyboard hook or mouse
+hook, the final keypress may be invisible to the active window and the
+system. If the system was to detect <em>only</em> a Win or Alt keydown and
+keyup with no intervening keypress, it would usually activate a menu. To
+prevent this, the keyboard or mouse hook may automatically send the mask
+key.</p>
+<p>Pressing a hook hotkey causes the next Alt or Win keyup to be masked if
+all of the following conditions are met:</p>
+<ul>
+<li>The hotkey is suppressed (it lacks the <a href="../Hotkeys.htm#Tilde">tilde
+    modifier</a>).</li>
+<li>[Alt]{.kbd} or [Win]{.kbd} is logically down when the hotkey is
+    pressed.</li>
+<li>The modifier is physically down or the hotkey requires the modifier
+    to activate. For example, <code>$#a::</code> in combination with
+    <code>AppsKey::RWin</code> causes masking when [Menu]{.kbd}+[A]{.kbd} is
+    pressed, but [Menu]{.kbd} on its own is able to open the Start Menu.</li>
+<li>[Alt]{.kbd} is not masked if [Ctrl]{.kbd} was down when the hotkey
+    was pressed, since [Ctrl]{.kbd}+[Alt]{.kbd} does not activate the
+    menu bar.</li>
+<li>[Win]{.kbd} is not masked if the most recent Win keydown was
+    modified with [Ctrl]{.kbd}, [Shift]{.kbd} or [Alt]{.kbd}, since the
+    Start Menu does not normally activate in those cases. However,
+    key-repeat occurs even for [Win]{.kbd} if it was the last key
+    physically pressed, so it can be hard to predict <em>when</em> the most
+    recent Win keydown was.</li>
+<li>Either the keyboard hook is not installed (i.e. for a mouse hotkey),
+    or there have been no other (unsuppressed) keydown or keyup events
+    since the last Alt or Win keydown. Note that key-repeat occurs even
+    for modifier keys and even after sending other keys, but only for
+    the last physically pressed key.</li>
+</ul>
+<p>Mouse hotkeys may send the mask key immediately if the keyboard hook is
+not installed.</p>
+<p>Hotkeys with the <a href="../Hotkeys.htm#Tilde">tilde modifier</a> are not intended
+to block the native function of the key, so they do not cause masking.
+Hotkeys like <code>~#a::</code> still suppress the menu, since the system detects
+that [Win]{.kbd} has been used in combination with another key. However,
+mouse hotkeys and both [Win]{.kbd} themselves (<code>~LWin::</code> and <code>~RWin::</code>)
+do not suppress the Start Menu.</p>
+<p>The Start Menu (or the active window\'s menu bar) can be suppressed by
+sending any keystroke. The following example disables the ability for
+the left [Win]{.kbd} to activate the Start Menu, while still allowing
+its use as a modifier:</p>
+<pre class="codehilite"><code>~LWin::Send &quot;{Blind}{vkE8}&quot;
+</code></pre>
+
+<p><strong>Send:</strong> <a href="Send.htm">Send</a>, <a href="ControlSend.htm">ControlSend</a> and related
+often release modifier keys as part of their normal operation. For
+example, the hotkey <code>&lt;#a::SendText Address</code> usually must release the
+left [Win]{.kbd} prior to sending the contents of <em>Address</em>, and press
+the left [Win]{.kbd} back down afterward (so that other Win key
+combinations continue working). The mask key may be sent in such cases
+to prevent a Win or Alt keyup from activating a menu.</p>
+<h2 id="Related">Related</h2>
+<p>See <a href="https://www.autohotkey.com/board/topic/20619-extraneous-control-key-presses-generated-by-or-hotkeys/">this archived forum
+thread</a>
+for background information.</p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Basic usage.</p>
+<pre class="codehilite"><code>A_MenuMaskKey := &quot;vkE8&quot;  ; Change the masking key to something unassigned such as vkE8.
+#Space::Run A_ScriptDir  ; An additional Ctrl keystroke is not triggered.
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExAdvanced .ex}
+<a class="ex_number" href="#ExAdvanced"></a> Shows in detail how this variable causes
+vkFF to be sent instead of LControl.</p>
+<pre class="codehilite"><code>A_MenuMaskKey := &quot;vkFF&quot;  ; vkFF is no mapping.
+#UseHook
+#Space::
+!Space::
+{
+    KeyWait &quot;LWin&quot;
+    KeyWait &quot;RWin&quot;
+    KeyWait &quot;Alt&quot;
+    KeyHistory
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/A_MenuMaskKey.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#a_menumaskkey">A_MenuMaskKey</a><ul>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrPtr | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Returns the current memory address of a string.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>StrPtr</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="strptr">StrPtr</h1>
+<p>Returns the current memory address of a string.</p>
+<pre class="codehilite"><code class="language-Syntax">Address := StrPtr(Value)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Value</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This function returns the current memory address of <em>Value</em>.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>The lifetime of an address and which operations are valid to perform on
+it depend on how <em>Value</em> was passed to this function. There are three
+distinct cases, shown as example code below. In all cases, if the string
+will [not]{.underline} be modified, the return value can be passed
+<em>directly</em> to a <a href="DllCall.htm">DllCall</a> function or
+<a href="SendMessage.htm">SendMessage</a>.</p>
+<pre class="codehilite"><code>Ptr := StrPtr(MyVar)
+</code></pre>
+
+<p>If <em>Value</em> is a variable reference such as <code>MyVar</code> (and not a built-in
+variable), the return value is the memory address of the variable\'s
+internal string buffer.
+<a href="VarSetStrCapacity.htm"><code>VarSetStrCapacity</code></a><code>(&amp;MyVar)</code> returns the size
+of the buffer <strong>in characters</strong>, excluding the terminating null
+character.</p>
+<p>The address should be considered valid <em>only</em> until the variable is
+freed or has been reassigned by means of any of the <a href="../Variables.htm#AssignOp">assignment
+operators</a> or by passing it to a built-in
+function. The address of the contents of a function\'s
+<a href="../Functions.htm#Local">local</a> variable is not valid after the function
+returns, as local variables are freed automatically.</p>
+<p>The address can be stored in a <a href="DllCall.htm#struct">structure</a> or
+another variable, and passed indirectly to <a href="DllCall.htm">DllCall</a> or
+<a href="SendMessage.htm">SendMessage</a> or used in other ways, for as long as it
+remains valid as described above.</p>
+<p>The script may change the value of the string indirectly by passing the
+address to <a href="NumPut.htm">NumPut</a>, <a href="DllCall.htm">DllCall</a> or
+<a href="SendMessage.htm">SendMessage</a>. If the length of the string is changed
+this way, the variable\'s internal length property must be updated by
+calling <a href="VarSetStrCapacity.htm"><code>VarSetStrCapacity</code></a><code>(&amp;MyVar, -1)</code>.</p>
+<pre class="codehilite"><code>Ptr := StrPtr(&quot;literal string&quot;)
+</code></pre>
+
+<p>The address of a literal string is valid until the program exits. The
+script should not attempt to modify the string. The address can be
+stored in a <a href="DllCall.htm#struct">structure</a> or another variable, and
+passed indirectly to <a href="DllCall.htm">DllCall</a> or
+<a href="SendMessage.htm">SendMessage</a> or used in other ways.</p>
+<pre class="codehilite"><code>SendMessage 0x000C, 0, StrPtr(A_ScriptName &quot; changed this title&quot;),, &quot;A&quot;
+</code></pre>
+
+<p>The address of a temporary string is valid only until evaluation of the
+overall expression or function call statement is completed, after which
+time it must not be used. For the example above, the address is valid
+until SendMessage returns. All of the following yield temporary strings:</p>
+<ul>
+<li>Concatenation.</li>
+<li>Built-in variables such as
+    <a href="../Variables.htm#ScriptName">A_ScriptName</a>.</li>
+<li>Functions which return strings.</li>
+<li>Accessing properties of an object, array elements or map elements.</li>
+</ul>
+<p>If not explicitly covered above, it is safe to assume the string is
+temporary.</p>
+<h2 id="Related">Related</h2>
+<p><a href="VarSetStrCapacity.htm">VarSetStrCapacity</a>, <a href="DllCall.htm">DllCall</a>,
+<a href="SendMessage.htm">SendMessage</a>, <a href="Buffer.htm">Buffer object</a>,
+<a href="NumPut.htm">NumPut</a>, <a href="NumGet.htm">NumGet</a></p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/StrPtr.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#strptr">StrPtr</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

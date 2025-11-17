@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Functions | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Applies to:">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Sound</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="sound-functions">Sound Functions</h1>
+<p>Applies to:</p>
+<ul>
+<li><a href="SoundGetVolume.htm">SoundGetVolume</a> /
+    <a href="SoundSetVolume.htm">SoundSetVolume</a></li>
+<li><a href="SoundGetMute.htm">SoundGetMute</a> / <a href="SoundSetMute.htm">SoundSetMute</a></li>
+<li><a href="SoundGetName.htm">SoundGetName</a></li>
+<li><a href="SoundGetInterface.htm">SoundGetInterface</a></li>
+</ul>
+<p>Other sound-related functions:</p>
+<ul>
+<li><a href="SoundBeep.htm">SoundBeep</a></li>
+<li><a href="SoundPlay.htm">SoundPlay</a></li>
+</ul>
+<h2 id="devices">Endpoint Devices</h2>
+<p>The \"devices\" referenced by the SoundGet and SoundSet functions are
+<em>audio endpoint devices</em>. A single device driver or physical device
+often has multiple endpoints, such as for different types of output or
+input. For example:</p>
+<p>Name                                Description</p>
+<hr />
+<p>Speakers (Example HD Audio)         The main analog outputs of this device (uses multiple jacks in the case of surround sound).
+  Digital Output (Example HD Audio)   An optical or coaxial digital output.
+  Microphone (Example HD Audio)       Captures audio through a microphone jack.
+  Stereo Mix (Example HD Audio)       Captures whatever audio is being output to the Speakers endpoint.</p>
+<p>Device names typically consist of an endpoint name such as \"Speakers\"
+followed by the name of the audio driver in parentheses. Scripts may use
+the full name or just the leading part of the name, such as \"Mic\" or
+\"Microphone\". An audio driver has a fixed name, but endpoint names may
+be changed by an administrator at any time via the Sound control panel.</p>
+<p>Devices are listed in the Sound control panel, which can be opened by
+running <code>mmsys.cpl</code> from the command line, or via the Run dialog
+([Win]{.kbd}+[R]{.kbd}) or the <a href="Run.htm">Run</a> function. By default, the
+control panel only lists devices that are enabled and plugged in (if
+applicable), but this can be changed via the right-click menu.
+AutoHotkey detects devices which are not plugged in, but does not detect
+disabled devices.</p>
+<h2 id="components">Components</h2>
+<p>Components are as shown on the Levels tab of the sound device\'s
+properties dialog.</p>
+<p><img alt="Levels" src="../static/sound_levels.png" /></p>
+<p>In this example, the master controls are at the top, followed by the
+first four components: Microphone, FrontMic, Line In, and Side. All have
+volume and mute controls, except the fourth component, which only has
+volume.</p>
+<p>A sound device\'s properties dialog can be opened via the <a href="#mmsys">Sound control
+panel</a>.</p>
+<p>Audio drivers are capable of exposing other controls, such as bass and
+treble. However, common audio drivers tend to have only volume and mute
+controls, or no components at all. Volume and mute controls are
+supported directly through <a href="SoundGetVolume.htm">SoundGetVolume</a>,
+<a href="SoundSetVolume.htm">SoundSetVolume</a>, <a href="SoundGetMute.htm">SoundGetMute</a>
+and <a href="SoundSetMute.htm">SoundSetMute</a>. All other controls are supported
+only indirectly, through <a href="SoundGetInterface.htm">SoundGetInterface</a> and
+<a href="ComCall.htm">ComCall</a>.</p>
+<h3 id="Advanced_Details">Advanced Details</h3>
+<p>Components are discovered through the <a href="https://learn.microsoft.com/windows/win32/coreaudio/devicetopology-api">DeviceTopology
+API</a>,
+which exposes a graph of <em>Connectors</em> and <em>Subunits</em>. Each component
+shown above has a Connector, and it is the Connector that defines the
+component\'s name. Each control (such as volume or mute) is represented
+by a Subunit which sits between the Connector and the endpoint. Data
+\"flows\" from or to the Connector and is altered as it flows through
+each Subunit, such as to adjust volume or suppress (mute) all sound.</p>
+<p>The SoundGet and SoundSet functions identify components by walking the
+<em>device topology</em> graph and counting Connectors with the given name (or
+all Connectors if no name is given). Once the matching Connector is
+found, a control interface (such as IAudioVolumeLevel or IAudioMute) is
+retrieved by querying each Subunit on that specific branch of the graph,
+starting nearest the Connector.</p>
+<p>Subunits which apply to multiple Connectors are excluded - such as
+Subunits which correspond to the master volume and mute controls. A
+Connector is counted if (and only if) it has at least one Subunit of its
+own, even if the Subunit is not of the requested type.</p>
+<p>In practice, the end result is that the available components are as
+listed on <a href="#components">the Levels tab</a>, and in the same order. However,
+this process is based on observation, trial and error, so might not be
+100 % accurate.</p>
+<h2 id="Common_Parameters">Common Parameters</h2>
+<dl>
+<dt>Component</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>One of the following:</p>
+<ul>
+<li>The index of a <a href="#components">component</a>, where 1 is the first
+    component.</li>
+<li>The full display name of a component (case-insensitive).</li>
+<li>As above, but followed by a colon and integer, where 1 is the
+    first occurrence of a component with that name. For example,
+    <code>"Line In:2"</code> uses the second component named \"Line In\". This
+    is necessary only when <em>Component</em> would otherwise be ambiguous,
+    such as when multiple components exist with the same name, or
+    the display name is empty, an integer or contains a colon.</li>
+<li>If blank or omitted, the function targets the master volume/mute
+    controls or an interface that can be returned by
+    <a href="https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-activate">IMMDevice::Activate</a>.</li>
+</ul>
+<p>If only an index is specified, the display names are ignored. For
+example, <code>1</code>, <code>"1"</code> and <code>":1"</code> use the first component regardless of
+name, whereas <code>""</code> uses the master controls.</p>
+<p>If the sound device lacks the specified <em>Component</em>, a
+<a href="Error.htm#TargetError">TargetError</a> is thrown.</p>
+</dd>
+<dt>Device</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>One of the following:</p>
+<ul>
+<li>A number (integer) between 1 and the total number of supported
+    devices.</li>
+<li>The display name of a device; either the full name or a leading
+    part (case-insensitive). For example, <code>"Speakers"</code> or
+    <code>"Speakers (Example HD Audio)"</code>.</li>
+<li>As above, but followed by a colon and integer, where 1 is the
+    first device with a matching name. For example, <code>"Speakers:2"</code>
+    indicates the second device which has a name starting with
+    \"Speakers\". This is necessary only when <em>Device</em> would
+    otherwise be ambiguous, such as when multiple devices exist with
+    the same name, or the display name contains a colon.</li>
+<li>If blank or omitted, it defaults to the system\'s default device
+    for playback (which is not necessarily device 1).</li>
+</ul>
+<p>The <a href="#ExSoundcard">soundcard analysis script</a> may help determine
+which name and/or number to use.</p>
+</dd>
+</dl>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExSoundcard .ex}
+<a class="ex_number" href="#ExSoundcard"></a> Soundcard Analysis. Use the following
+script to discover the available audio device and component names and
+whether each device or component supports volume and/or mute controls.
+It displays the results in a simple ListView. The current volume and
+mute settings are shown if they can be retrieved, but are not updated in
+realtime.</p>
+<pre class="codehilite"><code>scGui := Gui(, &quot;Sound Components&quot;)
+scLV := scGui.Add('ListView', &quot;w600 h400&quot;
+    , [&quot;Component&quot;, &quot;#&quot;, &quot;Device&quot;, &quot;Volume&quot;, &quot;Mute&quot;])
+
+devMap := Map()
+
+loop
+{
+    ; For each loop iteration, try to get the corresponding device.
+    try
+        devName := SoundGetName(, dev := A_Index)
+    catch  ; No more devices.
+        break
+
+    ; Qualify names with &quot;:index&quot; where needed.
+    devName := Qualify(devName, devMap, dev)
+
+    ; Retrieve master volume and mute setting, if possible.
+    vol := mute := &quot;&quot;
+    try vol := Round(SoundGetVolume( , dev), 2)
+    try mute := SoundGetMute( , dev)
+
+    ; Display the master settings only if at least one was retrieved.
+    if vol != &quot;&quot; || mute != &quot;&quot;
+        scLV.Add(&quot;&quot;, &quot;&quot;, dev, devName, vol, mute)
+
+    ; For each component, first query its name.
+    cmpMap := Map()
+
+    loop
+    {
+        try
+            cmpName := SoundGetName(cmp := A_Index, dev)
+        catch
+            break
+        ; Retrieve this component's volume and mute setting, if possible.
+        vol := mute := &quot;&quot;
+        try vol := Round(SoundGetVolume(cmp, dev), 2)
+        try mute := SoundGetMute(cmp, dev)
+        ; Display this component even if it does not support volume or mute,
+        ; since it likely supports other controls via SoundGetInterface().
+        scLV.Add(&quot;&quot;, Qualify(cmpName, cmpMap, A_Index), dev, devName, vol, mute)
+    }
+}
+
+loop 5
+    scLV.ModifyCol(A_Index, 'AutoHdr Logical')
+scGui.Show()
+
+; Qualifies full names with &quot;:index&quot; when needed.
+Qualify(name, names, overallIndex)
+{
+    if name = ''
+        return overallIndex
+    key := StrLower(name)
+    index := names.Has(key) ? ++names[key] : (names[key] := 1)
+    return (index &gt; 1 || InStr(name, ':') || IsInteger(name)) ? name ':' index : name
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Sound.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#sound-functions">Sound Functions</a><ul>
+<li><a href="#devices">Endpoint Devices</a></li>
+<li><a href="#components">Components</a><ul>
+<li><a href="#Advanced_Details">Advanced Details</a></li>
+</ul>
+</li>
+<li><a href="#Common_Parameters">Common Parameters</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

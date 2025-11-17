@@ -1,0 +1,17 @@
+# Core dependencies for vectorization scripts
+
+# For OpenAI embeddings (required for --embed)
+openai>=1.0.0
+
+# For local vector database (optional)
+chromadb>=0.4.0
+
+# Numerical operations
+numpy>=1.24.0
+
+# Optional: For better progress bars
+tqdm>=4.65.0
+
+# Optional: For advanced chunking
+# langchain>=0.1.0
+# llama-index>=0.9.0

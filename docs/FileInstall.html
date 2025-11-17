@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileInstall | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Includes the specified file inside the [compiled">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>FileInstall</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="fileinstall">FileInstall</h1>
+<p>Includes the specified file inside the <a href="../Scripts.htm#ahk2exe">compiled
+version</a> of the script.</p>
+<pre class="codehilite"><code class="language-Syntax">FileInstall Source, Dest , Overwrite
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Source</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name of a single file to be added to the compiled EXE. The file
+is assumed to be in (or relative to) the script\'s own directory if
+an absolute path isn\'t specified.</p>
+<p>This parameter must be a <a href="../Language.htm#strings">quoted literal
+string</a> (not a variable or any other
+expression), and must be listed to the right of the function name
+<em>FileInstall</em> (that is, not on a <a href="../Scripts.htm#continuation">continuation
+line</a> beneath it).</p>
+</dd>
+<dt>Dest</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>When <em>Source</em> is extracted from the EXE, this is the name of the
+file to be created. It is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified. The destination directory must already exist.</p>
+</dd>
+<dt>Overwrite</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 0. Otherwise, specify one of the
+following numbers to indicate whether to overwrite files if they
+already exist:</p>
+<p><strong>0:</strong> Do not overwrite existing files. The operation will fail and
+have no effect if <em>Dest</em> already exists.</p>
+<p><strong>1:</strong> Overwrite existing files.</p>
+<p>Other values are reserved for future use.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An exception is thrown on failure.</p>
+<p>Any case where the file cannot be written to the destination is
+considered failure. For example:</p>
+<ul>
+<li>The destination file already exists and the <em>Overwrite</em> parameter
+    was 0 or omitted.</li>
+<li>The destination file could not be opened due to a permission error,
+    or because the file is in use.</li>
+<li>The destination path was invalid or specifies a folder which does
+    not exist.</li>
+<li>The source file does not exist (only for uncompiled scripts).</li>
+</ul>
+<h2 id="Remarks">Remarks</h2>
+<p>When a call to this function is read by
+<a href="../Scripts.htm#ahk2exe">Ahk2Exe</a> during compilation of the script, the
+file specified by <em>Source</em> is added to the resulting compiled script.
+Later, when the compiled script EXE runs and the call to FileInstall is
+executed, the file is extracted from the EXE and written to the location
+specified by <em>Dest</em>.</p>
+<p>Files added to a script are neither compressed nor encrypted during
+compilation, but the compiled script EXE can be compressed by using the
+appropriate option in Ahk2Exe.</p>
+<p>If this function is used in a normal (uncompiled) script, a simple file
+copy will be performed instead -- this helps the testing of scripts
+that will eventually be compiled. No action is taken if the full source
+and destination paths are equal, as attempting to copy the file to its
+current location would result in an error. The paths are compared with
+<a href="https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpiw">lstrcmpi</a>
+after expansion with
+<a href="https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfullpathnamew">GetFullPathName</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="FileCopy.htm">FileCopy</a>, <a href="_Include.htm">#Include</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Includes a text file inside the compiled
+version of the script. Later, when the compiled script is executed, the
+included file is extracted to another location with another name. If a
+file with this name already exists at this location, it will be
+overwritten.</p>
+<pre class="codehilite"><code>FileInstall &quot;My File.txt&quot;, A_Desktop &quot;\Example File.txt&quot;, 1
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/FileInstall.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#fileinstall">FileInstall</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

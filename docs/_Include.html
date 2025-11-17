@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#Include / #IncludeAgain | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Causes the script to behave as though the specified file\'s contents are">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>_Include</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="include-includeagain">#Include / #IncludeAgain</h1>
+<p>Causes the script to behave as though the specified file\'s contents are
+present at this exact position.</p>
+<pre class="codehilite"><code class="language-Syntax">#Include FileOrDirName
+#Include &lt;LibName&gt;
+#IncludeAgain FileOrDirName
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>FileOrDirName</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The path of a file or directory as explained below. This must
+[not]{.underline} contain double quotes (except for an optional pair
+of double quotes surrounding the parameter), wildcards (<code>*</code> and <code>?</code>)
+or <a href="../misc/EscapeChar.htm">escape sequences</a> other than semicolon
+(<code>`;</code>).</p>
+<p>Built-in variables may be used by enclosing them in percent signs
+(for example, <code>#Include "%A_ScriptDir%"</code>). Percent signs which are
+not part of a valid variable reference are interpreted literally.
+All built-in variables containing strings or numbers are valid.</p>
+<p>Known limitation: When compiling a script, variables are evaluated
+by the compiler and may differ from what the script would return
+when it is finally executed. The following variables are supported:
+<a href="../Variables.htm#AhkPath">A_AhkPath</a>,
+<a href="../Variables.htm#AppData">A_AppData</a>,
+<a href="../Variables.htm#AppDataCommon">A_AppDataCommon</a>,
+<a href="../Variables.htm#ComputerName">A_ComputerName</a>,
+<a href="../Variables.htm#ComSpec">A_ComSpec</a>,
+<a href="../Variables.htm#Desktop">A_Desktop</a>,
+<a href="../Variables.htm#DesktopCommon">A_DesktopCommon</a>,
+<a href="../Variables.htm#IsCompiled">A_IsCompiled</a>,
+<a href="../Variables.htm#LineFile">A_LineFile</a>,
+<a href="../Variables.htm#MyDocuments">A_MyDocuments</a>,
+<a href="../Variables.htm#ProgramFiles">A_ProgramFiles</a>,
+<a href="../Variables.htm#Programs">A_Programs</a>,
+<a href="../Variables.htm#ProgramsCommon">A_ProgramsCommon</a>,
+<a href="../Variables.htm#ScriptDir">A_ScriptDir</a>,
+<a href="../Variables.htm#ScriptFullPath">A_ScriptFullPath</a>,
+<a href="../Variables.htm#ScriptName">A_ScriptName</a>,
+<a href="../Variables.htm#Space">A_Space</a>,
+<a href="../Variables.htm#StartMenu">A_StartMenu</a>,
+<a href="../Variables.htm#StartMenuCommon">A_StartMenuCommon</a>,
+<a href="../Variables.htm#Startup">A_Startup</a>,
+<a href="../Variables.htm#StartupCommon">A_StartupCommon</a>,
+<a href="../Variables.htm#Tab">A_Tab</a>, <a href="../Variables.htm#Temp">A_Temp</a>,
+<a href="../Variables.htm#UserName">A_UserName</a>,
+<a href="../Variables.htm#WinDir">A_WinDir</a>.</p>
+<p><strong>File:</strong> The name of the file to be included. By default, relative
+paths are relative to the directory of the file which contains the</p>
+<h1 id="include-directive-this-default-can-be-overridden-by-using">Include directive. This default can be overridden by using</h1>
+<p><code>#Include Dir</code> as described below. Note:
+<a href="SetWorkingDir.htm">SetWorkingDir</a> has no effect on #Include because</p>
+<h1 id="include-is-processed-before-the-script-begins-executing">Include is processed before the script begins executing.</h1>
+<p><strong>Directory:</strong> Specify a directory instead of a file to change the
+working directory used by all subsequent occurrences of #Include and
+<a href="FileInstall.htm">FileInstall</a> in the current file. Note: Changing
+the working directory in this way does not affect the script\'s
+initial working directory when it starts running
+(<a href="../Variables.htm#WorkingDir">A_WorkingDir</a>). To change that, use
+<a href="SetWorkingDir.htm">SetWorkingDir</a> at the top of the script.</p>
+<p><strong>Note:</strong> This parameter is not an expression, but can be enclosed
+in quote marks (either \'single\' or \"double\").</p>
+</dd>
+<dt>\&lt;LibName&gt;</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A library file or function name. For example, <code>#Include &lt;lib&gt;</code> and
+<code>#Include &lt;lib_func&gt;</code> would both include lib.ahk from one of the
+<a href="../Scripts.htm#lib">Lib folders</a>. Variable references are not
+allowed.</p>
+<p>A subdirectory can be specified, with the caveat that the first
+underscore may be interpreted as a delimiter as described under
+<a href="../Scripts.htm#lib">Script Library Folders</a>, e.g.
+<code>#Include &lt;a_b\c&gt;</code> will try a.ahk if a_b\c.ahk is not found.</p>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>A script behaves as though the included file\'s contents are physically
+present at the exact position of the #Include directive (as though a
+copy-and-paste were done from the included file). Consequently, it
+generally cannot merge two isolated scripts together into one
+functioning script.</p>
+<h1 id="include-ensures-that-the-specified-file-is-included-only-once-even-if">Include ensures that the specified file is included only once, even if</h1>
+<p>multiple inclusions are encountered for it. By contrast, #IncludeAgain
+allows multiple inclusions of the same file, while being the same as</p>
+<h1 id="include-in-all-other-respects">Include in all other respects.</h1>
+<p>The file path may optionally be preceded by <code>*i</code> and a single space,
+which causes the program to ignore any failure to read the file. For
+example: <code>#Include "*i SpecialOptions.ahk"</code>. This option should be used
+only when the file\'s contents are not essential to the main script\'s
+operation.</p>
+<p>Lines displayed in the <a href="../Program.htm#main-window">main window</a> via
+<a href="ListLines.htm">ListLines</a> or the menu View-&gt;Lines are always numbered
+according to their physical order within their own files. In other
+words, including a new file will change the line numbering of the main
+script file by only one line, namely that of the #Include line itself
+(except for <a href="../Scripts.htm#ahk2exe">compiled scripts</a>, which merge
+their included files into one big script at the time of compilation).</p>
+<h1 id="include-is-often-used-to-load-functions-defined-in">Include is often used to load <a href="../Functions.htm">functions</a> defined in</h1>
+<p>an external file.</p>
+<p>Like other directives, #Include cannot be executed conditionally. In
+other words, this example would not work as expected:</p>
+<pre class="codehilite"><code>if (x = 1)
+    #Include &quot;SomeFile.ahk&quot;  ; This line takes effect regardless of the value of x.
+</code></pre>
+
+<h2 id="Related">Related</h2>
+<p><a href="../Scripts.htm#lib">Script Library Folders</a>,
+<a href="../Functions.htm">Functions</a>, <a href="FileInstall.htm">FileInstall</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExFile .ex}
+<a class="ex_number" href="#ExFile"></a> Includes the contents of the specified file into
+the current script.</p>
+<pre class="codehilite"><code>#Include &quot;C:\My Documents\Scripts\Utility Subroutines.ahk&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExDir .ex}
+<a class="ex_number" href="#ExDir"></a> Changes the working directory for subsequent</p>
+<h1 id="includes-and-fileinstalls">Includes and FileInstalls.</h1>
+<pre class="codehilite"><code>#Include &quot;%A_ScriptDir%&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExDir2 .ex}
+<a class="ex_number" href="#ExDir2"></a> Same as above but for an explicitly named
+directory.</p>
+<pre class="codehilite"><code>#Include &quot;C:\My Scripts&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/_Include.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#include-includeagain">#Include / #IncludeAgain</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+</ul>
+</li>
+<li><a href="#include-directive-this-default-can-be-overridden-by-using">Include directive. This default can be overridden by using</a></li>
+<li><a href="#include-is-processed-before-the-script-begins-executing">Include is processed before the script begins executing.</a><ul>
+<li><a href="#Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#include-ensures-that-the-specified-file-is-included-only-once-even-if">Include ensures that the specified file is included only once, even if</a></li>
+<li><a href="#include-in-all-other-respects">Include in all other respects.</a></li>
+<li><a href="#include-is-often-used-to-load-functions-defined-in">Include is often used to load functions defined in</a><ul>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+<li><a href="#includes-and-fileinstalls">Includes and FileInstalls.</a></li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

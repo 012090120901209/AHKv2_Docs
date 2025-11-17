@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegExReplace | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Replaces occurrences of a pattern (regular expression) inside a string.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>RegExReplace</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="regexreplace">RegExReplace</h1>
+<p>Replaces occurrences of a pattern (regular expression) inside a string.</p>
+<pre class="codehilite"><code class="language-Syntax">NewStr := RegExReplace(Haystack, NeedleRegEx , Replacement, &amp;OutputVarCount, Limit, StartingPos)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Haystack</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The string whose content is searched and replaced. This may contain
+binary zero.</p>
+</dd>
+<dt>NeedleRegEx</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The pattern to search for, which is a Perl-compatible regular
+expression (PCRE). The pattern\'s
+<a href="../misc/RegEx-QuickRef.htm#Options">options</a> (if any) must be
+included at the beginning of the string followed by a
+close-parenthesis. For example, the pattern
+[[i)]{.red}abc.*123]{.regex} would turn on the case-insensitive
+option and search for \"abc\", followed by zero or more occurrences
+of any character, followed by \"123\". If there are no options, the
+\")\" is optional; for example, [)abc]{.regex} is equivalent to
+[abc]{.regex}.</p>
+<p>Although <em>NeedleRegEx</em> cannot contain binary zero, the pattern
+<code>\x00</code> can be used to match a binary zero within <em>Haystack</em>.</p>
+</dd>
+<dt>Replacement</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, <em>NeedleRegEx</em> will be replaced with blank
+(empty), meaning it will be omitted from the return value.
+Otherwise, specify the string to be substituted for each match,
+which is plain text (not a regular expression).</p>
+<p>This parameter may include backreferences like \$1, which brings in
+the substring from <em>Haystack</em> that matched the first
+<a href="../misc/RegEx-QuickRef.htm#subpat">subpattern</a>. The simplest
+backreferences are \$0 through \$9, where \$0 is the substring that
+matched the entire pattern, \$1 is the substring that matched the
+first subpattern, \$2 is the second, and so on. For backreferences
+greater than 9 (and optionally those less than or equal to 9),
+enclose the number in braces; e.g. \${10}, \${11}, and so on. For
+<a href="RegExMatch.htm#NamedSubPat">named subpatterns</a>, enclose the name in
+braces; e.g. \${SubpatternName}. To specify a literal \$, use \$\$
+(this is the only character that needs such special treatment;
+backslashes are never needed to escape anything).</p>
+<p>To convert the case of a subpattern, follow the \$ with one of the
+following characters: U or u (uppercase), L or l (lowercase), T or t
+(title case, in which the first letter of each word is capitalized
+but all others are made lowercase). For example, both \$U1 and
+\$U{1} transcribe an uppercase version of the first subpattern.</p>
+<p>Nonexistent backreferences and those that did not match anything in
+<em>Haystack</em> -- such as one of the subpatterns in
+[(abc)|(xyz)]{.regex} -- are transcribed as empty strings.</p>
+</dd>
+<dt>&amp;OutputVarCount</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#variable-references">VarRef</a></p>
+<p>If omitted, the corresponding value will not be stored. Otherwise,
+specify a reference to the output variable in which to store the
+number of replacements that occurred (0 if none).</p>
+</dd>
+<dt>Limit</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to -1, which replaces [all]{.underline}
+occurrences of the pattern found in <em>Haystack</em>. Otherwise, specify
+the maximum number of replacements to allow. The part of <em>Haystack</em>
+to the right of the last replacement is left unchanged.</p>
+</dd>
+<dt>StartingPos</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 1 (the beginning of <em>Haystack</em>).
+Otherwise, specify 2 to start at the second character, 3 to start at
+the third, and so on. If <em>StartingPos</em> is beyond the length of
+<em>Haystack</em>, the search starts at the empty string that lies at the
+end of <em>Haystack</em> (which typically results in no replacements).</p>
+<p>Specify a negative <em>StartingPos</em> to start at that position from the
+right. For example, -1 starts at the last character and -2 starts at
+the next-to-last character. If <em>StartingPos</em> tries to go beyond the
+left end of <em>Haystack</em>, all of <em>Haystack</em> is searched.</p>
+<p>Specify 0 to start at the end of <em>Haystack</em>; i.e. the position to
+the right of the last character. This can be used with zero-width
+assertions such as <code>(?&lt;=a)</code>.</p>
+<p>Regardless of the value of <em>StartingPos</em>, the return value is always
+a complete copy of <em>Haystack</em> -- the only difference is that more
+of its left side might be unaltered compared to what would have
+happened with a <em>StartingPos</em> of 1.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>This function returns a version of <em>Haystack</em> whose contents have been
+replaced by the operation. If no replacements are needed, <em>Haystack</em> is
+returned unaltered.</p>
+<h2 id="Errors">Errors</h2>
+<p>An <a href="Error.htm">Error</a> is thrown if:</p>
+<ul>
+<li>the pattern contains a syntax error; or</li>
+<li>an error occurred during the <em>execution</em> of the regular expression.</li>
+</ul>
+<p>For details, see <a href="RegExMatch.htm#Errors">RegExMatch</a>.</p>
+<h2 id="Options">Options</h2>
+<p>See <a href="../misc/RegEx-QuickRef.htm#Options">RegEx Quick Reference</a> for
+options such as [[i)]{.red}abc]{.regex}, which turns off
+case-sensitivity.</p>
+<h2 id="Performance">Performance</h2>
+<p>To replace simple substrings, use <a href="StrReplace.htm">StrReplace</a> because
+it is faster than RegExReplace.</p>
+<p>If you know what the maximum number of replacements will be, specifying
+that for the <em>Limit</em> parameter improves performance because the search
+can be stopped early (this might also reduce the memory load on the
+system during the operation). For example, if you know there can be only
+one match near the beginning of a large string, specify a limit of 1.</p>
+<p>To improve performance, the 100 most recently used regular expressions
+are kept cached in memory (in compiled form).</p>
+<p>The <a href="../misc/RegEx-QuickRef.htm#Study">study option (S)</a> can sometimes
+improve the performance of a regular expression that is used many times
+(such as in a loop).</p>
+<h2 id="Remarks">Remarks</h2>
+<p>Most characters like abc123 can be used literally inside a regular
+expression. However, any of the characters in the set <code>\.*?+[{|()^$</code>
+must be preceded by a backslash to be seen as literal. For example,
+[\.]{.regex} is a literal period and [\\]{.regex} is a literal
+backslash. Escaping can be avoided by using \Q...\E. For example:
+[\QLiteral Text\E]{.regex}.</p>
+<p>Within a regular expression, special characters such as tab and newline
+can be escaped with either an accent (`) or a backslash (\). For
+example, [`t]{.regex} is the same as [\t]{.regex} except when the <a href="../misc/RegEx-QuickRef.htm#opt_x">x
+option</a> is used.</p>
+<p>To learn the basics of regular expressions (or refresh your memory of
+pattern syntax), see the <a href="../misc/RegEx-QuickRef.htm">RegEx Quick
+Reference</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="RegExMatch.htm">RegExMatch</a>, <a href="../misc/RegEx-QuickRef.htm">RegEx Quick
+Reference</a>, <a href="../misc/RegExCallout.htm">Regular Expression
+Callouts</a>, <a href="StrReplace.htm">StrReplace</a>,
+<a href="InStr.htm">InStr</a></p>
+<p>Common sources of text data: <a href="FileRead.htm">FileRead</a>,
+<a href="Download.htm">Download</a>, <a href="A_Clipboard.htm">A_Clipboard</a>, <a href="GuiControls.htm#Edit">GUI Edit
+controls</a></p>
+<h2 id="Examples">Examples</h2>
+<p>For general RegEx examples, see the <a href="../misc/RegEx-QuickRef.htm">RegEx Quick
+Reference</a>.</p>
+<p>::: {#ExDollar .ex}
+<a class="ex_number" href="#ExDollar"></a> Reports \"abc123xyz\" because the \$ allows a
+match only at the end.</p>
+<pre class="codehilite"><code>MsgBox RegExReplace(&quot;abc123123&quot;, &quot;123$&quot;, &quot;xyz&quot;)
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExCaseInsens .ex}
+<a class="ex_number" href="#ExCaseInsens"></a> Reports \"123\" because a match was
+achieved via the case-insensitive option.</p>
+<pre class="codehilite"><code>MsgBox RegExReplace(&quot;abc123&quot;, &quot;i)^ABC&quot;)
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExBackref .ex}
+<a class="ex_number" href="#ExBackref"></a> Reports \"aaaXYZzzz\" by means of the \$1
+<a href="#BackRef">backreference</a>.</p>
+<pre class="codehilite"><code>MsgBox RegExReplace(&quot;abcXYZ123&quot;, &quot;abc(.*)123&quot;, &quot;aaa$1zzz&quot;)
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExOutputVarCount .ex}
+<a class="ex_number" href="#ExOutputVarCount"></a> Reports an empty string and stores 2
+in <code class="variable">ReplacementCount</code>.</p>
+<pre class="codehilite"><code>MsgBox RegExReplace(&quot;abc123abc456&quot;, &quot;abc\d+&quot;, &quot;&quot;, &amp;ReplacementCount)
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/RegExReplace.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#regexreplace">RegExReplace</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Errors">Errors</a></li>
+<li><a href="#Options">Options</a></li>
+<li><a href="#Performance">Performance</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

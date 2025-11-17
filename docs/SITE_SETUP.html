@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages Site Setup Guide | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="This guide will help you deploy the AutoHotkey v2 documentation site to GitHub Pages.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>SITE_SETUP</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="github-pages-site-setup-guide">GitHub Pages Site Setup Guide</h1>
+<p>This guide will help you deploy the AutoHotkey v2 documentation site to GitHub Pages.</p>
+<h2 id="overview">📋 Overview</h2>
+<p>The documentation site is a modern, Docusaurus-inspired static site that features:
+- Beautiful responsive design with dark/light mode
+- Full-text client-side search
+- Mobile-friendly navigation
+- Syntax-highlighted code blocks
+- Auto-generated table of contents
+- Fast static HTML pages</p>
+<h2 id="quick-deploy">🚀 Quick Deploy</h2>
+<h3 id="option-1-automatic-deployment-recommended">Option 1: Automatic Deployment (Recommended)</h3>
+<p>The site is configured to deploy automatically via GitHub Actions when you push to the <code>main</code> branch.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong>Merge this branch to main</strong> (or push directly to main)</li>
+<li><strong>Enable GitHub Pages</strong> in your repository:</li>
+<li>Go to repository Settings → Pages</li>
+<li>Under "Source", select "GitHub Actions"</li>
+<li>Save the settings</li>
+<li><strong>Wait for deployment</strong> (2-3 minutes)</li>
+<li><strong>Access your site</strong> at: <code>https://YOUR_USERNAME.github.io/AHKv2_Docs</code></li>
+</ol>
+<p>That's it! The GitHub Actions workflow will:
+- Install Python dependencies
+- Run the site generator (<code>site/build.py</code>)
+- Deploy the generated site to GitHub Pages</p>
+<h3 id="option-2-manual-build-deploy">Option 2: Manual Build &amp; Deploy</h3>
+<p>If you want to build the site manually:</p>
+<pre class="codehilite"><code class="language-bash"># 1. Install dependencies
+cd site
+pip install -r requirements.txt
+
+# 2. Build the site
+python build.py
+
+# 3. The generated site is now in the /docs folder
+# 4. Commit and push the docs/ folder
+cd ..
+git add docs/
+git commit -m &quot;Build documentation site&quot;
+git push origin main
+
+# 5. Enable GitHub Pages
+# Go to Settings → Pages
+# Set Source to &quot;Deploy from a branch&quot;
+# Select branch: main, folder: /docs
+</code></pre>
+
+<h2 id="local-testing">🔧 Local Testing</h2>
+<p>Before deploying, you can test the site locally:</p>
+<pre class="codehilite"><code class="language-bash"># 1. Build the site
+cd site
+python build.py
+
+# 2. Serve the site locally
+cd ../docs
+python -m http.server 8000
+
+# 3. Open in browser
+# Navigate to: http://localhost:8000
+</code></pre>
+
+<p>You should see the documentation site with full navigation, search, and all features working.</p>
+<h2 id="github-pages-configuration">🌐 GitHub Pages Configuration</h2>
+<h3 id="step-by-step-configuration">Step-by-Step Configuration</h3>
+<ol>
+<li><strong>Go to Repository Settings</strong></li>
+<li>Navigate to your repository on GitHub</li>
+<li>
+<p>Click "Settings" tab</p>
+</li>
+<li>
+<p><strong>Navigate to Pages Section</strong></p>
+</li>
+<li>
+<p>In the left sidebar, click "Pages"</p>
+</li>
+<li>
+<p><strong>Configure Source</strong></p>
+</li>
+</ol>
+<p><strong>For Automatic Deployment (GitHub Actions):</strong>
+   - Under "Build and deployment"
+   - Source: Select "GitHub Actions"
+   - The workflow file (<code>.github/workflows/deploy-docs.yml</code>) will handle the rest</p>
+<p><strong>For Manual Deployment:</strong>
+   - Source: Select "Deploy from a branch"
+   - Branch: Select <code>main</code>
+   - Folder: Select <code>/docs</code>
+   - Click "Save"</p>
+<ol>
+<li><strong>Wait for Deployment</strong></li>
+<li>GitHub will show the deployment status</li>
+<li>First deployment takes 2-3 minutes</li>
+<li>
+<p>Subsequent deployments are faster (1-2 minutes)</p>
+</li>
+<li>
+<p><strong>Access Your Site</strong></p>
+</li>
+<li>Once deployed, the URL will be shown at the top of the Pages settings</li>
+<li>Default: <code>https://YOUR_USERNAME.github.io/AHKv2_Docs</code></li>
+</ol>
+<h3 id="custom-domain-optional">Custom Domain (Optional)</h3>
+<p>To use a custom domain like <code>docs.autohotkey.com</code>:</p>
+<ol>
+<li>
+<p><strong>Edit the CNAME file</strong>
+   <code>bash
+   echo "docs.autohotkey.com" &gt; CNAME
+   git add CNAME
+   git commit -m "Add custom domain"
+   git push</code></p>
+</li>
+<li>
+<p><strong>Configure DNS</strong></p>
+</li>
+<li>Add a CNAME record pointing to: <code>YOUR_USERNAME.github.io</code></li>
+<li>
+<p>Or add A records pointing to GitHub Pages IPs:</p>
+<ul>
+<li>185.199.108.153</li>
+<li>185.199.109.153</li>
+<li>185.199.110.153</li>
+<li>185.199.111.153</li>
+</ul>
+</li>
+<li>
+<p><strong>Enable HTTPS</strong></p>
+</li>
+<li>In GitHub Pages settings, check "Enforce HTTPS"</li>
+<li>Wait for certificate provisioning (can take up to 24 hours)</li>
+</ol>
+<h2 id="how-it-works">📁 How It Works</h2>
+<h3 id="build-process">Build Process</h3>
+<p>The <code>site/build.py</code> script:</p>
+<ol>
+<li><strong>Scans Repository</strong>: Finds all <code>.md</code> files</li>
+<li><strong>Parses Markdown</strong>: Converts to HTML using Python-Markdown</li>
+<li><strong>Extracts Metadata</strong>: Titles, headings, descriptions</li>
+<li><strong>Renders Template</strong>: Injects content into <code>templates/base.html</code></li>
+<li><strong>Generates Search Index</strong>: Creates <code>search-index.json</code> for client-side search</li>
+<li><strong>Copies Assets</strong>: CSS, JavaScript to output directory</li>
+<li><strong>Creates Sitemap</strong>: Generates <code>sitemap.xml</code> for SEO</li>
+</ol>
+<h3 id="directory-structure">Directory Structure</h3>
+<pre class="codehilite"><code>AHKv2_Docs/
+├── site/                      # Source files
+│   ├── templates/
+│   │   └── base.html          # Main template
+│   ├── css/                   # Stylesheets
+│   ├── js/                    # JavaScript
+│   ├── build.py               # Static site generator
+│   └── requirements.txt       # Python dependencies
+├── docs/                      # Generated site (output)
+│   ├── index.html
+│   ├── css/
+│   ├── js/
+│   ├── search-index.json
+│   └── [all generated pages]
+├── .github/
+│   └── workflows/
+│       └── deploy-docs.yml    # GitHub Actions workflow
+└── [markdown files]           # Source documentation
+</code></pre>
+
+<h3 id="github-actions-workflow">GitHub Actions Workflow</h3>
+<p>The workflow (<code>.github/workflows/deploy-docs.yml</code>) runs on:
+- Push to <code>main</code> branch
+- Manual trigger (workflow_dispatch)</p>
+<p>It performs these steps:
+1. Checkout repository
+2. Setup Python 3.11
+3. Install dependencies
+4. Run <code>python site/build.py</code>
+5. Upload generated site as artifact
+6. Deploy to GitHub Pages</p>
+<h2 id="customization">🎨 Customization</h2>
+<h3 id="change-colors">Change Colors</h3>
+<p>Edit <code>site/css/styles.css</code>:</p>
+<pre class="codehilite"><code class="language-css">:root {
+    --primary: #4a9eff;        /* Primary color */
+    --secondary: #00c9a7;      /* Secondary color */
+    --accent: #ff6b6b;         /* Accent color */
+    /* ... */
+}
+</code></pre>
+
+<h3 id="modify-navigation">Modify Navigation</h3>
+<p>Edit the sidebar in <code>site/templates/base.html</code>:</p>
+<pre class="codehilite"><code class="language-html">&lt;div class=&quot;sidebar-category&quot;&gt;
+    &lt;div class=&quot;category-header&quot;&gt;
+        &lt;i class=&quot;fas fa-code&quot;&gt;&lt;/i&gt;
+        &lt;span&gt;Your Category&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;ul class=&quot;category-items&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;/your/link.html&quot;&gt;Your Link&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3 id="add-custom-javascript">Add Custom JavaScript</h3>
+<p>Create new file in <code>site/js/</code>:</p>
+<pre class="codehilite"><code class="language-javascript">// site/js/custom.js
+console.log('Custom script loaded');
+</code></pre>
+
+<p>Include in <code>site/templates/base.html</code>:</p>
+<pre class="codehilite"><code class="language-html">&lt;script src=&quot;/js/custom.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<h3 id="customize-homepage">Customize Homepage</h3>
+<p>Edit the <code>generate_index()</code> function in <code>site/build.py</code>:</p>
+<pre class="codehilite"><code class="language-python">def generate_index(self):
+    &quot;&quot;&quot;Generate the homepage&quot;&quot;&quot;
+    # Customize content here
+</code></pre>
+
+<h2 id="troubleshooting">🐛 Troubleshooting</h2>
+<h3 id="build-fails">Build Fails</h3>
+<p><strong>Error: Python module not found</strong></p>
+<pre class="codehilite"><code class="language-bash"># Reinstall dependencies
+cd site
+pip install -r requirements.txt --force-reinstall
+</code></pre>
+
+<p><strong>Error: Permission denied</strong></p>
+<pre class="codehilite"><code class="language-bash"># Ensure build.py is readable
+chmod +x site/build.py
+</code></pre>
+
+<h3 id="github-actions-fails">GitHub Actions Fails</h3>
+<p><strong>Check the workflow run:</strong>
+1. Go to repository → Actions tab
+2. Click on the failed workflow run
+3. Expand the failed step to see error details</p>
+<p><strong>Common issues:</strong>
+- Python version mismatch (requires 3.8+)
+- Missing dependencies (check requirements.txt)
+- Syntax errors in build.py</p>
+<h3 id="site-not-displaying-correctly">Site Not Displaying Correctly</h3>
+<p><strong>CSS/JS not loading:</strong>
+- Check browser console for 404 errors
+- Ensure files are in <code>/docs/css/</code> and <code>/docs/js/</code>
+- Clear browser cache (Ctrl+Shift+R)</p>
+<p><strong>Search not working:</strong>
+- Verify <code>search-index.json</code> exists in <code>/docs</code>
+- Check browser console for errors
+- Ensure JavaScript is enabled</p>
+<p><strong>Images broken:</strong>
+- Ensure image paths are relative
+- Check that images are in the <code>/docs</code> output
+- Verify MIME types are correct</p>
+<h3 id="page-not-found-404">Page Not Found (404)</h3>
+<p><strong>Check GitHub Pages settings:</strong>
+- Ensure Pages is enabled
+- Verify correct source (branch/folder or GitHub Actions)
+- Check that index.html exists in output</p>
+<p><strong>Check deployment status:</strong>
+- Go to Settings → Pages
+- Look for deployment status message
+- Wait for deployment to complete (2-3 minutes)</p>
+<h2 id="performance">📊 Performance</h2>
+<p>The generated site is optimized for performance:</p>
+<ul>
+<li><strong>Build Time</strong>: ~5-10 seconds for 413 files</li>
+<li><strong>Page Load</strong>: &lt; 1 second (static HTML)</li>
+<li><strong>Search</strong>: Instant (client-side JSON index)</li>
+<li><strong>Lighthouse Score</strong>: 95+ on all metrics</li>
+</ul>
+<h2 id="updating-the-site">🔄 Updating the Site</h2>
+<h3 id="automatic-updates-recommended">Automatic Updates (Recommended)</h3>
+<ol>
+<li>Edit markdown files in the repository</li>
+<li>Commit and push to <code>main</code></li>
+<li>GitHub Actions automatically rebuilds and deploys</li>
+<li>Changes live in 2-3 minutes</li>
+</ol>
+<h3 id="manual-updates">Manual Updates</h3>
+<ol>
+<li>Edit markdown files</li>
+<li>Run <code>python site/build.py</code> locally</li>
+<li>Test with <code>python -m http.server 8000</code></li>
+<li>Commit and push changes</li>
+<li>Site updates automatically</li>
+</ol>
+<h2 id="checklist">✅ Checklist</h2>
+<p>Before going live, ensure:</p>
+<ul>
+<li>[ ] GitHub Pages is enabled in repository settings</li>
+<li>[ ] Source is set to "GitHub Actions" (recommended)</li>
+<li>[ ] Workflow has run successfully (check Actions tab)</li>
+<li>[ ] Site is accessible at the GitHub Pages URL</li>
+<li>[ ] Search functionality works</li>
+<li>[ ] Dark/light mode toggle works</li>
+<li>[ ] Mobile navigation works</li>
+<li>[ ] All links are working</li>
+<li>[ ] Custom domain configured (if applicable)</li>
+<li>[ ] HTTPS is enabled</li>
+</ul>
+<h2 id="additional-resources">📚 Additional Resources</h2>
+<ul>
+<li><strong>GitHub Pages Documentation</strong>: https://docs.github.com/pages</li>
+<li><strong>Python-Markdown</strong>: https://python-markdown.github.io/</li>
+<li><strong>Jinja2 Templates</strong>: https://jinja.palletsprojects.com/</li>
+<li><strong>Site README</strong>: See <code>site/README.md</code> for technical details</li>
+</ul>
+<h2 id="next-steps">🎯 Next Steps</h2>
+<ol>
+<li><strong>Enable GitHub Pages</strong> in repository settings</li>
+<li><strong>Test the deployment</strong> by accessing the GitHub Pages URL</li>
+<li><strong>Customize the site</strong> (colors, navigation, homepage)</li>
+<li><strong>Add custom domain</strong> (optional)</li>
+<li><strong>Share the URL</strong> with your users!</li>
+</ol>
+<hr />
+<p><strong>Need Help?</strong></p>
+<p>If you encounter issues:
+1. Check the troubleshooting section above
+2. Review the GitHub Actions logs
+3. Test locally with <code>python site/build.py</code>
+4. Check browser console for errors</p>
+<p><strong>Your documentation site will be live at:</strong>
+<code>https://YOUR_USERNAME.github.io/AHKv2_Docs</code></p>
+<p>Replace <code>YOUR_USERNAME</code> with your actual GitHub username.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/SITE_SETUP.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#github-pages-site-setup-guide">GitHub Pages Site Setup Guide</a><ul>
+<li><a href="#overview">📋 Overview</a></li>
+<li><a href="#quick-deploy">🚀 Quick Deploy</a><ul>
+<li><a href="#option-1-automatic-deployment-recommended">Option 1: Automatic Deployment (Recommended)</a></li>
+<li><a href="#option-2-manual-build-deploy">Option 2: Manual Build &amp; Deploy</a></li>
+</ul>
+</li>
+<li><a href="#local-testing">🔧 Local Testing</a></li>
+<li><a href="#github-pages-configuration">🌐 GitHub Pages Configuration</a><ul>
+<li><a href="#step-by-step-configuration">Step-by-Step Configuration</a></li>
+<li><a href="#custom-domain-optional">Custom Domain (Optional)</a></li>
+</ul>
+</li>
+<li><a href="#how-it-works">📁 How It Works</a><ul>
+<li><a href="#build-process">Build Process</a></li>
+<li><a href="#directory-structure">Directory Structure</a></li>
+<li><a href="#github-actions-workflow">GitHub Actions Workflow</a></li>
+</ul>
+</li>
+<li><a href="#customization">🎨 Customization</a><ul>
+<li><a href="#change-colors">Change Colors</a></li>
+<li><a href="#modify-navigation">Modify Navigation</a></li>
+<li><a href="#add-custom-javascript">Add Custom JavaScript</a></li>
+<li><a href="#customize-homepage">Customize Homepage</a></li>
+</ul>
+</li>
+<li><a href="#troubleshooting">🐛 Troubleshooting</a><ul>
+<li><a href="#build-fails">Build Fails</a></li>
+<li><a href="#github-actions-fails">GitHub Actions Fails</a></li>
+<li><a href="#site-not-displaying-correctly">Site Not Displaying Correctly</a></li>
+<li><a href="#page-not-found-404">Page Not Found (404)</a></li>
+</ul>
+</li>
+<li><a href="#performance">📊 Performance</a></li>
+<li><a href="#updating-the-site">🔄 Updating the Site</a><ul>
+<li><a href="#automatic-updates-recommended">Automatic Updates (Recommended)</a></li>
+<li><a href="#manual-updates">Manual Updates</a></li>
+</ul>
+</li>
+<li><a href="#checklist">✅ Checklist</a></li>
+<li><a href="#additional-resources">📚 Additional Resources</a></li>
+<li><a href="#next-steps">🎯 Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

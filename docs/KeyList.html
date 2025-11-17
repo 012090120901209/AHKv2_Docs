@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Keys [(Keyboard, Mouse and Controller)] | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="## Table of Contents {#toc}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>KeyList</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="list-of-keys-keyboard-mouse-and-controllerheadnote">List of Keys [(Keyboard, Mouse and Controller)]{.headnote}</h1>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#mouse">Mouse</a><ul>
+<li><a href="#mouse-general">General Buttons</a></li>
+<li><a href="#mouse-advanced">Advanced Buttons</a></li>
+<li><a href="#mouse-wheel">Wheel</a></li>
+</ul>
+</li>
+<li><a href="#keyboard">Keyboard</a><ul>
+<li><a href="#general">General Keys</a></li>
+<li><a href="#cursor">Cursor Control Keys</a></li>
+<li><a href="#numpad">Numpad Keys</a></li>
+<li><a href="#function">Function Keys</a></li>
+<li><a href="#modifier">Modifier Keys</a></li>
+<li><a href="#multimedia">Multimedia Keys</a></li>
+<li><a href="#other">Other Keys</a></li>
+</ul>
+</li>
+<li><a href="#Controller">Game Controller (Gamepad, Joystick, etc.)</a></li>
+<li><a href="#remote">Hand-held Remote Controls</a></li>
+<li><a href="#SpecialKeys">Special Keys</a></li>
+<li><a href="#IME">CapsLock and IME</a></li>
+</ul>
+<h2 id="mouse">Mouse</h2>
+<h3 id="mouse-general">General Buttons</h3>
+<p>Name      Description</p>
+<hr />
+<p>LButton   Primary mouse button. Which physical button this corresponds to depends on system settings; by default it is the left button.
+  RButton   Secondary mouse button. Which physical button this corresponds to depends on system settings; by default it is the right button.
+  MButton   Middle or wheel mouse button</p>
+<h3 id="mouse-advanced">Advanced Buttons</h3>
+<p>Name       Description</p>
+<hr />
+<p>XButton1   4th mouse button. Typically performs the same function as Browser_Back.
+  XButton2   5th mouse button. Typically performs the same function as Browser_Forward.</p>
+<h3 id="mouse-wheel">Wheel</h3>
+<p>+-----------------------------------+-----------------------------------+
+| Name                              | Description                       |
++===================================+===================================+
+| WheelDown                         | Turn the wheel downward (toward   |
+|                                   | you).                             |
++-----------------------------------+-----------------------------------+
+| WheelUp                           | Turn the wheel upward (away from  |
+|                                   | you).                             |
++-----------------------------------+-----------------------------------+
+| WheelLeft\                        | Scroll to the left or right.      |
+| WheelRight                        |                                   |
+|                                   | These can be <a href="Hotkeys.htm#HWheel">used as             |
+|                                   | hotkeys</a> with |
+|                                   | some (but not all) mice which     |
+|                                   | have a second wheel or support    |
+|                                   | tilting the wheel to either side. |
+|                                   | In some cases, software bundled   |
+|                                   | with the mouse must instead be    |
+|                                   | used to control this feature.     |
+|                                   | Regardless of the particular      |
+|                                   | mouse, <a href="lib/Send.htm">Send</a> and   |
+|                                   | <a href="lib/Click.htm">Click</a> can be     |
+|                                   | used to scroll horizontally in    |
+|                                   | programs which support it.        |
++-----------------------------------+-----------------------------------+</p>
+<h2 id="keyboard">Keyboard</h2>
+<p><strong>Note:</strong> The names of the letter and number keys are the same as that
+single letter or digit. For example: b is [B]{.kbd} and 5 is [5]{.kbd}.</p>
+<p>Although any single character can be used as a key name, its meaning
+(scan code or virtual keycode) depends on the current keyboard layout.
+Additionally, some special characters may need to be escaped or enclosed
+in braces, depending on the context. The letters a-z or A-Z can be used
+to refer to the corresponding virtual keycodes (usually vk41-vk5A) even
+if they are not included in the current keyboard layout.</p>
+<h3 id="general">General Keys</h3>
+<p>+-----------------------------------+-----------------------------------+
+| Name                              | Description                       |
++===================================+===================================+
+| CapsLock                          | [CapsLock]{.kbd} (caps lock key)  |
+|                                   |                                   |
+|                                   | <strong>Note:</strong> Windows IME may         |
+|                                   | interfere with the detection and  |
+|                                   | functionality of CapsLock; see    |
+|                                   | <a href="#IME">CapsLock and IME</a> for      |
+|                                   | details.                          |
++-----------------------------------+-----------------------------------+
+| Space                             | [Space]{.kbd} (space bar)         |
++-----------------------------------+-----------------------------------+
+| Tab                               | [Tab]{.kbd} (tabulator key)       |
++-----------------------------------+-----------------------------------+
+| Enter                             | [Enter]{.kbd}                     |
++-----------------------------------+-----------------------------------+
+| Escape (or Esc)                   | [Esc]{.kbd}                       |
++-----------------------------------+-----------------------------------+
+| Backspace (or BS)                 | [Backspace]{.kbd}                 |
++-----------------------------------+-----------------------------------+</p>
+<h3 id="cursor">Cursor Control Keys</h3>
+<p>Name              Description</p>
+<hr />
+<p>ScrollLock        [ScrollLock]{.kbd} (scroll lock key). While [Ctrl]{.kbd} is held down, [ScrollLock]{.kbd} produces the key code of <code>CtrlBreak</code>, but can be differentiated from [Pause]{.kbd} by scan code.
+  Delete (or Del)   [Del]{.kbd}
+  Insert (or Ins)   [Ins]{.kbd}
+  Home              [Home]{.kbd}
+  End               [End]{.kbd}
+  PgUp              [PgUp]{.kbd} (page up key)
+  PgDn              [PgDn]{.kbd} (page down key)
+  Up                [↑]{.kbd} (up arrow key)
+  Down              [↓]{.kbd} (down arrow key)
+  Left              [←]{.kbd} (left arrow key)
+  Right             [→]{.kbd} (right arrow key)</p>
+<h3 id="numpad">Numpad Keys</h3>
+<p>Due to system behavior, the following keys separated by a slash are
+identified differently depending on whether [NumLock]{.kbd} is ON or
+OFF. If [NumLock]{.kbd} is OFF but [Shift]{.kbd} is pressed, the system
+temporarily releases [Shift]{.kbd} and acts as though [NumLock]{.kbd} is
+ON.</p>
+<p>Name                    Description</p>
+<hr />
+<p>Numpad0 / NumpadIns     [0]{.kbd} / [Ins]{.kbd}
+  Numpad1 / NumpadEnd     [1]{.kbd} / [End]{.kbd}
+  Numpad2 / NumpadDown    [2]{.kbd} / [↓]{.kbd}
+  Numpad3 / NumpadPgDn    [3]{.kbd} / [PgDn]{.kbd}
+  Numpad4 / NumpadLeft    [4]{.kbd} / [←]{.kbd}
+  Numpad5 / NumpadClear   [5]{.kbd} / typically does nothing
+  Numpad6 / NumpadRight   [6]{.kbd} / [→]{.kbd}
+  Numpad7 / NumpadHome    [7]{.kbd} / [Home]{.kbd}
+  Numpad8 / NumpadUp      [8]{.kbd} / [↑]{.kbd}
+  Numpad9 / NumpadPgUp    [9]{.kbd} / [PgUp]{.kbd}
+  NumpadDot / NumpadDel   [.]{.kbd} / [Del]{.kbd}
+  NumLock                 [NumLock]{.kbd} (number lock key). While [Ctrl]{.kbd} is held down, [NumLock]{.kbd} produces the key code of <code class="no-highlight">Pause</code>, so use <code class="no-highlight">^Pause</code> in hotkeys instead of <code>^NumLock</code>.
+  NumpadDiv               [/]{.kbd} (division)
+  NumpadMult              [*]{.kbd} (multiplication)
+  NumpadAdd               [+]{.kbd} (addition)
+  NumpadSub               [-]{.kbd} (subtraction)
+  NumpadEnter             [Enter]{.kbd}</p>
+<h3 id="function">Function Keys</h3>
+<p>Name       Description</p>
+<hr />
+<p>F1 - F24   The 12 or more function keys at the top of most keyboards.</p>
+<h3 id="modifier">Modifier Keys</h3>
+<p>+-----------------------------------+-----------------------------------+
+| Name                              | Description                       |
++===================================+===================================+
+| LWin                              | Left [Win]{.kbd}. Corresponds to  |
+|                                   | the <code>&lt;#</code> hotkey prefix.           |
++-----------------------------------+-----------------------------------+
+| RWin                              | Right [Win]{.kbd}. Corresponds to |
+|                                   | the <code>&gt;#</code> hotkey prefix.           |
+|                                   |                                   |
+|                                   | <strong>Note:</strong> Unlike                  |
+|                                   | [Ctrl]                            |
+|                                   | {.kbd}/[Alt]{.kbd}/[Shift]{.kbd}, |
+|                                   | there is no generic/neutral       |
+|                                   | \"Win\" key because the OS does   |
+|                                   | not support it. However, hotkeys  |
+|                                   | with the <code>#</code> modifier can be      |
+|                                   | triggered by either [Win]{.kbd}.  |
++-----------------------------------+-----------------------------------+
+| Control (or Ctrl)                 | [Ctrl]{.kbd}. As a hotkey         |
+|                                   | (<code>Control::</code>) it fires upon       |
+|                                   | release unless it has the tilde   |
+|                                   | prefix. Corresponds to the <code>^</code>    |
+|                                   | hotkey prefix.                    |
++-----------------------------------+-----------------------------------+
+| Alt                               | [Alt]{.kbd}. As a hotkey          |
+|                                   | (<code>Alt::</code>) it fires upon release   |
+|                                   | unless it has the tilde prefix.   |
+|                                   | Corresponds to the <code>!</code> hotkey     |
+|                                   | prefix.                           |
++-----------------------------------+-----------------------------------+
+| Shift                             | [Shift]{.kbd}. As a hotkey        |
+|                                   | (<code>Shift::</code>) it fires upon release |
+|                                   | unless it has the tilde prefix.   |
+|                                   | Corresponds to the <code>+</code> hotkey     |
+|                                   | prefix.                           |
++-----------------------------------+-----------------------------------+
+| LControl (or LCtrl)               | Left [Ctrl]{.kbd}. Corresponds to |
+|                                   | the <code>&lt;^</code> hotkey prefix.           |
++-----------------------------------+-----------------------------------+
+| RControl (or RCtrl)               | Right [Ctrl]{.kbd}. Corresponds   |
+|                                   | to the <code>&gt;^</code> hotkey prefix.        |
++-----------------------------------+-----------------------------------+
+| LShift                            | Left [Shift]{.kbd}. Corresponds   |
+|                                   | to the <code>&lt;+</code> hotkey prefix.        |
++-----------------------------------+-----------------------------------+
+| RShift                            | Right [Shift]{.kbd}. Corresponds  |
+|                                   | to the <code>&gt;+</code> hotkey prefix.        |
++-----------------------------------+-----------------------------------+
+| LAlt                              | Left [Alt]{.kbd}. Corresponds to  |
+|                                   | the <code>&lt;!</code> hotkey prefix.           |
++-----------------------------------+-----------------------------------+
+| RAlt                              | Right [Alt]{.kbd}. Corresponds to |
+|                                   | the <code>&gt;!</code> hotkey prefix.           |
+|                                   |                                   |
+|                                   | <strong>Note:</strong> If your keyboard layout |
+|                                   | has AltGr instead of RAlt, you    |
+|                                   | can probably use it as a hotkey   |
+|                                   | prefix via <code>&lt;^&gt;!</code> as described    |
+|                                   | <a href="Hotkeys.htm#AltGr">here</a>. In     |
+|                                   | addition, <code>LControl &amp; RAlt::</code>     |
+|                                   | would make AltGr itself into a    |
+|                                   | hotkey.                           |
++-----------------------------------+-----------------------------------+</p>
+<h3 id="multimedia">Multimedia Keys</h3>
+<p>The function assigned to each of the keys listed below can be overridden
+by modifying the Windows registry. This table shows the default function
+of each key on most versions of Windows.</p>
+<p>Name                Description</p>
+<hr />
+<p>Browser_Back        Back
+  Browser_Forward     Forward
+  Browser_Refresh     Refresh
+  Browser_Stop        Stop
+  Browser_Search      Search
+  Browser_Favorites   Favorites
+  Browser_Home        Homepage
+  Volume_Mute         Mute the volume
+  Volume_Down         Lower the volume
+  Volume_Up           Increase the volume
+  Media_Next          Next Track
+  Media_Prev          Previous Track
+  Media_Stop          Stop
+  Media_Play_Pause    Play/Pause
+  Launch_Mail         Launch default e-mail program
+  Launch_Media        Launch default media player
+  Launch_App1         Launch This PC (formerly My Computer or Computer)
+  Launch_App2         Launch Calculator</p>
+<h3 id="other">Other Keys</h3>
+<p>+-----------------------------------+-----------------------------------+
+| Name                              | Description                       |
++===================================+===================================+
+| AppsKey                           | [Menu]{.kbd}. This is the key     |
+|                                   | that invokes the right-click      |
+|                                   | context menu.                     |
++-----------------------------------+-----------------------------------+
+| PrintScreen                       | [PrtSc]{.kbd} (print screen key)  |
++-----------------------------------+-----------------------------------+
+| CtrlBreak                         | [Ctrl]{.kbd}+[Pause]{.kbd} or     |
+|                                   | [Ctrl]{.kbd}+[ScrollLock]{.kbd}   |
++-----------------------------------+-----------------------------------+
+| Pause                             | [Pause]{.kbd} or                  |
+|                                   | [Ctrl]{.kbd}+[NumLock]{.kbd}.     |
+|                                   | While [Ctrl]{.kbd} is held down,  |
+|                                   | [Pause]{.kbd} produces the key    |
+|                                   | code of <code>CtrlBreak</code> and           |
+|                                   | [NumLock]{.kbd} produces          |
+|                                   | <code class="no-highlight">Pause</code>, so use    |
+|                                   | <code>^CtrlBreak</code> in hotkeys instead   |
+|                                   | of <code class="no-highlight">^Pause</code>.       |
++-----------------------------------+-----------------------------------+
+| Help                              | [Help]{.kbd}. This probably       |
+|                                   | doesn\'t exist on most keyboards. |
+|                                   | It\'s usually not the same as     |
+|                                   | [F1]{.kbd}.                       |
++-----------------------------------+-----------------------------------+
+| Sleep                             | [Sleep]{.kbd}. Note that the      |
+|                                   | sleep key on some keyboards might |
+|                                   | not work with this.               |
++-----------------------------------+-----------------------------------+
+| SC<strong>nnn</strong>                         | Specify for <strong>nnn</strong> the scan code |
+|                                   | of a key. Recognizes unusual keys |
+|                                   | not mentioned above. See <a href="#SpecialKeys">Special |
+|                                   | Keys</a> for details.  |
++-----------------------------------+-----------------------------------+
+| VK<strong>nn</strong>                          | Specify for <strong>nn</strong> the            |
+|                                   | hexadecimal virtual key code of a |
+|                                   | key. This rarely-used method also |
+|                                   | prevents certain types of         |
+|                                   | <a href="Hotkeys.htm">hotkeys</a> from       |
+|                                   | requiring the <a href="lib/InstallKeybdHook.htm">keyboard           |
+|                                   | hook</a>.  |
+|                                   | For example, the following hotkey |
+|                                   | does not use the keyboard hook,   |
+|                                   | but as a side-effect it is        |
+|                                   | triggered by pressing <em>either</em>    |
+|                                   | [Home]{.kbd} or NumpadHome:       |
+|                                   |                                   |
+|                                   |     ^VK24::M                      |
+|                                   | sgBox "You pressed Home or Numpad |
+|                                   | Home while holding down Control." |
+|                                   |                                   |
+|                                   | <strong>Known limitation:</strong> VK hotkeys  |
+|                                   | that are forced to use the        |
+|                                   | <a href="lib/InstallKeybdHook.htm">keyboard                         |
+|                                   | hook</a>,  |
+|                                   | such as <code>*VK24</code> or <code>~VK24</code>, will  |
+|                                   | fire for only one of the keys,    |
+|                                   | not both (e.g. NumpadHome but not |
+|                                   | [Home]{.kbd}). For more           |
+|                                   | information about the VKnn        |
+|                                   | method, see <a href="#SpecialKeys">Special              |
+|                                   | Keys</a>.              |
+|                                   |                                   |
+|                                   | <strong>Warning:</strong> Only                 |
+|                                   | <a href="lib/Send.htm">Send</a>,             |
+|                                   | <a href="lib/GetKeyName.htm">GetKeyName</a>, |
+|                                   | <a href="lib/GetKeyVK.htm">GetKeyVK</a>,     |
+|                                   | <a href="lib/GetKeySC.htm">GetKeySC</a> and  |
+|                                   | <a href="lib/A_MenuMaskKey.htm">A_Me                             |
+|                                   | nuMaskKey</a> |
+|                                   | support combining VKnn and SCnnn. |
+|                                   | If combined in any other case (or |
+|                                   | if any other invalid suffix is    |
+|                                   | present), the key is not          |
+|                                   | recognized. For example,          |
+|                                   | <code>vk1Bsc001::</code> raises an error.    |
++-----------------------------------+-----------------------------------+</p>
+<h2 id="Controller">Game Controller (Gamepad, Joystick, etc.)</h2>
+<p><strong>Note:</strong> For historical reasons, the following button and control names
+begin with <code>Joy</code>, which stands for joystick. However, they usually also
+work for other game controllers such as gamepads or steering wheels.</p>
+<p><strong>Joy1 through Joy32:</strong> The buttons of the controller. To help determine
+the button numbers for your controller, use this <a href="scripts/index.htm#ControllerTest">test
+script</a>. Note that <a href="Hotkeys.htm">hotkey prefix
+symbols</a> such as \^ (control) and + (shift) are not
+supported (though <a href="lib/GetKeyState.htm">GetKeyState</a> can be used as a
+substitute). Also note that the pressing of controller buttons always
+\"passes through\" to the active window if that window is designed to
+detect the pressing of controller buttons.</p>
+<p>Although the following control names cannot be used as hotkeys, they can
+be used with <a href="lib/GetKeyState.htm">GetKeyState</a>:</p>
+<ul>
+<li><strong>JoyX, JoyY, and JoyZ:</strong> The X (horizontal), Y (vertical), and Z
+    (altitude/depth) axes of the stick.</li>
+<li><strong>JoyR:</strong> The rudder or 4th axis of the stick.</li>
+<li><strong>JoyU and JoyV:</strong> The 5th and 6th axes of the stick.</li>
+<li><strong>JoyPOV:</strong> The point-of-view (hat) control.</li>
+<li><strong>JoyName:</strong> The name of the controller or its driver.</li>
+<li><strong>JoyButtons:</strong> The number of buttons supported by the controller
+    (not always accurate).</li>
+<li><strong>JoyAxes:</strong> The number of axes supported by the controller.</li>
+<li><strong>JoyInfo:</strong> Provides a string consisting of zero or more of the
+    following letters to indicate the controller\'s capabilities: <strong>Z</strong>
+    (has Z axis), <strong>R</strong> (has R axis), <strong>U</strong> (has U axis), <strong>V</strong> (has V
+    axis), <strong>P</strong> (has POV control), <strong>D</strong> (the POV control has a limited
+    number of discrete/distinct settings), <strong>C</strong> (the POV control is
+    continuous/fine). Example string: ZRUVPD</li>
+</ul>
+<p>For example, when using Xbox Wireless/360 controllers, JoyX/JoyY is the
+left stick, JoyR/JoyU the right stick, JoyZ the left and right triggers,
+and JoyPOV the directional pad (D-pad).</p>
+<p><strong>Multiple controllers:</strong> If the computer has more than one controller
+and you want to use one beyond the first, include the controller number
+(max 16) in front of the control name. For example, 2joy1 is the second
+controller\'s first button.</p>
+<p><strong>Note:</strong> If you have trouble getting a script to recognize your
+controller, specify a controller number other than 1 even though only a
+single controller is present. It is unclear how this situation arises or
+whether it is normal, but experimenting with the controller number in
+the <a href="scripts/index.htm#ControllerTest">controller test script</a> can help
+determine if this applies to your system.</p>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="misc/RemapController.htm">Controller remapping</a>: Methods of sending
+    keystrokes and mouse clicks with a controller.</li>
+<li><a href="scripts/index.htm#ControllerMouse">Controller-To-Mouse script</a>:
+    Using a controller as a mouse.</li>
+</ul>
+<h2 id="remote">Hand-held Remote Controls</h2>
+<p>Respond to signals from hand-held remote controls via the <a href="scripts/index.htm#WinLIRC">WinLIRC
+client script</a>.</p>
+<h2 id="SpecialKeys">Special Keys</h2>
+<p>If your keyboard or mouse has a key not listed above, you might still be
+able to make it a hotkey by using the following steps:</p>
+<ol>
+<li>
+<p>Ensure that at least one script is running that is using the
+    <a href="lib/InstallKeybdHook.htm">keyboard hook</a>. You can tell if a script
+    has the keyboard hook by opening its <a href="Program.htm#main-window">main
+    window</a> and selecting \"View-&gt;<a href="lib/KeyHistory.htm">Key
+    history</a>\" from the menu bar.</p>
+</li>
+<li>
+<p>Double-click that script\'s <a href="Program.htm#tray-icon">tray icon</a> to
+    open its <a href="Program.htm#main-window">main window</a>.</p>
+</li>
+<li>
+<p>Press one of the \"mystery keys\" on your keyboard.</p>
+</li>
+<li>
+<p>Select the menu item \"View-&gt;<a href="lib/KeyHistory.htm">Key history</a>\"</p>
+</li>
+<li>
+<p>Scroll down to the bottom of the page. Somewhere near the bottom are
+    the key-down and key-up events for your key. NOTE: Some keys do not
+    generate events and thus will not be visible here. If this is the
+    case, you cannot directly make that particular key a hotkey because
+    your keyboard driver or hardware handles it at a level too low for
+    AutoHotkey to access. For possible solutions, see further below.</p>
+</li>
+<li>
+<p>If your key is detectable, make a note of the 3-digit hexadecimal
+    value in the second column of the list (e.g. <strong>159</strong>).</p>
+</li>
+<li>
+<p>To define this key as a hotkey, follow this example:</p>
+<pre class="codehilite"><code>SC159::MsgBox ThisHotkey &quot; was pressed.&quot; ; Replace 159 with your key's value.
+</code></pre>
+
+<p>Also see <a href="Hotkeys.htm#ThisHotkey">ThisHotkey</a>.</p>
+</li>
+</ol>
+<p><strong>Reverse direction:</strong> To remap some other key to <em>become</em> a \"mystery
+key\", follow this example:</p>
+<pre class="codehilite"><code>; Replace 159 with the value discovered above. Replace FF (if needed) with the
+; key's virtual key, which can be discovered in the first column of the Key History screen.
+#c::Send &quot;{vkFFsc159}&quot; ; See Send {vkXXscYYY} for more details.
+</code></pre>
+
+<p><strong>Alternate solutions:</strong> If your key or mouse button is not detectable
+by the <a href="lib/KeyHistory.htm">Key History</a> screen, one of the following
+might help:</p>
+<ol>
+<li>
+<p>Reconfigure the software that came with your mouse or keyboard
+    (sometimes accessible in the Control Panel or Start Menu) to have
+    the \"mystery key\" send some other keystroke. Such a keystroke can
+    then be defined as a hotkey in a script. For example, if you
+    configure a mystery key to send [Ctrl]{.kbd}+[F1]{.kbd}, you can
+    then indirectly make that key as a hotkey by using <code>^F1::</code> in a
+    script.</p>
+</li>
+<li>
+<p>Try
+    <a href="https://www.autohotkey.com/board/topic/38015-ahkhid-an-ahk-implementation-of-the-hid-functions/">AHKHID</a>
+    from the archived forum. You can also try searching the
+    <a href="https://www.autohotkey.com/boards/">forum</a> for a keywords like
+    <code>RawInput*</code>, <code>USB HID</code> or <code>AHKHID</code>.</p>
+</li>
+<li>
+<p>The following is a last resort and generally should be attempted
+    only in desperation. This is because the chance of success is low
+    and it may cause unwanted side-effects that are difficult to undo:\
+    Disable or remove any extra software that came with your keyboard or
+    mouse or change its driver to a more standard one such as the one
+    built into the OS. This assumes there is such a driver for your
+    particular keyboard or mouse and that you can live without the
+    features provided by its custom driver and software.</p>
+</li>
+</ol>
+<h2 id="IME">CapsLock and IME</h2>
+<p>Some configurations of Windows IME (such as Japanese input with English
+keyboard) use CapsLock to toggle between modes. In such cases, CapsLock
+is suppressed by the IME and cannot be detected by AutoHotkey. However,
+the [Alt]{.kbd}+[CapsLock]{.kbd}, [Ctrl]{.kbd}+[CapsLock]{.kbd} and
+[Shift]{.kbd}+[CapsLock]{.kbd} shortcuts can be disabled with a
+workaround. Specifically, send a key-up to modify the state of the IME,
+but prevent any other effects by signalling the keyboard hook to
+suppress the event. The following function can be used for this purpose:</p>
+<pre class="codehilite"><code>; The keyboard hook must be installed.
+InstallKeybdHook
+SendSuppressedKeyUp(key) {
+    DllCall(&quot;keybd_event&quot;
+        , &quot;char&quot;, GetKeyVK(key)
+        , &quot;char&quot;, GetKeySC(key)
+        , &quot;uint&quot;, KEYEVENTF_KEYUP := 0x2
+        , &quot;uptr&quot;, KEY_BLOCK_THIS := 0xFFC3D450)
+}
+</code></pre>
+
+<p>After copying the function into a script or saving it as
+<em>SendSuppressedKeyUp.ahk</em> in a <a href="Scripts.htm#lib">Lib folder</a> and adding
+<code>#Include &lt;SendSuppressedKeyUp&gt;</code> to the script, it can be used as
+follows:</p>
+<pre class="codehilite"><code>; Disable Alt+key shortcuts for the IME.
+~LAlt::SendSuppressedKeyUp &quot;LAlt&quot;
+
+; Test hotkey:
+!CapsLock::MsgBox A_ThisHotkey
+
+; Remap CapsLock to LCtrl in a way compatible with IME.
+*CapsLock::
+{
+    Send &quot;{Blind}{LCtrl DownR}&quot;
+    SendSuppressedKeyUp &quot;LCtrl&quot;
+}
+*CapsLock up::
+{
+    Send &quot;{Blind}{LCtrl Up}&quot;
+}
+</code></pre>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/KeyList.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#list-of-keys-keyboard-mouse-and-controllerheadnote">List of Keys [(Keyboard, Mouse and Controller)]{.headnote}</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#mouse">Mouse</a><ul>
+<li><a href="#mouse-general">General Buttons</a></li>
+<li><a href="#mouse-advanced">Advanced Buttons</a></li>
+<li><a href="#mouse-wheel">Wheel</a></li>
+</ul>
+</li>
+<li><a href="#keyboard">Keyboard</a><ul>
+<li><a href="#general">General Keys</a></li>
+<li><a href="#cursor">Cursor Control Keys</a></li>
+<li><a href="#numpad">Numpad Keys</a></li>
+<li><a href="#function">Function Keys</a></li>
+<li><a href="#modifier">Modifier Keys</a></li>
+<li><a href="#multimedia">Multimedia Keys</a></li>
+<li><a href="#other">Other Keys</a></li>
+</ul>
+</li>
+<li><a href="#Controller">Game Controller (Gamepad, Joystick, etc.)</a></li>
+<li><a href="#remote">Hand-held Remote Controls</a></li>
+<li><a href="#SpecialKeys">Special Keys</a></li>
+<li><a href="#IME">CapsLock and IME</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

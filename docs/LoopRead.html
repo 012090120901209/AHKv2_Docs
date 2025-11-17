@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop Read | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Retrieves the lines in a text file, one at a time.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>LoopRead</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="loop-read">Loop Read</h1>
+<p>Retrieves the lines in a text file, one at a time.</p>
+<pre class="codehilite"><code class="language-Syntax">Loop Read InputFile , OutputFile
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>InputFile</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name of the text file whose contents will be read by the loop,
+which is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified. The file\'s lines may end in carriage return and
+linefeed (`r`n), just linefeed (`n), or just carriage return
+(`r).</p>
+</dd>
+<dt>OutputFile</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>(Optional) The name of the file to be kept open for the duration of
+the loop, which is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified.</p>
+<p>Within the loop\'s body, use the <a href="FileAppend.htm">FileAppend</a>
+function without the <em>Filename</em> parameter (i.e. omit it) to append
+to this special file. Appending to a file in this manner performs
+better than using <a href="FileAppend.htm">FileAppend</a> in its 2-parameter
+mode because the file does not need to be closed and re-opened for
+each operation. Remember to include a linefeed (`n) or carriage
+return and linefeed (`r`n) after the text, if desired.</p>
+<p>The file is not opened if nothing is ever written to it. This
+happens if the loop performs zero iterations or if it never calls
+<a href="FileAppend.htm">FileAppend</a>.</p>
+<p><strong>Options:</strong> The end of line (EOL) translation mode and output file
+encoding depend on which options are passed in the opening call to
+<a href="FileAppend.htm">FileAppend</a> (i.e. the first call which omits
+<em>Filename</em>). Subsequent calls ignore the <em>Options</em> parameter. EOL
+translation is not performed by default; that is, linefeed (`n)
+characters are written as-is unless the <code>"`n"</code> option is
+present.</p>
+<p><strong>Standard Output (stdout):</strong> Specifying an asterisk (*) for
+<em>OutputFile</em> sends any text written by <a href="FileAppend.htm">FileAppend</a>
+to standard output (stdout). Such text can be redirected to a file,
+piped to another EXE, or captured by <a href="_ErrorStdOut.htm">fancy text
+editors</a>. However, text sent to stdout will not
+appear at the command prompt it was launched from. This can be
+worked around by 1) compiling the script with the <a href="../misc/Ahk2ExeDirectives.htm#ConsoleApp">Ahk2Exe
+ConsoleApp directive</a>,
+or 2) piping a script\'s output to another command or program. See
+<a href="FileAppend.htm">FileAppend</a> for more details.</p>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>A file-reading loop is useful when you want to operate on each line
+contained in a text file, one at a time. The file is kept open for the
+entire operation to avoid having to re-scan each time to find the next
+line.</p>
+<p>The built-in variable <strong>A_LoopReadLine</strong> exists within any file-reading
+loop. It contains the contents of the current line excluding the
+carriage return and linefeed (`r`n) that marks the end of the line. If
+an inner file-reading loop is enclosed by an outer file-reading loop,
+the innermost loop\'s file-line will take precedence.</p>
+<p>Lines up to 65,534 characters long can be read. If the length of a line
+exceeds this, its remaining characters will be read during the next loop
+iteration.</p>
+<p><a href="StrSplit.htm">StrSplit</a> or a <a href="LoopParse.htm">parsing loop</a> is often
+used inside a file-reading loop to parse the contents of each line
+retrieved from <em>InputFile</em>. For example, if <em>InputFile</em>\'s lines are
+each a series of tab-delimited fields, those fields can individually
+retrieved as in this example:</p>
+<pre class="codehilite"><code>Loop read, &quot;C:\Database Export.txt&quot;
+{
+    Loop parse, A_LoopReadLine, A_Tab
+    {
+        MsgBox &quot;Field number &quot; A_Index &quot; is &quot; A_LoopField &quot;.&quot;
+    }
+}
+</code></pre>
+
+<p>To load an entire file into a variable, use <a href="FileRead.htm">FileRead</a>
+because it performs much better than a loop (especially for large
+files).</p>
+<p>To have multiple files open simultaneously, use
+<a href="FileOpen.htm">FileOpen</a>.</p>
+<p>The One True Brace (OTB) style may optionally be used, which allows the
+open-brace to appear on the same line rather than underneath. For
+example: <code>Loop Read InputFile, OutputFile {</code>.</p>
+<p>See <a href="Loop.htm">Loop</a> for information about <a href="Block.htm">Blocks</a>,
+<a href="Break.htm">Break</a>, <a href="Continue.htm">Continue</a>, and the A_Index variable
+(which exists in every type of loop).</p>
+<p>To control how the file is decoded when no byte order mark is present,
+use <a href="FileEncoding.htm">FileEncoding</a>.</p>
+<p>The loop may optionally be followed by an <a href="Else.htm">Else</a> statement,
+which is executed if the input file is empty or could not be found. If
+<em>OutputFile</em> was specified, the special mode of
+<a href="FileAppend.htm">FileAppend</a> described <a href="#OutputFile">above</a> may also be
+used within the <em>Else</em> statement\'s body. If there is no <em>Else</em>, an
+<a href="Error.htm#OSError">OSError</a> is thrown if the file could not be found.</p>
+<h2 id="Related">Related</h2>
+<p><a href="FileEncoding.htm">FileEncoding</a>, <a href="FileOpen.htm">FileOpen</a>/<a href="File.htm">File
+Object</a>, <a href="FileRead.htm">FileRead</a>,
+<a href="FileAppend.htm">FileAppend</a>, <a href="Sort.htm">Sort</a>, <a href="Loop.htm">Loop</a>,
+<a href="Break.htm">Break</a>, <a href="Continue.htm">Continue</a>, <a href="Block.htm">Blocks</a>,
+<a href="FileSetAttrib.htm">FileSetAttrib</a>, <a href="FileSetTime.htm">FileSetTime</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExFileAppend .ex}
+<a class="ex_number" href="#ExFileAppend"></a> Only those lines of the 1st file that
+contain the word FAMILY will be written to the 2nd file. Uncomment the
+first line to overwrite rather than append to any existing file.</p>
+<pre class="codehilite"><code>;FileDelete &quot;C:\Docs\Family Addresses.txt&quot;
+
+Loop read, &quot;C:\Docs\Address List.txt&quot;, &quot;C:\Docs\Family Addresses.txt&quot;
+{
+    if InStr(A_LoopReadLine, &quot;family&quot;)
+        FileAppend(A_LoopReadLine &quot;`n&quot;)
+}
+else
+    MsgBox &quot;Address List.txt was completely empty or not found.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExLastLine .ex}
+<a class="ex_number" href="#ExLastLine"></a> Retrieves the last line from a text file.</p>
+<pre class="codehilite"><code>Loop read, &quot;C:\Log File.txt&quot;
+    last_line := A_LoopReadLine  ; When loop finishes, this will hold the last line.
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExURL .ex}
+<a class="ex_number" href="#ExURL"></a> Attempts to extract all FTP and HTTP URLs from a
+text or HTML file.</p>
+<pre class="codehilite"><code>SourceFile := FileSelect(3,, &quot;Pick a text or HTML file to analyze.&quot;)
+if SourceFile = &quot;&quot;
+    return  ; This will exit in this case.
+
+SplitPath SourceFile,, &amp;SourceFilePath,, &amp;SourceFileNoExt
+DestFile := SourceFilePath &quot;\&quot; SourceFileNoExt &quot; Extracted Links.txt&quot;
+
+if FileExist(DestFile)
+{
+    Result := MsgBox(&quot;Overwrite the existing links file? Press No to append to it.`n`nFILE: &quot; DestFile,, 4)
+    if Result = &quot;Yes&quot;
+        FileDelete DestFile
+}
+
+LinkCount := 0
+Loop read, SourceFile, DestFile
+{
+    URLSearch(A_LoopReadLine)
+}
+MsgBox LinkCount ' links were found and written to &quot;' DestFile '&quot;.'
+return
+
+
+URLSearch(URLSearchString)
+{
+    ; It's done this particular way because some URLs have other URLs embedded inside them:
+    ; Find the left-most starting position:
+    URLStart := 0  ; Set starting default.
+    for URLPrefix in [&quot;https://&quot;, &quot;http://&quot;, &quot;ftp://&quot;, &quot;www.&quot;]
+    {
+        ThisPos := InStr(URLSearchString, URLPrefix)
+        if !ThisPos  ; This prefix is disqualified.
+            continue
+        if !URLStart
+            URLStart := ThisPos
+        else ; URLStart has a valid position in it, so compare it with ThisPos.
+        {
+            if ThisPos &amp;&amp; ThisPos &lt; URLStart
+                URLStart := ThisPos
+        }
+    }
+
+    if !URLStart  ; No URLs exist in URLSearchString.
+        return
+
+    ; Otherwise, extract this URL:
+    URL := SubStr(URLSearchString, URLStart)  ; Omit the beginning/irrelevant part.
+    Loop parse, URL, &quot; `t&lt;&gt;&quot;  ; Find the first space, tab, or angle bracket (if any).
+    {
+        URL := A_LoopField
+        break  ; i.e. perform only one loop iteration to fetch the first &quot;field&quot;.
+    }
+    ; If the above loop had zero iterations because there were no ending characters found,
+    ; leave the contents of the URL var untouched.
+
+    ; If the URL ends in a double quote, remove it.  For now, StrReplace is used, but
+    ; note that it seems that double quotes can legitimately exist inside URLs, so this
+    ; might damage them:
+    URLCleansed := StrReplace(URL, '&quot;')
+    FileAppend URLCleansed &quot;`n&quot;
+    global LinkCount += 1
+
+    ; See if there are any other URLs in this line:
+    CharactersToOmit := StrLen(URL)
+    CharactersToOmit += URLStart
+    URLSearchString := SubStr(URLSearchString, CharactersToOmit)
+
+    ; Recursive call to self:
+    URLSearch(URLSearchString)
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/LoopRead.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#loop-read">Loop Read</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

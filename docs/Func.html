@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Func Object | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="``` NoIndent">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Func</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="func-object">Func Object</h1>
+<pre class="codehilite"><code class="language-NoIndent">class Func extends Object
+</code></pre>
+
+<p>Represents a user-defined or built-in function and provides an interface
+to call it, bind parameters to it, and retrieve information about it or
+its parameters.</p>
+<p>For information about other objects which can be called like functions,
+see <a href="../misc/Functor.htm">Function Objects</a>.</p>
+<p>The <code>Closure</code> class extends <code>Func</code> but does not define any new
+properties.</p>
+<p>For each built-in function or function definition within the script,
+there is a corresponding read-only variable containing a Func object.
+This variable is directly used to call the function, but its value can
+also be read to retrieve the function itself, as a value. For example:</p>
+<pre class="codehilite"><code>InspectFn StrLen
+InspectFn InspectFn
+
+InspectFn(fn)
+{
+    ; Display information about the passed function.
+    MsgBox fn.Name &quot;() is &quot; (fn.IsBuiltIn ? &quot;built-in.&quot; : &quot;user-defined.&quot;)
+}
+</code></pre>
+
+<p>\"FuncObj\" is used below as a placeholder for any Func object, as
+\"Func\" is the class itself.</p>
+<p>In addition to the methods and property inherited from
+<a href="Object.htm">Object</a>, Func objects have the following predefined methods
+and properties.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a>:<ul>
+<li><a href="#Call">Call</a>: Calls the function.</li>
+<li><a href="#Bind">Bind</a>: Binds parameters to the function.</li>
+<li><a href="#IsByRef">IsByRef</a>: Determines whether a parameter is ByRef.</li>
+<li><a href="#IsOptional">IsOptional</a>: Determines whether a parameter is
+    optional.</li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a>:<ul>
+<li><a href="#Name">Name</a>: Returns the function\'s name.</li>
+<li><a href="#IsBuiltIn">IsBuiltIn</a>: Returns 1 (true) if the function is
+    built-in, otherwise 0 (false).</li>
+<li><a href="#IsVariadic">IsVariadic</a>: Returns 1 (true) if the function is
+    variadic, otherwise 0 (false).</li>
+<li><a href="#MinParams">MinParams</a>: Returns the number of required
+    parameters.</li>
+<li><a href="#MaxParams">MaxParams</a>: Returns the number of formally-declared
+    parameters for a user-defined function or maximum parameters for
+    a built-in function.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Methods">Methods</h2>
+<p>::: {#Call .methodShort}</p>
+<h3 id="call">Call</h3>
+<p>Calls the function.</p>
+<pre class="codehilite"><code class="language-Syntax">FuncObj(Param1, Param2, ...)
+FuncObj.Call(Param1, Param2, ...)
+</code></pre>
+
+<h4 id="Call_Parameters">Parameters</h4>
+<dl>
+<dt>Param1, Param2, ...</dt>
+<dd>
+<p>Parameters and return value are defined by the function.</p>
+</dd>
+</dl>
+<h4 id="Call_Remarks">Remarks</h4>
+<p>The \"Call\" method is implied when calling a value, so need not be
+explicitly specified.
+:::</p>
+<p>::: {#Bind .methodShort}</p>
+<h3 id="bind">Bind</h3>
+<p>Binds parameters to the function.</p>
+<pre class="codehilite"><code class="language-Syntax">BoundFunc := FuncObj.Bind(Param1, Param2, ...)
+</code></pre>
+
+<h4 id="Bind_Parameters">Parameters</h4>
+<dl>
+<dt>Param1, Param2, ...</dt>
+<dd>
+<p>Any number of parameters.</p>
+</dd>
+</dl>
+<h4 id="Bind_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>This method returns a <a href="../misc/Functor.htm#BoundFunc">BoundFunc object</a>.
+:::</p>
+<p>::: {#IsByRef .methodShort}</p>
+<h3 id="isbyref">IsByRef</h3>
+<p>Determines whether a parameter is ByRef.</p>
+<pre class="codehilite"><code class="language-Syntax">Boolean := FuncObj.IsByRef(ParamIndex)
+</code></pre>
+
+<h4 id="IsByRef_Parameters">Parameters</h4>
+<dl>
+<dt>ParamIndex</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, <em>Boolean</em> indicates whether the function has any ByRef
+parameters. Otherwise, specify the one-based index of a parameter.</p>
+</dd>
+</dl>
+<h4 id="IsByRef_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#boolean">Integer (boolean)</a></p>
+<p>This method returns 1 (true) if the parameter is ByRef, otherwise 0
+(false). If <em>ParamIndex</em> is invalid, an exception is thrown.
+:::</p>
+<p>::: {#IsOptional .methodShort}</p>
+<h3 id="isoptional">IsOptional</h3>
+<p>Determines whether a parameter is optional.</p>
+<pre class="codehilite"><code class="language-Syntax">Boolean := FuncObj.IsOptional(ParamIndex)
+</code></pre>
+
+<h4 id="IsOptional_Parameters">Parameters</h4>
+<dl>
+<dt>ParamIndex</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, <em>Boolean</em> indicates whether the function has any
+optional parameters. Otherwise, specify the one-based index of a
+parameter.</p>
+</dd>
+</dl>
+<h4 id="IsOptional_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#boolean">Integer (boolean)</a></p>
+<p>This method returns 1 (true) if the parameter is optional, otherwise 0
+(false). If <em>ParamIndex</em> is invalid, an exception is thrown.</p>
+<h4 id="IsOptional_Remarks">Remarks</h4>
+<p>Parameters do not need to be formally declared if the function is
+variadic. Built-in functions are supported.
+:::</p>
+<h2 id="Properties">Properties</h2>
+<p>::: {#Name .methodShort}</p>
+<h3 id="name">Name</h3>
+<p>Returns the function\'s name.</p>
+<pre class="codehilite"><code class="language-Syntax">FunctionName := FuncObj.Name
+</code></pre>
+
+<p>:::</p>
+<p>::: {#IsBuiltIn .methodShort}</p>
+<h3 id="isbuiltin">IsBuiltIn</h3>
+<p>Returns 1 (true) if the function is
+<a href="../Functions.htm#BuiltIn">built-in</a>, otherwise 0 (false).</p>
+<pre class="codehilite"><code class="language-Syntax">Boolean := FuncObj.IsBuiltIn
+</code></pre>
+
+<p>:::</p>
+<p>::: {#IsVariadic .methodShort}</p>
+<h3 id="isvariadic">IsVariadic</h3>
+<p>Returns 1 (true) if the function is
+<a href="../Functions.htm#Variadic">variadic</a>, otherwise 0 (false).</p>
+<pre class="codehilite"><code class="language-Syntax">Boolean := FuncObj.IsVariadic
+</code></pre>
+
+<p>:::</p>
+<p>::: {#MinParams .methodShort}</p>
+<h3 id="minparams">MinParams</h3>
+<p>Returns the number of required parameters.</p>
+<pre class="codehilite"><code class="language-Syntax">ParamCount := FuncObj.MinParams
+</code></pre>
+
+<p>:::</p>
+<p>::: {#MaxParams .methodShort}</p>
+<h3 id="maxparams">MaxParams</h3>
+<p>Returns the number of formally-declared parameters for a user-defined
+function or maximum parameters for a built-in function.</p>
+<pre class="codehilite"><code class="language-Syntax">ParamCount := FuncObj.MaxParams
+</code></pre>
+
+<p>If the function is <a href="../Functions.htm#Variadic">variadic</a>, <em>ParamCount</em>
+indicates the maximum number of parameters which can be accepted by the
+function without overflowing into the \"variadic*\" parameter.
+:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Func.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#func-object">Func Object</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#Methods">Methods</a><ul>
+<li><a href="#call">Call</a><ul>
+<li><a href="#Call_Parameters">Parameters</a></li>
+<li><a href="#Call_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#bind">Bind</a><ul>
+<li><a href="#Bind_Parameters">Parameters</a></li>
+<li><a href="#Bind_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#isbyref">IsByRef</a><ul>
+<li><a href="#IsByRef_Parameters">Parameters</a></li>
+<li><a href="#IsByRef_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#isoptional">IsOptional</a><ul>
+<li><a href="#IsOptional_Parameters">Parameters</a></li>
+<li><a href="#IsOptional_Return_Value">Return Value</a></li>
+<li><a href="#IsOptional_Remarks">Remarks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a><ul>
+<li><a href="#name">Name</a></li>
+<li><a href="#isbuiltin">IsBuiltIn</a></li>
+<li><a href="#isvariadic">IsVariadic</a></li>
+<li><a href="#minparams">MinParams</a></li>
+<li><a href="#maxparams">MaxParams</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

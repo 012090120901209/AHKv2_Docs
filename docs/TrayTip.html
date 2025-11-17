@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrayTip | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Shows a balloon message window or, on Windows 10 and later, a toast">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>TrayTip</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="traytip">TrayTip</h1>
+<p>Shows a balloon message window or, on Windows 10 and later, a toast
+notification near the <a href="../Program.htm#tray-icon">tray icon</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">TrayTip Text, Title, Options
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Text</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the text will be entirely omitted from the
+traytip, making it vertically shorter. Otherwise, specify the
+message to display. Only the first 255 characters will be displayed.</p>
+<p>Carriage return (`r) or linefeed (`n) may be used to create
+multiple lines of text. For example: <code>Line1`nLine2</code>.</p>
+<p>If <em>Text</em> is long, it can be broken up into several shorter lines by
+means of a <a href="../Scripts.htm#continuation">continuation section</a>,
+which might improve readability and maintainability.</p>
+</dd>
+<dt>Title</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the title line will be entirely omitted from
+the traytip, making it vertically shorter. Otherwise, specify the
+title of the traytip. Only the first 63 characters will be
+displayed.</p>
+</dd>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If blank or omitted, it defaults to 0. Otherwise, specify either an
+integer value (a combination by addition or bitwise-OR) or a string
+of zero or more case-insensitive options separated by at least one
+space or tab. One or more numeric options may also be included in
+the string.</p>
+<p>Function                              Dec   Hex    String</p>
+<hr />
+<p>No icon                               0     0x0    N/A
+  Info icon                             1     0x1    <code>Iconi</code>
+  Warning icon                          2     0x2    <code>Icon!</code>
+  Error icon                            3     0x3    <code>Iconx</code>
+  <a href="TraySetIcon.htm">Tray icon</a>          4     0x4    N/A
+  Do not play the notification sound.   16    0x10   <code>Mute</code>
+  Use the large version of the icon.    32    0x20   N/A</p>
+<p>The icon is also not shown by the traytip if it lacks a title (this
+does not apply to the toast notifications on Windows 10 and later).</p>
+<p>On Windows 10 and later, the small tray icon is generally displayed
+even if the \"tray icon\" option (4) is omitted, and specifying this
+option may cause the program\'s name to be shown in the
+notification.</p>
+</dd>
+</dl>
+<h2 id="Hiding_the_Traytip">Hiding the Traytip</h2>
+<p>To hide the traytip, omit all parameters (or at least the <em>Text</em> and
+<em>Title</em> parameters). For example:</p>
+<pre class="codehilite"><code>TrayTip
+</code></pre>
+
+<p>To hide the traytip on Windows 10, temporarily remove the <a href="../Program.htm#tray-icon">tray
+icon</a> (which not always work, according to at
+least one report). For example:</p>
+<pre class="codehilite"><code>TrayTip &quot;#1&quot;, &quot;This is TrayTip #1&quot;
+Sleep 3000   ; Let it display for 3 seconds.
+HideTrayTip
+TrayTip &quot;#2&quot;, &quot;This is the second notification.&quot;
+Sleep 3000
+
+; Copy this function into your script to use it.
+HideTrayTip() {
+    TrayTip  ; Attempt to hide it the normal way.
+    if SubStr(A_OSVersion,1,3) = &quot;10.&quot; {
+        A_IconHidden := true
+        Sleep 200  ; It may be necessary to adjust this sleep.
+        A_IconHidden := false
+    }
+}
+</code></pre>
+
+<h2 id="Remarks">Remarks</h2>
+<p>On Windows 10, a traytip window usually looks like this:</p>
+<p><img alt="TrayTip" src="../static/dlg_traytip.png" /></p>
+<p><strong>Windows 10 and later</strong> replace all balloon windows with toast
+notifications by default (this can be overridden via group policy).
+Calling TrayTip multiple times will usually cause multiple notifications
+to be placed in a \"queue\" instead of each notification replacing the
+last.</p>
+<p>TrayTip has no effect if the script lacks a <a href="../Program.htm#tray-icon">tray
+icon</a> (via <a href="_NoTrayIcon.htm">#NoTrayIcon</a> or
+<a href="../Variables.htm#IconHidden"><code>A_IconHidden</code></a><code>:= true</code>). TrayTip also
+has no effect if the following REG_DWORD value exists and has been set
+to 0:</p>
+<pre class="codehilite"><code>HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced &gt;&gt; EnableBalloonTips
+</code></pre>
+
+<p>On a related note, there is a tooltip displayed whenever the user hovers
+the mouse over the script\'s <a href="../Program.htm#tray-icon">tray icon</a>. The
+contents of this tooltip can be changed via:
+<a href="../Variables.htm#IconTip"><code>A_IconTip</code></a><code>:= "My New Text"</code>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="ToolTip.htm">ToolTip</a>, <a href="SetTimer.htm">SetTimer</a>, <a href="Menu.htm">Menu
+object</a>, <a href="MsgBox.htm">MsgBox</a>, <a href="InputBox.htm">InputBox</a>,
+<a href="FileSelect.htm">FileSelect</a>, <a href="DirSelect.htm">DirSelect</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Shows a multiline balloon message or toast
+notification for 20 seconds near the <a href="../Program.htm#tray-icon">tray
+icon</a> without playing the notification sound.
+It also has a title and contains an info icon.</p>
+<pre class="codehilite"><code>TrayTip &quot;Multiline`nText&quot;, &quot;My Title&quot;, &quot;Iconi Mute&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExDisplayTime .ex}
+<a class="ex_number" href="#ExDisplayTime"></a> Provides a more precise control over the
+display time without having to use Sleep (which would stop the current
+thread).</p>
+<pre class="codehilite"><code>TrayTip &quot;This will be displayed for 5 seconds.&quot;, &quot;Timed traytip&quot;
+SetTimer () =&gt; TrayTip(), -5000
+</code></pre>
+
+<p>The following does the same, but allows you to replace the HideTrayTip
+function definition with the one defined <a href="#Hide">above</a> for Windows 10.</p>
+<pre class="codehilite"><code>TrayTip &quot;This will be displayed for 5 seconds.&quot;, &quot;Timed traytip&quot;
+SetTimer HideTrayTip, -5000
+
+HideTrayTip() {
+    TrayTip
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExPermanent .ex}
+<a class="ex_number" href="#ExPermanent"></a> Permanently displays a traytip by
+refreshing it periodically via timer. Note that this probably won\'t
+work well on Windows 10 and later for <a href="#Windows10">reasons described
+above</a>.</p>
+<pre class="codehilite"><code>SetTimer RefreshTrayTip, 1000
+RefreshTrayTip  ; Call it once to get it started right away.
+
+RefreshTrayTip()
+{
+    TrayTip &quot;This is a more permanent traytip.&quot;, &quot;Refreshed traytip&quot;, &quot;Mute&quot;
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/TrayTip.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#traytip">TrayTip</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Hiding_the_Traytip">Hiding the Traytip</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

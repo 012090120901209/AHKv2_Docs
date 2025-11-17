@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular Expression Callouts | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="RegEx callouts provide a means of temporarily passing control to the">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>RegExCallout</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="regular-expression-callouts">Regular Expression Callouts</h1>
+<p>RegEx callouts provide a means of temporarily passing control to the
+script in the middle of regular expression pattern matching. For
+detailed information about the PCRE-standard callout feature, see
+<a href="http://www.pcre.org/pcre.txt">pcre.txt</a>.</p>
+<p>RegEx callouts are currently supported only by
+<a href="../lib/RegExMatch.htm">RegExMatch</a> and
+<a href="../lib/RegExReplace.htm">RegExReplace</a>.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#callout-functions">RegEx Callout Functions</a></li>
+<li><a href="#EventInfo">EventInfo</a></li>
+<li><a href="#auto">Auto-Callout</a></li>
+<li><a href="#remarks">Remarks</a></li>
+</ul>
+<h2 id="syntax">Syntax</h2>
+<p>The syntax for a RegEx callout in AutoHotkey is
+[(?C<em>Number</em>:<em>Function</em>)]{.regex}, where both <em>Number</em> and <em>Function</em>
+are optional. Colon \':\' is allowed only if <em>Function</em> is specified,
+and is optional if <em>Number</em> is omitted. If <em>Function</em> is specified but
+is not the name of a <a href="Functor.htm">function object</a>, a compile error
+occurs and pattern-matching does not begin.</p>
+<p>If <em>Function</em> is omitted, the default RegEx callout function named
+<strong>pcre_callout</strong> must be defined. If <em>pcre_callout</em> is not defined,
+RegEx callouts which omit <em>Function</em> are ignored.</p>
+<h2 id="callout-functions">RegEx Callout Functions</h2>
+<pre class="codehilite"><code class="language-Syntax">MyFunction(Match, CalloutNumber, FoundPos, Haystack, NeedleRegEx)
+{
+    ...
+}
+</code></pre>
+
+<p>RegEx callout functions may define up to 5 parameters:</p>
+<ul>
+<li><strong>Match:</strong> Receives a
+    <a href="../lib/RegExMatch.htm#MatchObject">RegExMatchInfo</a> object
+    containing information about the match so far.</li>
+<li><strong>CalloutNumber:</strong> Receives the <em>Number</em> of the RegEx callout.</li>
+<li><strong>FoundPos:</strong> Receives the position of the current potential match.</li>
+<li><strong>Haystack:</strong> Receives the <em>Haystack</em> passed to RegExMatch or
+    RegExReplace.</li>
+<li><strong>NeedleRegEx:</strong> Receives the <em>NeedleRegEx</em> passed to RegExMatch or
+    RegExReplace.</li>
+</ul>
+<p>These names are suggestive only. Actual names may vary.</p>
+<p><strong>Warning:</strong> Changing the input parameters of
+<a href="../lib/RegExReplace.htm">RegExReplace</a> or
+<a href="../lib/RegExMatch.htm">RegExMatch</a> during a call is unsupported and may
+cause unpredictable behaviour.</p>
+<p>Pattern-matching may proceed or fail depending on the return value of
+the RegEx callout function:</p>
+<ul>
+<li>If the function returns <strong>0</strong> or does not return a numeric value,
+    matching proceeds as normal.</li>
+<li>If the function returns <strong>1</strong> or greater, matching fails at the
+    current point, but the testing of other matching possibilities goes
+    ahead.</li>
+<li>If the function returns <strong>-1</strong>, matching is abandoned.</li>
+<li>If the function returns a value less than -1, it is treated as a
+    PCRE error code and matching is abandoned. This causes RegExMatch
+    and RegExReplace to throw an exception; the <em>Extra</em> property of the
+    exception object contains the error code.</li>
+</ul>
+<p>For example:</p>
+<pre class="codehilite"><code>Haystack := &quot;The quick brown fox jumps over the lazy dog.&quot;
+RegExMatch(Haystack, &quot;i)(The) (\w+)\b(?CCallout)&quot;)
+Callout(m, *) {
+    MsgBox &quot;m[0]=&quot; m[0] &quot;`nm[1]=&quot; m[1] &quot;`nm[2]=&quot; m[2]
+    return 1
+}
+</code></pre>
+
+<p>In the above example, <em>Callout</em> is called once for each substring which
+matches the part of the pattern preceding the RegEx callout.
+[\b]{.regex} is used to exclude incomplete words in matches such as
+<em>The quic</em>, <em>The qui</em>, <em>The qu</em>, etc.</p>
+<p>If any of the input parameters to a <em>RegEx</em> function is modified during
+a callout, the behaviour is undefined.</p>
+<h2 id="EventInfo">EventInfo</h2>
+<p>Additional information is available by accessing the pcre_callout_block
+structure via <strong>A_EventInfo</strong>.</p>
+<pre class="codehilite"><code>version           := NumGet(A_EventInfo,  0, &quot;Int&quot;)
+callout_number    := NumGet(A_EventInfo,  4, &quot;Int&quot;)
+offset_vector     := NumGet(A_EventInfo,  8, &quot;Ptr&quot;)
+subject           := NumGet(A_EventInfo,  8 + A_PtrSize, &quot;Ptr&quot;)
+subject_length    := NumGet(A_EventInfo,  8 + A_PtrSize*2, &quot;Int&quot;)
+start_match       := NumGet(A_EventInfo, 12 + A_PtrSize*2, &quot;Int&quot;)
+current_position  := NumGet(A_EventInfo, 16 + A_PtrSize*2, &quot;Int&quot;)
+capture_top       := NumGet(A_EventInfo, 20 + A_PtrSize*2, &quot;Int&quot;)
+capture_last      := NumGet(A_EventInfo, 24 + A_PtrSize*2, &quot;Int&quot;)
+pad := A_PtrSize=8 ? 4 : 0  ; Compensate for 64-bit data alignment.
+callout_data      := NumGet(A_EventInfo, 28 + pad + A_PtrSize*2, &quot;Ptr&quot;)
+pattern_position  := NumGet(A_EventInfo, 28 + pad + A_PtrSize*3, &quot;Int&quot;)
+next_item_length  := NumGet(A_EventInfo, 32 + pad + A_PtrSize*3, &quot;Int&quot;)
+if (version &gt;= 2)
+    mark   := StrGet(NumGet(A_EventInfo, 36 + pad + A_PtrSize*3, &quot;Int&quot;), &quot;UTF-8&quot;)
+</code></pre>
+
+<p>For more information, see <a href="http://www.pcre.org/pcre.txt">pcre.txt</a>,
+<a href="../lib/NumGet.htm">NumGet</a> and <a href="../Variables.htm#PtrSize">A_PtrSize</a>.</p>
+<h2 id="auto">Auto-Callout</h2>
+<p>Including <strong>C</strong> in the options of the pattern enables the auto-callout
+mode. In this mode, RegEx callouts equivalent to [(?C255)]{.regex} are
+inserted before each item in the pattern. For example, the following
+template may be used to debug regular expressions:</p>
+<pre class="codehilite"><code>; Call RegExMatch with auto-callout option C.
+RegExMatch(&quot;xxxabc123xyz&quot;, &quot;C)abc.*xyz&quot;)
+
+; Define the default RegEx callout function.
+pcre_callout(Match, CalloutNumber, FoundPos, Haystack, NeedleRegEx)
+{
+    ; See pcre.txt for descriptions of these fields.
+    start_match       := NumGet(A_EventInfo, 12 + A_PtrSize*2, &quot;Int&quot;)
+    current_position  := NumGet(A_EventInfo, 16 + A_PtrSize*2, &quot;Int&quot;)
+    pad := A_PtrSize=8 ? 4 : 0
+    pattern_position  := NumGet(A_EventInfo, 28 + pad + A_PtrSize*3, &quot;Int&quot;)
+    next_item_length  := NumGet(A_EventInfo, 32 + pad + A_PtrSize*3, &quot;Int&quot;)
+
+    ; Point out &gt;&gt;current match&lt;&lt;.
+    _HAYSTACK:=SubStr(Haystack, 1, start_match)
+        . &quot;&gt;&gt;&quot; SubStr(Haystack, start_match + 1, current_position - start_match)
+        . &quot;&lt;&lt;&quot; SubStr(Haystack, current_position + 1)
+
+    ; Point out &gt;&gt;next item to be evaluated&lt;&lt;.
+    _NEEDLE:=  SubStr(NeedleRegEx, 1, pattern_position)
+        . &quot;&gt;&gt;&quot; SubStr(NeedleRegEx, pattern_position + 1, next_item_length)
+        . &quot;&lt;&lt;&quot; SubStr(NeedleRegEx, pattern_position + 1 + next_item_length)
+
+    ListVars
+    ; Press Pause to continue.
+    Pause
+}
+</code></pre>
+
+<h2 id="remarks">Remarks</h2>
+<p>RegEx callouts are executed on the current quasi-thread, but the
+previous value of A_EventInfo will be restored after the RegEx callout
+function returns.</p>
+<p>PCRE is optimized to abort early in some cases if it can determine that
+a match is not possible. For all RegEx callouts to be called in such
+cases, it may be necessary to disable these optimizations by specifying
+[(*NO_START_OPT)]{.regex} at the start of the pattern.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/RegExCallout.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#regular-expression-callouts">Regular Expression Callouts</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#callout-functions">RegEx Callout Functions</a></li>
+<li><a href="#EventInfo">EventInfo</a></li>
+<li><a href="#auto">Auto-Callout</a></li>
+<li><a href="#remarks">Remarks</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

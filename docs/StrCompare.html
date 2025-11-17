@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrCompare | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Compares two strings alphabetically.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>StrCompare</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="strcompare">StrCompare</h1>
+<p>Compares two strings alphabetically.</p>
+<pre class="codehilite"><code class="language-Syntax">Result := StrCompare(String1, String2 , CaseSense)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>String1, String2</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The strings to be compared.</p>
+</dd>
+<dt>CaseSense</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or <a href="../Concepts.htm#boolean">Integer
+(boolean)</a></p>
+<p>If omitted, it defaults to <em>Off</em>. Otherwise, specify one of the
+following values:</p>
+<p><strong>On</strong> or <strong>1</strong> (true): The comparison is case-sensitive.</p>
+<p><strong>Off</strong> or <strong>0</strong> (false): The comparison is not case-sensitive, i.e.
+the letters A-Z are considered identical to their lowercase
+counterparts.</p>
+<p><strong>Locale:</strong> The comparison is not case-sensitive according to the
+rules of the current user\'s locale. For example, most English and
+Western European locales treat not only the letters A-Z as identical
+to their lowercase counterparts, but also non-ASCII letters like Ä
+and Ü as identical to theirs. <em>Locale</em> is 1 to 8 times slower than
+<em>Off</em> depending on the nature of the strings being compared.</p>
+<p><strong>Logical:</strong> Like <em>Locale</em>, but digits in the strings are considered
+as numerical content rather than text. For example, <code>"A2"</code> is
+considered less than <code>"A10"</code>. However, if two numbers differ only by
+the presence of a leading zero, the string with leading zero may be
+considered [less]{.underline} than the other string. The exact
+behavior may differ between OS versions.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>To indicate the relationship between <em>String1</em> and <em>String2</em>, this
+function returns one of the following:</p>
+<ul>
+<li>0, if <em>String1</em> is identical to <em>String2</em></li>
+<li>a positive integer, if <em>String1</em> is greater than <em>String2</em></li>
+<li>a negative integer, if <em>String1</em> is less than <em>String2</em></li>
+</ul>
+<p>To check for a specific relationship between the two strings, compare
+the result to 0. For example:</p>
+<pre class="codehilite"><code>a_less_than_b := StrCompare(a, b) &lt; 0
+a_greater_than_or_equal_to_b := StrCompare(a, b) &gt;= 0
+</code></pre>
+
+<h2 id="Remarks">Remarks</h2>
+<p>This function is commonly used for <a href="Sort.htm#callback">sort callbacks</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="Sort.htm">Sort</a>, <a href="VerCompare.htm">VerCompare</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExCaseSens .ex}
+<a class="ex_number" href="#ExCaseSens"></a> Demonstrates the difference between a
+case-insensitive and case-sensitive comparison.</p>
+<pre class="codehilite"><code>MsgBox StrCompare(&quot;Abc&quot;, &quot;abc&quot;) ; Returns 0
+MsgBox StrCompare(&quot;Abc&quot;, &quot;abc&quot;, true) ; Returns -1
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/StrCompare.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#strcompare">StrCompare</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

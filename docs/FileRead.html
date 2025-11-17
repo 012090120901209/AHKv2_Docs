@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileRead | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Retrieves the contents of a file.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>FileRead</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="fileread">FileRead</h1>
+<p>Retrieves the contents of a file.</p>
+<pre class="codehilite"><code class="language-Syntax">Text := FileRead(Filename , Options)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Filename</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name of the file to read, which is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified.</p>
+</dd>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Zero or more of the following strings. Separate each option from the
+next with a single space or tab. For example: <code>"`n m5000 UTF-8"</code></p>
+<p><strong>Encoding:</strong> Specify any of the encoding names accepted by
+<a href="FileEncoding.htm">FileEncoding</a> (excluding the empty string) to use
+that encoding if the file lacks a UTF-8 or UTF-16 byte order mark.
+If omitted, it defaults to
+<a href="../Variables.htm#FileEncoding">A_FileEncoding</a>.</p>
+<p><strong>RAW:</strong> Specify the word RAW (case-insensitive) to read the file\'s
+content as <a href="#Binary">raw binary data</a> and return a
+<a href="Buffer.htm">Buffer</a> object instead of a string. This option
+overrides any previously specified encoding and vice versa.</p>
+<p><strong>m1024:</strong> If this option is omitted, the entire file is loaded
+unless there is insufficient memory, in which case an error message
+is shown and the thread exits (but <a href="Try.htm">Try</a> can be used to
+avoid this). Otherwise, replace 1024 with a decimal or hexadecimal
+number of bytes. If the file is larger than this, only its leading
+part is loaded.</p>
+<p><strong>Note:</strong> This might result in the last line ending in a naked
+carriage return (`r) rather than `r`n.</p>
+<p><strong>`n</strong> (a linefeed character): Replaces any/all occurrences of
+carriage return &amp; linefeed (`r`n) with linefeed (`n). However,
+this translation reduces performance and is usually not necessary.
+For example, text containing `r`n is already in the right format
+to be added to a <a href="StrReplace.htm">Gui Edit control</a>. The following
+<a href="LoopParse.htm">parsing loop</a> will work correctly regardless of
+whether each line ends in `r`n or just `n:
+<code>Loop Parse, MyFileContents, "`n", "`r"</code>.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#objects">Object</a></p>
+<p>This function returns the contents of the specified file. The return
+value is a <a href="Buffer.htm">Buffer object</a> if the RAW option is in effect
+and the file can be opened; otherwise, it is a string. If the file does
+not exist or cannot be opened for any other reason, an empty string is
+returned.</p>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An <a href="Error.htm#OSError">OSError</a> is thrown if there was a problem opening
+or reading the file.</p>
+<p>A file greater than 4 GB in size will cause a
+<a href="Error.htm#MemoryError">MemoryError</a> to be thrown unless the *m option
+is present, in which case the leading part of the file is loaded. A
+MemoryError will also be thrown if the program is unable to allocate
+enough memory to contain the requested amount of data.</p>
+<p><a href="../Variables.htm#LastError">A_LastError</a> is set to the result of the
+operating system\'s GetLastError() function.</p>
+<h2 id="Binary">Reading Binary Data</h2>
+<p>When the <code>RAW</code> option is used, the return value is a
+<a href="Buffer.htm">Buffer</a> object containing the raw, unmodified contents of
+the file. The object\'s <a href="Buffer.htm#Size">Size</a> property returns the
+number of bytes read. <a href="NumGet.htm">NumGet</a> or <a href="StrGet.htm">StrGet</a> can
+be used to retrieve data from the buffer. For example:</p>
+<pre class="codehilite"><code>buf := FileRead(A_AhkPath, &quot;RAW&quot;)
+if StrGet(buf, 2, &quot;cp0&quot;) == &quot;MZ&quot;  ; Looks like an executable file...
+{
+    ; Read machine type from COFF file header.
+    machine := NumGet(buf, NumGet(buf, 0x3C, &quot;uint&quot;) + 4, &quot;ushort&quot;)
+    machine := machine=0x8664 ? &quot;x64&quot; : machine=0x014C ? &quot;x86&quot; : &quot;unknown&quot;
+    ; Display machine type and file size.
+    MsgBox &quot;This &quot; machine &quot; executable is &quot; buf.Size &quot; bytes.&quot;
+}
+buf := &quot;&quot;
+</code></pre>
+
+<p>This option is generally required for reading binary data because by
+default, any bytes read from file are interpreted as text and may be
+converted from the source file\'s encoding (as specified in the options
+or by <a href="../Variables.htm#FileEncoding">A_FileEncoding</a>) to the script\'s
+<a href="../Compat.htm#Format">native encoding</a>, UTF-16. If the data is not
+UTF-16 text, this conversion generally changes the data in undesired
+ways.</p>
+<p>For another demonstration of the RAW option, see [ClipboardAll example</p>
+<h1 id="2clipboardallhtmexfile">2](ClipboardAll.htm#ExFile).</h1>
+<p>Finally, <a href="FileOpen.htm">FileOpen</a> and <a href="File.htm#RawRead">File.RawRead</a>
+or <a href="File.htm#ReadNum">File.Read<em>Num</em></a> may be used to read binary data
+without first reading the entire file into memory.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>When the goal is to load all or a large part of a file into memory,
+FileRead performs much better than using a <a href="LoopRead.htm">file-reading
+loop</a>.</p>
+<p>If there is concern about using too much memory, check the file size
+beforehand with <a href="FileGetSize.htm">FileGetSize</a>.</p>
+<p><a href="FileOpen.htm">FileOpen</a> provides more advanced functionality than
+FileRead, such as reading or writing data at a specific location in the
+file without reading the entire file into memory. See <a href="File.htm">File
+Object</a> for a list of functions.</p>
+<h2 id="Related">Related</h2>
+<p><a href="FileEncoding.htm">FileEncoding</a>, <a href="FileOpen.htm">FileOpen</a>/<a href="File.htm">File
+Object</a>, <a href="LoopRead.htm">file-reading loop</a>,
+<a href="FileGetSize.htm">FileGetSize</a>, <a href="FileAppend.htm">FileAppend</a>,
+<a href="IniRead.htm">IniRead</a>, <a href="Sort.htm">Sort</a>, <a href="Download.htm">Download</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Reads a text file into <em>MyText</em>.</p>
+<pre class="codehilite"><code>MyText := FileRead(&quot;C:\My Documents\My File.txt&quot;)
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExSort .ex}
+<a class="ex_number" href="#ExSort"></a> Quickly sorts the contents of a file.</p>
+<pre class="codehilite"><code>Contents := FileRead(&quot;C:\Address List.txt&quot;)
+Contents := Sort(Contents)
+FileDelete &quot;C:\Address List (alphabetical).txt&quot;
+FileAppend Contents, &quot;C:\Address List (alphabetical).txt&quot;
+Contents := &quot;&quot; ; Free the memory.
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/FileRead.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#fileread">FileRead</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Binary">Reading Binary Data</a></li>
+</ul>
+</li>
+<li><a href="#2clipboardallhtmexfile">2](ClipboardAll.htm#ExFile).</a><ul>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

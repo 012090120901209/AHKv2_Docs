@@ -1,0 +1,10 @@
+# PostgreSQL database requirements
+
+# Core database driver
+psycopg2-binary>=2.9.0
+
+# Optional: For better performance with binary protocol
+# psycopg2>=2.9.0
+
+# Optional: For pgvector support (semantic search with embeddings)
+# pgvector>=0.2.0

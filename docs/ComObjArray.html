@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComObjArray | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Creates a SafeArray for use with COM.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ComObjArray</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="comobjarray">ComObjArray</h1>
+<p>Creates a SafeArray for use with COM.</p>
+<pre class="codehilite"><code class="language-Syntax">ArrayObj := ComObjArray(VarType, Count1 , Count2, ... Count8)
+</code></pre>
+
+<p><code>ComObjArray</code> itself is a <a href="Class.htm">class</a> derived from <code>ComValue</code>,
+but is used only to create or identify SafeArray wrapper objects.</p>
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>VarType</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The base type of the array (the VARTYPE of each element of the
+array). The VARTYPE is restricted to a subset of the variant types.
+Neither the VT_ARRAY nor the VT_BYREF flag can be set. VT_EMPTY and
+VT_NULL are not valid base types for the array. All other types are
+legal.</p>
+<p>See <a href="ComObjType.htm">ComObjType</a> for a list of possible values.</p>
+</dd>
+<dt>Count<em>N</em></dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The size of each dimension. Arrays containing up to 8 dimensions are
+supported.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: ComObjArray</p>
+<p>This function returns a wrapper object containing a new SafeArray.</p>
+<h2 id="Methods">Methods</h2>
+<p>ComObjArray objects support the following methods:</p>
+<ul>
+<li><code>.MaxIndex(n)</code>: Returns the upper bound of the <em>n</em>th dimension. If
+    <em>n</em> is omitted, it defaults to 1.</li>
+<li><code>.MinIndex(n)</code>: Returns the lower bound of the <em>n</em>th dimension. If
+    <em>n</em> is omitted, it defaults to 1.</li>
+<li><code>.Clone()</code>: Returns a copy of the array.</li>
+<li><code>.__Enum()</code>: Not typically called by script; allows
+    <a href="For.htm">for-loops</a> to be used with SafeArrays.</li>
+</ul>
+<h2 id="Remarks">Remarks</h2>
+<p>ComObjArray objects may also be returned by COM methods and
+<a href="ComValue.htm">ComValue</a>. Scripts may determine if a value is a
+ComObjArray as follows:</p>
+<pre class="codehilite"><code>; Check class
+if obj is ComObjArray
+    MsgBox &quot;Array subtype: &quot; . ComObjType(obj) &amp; 0xfff
+else
+    MsgBox &quot;Not an array.&quot;
+
+; Check for VT_ARRAY
+if ComObjType(obj) &amp; 0x2000
+    MsgBox &quot;obj is a ComObjArray&quot;
+
+; Check specific array type
+if ComObjType(obj) = 0x2008
+    MsgBox &quot;obj is a ComObjArray of strings&quot;
+</code></pre>
+
+<p>Arrays with up to 8 dimensions are supported.</p>
+<p>Since SafeArrays are not designed to support multiple references, when
+one SafeArray is assigned to an element of another SafeArray, a separate
+copy is created. However, this only occurs if the wrapper object has the
+F_OWNVALUE flag, which indicates it is responsible for destroying the
+array. This flag can be removed by using <a href="ComObjFlags.htm">ComObjFlags</a>.</p>
+<p>When a function or method called by a COM client returns a SafeArray
+with the F_OWNVALUE flag, a copy is created and returned instead, as the
+original SafeArray is automatically destroyed.</p>
+<h2 id="Related">Related</h2>
+<p><a href="ComValue.htm">ComValue</a>, <a href="ComObjType.htm">ComObjType</a>,
+<a href="ComObjValue.htm">ComObjValue</a>, <a href="ComObjActive.htm">ComObjActive</a>,
+<a href="ComObjFlags.htm">ComObjFlags</a>, <a href="https://learn.microsoft.com/previous-versions/windows/desktop/automat/array-manipulation-functions">Array Manipulation Functions (Microsoft
+Docs)</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Simple usage.</p>
+<pre class="codehilite"><code>arr := ComObjArray(VT_VARIANT:=12, 3)
+arr[0] := &quot;Auto&quot;
+arr[1] := &quot;Hot&quot;
+arr[2] := &quot;key&quot;
+t := &quot;&quot;
+Loop arr.MaxIndex() + 1
+    t .= arr[A_Index-1]
+MsgBox t
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExMultiDims .ex}
+<a class="ex_number" href="#ExMultiDims"></a> Multiple dimensions.</p>
+<pre class="codehilite"><code>arr := ComObjArray(VT_VARIANT:=12, 3, 4)
+
+; Get the number of dimensions:
+dim := DllCall(&quot;oleaut32\SafeArrayGetDim&quot;, &quot;ptr&quot;, ComObjValue(arr))
+
+; Get the bounds of each dimension:
+dims := &quot;&quot;
+Loop dim
+    dims .= arr.MinIndex(A_Index) &quot; .. &quot; arr.MaxIndex(A_Index) &quot;`n&quot;
+MsgBox dims
+
+; Simple usage:
+Loop 3 {
+    x := A_Index-1
+    Loop 4 {
+        y := A_Index-1
+        arr[x, y] := x * y
+    }
+}
+MsgBox arr[2, 3]
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ComObjArray.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#comobjarray">ComObjArray</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Methods">Methods</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

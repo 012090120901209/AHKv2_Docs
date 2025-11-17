@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threads | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="The *current thread* is defined as the flow of execution invoked by the">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Threads</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="threads">Threads</h1>
+<p>The <em>current thread</em> is defined as the flow of execution invoked by the
+most recent event; examples include <a href="../Hotkeys.htm">hotkeys</a>, <a href="../lib/SetTimer.htm">SetTimer
+subroutines</a>, <a href="../lib/Menu.htm">custom menu items</a>,
+and <a href="../lib/Gui.htm#Events">GUI events</a>. The <em>current thread</em> can be
+executing functions within its own subroutine or within other
+subroutines called by that subroutine.</p>
+<p>Although AutoHotkey doesn\'t actually use multiple threads, it simulates
+some of that behavior: If a second thread is started -- such as by
+pressing another hotkey while the previous is still running -- the
+<em>current thread</em> will be interrupted (temporarily halted) to allow the
+new thread to become <em>current</em>. If a third thread is started while the
+second is still running, both the second and first will be in a dormant
+state, and so on.</p>
+<p>When the <em>current thread</em> finishes, the one most recently interrupted
+will be resumed, and so on, until all the threads finally finish. When
+resumed, a thread\'s settings for things such as
+<a href="../lib/SendMode.htm">SendMode</a> and
+<a href="../lib/SetKeyDelay.htm">SetKeyDelay</a> are automatically restored to what
+they were just prior to its interruption; in other words, a thread will
+experience no side-effects from having been interrupted (except for a
+possible change in the <a href="../lib/WinActivate.htm">active window</a>).</p>
+<p><strong>Note:</strong> The <a href="../lib/KeyHistory.htm">KeyHistory</a> function/menu-item
+shows how many threads are in an interrupted state and the
+<a href="../lib/ListHotkeys.htm">ListHotkeys</a> function/menu-item shows which
+hotkeys have threads.</p>
+<p>A single script can have multiple simultaneous
+<a href="../lib/MsgBox.htm">MsgBox</a>, <a href="../lib/InputBox.htm">InputBox</a>,
+<a href="../lib/FileSelect.htm">FileSelect</a>, and
+<a href="../lib/DirSelect.htm">DirSelect</a> dialogs. This is achieved by launching
+a new thread (via <a href="../Hotkeys.htm">hotkey</a>, <a href="../lib/SetTimer.htm">timed
+subroutine</a>, <a href="../lib/Menu.htm">custom menu item</a>,
+etc.) while a prior thread already has a dialog displayed.</p>
+<p>By default, a given <a href="../Hotkeys.htm">hotkey</a> or
+<a href="../Hotstrings.htm">hotstring</a> subroutine cannot be run a second time if
+it is already running. Use
+<a href="../lib/_MaxThreadsPerHotkey.htm">#MaxThreadsPerHotkey</a> to change this
+behavior.</p>
+<p><strong>Related:</strong> The <a href="../lib/Thread.htm">Thread</a> function sets the priority
+or interruptibility of threads.</p>
+<h2 id="Priority">Thread Priority</h2>
+<p>Any thread (<a href="../Hotkeys.htm">hotkey</a>, <a href="../lib/SetTimer.htm">timed
+subroutine</a>, <a href="../lib/Menu.htm">custom menu item</a>,
+etc.) with a priority lower than that of the <em>current thread</em> cannot
+interrupt it. During that time, such timers will not run, and any
+attempt by the user to create a thread (such as by pressing a
+<a href="../Hotkeys.htm">hotkey</a> or <a href="../lib/GuiControls.htm#Button">GUI button</a>)
+will have no effect, nor will it be buffered. Because of this, it is
+usually best to design high priority threads to finish quickly, or use
+<a href="../lib/Critical.htm">Critical</a> instead of making them high priority.</p>
+<p>The default priority is 0. All threads use the default priority unless
+changed by one of the following methods:</p>
+<ul>
+<li>A timed subroutine is given a specific priority via
+    <a href="../lib/SetTimer.htm">SetTimer</a>.</li>
+<li>A hotkey is given a specific priority via the
+    <a href="../lib/Hotkey.htm">Hotkey</a> function.</li>
+<li>A <a href="../Hotstrings.htm">hotstring</a> is given a specific priority when
+    it is defined, or via the <a href="../lib/_Hotstring.htm">#Hotstring</a>
+    directive.</li>
+<li>A custom menu item is given a specific priority via the
+    <a href="../lib/Menu.htm#Add">Menu.Add</a> method.</li>
+<li>The <em>current thread</em> sets its own priority via the
+    <a href="../lib/Thread.htm">Thread</a> function.</li>
+</ul>
+<p>The <a href="../lib/OnExit.htm">OnExit</a> callback function (if any) will always
+run when called for, regardless of the <em>current thread</em>\'s priority.</p>
+<h2 id="Interrupt">Thread Interruptibility</h2>
+<p>For most types of events, new threads are permitted to launch only if
+the current thread is <em>interruptible</em>. A thread can be <em>uninterruptible</em>
+for a number of reasons, including:</p>
+<ul>
+<li>The thread has been marked as <em>critical</em>.
+    <a href="../lib/Critical.htm">Critical</a> may have been called by the thread
+    itself or by <a href="../Scripts.htm#auto">the auto-execute thread</a>.</li>
+<li>The thread has not been running long enough to meet the conditions
+    for becoming interruptible, as set by <a href="../lib/Thread.htm#Interrupt">Thread
+    Interrupt</a>.</li>
+<li>One of the script\'s menus is being displayed (such as the <a href="../Program.htm#tray-icon">tray
+    icon</a> menu or a menu bar).</li>
+<li>A delay is being performed by <a href="../lib/Send.htm">Send</a> (most often
+    due to <a href="../lib/SetKeyDelay.htm">SetKeyDelay</a>),
+    <a href="../lib/WinActivate.htm">WinActivate</a>, or a
+    <a href="../lib/A_Clipboard.htm">Clipboard</a> operation.</li>
+<li>An <a href="../lib/OnExit.htm">OnExit</a> thread is executing.</li>
+<li>A warning dialog is being displayed due to the
+    <a href="../lib/A_MaxHotkeysPerInterval.htm">A_MaxHotkeysPerInterval</a> limit
+    being reached, or due to a problem activating the keyboard or mouse
+    hook (very rare).</li>
+</ul>
+<h3 id="Behave">Behavior of Uninterruptible Threads</h3>
+<p>Unlike high-priority threads, events that occur while the thread is
+uninterruptible are not discarded. For example, if the user presses a
+<a href="../Hotkeys.htm">hotkey</a> while the current thread is uninterruptible,
+the hotkey is buffered indefinitely until the current thread finishes or
+becomes interruptible, at which time the hotkey is launched as a new
+thread.</p>
+<p>Any thread may be interrupted in emergencies. Emergencies consist of:</p>
+<ul>
+<li>An <a href="../lib/OnExit.htm">OnExit</a> callback.</li>
+<li>Any <a href="../lib/OnMessage.htm">OnMessage</a> function that monitors a
+    message which is not <a href="../lib/OnMessage.htm#buffering">buffered</a>.</li>
+<li>Any <a href="../lib/CallbackCreate.htm">callback</a> indirectly triggered by
+    the thread itself (e.g. via <a href="../lib/PostMessage.htm">SendMessage</a> or
+    <a href="../lib/DllCall.htm">DllCall</a>).</li>
+</ul>
+<p>To avoid these interruptions, temporarily disable such functions.</p>
+<p>A <a href="../lib/Critical.htm">critical</a> thread becomes interruptible when a
+<a href="../lib/MsgBox.htm">MsgBox</a> or other dialog is displayed. However,
+unlike <a href="../lib/Thread.htm#Interrupt">Thread Interrupt</a>, the thread
+becomes critical (and therefore uninterruptible) again after the user
+dismisses the dialog.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Threads.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#threads">Threads</a><ul>
+<li><a href="#Priority">Thread Priority</a></li>
+<li><a href="#Interrupt">Thread Interruptibility</a><ul>
+<li><a href="#Behave">Behavior of Uninterruptible Threads</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

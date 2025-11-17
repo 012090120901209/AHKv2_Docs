@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MsgBox | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Displays the specified text in a small window containing one or more">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>MsgBox</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="msgbox">MsgBox</h1>
+<p>Displays the specified text in a small window containing one or more
+buttons (such as Yes and No).</p>
+<pre class="codehilite"><code class="language-Syntax">MsgBox Text, Title, Options
+Result := MsgBox(Text, Title, Options)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Text</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If omitted and \"OK\" is the only button present, it defaults to the
+string \"Press OK to continue.\". If omitted in any other case, it
+defaults to an empty string. Otherwise, specify the text to display
+inside the message box.</p>
+<p><a href="../misc/EscapeChar.htm">Escape sequences</a> can be used to denote
+special characters. For example, `n indicates a linefeed character,
+which ends the current line and begins a new one. Thus, using
+<code>text1`n`ntext2</code> would create a blank line between text1 and
+text2.</p>
+<p>If <em>Text</em> is long, it can be broken up into several shorter lines by
+means of a <a href="../Scripts.htm#continuation">continuation section</a>,
+which might improve readability and maintainability.</p>
+</dd>
+<dt>Title</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If omitted, it defaults to the current value of
+<a href="../Variables.htm#ScriptName">A_ScriptName</a>. Otherwise, specify the
+title of the message box.</p>
+</dd>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, it defaults to 0 (only an OK button is
+displayed). Otherwise, specify a combination (sum) of values or a
+string of one or more options from the tables below to indicate the
+type of message box and the possible button combinations.</p>
+<p>In addition, zero or more of the following options can be specified:</p>
+<p><strong>Owner:</strong> To specify an <a href="#Owner">owner window</a> for the message box,
+use the word Owner followed immediately by a HWND (window ID).</p>
+<p><strong>T:</strong> Timeout. To have the message box close automatically if the
+user has not closed it within a specified time, use the letter T
+followed by the timeout in seconds, which can contain a decimal
+point. If this value exceeds 2147483 (24.8 days), it will be set
+to 2147483. If the message box times out, the <a href="#Result">return
+value</a> is the word Timeout.</p>
+</dd>
+</dl>
+<h2 id="Options">Values for the <em>Options</em> parameter</h2>
+<p>The <em>Options</em> parameter can be either a combination (sum) of numeric
+values from the following groups, which is passed directly to the
+operating system\'s MessageBox function, or a string of zero or more
+case-insensitive options separated by at least one space or tab. One or
+more numeric options may also be included in the string.</p>
+<h3 id="Group_1_Buttons">Group #1: Buttons</h3>
+<p>To indicate the buttons displayed in the message box, add
+[one]{.underline} of the following values:</p>
+<p>Function                      Dec   Hex   String</p>
+<hr />
+<p>OK                            0     0x0   <code>OK</code> or <code>O</code>
+  OK, Cancel                    1     0x1   <code>OKCancel</code>, <code>O/C</code> or <code>OC</code>
+  Abort, Retry, Ignore          2     0x2   <code>AbortRetryIgnore</code>, <code>A/R/I</code> or <code>ARI</code>
+  Yes, No, Cancel               3     0x3   <code>YesNoCancel</code>, <code>Y/N/C</code> or <code>YNC</code>
+  Yes, No                       4     0x4   <code>YesNo</code>, <code>Y/N</code> or <code>YN</code>
+  Retry, Cancel                 5     0x5   <code>RetryCancel</code>, <code>R/C</code> or <code>RC</code>
+  Cancel, Try Again, Continue   6     0x6   <code>CancelTryAgainContinue</code>, <code>C/T/C</code> or <code>CTC</code></p>
+<h3 id="Group_2_Icon">Group #2: Icon</h3>
+<p>To display an icon in the message box, add [one]{.underline} of the
+following values:</p>
+<p>Function                 Dec   Hex    String</p>
+<hr />
+<p>Icon Hand (stop/error)   16    0x10   <code>Iconx</code>
+  Icon Question            32    0x20   <code>Icon?</code>
+  Icon Exclamation         48    0x30   <code>Icon!</code>
+  Icon Asterisk (info)     64    0x40   <code>Iconi</code></p>
+<h3 id="Group_3_Default_Button">Group #3: Default Button</h3>
+<p>To indicate the default button, add [one]{.underline} of the following
+values:</p>
+<hr />
+<p>Function          Dec               Hex               String</p>
+<hr />
+<p>Makes the 2nd     256               0x100             <code>Default2</code>
+  button the                                          <br />
+  default                                               </p>
+<p>Makes the 3rd     512               0x200             <code>Default3</code>
+  button the                                          <br />
+  default                                               </p>
+<p>Makes the 4th     768               0x300             <code>Default4</code>
+  button the                                          <br />
+  default\                                            <br />
+  (requires the                                       <br />
+<a href="#Help">Help                                               <br />
+  button</a> to                                   <br />
+  be present)                                           </p>
+<hr />
+<h3 id="Group_4_Modality">Group #4: Modality</h3>
+<p>To indicate the modality of the dialog box, add [one]{.underline} of the
+following values:</p>
+<hr />
+<p>Function          Dec               Hex               String</p>
+<hr />
+<p>System Modal      4096              0x1000            N/A
+  (always on top)                                       </p>
+<p>Task Modal        8192              0x2000            N/A</p>
+<p>Always-on-top     262144            0x40000           N/A
+  (style                                              <br />
+  WS_EX_TOPMOST)\                                     <br />
+  (like System                                        <br />
+  Modal but omits                                     <br />
+  title bar icon)                                       </p>
+<hr />
+<h3 id="Group_5_Other_Options">Group #5: Other Options</h3>
+<p>To specify other options, add [one or more]{.underline} of the following
+values:</p>
+<p>Function                                        Dec       Hex        String</p>
+<hr />
+<p>Adds a Help button (see remarks below)          16384     0x4000     N/A
+  Makes the text right-justified                  524288    0x80000    N/A
+  Right-to-left reading order for Hebrew/Arabic   1048576   0x100000   N/A</p>
+<h2 id="Result">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>This function returns one of the following strings to represent which
+button the user pressed:</p>
+<ul>
+<li>OK</li>
+<li>Cancel</li>
+<li>Yes</li>
+<li>No</li>
+<li>Abort</li>
+<li>Retry</li>
+<li>Ignore</li>
+<li>TryAgain</li>
+<li>Continue</li>
+<li>Timeout (that is, the word \"timeout\" is returned if the message
+    box timed out)</li>
+</ul>
+<p>If the dialog could not be displayed, an empty string is returned. This
+typically only occurs as a result of the <a href="#max">MsgBox limit</a> being
+reached, but may occur in other unusual cases.</p>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An <a href="Error.htm">Error</a> is thrown on failure, such as if the options are
+invalid, the <a href="#max">MsgBox limit</a> has been reached, or the message box
+could not be displayed for some other reason.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>A message box usually looks like this:</p>
+<p><img alt="MsgBox" src="../static/dlg_message.png" /></p>
+<p>To determine which button the user pressed, use the function\'s <a href="#Result">return
+value</a>. For example:</p>
+<pre class="codehilite"><code>Result := MsgBox(&quot;Would you like to continue? (press Yes or No)&quot;,, &quot;YesNo&quot;)
+if Result = &quot;Yes&quot;
+    MsgBox &quot;You pressed Yes.&quot;
+else
+    MsgBox &quot;You pressed No.&quot;
+
+if MsgBox(&quot;Retry or cancel?&quot;,, &quot;R/C&quot;) = &quot;Retry&quot;
+    MsgBox(&quot;You pressed Retry.&quot;)
+</code></pre>
+
+<p>To customize the names of the buttons, see <a href="../scripts/index.htm#MsgBoxButtonNames">Changing MsgBox\'s Button
+Names</a>.</p>
+<p><strong>Note:</strong> Pressing [Ctrl]{.kbd}+[C]{.kbd} while a message box is active
+will copy its text to the clipboard. This applies to all message boxes,
+not just those produced by AutoHotkey.</p>
+<p><strong>Using MsgBox with GUI windows:</strong> A GUI window may display a <em>modal</em>
+message box by means of the <a href="Gui.htm#OwnDialogs">OwnDialogs option</a>. A
+<em>modal</em> message box prevents the user from interacting with the GUI
+window until the message box is dismissed. In such a case, it is not
+necessary to specify the System Modal or Task Modal options from the
+table above.</p>
+<p>When the <a href="Gui.htm#OwnDialogs">OwnDialogs option</a> is <em>not</em> in effect, the
+Task Modal option (8192) can be used to disable all the script\'s
+windows until the user dismisses the message box.</p>
+<p>If the <code>Owner</code><em><code>HWND</code></em> option is specified, it takes precedence over any
+other setting. <em>HWND</em> can be the HWND of any window, even one not owned
+by the script.</p>
+<p><strong>The Help button:</strong> When the Help button option (16384) is present in
+<em>Options</em>, pressing the Help button will have no effect unless both of
+the following are true:</p>
+<ol>
+<li>The message box is owned by a GUI window by means of the <a href="Gui.htm#OwnDialogs">OwnDialogs
+    option</a>.</li>
+<li>The script is monitoring the WM_HELP message (0x0053). For example:
+    <a href="OnMessage.htm"><code>OnMessage</code></a><code>(0x0053, WM_HELP)</code>. When the WM_HELP
+    function is called, it may guide the user by means such as showing
+    another window or message box.</li>
+</ol>
+<p><strong>The Close button (in the message box\'s title bar):</strong> Since the
+message box is a built-in feature of the operating system, its X button
+is enabled only when certain buttons are present. If there is only an OK
+button, clicking the X button is the same as pressing OK. Otherwise, the
+X button is disabled unless there is a Cancel button, in which case
+clicking the X is the same as pressing Cancel.</p>
+<p><strong>Maximum 7 ongoing calls:</strong> The <a href="../misc/Threads.htm">thread</a>
+displaying a message box can typically be interrupted, allowing the new
+thread to display its own message box before the previous call returns.
+A maximum of 7 ongoing calls to MsgBox are permitted, but any calls
+beyond the 7th cause an <a href="Error.htm">Error</a> to be thrown. Note that a
+call to MsgBox in an interrupted thread cannot return until the thread
+is resumed.</p>
+<h2 id="Related">Related</h2>
+<p><a href="InputBox.htm">InputBox</a>, <a href="FileSelect.htm">FileSelect</a>,
+<a href="DirSelect.htm">DirSelect</a>, <a href="ToolTip.htm">ToolTip</a>, <a href="Gui.htm">Gui
+object</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Shows a message box with specific text. A quick
+and easy way to show information. The user can press an OK button to
+close the message box and continue execution.</p>
+<pre class="codehilite"><code>MsgBox &quot;This is a string.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExTitle .ex}
+<a class="ex_number" href="#ExTitle"></a> Shows a message box with specific text and a
+title.</p>
+<pre class="codehilite"><code>MsgBox &quot;This MsgBox has a custom title.&quot;, &quot;A Custom Title&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExNoParams .ex}
+<a class="ex_number" href="#ExNoParams"></a> Shows a message box with default text.
+Mainly useful for debugging purposes, for example to quickly set a
+breakpoint in the script.</p>
+<pre class="codehilite"><code>MsgBox ; &quot;Press OK to continue.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExContSec .ex}
+<a class="ex_number" href="#ExContSec"></a> Shows a message box with specific text, a
+title and an info icon. Besides, a <a href="../Scripts.htm#continuation">continuation
+section</a> is used to display the multi-line
+text in a more clear manner.</p>
+<pre class="codehilite"><code>MsgBox &quot;
+  (
+    The first parameter is displayed as the message.
+    The second parameter becomes the window title.
+    The third parameter determines the type of message box.
+  )&quot;, &quot;Window Title&quot;, &quot;iconi&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExRetValue .ex}
+<a class="ex_number" href="#ExRetValue"></a> Use the return value to determine which
+button the user pressed in the message box. Note that in this case the
+MsgBox function call must be specified with
+<a href="../Language.htm#function-call-statements">parentheses</a>.</p>
+<pre class="codehilite"><code>result := MsgBox(&quot;Do you want to continue? (Press YES or NO)&quot;,, &quot;YesNo&quot;)
+if (result = &quot;No&quot;)
+    return
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExTimeout .ex}
+<a class="ex_number" href="#ExTimeout"></a> Use the T (timeout) option to automatically
+close the message box after a certain number of seconds.</p>
+<pre class="codehilite"><code>result := MsgBox(&quot;This MsgBox will time out in 5 seconds.  Continue?&quot;,, &quot;Y/N T5&quot;)
+if (result = &quot;Timeout&quot;)
+    MsgBox &quot;You didn't press YES or NO within the 5-second period.&quot;
+else if (result = &quot;No&quot;)
+    return
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExExpr .ex}
+<a class="ex_number" href="#ExExpr"></a> Include a variable or sub-expression in the
+message. See also: <a href="../Variables.htm#concat">Concatenation</a></p>
+<pre class="codehilite"><code>var := 10
+MsgBox &quot;The initial value is: &quot; var
+MsgBox &quot;The result is: &quot; var * 2
+MsgBox Format(&quot;The result is: {1}&quot;, var * 2)
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/MsgBox.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#msgbox">MsgBox</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Options">Values for the Options parameter</a><ul>
+<li><a href="#Group_1_Buttons">Group #1: Buttons</a></li>
+<li><a href="#Group_2_Icon">Group #2: Icon</a></li>
+<li><a href="#Group_3_Default_Button">Group #3: Default Button</a></li>
+<li><a href="#Group_4_Modality">Group #4: Modality</a></li>
+<li><a href="#Group_5_Other_Options">Group #5: Other Options</a></li>
+</ul>
+</li>
+<li><a href="#Result">Return Value</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

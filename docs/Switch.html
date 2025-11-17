@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Compares a value with multiple cases and executes the">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Switch</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="switch">Switch</h1>
+<p>Compares a value with multiple cases and executes the
+<a href="../Concepts.htm#statement">statements</a> of the first match.</p>
+<pre class="codehilite"><code class="language-Syntax">Switch SwitchValue, CaseSense
+{
+Case CaseValue1:
+    Statements1
+Case CaseValue2a, CaseValue2b:
+    Statements2
+Default:
+    Statements3
+}
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>SwitchValue</dt>
+<dd>
+<p>If this and <em>CaseSense</em> are omitted, the first case which evaluates
+to <a href="../Concepts.htm#boolean">true</a> (non-zero and non-empty) is
+executed. Otherwise, <em>SwitchValue</em> is evaluated once and compared to
+each case value until a match is found, and then that case is
+executed.</p>
+<p>If there is no matching case and <em>Default</em> is present, it is
+executed.</p>
+</dd>
+<dt>CaseSense</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or <a href="../Concepts.htm#boolean">Integer
+(boolean)</a></p>
+<p>If omitted, it defaults to <em>On</em>. Otherwise, specify one of the
+following values, which forces all values to be compared as strings:</p>
+<p><strong>On</strong> or <strong>1</strong> (true): Each comparison is case-sensitive.</p>
+<p><strong>Off</strong> or <strong>0</strong> (false): Each comparison is not case-sensitive,
+i.e. the letters A-Z are considered identical to their lowercase
+counterparts.</p>
+<p><strong>Locale:</strong> Each comparison is not case-sensitive according to the
+rules of the current user\'s locale. For example, most English and
+Western European locales treat not only the letters A-Z as identical
+to their lowercase counterparts, but also non-ASCII letters like Ä
+and Ü as identical to theirs. <em>Locale</em> is 1 to 8 times slower than
+<em>Off</em> depending on the nature of the strings being compared.</p>
+</dd>
+<dt>CaseValueN</dt>
+<dd>
+<p>The value to check or compare depending on whether <em>SwitchValue</em> is
+present.</p>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>As with the <code>=</code> and <code>==</code> operators, when <em>CaseSense</em> is omitted, numeric
+comparison is performed if <em>SwitchValue</em> and the case value are both
+pure numbers, or if one is a pure number and the other is a numeric
+string. Each case value is considered separately and does not affect the
+type of comparison used for other case values.</p>
+<p>If the <em>CaseSense</em> parameter is present, all values are compared as
+strings, not as numbers, and a <a href="Error.htm#TypeError">TypeError</a> is
+thrown if <em>SwitchValue</em> or a <em>CaseValue</em> evaluates to an object.</p>
+<p>If the <em>CaseSense</em> parameter is omitted, string comparisons are
+case-sensitive by default.</p>
+<p>Each case may list up to 20 values. Each value must be an
+<a href="../Language.htm#expressions">expression</a>, but can be a simple one such
+as a literal number, quoted string or variable. <em>Case</em> and <em>Default</em>
+must be terminated with a colon.</p>
+<p>The first statement of each case may be below <em>Case</em> or on the same
+line, following the colon. Each case implicitly ends at the next
+<em>Case</em>/<em>Default</em> or the closing brace. Unlike the switch statement found
+in some other languages, there is no implicit fall-through and
+<a href="Break.htm">Break</a> is not used (except to break out of an enclosing
+loop).</p>
+<p>As all cases are enclosed in the same block, a label defined in one case
+can be the target of <a href="Goto.htm">Goto</a> from another case. However, if a
+label is placed immediately above <em>Case</em> or <em>Default</em>, it targets the
+end of the previous case, not the beginning of the next one.</p>
+<p><em>Default</em> is not required to be listed last.</p>
+<h2 id="Related">Related</h2>
+<p><a href="If.htm">If</a>, <a href="Else.htm">Else</a>, <a href="Block.htm">Blocks</a></p>
+<h2 id="examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Compares a number with multiple cases and shows
+the message box of the first match.</p>
+<pre class="codehilite"><code>switch 2
+{
+case 1: MsgBox &quot;no match&quot;
+case 2: MsgBox &quot;match&quot;
+case 3: MsgBox &quot;no match&quot;
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExBasicOmitted .ex}
+<a class="ex_number" href="#ExBasicOmitted"></a> The <em>SwitchValue</em> parameter can be
+omitted to execute the first case which evaluates to true.</p>
+<pre class="codehilite"><code>str := &quot;The quick brown fox jumps over the lazy dog&quot;
+switch
+{
+case InStr(str, &quot;blue&quot;): MsgBox &quot;false&quot;
+case InStr(str, &quot;brown&quot;): MsgBox &quot;true&quot;
+case InStr(str, &quot;green&quot;): MsgBox &quot;false&quot;
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExInput .ex}
+<a class="ex_number" href="#ExInput"></a> followed
+by one of the abbreviations listed below, any other 5 characters, or
+Enter/Esc/Tab/[.]{.kbd}; or wait for 4 seconds.} To test this example, type [[]{.kbd</p>
+<pre class="codehilite"><code>~[::
+{
+    ih := InputHook(&quot;V T5 L4 C&quot;, &quot;{enter}.{esc}{tab}&quot;, &quot;btw,otoh,fl,ahk,ca&quot;)
+    ih.Start()
+    ih.Wait()
+    switch ih.EndReason
+    {
+    case &quot;Max&quot;:
+        MsgBox 'You entered &quot;' ih.Input '&quot;, which is the maximum length of text'
+    case &quot;Timeout&quot;:
+        MsgBox 'You entered &quot;' ih.Input '&quot; at which time the input timed out'
+    case &quot;EndKey&quot;:
+        MsgBox 'You entered &quot;' ih.Input '&quot; and terminated it with ' ih.EndKey
+    default:  ; Match
+        switch ih.Input
+        {
+        case &quot;btw&quot;:   Send &quot;{backspace 3}by the way&quot;
+        case &quot;otoh&quot;:  Send &quot;{backspace 4}on the other hand&quot;
+        case &quot;fl&quot;:    Send &quot;{backspace 2}Florida&quot;
+        case &quot;ca&quot;:    Send &quot;{backspace 2}California&quot;
+        case &quot;ahk&quot;:
+            Send &quot;{backspace 3}&quot;
+            Run &quot;https://www.autohotkey.com&quot;
+        }
+    }
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Switch.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#switch">Switch</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InputBox | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Displays an input box to ask the user to enter a string.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>InputBox</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="inputbox">InputBox</h1>
+<p>Displays an input box to ask the user to enter a string.</p>
+<pre class="codehilite"><code class="language-Syntax">InputBoxObj := InputBox(Prompt, Title, Options, Default)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Prompt</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, it defaults to no text. Otherwise, specify the
+text, which is usually a message to the user indicating what kind of
+input is expected. If <em>Prompt</em> is long, it can be broken up into
+several shorter lines by means of a <a href="../Scripts.htm#continuation">continuation
+section</a>, which might improve
+readability and maintainability.</p>
+</dd>
+<dt>Title</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If omitted, it defaults to the current value of
+<a href="../Variables.htm#ScriptName">A_ScriptName</a>. Otherwise, specify the
+title of the input box.</p>
+</dd>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the input box will be centered horizontally and
+vertically on the screen, with a default size of about 380x200
+pixels, depending on the OS version and theme. Otherwise, specify a
+string of one or more of the following options, each separated from
+the next with a space or tab:</p>
+<p><strong>X</strong><em>n</em> and <strong>Y</strong><em>n</em>: The X and Y coordinates of the dialog. For
+example, <code>x0 y0</code> puts the window at the upper left corner of the
+desktop. If either coordinate is omitted, the dialog will be
+centered in that dimension. Either coordinate can be negative to
+position the dialog partially or entirely off the desktop (or on a
+secondary monitor in a multi-monitor setup).</p>
+<p><strong>W</strong><em>n</em> and <strong>H</strong><em>n</em>: The width and height of the dialog\'s client
+area, which excludes the title bar and borders. For example,
+<code>w200 h100</code>.</p>
+<p><strong>T</strong><em>n</em>: Specifies the timeout in seconds. For example,
+<code class="no-highlight">T10.0</code> is ten seconds. If this value exceeds 2147483
+(24.8 days), it will be set to 2147483. After the timeout has
+elapsed, the input box will be automatically closed and
+<a href="#return">InputBoxObj.Result</a> will be set to the word Timeout.
+<a href="#return">InputBoxObj.Value</a> will still contain what the user
+entered.</p>
+<p><strong>Password:</strong> Hides the user\'s input (such as for password entry)
+by substituting masking characters for what the user types. If a
+non-default masking character is desired, include it immediately
+after the word Password. For example, <code>Password*</code> would make the
+masking character an asterisk rather than the black circle (bullet).</p>
+</dd>
+<dt>Default</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, it defaults to no string. Otherwise, specify a
+string that will appear in the input box\'s edit field when the
+dialog first appears. The user can change it by backspacing or other
+means.</p>
+</dd>
+</dl>
+<h2 id="return">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>This function returns an object with the following properties:</p>
+<ul>
+<li><code>Value</code> (<a href="../Concepts.htm#strings">String</a>): The text entered by the
+    user.</li>
+<li><code>Result</code> (<a href="../Concepts.htm#strings">String</a>): One of the following
+    words indicating how the input box was closed: OK, Cancel, or
+    Timeout.</li>
+</ul>
+<h2 id="Remarks">Remarks</h2>
+<p>An input box usually looks like this:</p>
+<p><img alt="InputBox" src="../static/dlg_input.png" /></p>
+<p>The dialog allows the user to enter text and then press OK or CANCEL.
+The user can resize the dialog window by dragging its borders.</p>
+<p>A GUI window may display a modal input box by means of <a href="Gui.htm#OwnDialogs">OwnDialogs
+option</a>. A modal input box prevents the user from
+interacting with the GUI window until the input box is dismissed.</p>
+<h2 id="Related">Related</h2>
+<p><a href="Gui.htm">Gui object</a>, <a href="MsgBox.htm">MsgBox</a>,
+<a href="FileSelect.htm">FileSelect</a>, <a href="DirSelect.htm">DirSelect</a>,
+<a href="ToolTip.htm">ToolTip</a>, <a href="InputHook.htm">InputHook</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExPassword .ex}
+<a class="ex_number" href="#ExPassword"></a> Allows the user to enter a hidden password.</p>
+<pre class="codehilite"><code>password := InputBox(&quot;(your input will be hidden)&quot;, &quot;Enter Password&quot;, &quot;password&quot;).value
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Allows the user to enter a phone number.</p>
+<pre class="codehilite"><code>IB := InputBox(&quot;Please enter a phone number.&quot;, &quot;Phone Number&quot;, &quot;w640 h480&quot;)
+if IB.Result = &quot;Cancel&quot;
+    MsgBox &quot;You entered '&quot; IB.Value &quot;' but then cancelled.&quot;
+else
+    MsgBox &quot;You entered '&quot; IB.Value &quot;'.&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/InputBox.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#inputbox">InputBox</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#return">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

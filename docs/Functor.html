@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Objects | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="\"Function object\" usually means any of the following:">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Functor</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="function-objects">Function Objects</h1>
+<p>\"Function object\" usually means any of the following:</p>
+<ul>
+<li>A <a href="../lib/Func.htm">Func</a> or <a href="../Functions.htm#closures">Closure</a>
+    object, which represents an actual <a href="../Functions.htm">function</a>;
+    either built-in or defined by the script.</li>
+<li>A user-defined object which can be called like a function. This is
+    sometimes also referred to as a \"functor\".</li>
+<li>Any other object which can be called like a function, such as a
+    <a href="#BoundFunc">BoundFunc object</a> or a JavaScript function object
+    returned by a COM method.</li>
+</ul>
+<p>Function objects can be used with the following:</p>
+<ul>
+<li><a href="../lib/CallbackCreate.htm">CallbackCreate</a></li>
+<li><a href="../lib/GuiOnEvent.htm">Gui events</a></li>
+<li><a href="../lib/For.htm">For ... in</a></li>
+<li><a href="../lib/HotIf.htm">HotIf</a></li>
+<li><a href="../lib/Hotkey.htm">Hotkey</a></li>
+<li><a href="../lib/Hotstring.htm">Hotstring</a></li>
+<li><a href="../lib/InputHook.htm">InputHook</a> (OnEnd, OnChar, OnKeyDown,
+    OnKeyUp)</li>
+<li><a href="../lib/Menu.htm#Add">Menu.Add</a></li>
+<li><a href="../lib/OnClipboardChange.htm">OnClipboardChange</a></li>
+<li><a href="../lib/OnError.htm">OnError</a></li>
+<li><a href="../lib/OnExit.htm">OnExit</a></li>
+<li><a href="../lib/OnMessage.htm">OnMessage</a></li>
+<li><a href="RegExCallout.htm">RegEx callouts</a></li>
+<li><a href="../lib/SetTimer.htm">SetTimer</a></li>
+<li><a href="../lib/Sort.htm">Sort</a></li>
+</ul>
+<p>To determine whether an object appears to be callable, use one of the
+following:</p>
+<ul>
+<li><code>Value.HasMethod()</code> works with all AutoHotkey values and objects by
+    default, but allows HasMethod to be overridden for some objects or
+    classes. For COM objects, this will typically fail (throw an
+    exception or produce the wrong result) unless the COM object is
+    actually an AutoHotkey object from another process.</li>
+<li><code>HasMethod(Value)</code> works with all AutoHotkey values and objects and
+    cannot be overridden, but will return false if the presence of a
+    <em>Call</em> method cannot be determined. An exception is thrown if
+    <em>Value</em> is a <a href="../lib/ComObject.htm">ComObject</a>.</li>
+</ul>
+<h2 id="User-Defined">User-Defined</h2>
+<p>User-defined function objects must define a <em>Call</em> method containing the
+implementation of the \"function\".</p>
+<pre class="codehilite"><code>class YourClassName {
+    Call(a, b) {  ; Declare parameters as needed, or an array*.
+        ;...
+        return c
+    }
+    ;...
+}
+</code></pre>
+
+<p>This applies to <em>instances</em> of <em>YourClassName</em>, such as the object
+returned by <code>YourClassName()</code>. Replacing <code>Call</code> with <code>static Call</code> would
+instead override what occurs when <em>YourClassName</em> itself is called.</p>
+<h3 id="User-Defined-Examples">Examples</h3>
+<p>The following example defines a function array which can be called; when
+called, it calls each element of the array in turn.</p>
+<pre class="codehilite"><code>class FuncArrayType extends Array {
+    Call(params*) {
+        ; Call a list of functions.
+        for fn in this
+            fn(params*)
+    }
+}
+
+; Create an array of functions.
+funcArray := FuncArrayType()
+; Add some functions to the array (can be done at any point).
+funcArray.Push(One)
+funcArray.Push(Two)
+; Create an object which uses the array as a method.
+obj := {method: funcArray}
+; Call the method (and consequently both One and Two).
+obj.method(&quot;2nd&quot;)
+; Call it as a function.
+(obj.method)(&quot;1st&quot;, &quot;2nd&quot;)
+
+One(param1, param2) {
+    ListVars
+    MsgBox
+}
+Two(param1, param2) {
+    ListVars
+    MsgBox
+}
+</code></pre>
+
+<h2 id="BoundFunc">BoundFunc Object</h2>
+<p>Acts like a function, but just passes predefined parameters to another
+function.</p>
+<p>There are two ways that BoundFunc objects can be created:</p>
+<ul>
+<li>By calling the <a href="../lib/Func.htm#Bind">Func.Bind</a> method, which binds
+    parameter values to a function.</li>
+<li>By calling the <a href="../lib/ObjBindMethod.htm">ObjBindMethod</a> function,
+    which binds parameter values and a method name to a target object.</li>
+</ul>
+<p>BoundFunc objects can be called as shown in the example below. When the
+BoundFunc is called, it calls the function or method to which it is
+bound, passing a combination of bound parameters and the caller\'s
+parameters. Unbound parameter positions are assigned positions from the
+caller\'s parameter list, left to right. For example:</p>
+<pre class="codehilite"><code>fn := RealFn.Bind(1)  ; Bind first parameter only
+fn(2)      ; Shows &quot;1, 2&quot;
+fn.Call(3) ; Shows &quot;1, 3&quot;
+
+fn := RealFn.Bind( , 1)  ; Bind second parameter only
+fn(2, 0)   ; Shows &quot;2, 1, 0&quot;
+fn.Call(3) ; Shows &quot;3, 1&quot;
+fn(, 4)    ; Error: 'a' was omitted
+
+RealFn(a, b, c?) {
+    MsgBox a &quot;, &quot; b (IsSet(c) ? &quot;, &quot; c : &quot;&quot;)
+}
+</code></pre>
+
+<p><a href="../lib/ObjBindMethod.htm">ObjBindMethod</a> can be used to bind to a
+method even when it isn\'t possible to retrieve a reference to the
+method itself. For example:</p>
+<pre class="codehilite"><code>Shell := ComObject(&quot;Shell.Application&quot;)
+RunBox := ObjBindMethod(Shell, &quot;FileRun&quot;)
+; Show the Run dialog.
+RunBox
+</code></pre>
+
+<p>For a more complex example, see
+<a href="../lib/SetTimer.htm#ExampleClass">SetTimer</a>.</p>
+<p>Other properties and methods are inherited from <a href="../lib/Func.htm">Func</a>,
+but do not reflect the properties of the target function or method
+(which is not required to be implemented as a function). The BoundFunc
+acts as an anonymous variadic function with no other formal parameters,
+similar to the <a href="../Variables.htm#fat-arrow">fat arrow function</a> below:</p>
+<pre class="codehilite"><code>Func_Bind(fn, bound_args*) {
+    return (args*) =&gt; (args.InsertAt(1, bound_args*), fn(args*))
+}
+</code></pre>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Functor.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#function-objects">Function Objects</a><ul>
+<li><a href="#User-Defined">User-Defined</a><ul>
+<li><a href="#User-Defined-Examples">Examples</a></li>
+</ul>
+</li>
+<li><a href="#BoundFunc">BoundFunc Object</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

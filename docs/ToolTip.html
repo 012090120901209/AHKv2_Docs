@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolTip | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Shows an always-on-top window anywhere on the screen.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ToolTip</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="tooltip">ToolTip</h1>
+<p>Shows an always-on-top window anywhere on the screen.</p>
+<pre class="codehilite"><code class="language-Syntax">ToolTip Text, X, Y, WhichToolTip
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Text</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the existing tooltip (if any) will be hidden.
+Otherwise, specify the text to display in the tooltip. To create a
+multi-line tooltip, use the linefeed character (`n) in between each
+line, e.g. <code>"Line1`nLine2"</code>.</p>
+<p>If <em>Text</em> is long, it can be broken up into several shorter lines by
+means of a <a href="../Scripts.htm#continuation">continuation section</a>,
+which might improve readability and maintainability.</p>
+</dd>
+<dt>X, Y</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, the tooltip will be shown near the mouse cursor.
+Otherwise, specify the X and Y position of the tooltip relative to
+the active window\'s client area (use
+<a href="CoordMode.htm"><code>CoordMode</code></a><code>"ToolTip"</code> to change to screen
+coordinates).</p>
+</dd>
+<dt>WhichToolTip</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 1 (the first tooltip). Otherwise, specify
+a number between 1 and 20 to indicate which tooltip to operate upon
+when using multiple tooltips simultaneously.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If a tooltip is being shown or updated, this function returns the
+tooltip window\'s <a href="../misc/WinTitle.htm#ahk_id">unique ID (HWND)</a>, which
+can be used to move the tooltip or send <a href="https://learn.microsoft.com/windows/win32/controls/bumper-tooltip-control-reference-messages">Tooltip Control
+Messages</a>.</p>
+<p>If <em>Text</em> is blank or omitted, the return value is zero.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>A tooltip usually looks like this:
+<img alt="ToolTip" src="../static/dlg_tooltip.png" style="vertical-align: middle" /></p>
+<p>If the X and Y coordinates caused the tooltip to run off-screen, or
+outside the <a href="MonitorGetWorkArea.htm">monitor\'s working area</a> on Windows
+8 or later, it is repositioned to be entirely visible.</p>
+<p>The tooltip is displayed until one of the following occurs:</p>
+<ul>
+<li>The script terminates.</li>
+<li>The ToolTip function is executed again with a blank <em>Text</em>
+    parameter.</li>
+<li>The user clicks on the tooltip (this behavior may vary depending on
+    operating system version).</li>
+</ul>
+<p>A GUI window may be made the owner of a tooltip by means of the
+<a href="Gui.htm#OwnDialogs">OwnDialogs option</a>. Such a tooltip is automatically
+destroyed when its owner is destroyed.</p>
+<h2 id="Related">Related</h2>
+<p><a href="CoordMode.htm">CoordMode</a>, <a href="TrayTip.htm">TrayTip</a>, <a href="Gui.htm">GUI</a>,
+<a href="MsgBox.htm">MsgBox</a>, <a href="InputBox.htm">InputBox</a>,
+<a href="FileSelect.htm">FileSelect</a>, <a href="DirSelect.htm">DirSelect</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Shows a multiline tooltip at a specific
+position in the active window.</p>
+<pre class="codehilite"><code>ToolTip &quot;Multiline`nTooltip&quot;, 100, 150
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExAutoHide .ex}
+<a class="ex_number" href="#ExAutoHide"></a> Hides a tooltip after a certain amount of
+time without having to use Sleep (which would stop the current thread).</p>
+<pre class="codehilite"><code>ToolTip &quot;Timed ToolTip`nThis will be displayed for 5 seconds.&quot;
+SetTimer () =&gt; ToolTip(), -5000
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ToolTip.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#tooltip">ToolTip</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

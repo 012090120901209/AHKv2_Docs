@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComObject | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Creates a COM object.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ComObject</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="comobject">ComObject</h1>
+<p>Creates a COM object.</p>
+<pre class="codehilite"><code class="language-Syntax">ComObj := ComObject(CLSID , IID)
+</code></pre>
+
+<p><code>ComObject</code> itself is a <a href="Class.htm">class</a> derived from <code>ComValue</code>, but
+is used only to create or identify COM objects.</p>
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>CLSID</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>CLSID or human-readable Prog ID of the COM object to create.</p>
+</dd>
+<dt>IID</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If omitted, it defaults to
+<code>"{00020400-0000-0000-C000-000000000046}"</code> (IID_IDispatch).
+Otherwise, specify the identifier of the interface to return. In
+most cases this is omitted.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>This function returns a COM wrapper object of type dependent on the IID
+parameter.</p>
+<p>IID             Class                                     Variant Type                                    Description</p>
+<hr />
+<p>IID_IDispatch   <code style="white-space:nowrap">ComObject</code>   Allows the script to call properties and methods of the object using normal }   [VT_DISPATCH (9)]{style="white-space:nowrap"<a href="../Objects.htm#Usage_Objects">object syntax</a>.
+  Any other IID   <code style="white-space:nowrap">ComValue</code>   Provides only a }    [VT_UNKNOWN (13)]{style="white-space:nowrap"<code>Ptr</code> property, which allows the object to be passed to <a href="DllCall.htm">DllCall</a> or <a href="ComCall.htm">ComCall</a>.</p>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An exception is thrown on failure, such as if a parameter is invalid or
+the object does not support the interface specified by <em>IID</em>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="ComValue.htm">ComValue</a>, <a href="ComObjGet.htm">ComObjGet</a>,
+<a href="ComObjActive.htm">ComObjActive</a>, <a href="ComObjConnect.htm">ComObjConnect</a>,
+<a href="ComObjArray.htm">ComObjArray</a>, <a href="ComObjQuery.htm">ComObjQuery</a>,
+<a href="ComCall.htm">ComCall</a>, <a href="https://learn.microsoft.com/previous-versions/dcw63t7z(v=vs.85)">CreateObject (Microsoft
+Docs)</a></p>
+<h2 id="Examples">Examples</h2>
+<p>For a long list of v1.1 examples, see <a href="https://www.autohotkey.com/board/topic/56987-">this archived forum
+thread</a>.</p>
+<p>::: {#ExIE .ex}
+<a class="ex_number" href="#ExIE"></a> Launches an instance of Internet Explorer, makes
+it visible and navigates to a website.</p>
+<pre class="codehilite"><code>ie := ComObject(&quot;InternetExplorer.Application&quot;)
+ie.Visible := true  ; This is known to work incorrectly on IE7.
+ie.Navigate(&quot;https://www.autohotkey.com/&quot;)
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExWallpaper .ex}
+<a class="ex_number" href="#ExWallpaper"></a> Retrieves the path of the desktop\'s
+current wallpaper.</p>
+<pre class="codehilite"><code>AD_GETWP_BMP := 0
+AD_GETWP_LAST_APPLIED := 0x00000002
+CLSID_ActiveDesktop := &quot;{75048700-EF1F-11D0-9888-006097DEACF9}&quot;
+IID_IActiveDesktop := &quot;{F490EB00-1240-11D1-9888-006097DEACF9}&quot;
+cchWallpaper := 260
+GetWallpaper := 4
+
+AD := ComObject(CLSID_ActiveDesktop, IID_IActiveDesktop)
+wszWallpaper := Buffer(cchWallpaper * 2)
+ComCall(GetWallpaper, AD, &quot;ptr&quot;, wszWallpaper, &quot;uint&quot;, cchWallpaper, &quot;uint&quot;, AD_GETWP_LAST_APPLIED)
+Wallpaper := StrGet(wszWallpaper, &quot;UTF-16&quot;)
+MsgBox &quot;Wallpaper: &quot; Wallpaper
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ComObject.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#comobject">ComObject</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

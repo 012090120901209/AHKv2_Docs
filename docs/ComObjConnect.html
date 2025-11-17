@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComObjConnect | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Connects a COM object\'s event source to the script, enabling events to">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ComObjConnect</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="comobjconnect">ComObjConnect</h1>
+<p>Connects a COM object\'s event source to the script, enabling events to
+be handled.</p>
+<pre class="codehilite"><code class="language-Syntax">ComObjConnect ComObj , PrefixOrSink
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>ComObj</dt>
+<dd>
+<p>Type: <a href="ComObject.htm">ComObject</a></p>
+<p>An object which raises events.</p>
+<p>If the object does not support the IConnectionPointContainer
+interface or type information about the object\'s class cannot be
+retrieved, an error message is shown. This can be suppressed or
+handled with <a href="Try.htm">try</a>/<a href="Catch.htm">catch</a>.</p>
+<p>The IProvideClassInfo interface is used to retrieve type information
+about the object\'s class if the object supports it. Otherwise,
+ComObjConnect attempts to retrieve type information via the
+object\'s IDispatch interface, which may be unreliable.</p>
+</dd>
+<dt>PrefixOrSink</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#objects">Object</a></p>
+<p>If omitted, the object is \"disconnected\"; that is, the script will
+no longer receive notification of its events. Otherwise, specify a
+string to prefix to the event name to determine which global
+function to call when an event occurs, or an <a href="#event-sink">event sink
+object</a> defining a static method for each event to be
+handled.</p>
+<p><strong>Note:</strong> Nested functions are not supported in this mode, as names
+may be resolved after the current function returns. To use nested
+functions or closures, attach them to an object and pass the object
+as described below.</p>
+</dd>
+</dl>
+<h2 id="Usage">Usage</h2>
+<p>To make effective use of ComObjConnect, you must first write functions
+in the script to handle any events of interest. Such functions, or
+\"event-handlers,\" have the following structure:</p>
+<pre class="Short NoIndent codehilite"><code class="language-Syntax">PrefixEventName([Params..., ComObj])
+{
+    ... event-handling code ...
+    return ReturnValue
+}
+</code></pre>
+
+<p><em>Prefix</em> should be the same as the <em>PrefixOrSink</em> parameter if it is a
+string; otherwise, it should be omitted. <strong>EventName</strong> should be
+replaced with the name of whatever event the function should handle.</p>
+<p><em>Params</em> corresponds to whatever parameters the event has. If the event
+has no parameters, <em>Params</em> should be omitted entirely. <em>ComObj</em> is an
+additional parameter containing a reference to the original wrapper
+object which was passed to ComObjConnect; it is never included in the
+COM event\'s documentation. \"ComObj\" should be replaced with a name
+more meaningful in the context of your script.</p>
+<p>Note that event handlers may have return values. To return a
+COM-specific type of value, use <a href="ComValue.htm">ComValue</a>. For example,
+<code>return ComValue(0,0)</code> returns a variant of type VT_EMPTY, which is
+equivalent to returning <code>undefined</code> (or not returning) from a JavaScript
+function.</p>
+<p>Call <code>ComObjConnect(yourObject, "</code><em><code>Prefix</code></em><code>")</code> to enable
+event-handling.</p>
+<p>Call <code>ComObjConnect(yourObject)</code> to disconnect the object (stop handling
+events).</p>
+<p>If the number of parameters is not known, a <a href="../Functions.htm#Variadic">variadic
+function</a> can be used.</p>
+<h3 id="event-sink">Event Sink</h3>
+<p>If <em>PrefixOrSink</em> is an object, whenever an event is raised, the
+corresponding method of that object is called. Although the object can
+be constructed dynamically, it is more typical for <em>PrefixOrSink</em> to
+refer to a class or an instance of a class. In that case, methods are
+defined as shown above, but without <em>Prefix</em>.</p>
+<p>As with any call to a method, the method\'s (normally hidden) <code>this</code>
+parameter contains a reference to the object through which the method
+was called; i.e. the event sink object, not the COM object. This can be
+used to provide context to the event handlers, or share values between
+them.</p>
+<p>To catch all events without defining a method for each one, define a
+<a href="../Objects.htm#Meta_Functions">__Call meta-function</a>.</p>
+<p><em>ComObject</em> releases its reference to <em>PrefixOrSink</em> automatically if
+the COM object releases the connection. For example, Internet Explorer
+does this when it exits. If the script does not retain its own reference
+to <em>PrefixOrSink</em>, it can use
+<a href="../Objects.htm#Custom_NewDelete">__Delete</a> to detect when this
+occurs. If the object is hosted by a remote process and the process
+terminates unexpectedly, it may take several minutes for the system to
+release the connection.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>The script must retain a reference to <em>ComObj</em>, otherwise it would be
+freed automatically and would disconnect from its COM object, preventing
+any further events from being detected. There is no standard way to
+detect when the connection is no longer required, so the script must
+disconnect manually by calling ComObjConnect.</p>
+<p>The <a href="Persistent.htm">Persistent</a> function may be needed to keep the
+script running while it is listening for events.</p>
+<p>An exception is thrown on failure.</p>
+<h2 id="Related">Related</h2>
+<p><a href="ComObject.htm">ComObject</a>, <a href="ComObjGet.htm">ComObjGet</a>,
+<a href="ComObjActive.htm">ComObjActive</a>, <a href="https://learn.microsoft.com/previous-versions/ccxe1xe6(v=vs.85)">WScript.ConnectObject (Microsoft
+Docs)</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExIE .ex}
+<a class="ex_number" href="#ExIE"></a> Launches an instance of Internet Explorer and
+connects events to corresponding script functions with the prefix
+\"IE_\". For details about the COM object and DocumentComplete event
+used below, see <a href="https://learn.microsoft.com/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa752084(v=vs.85)">InternetExplorer object (Microsoft
+Docs)</a>.</p>
+<pre class="codehilite"><code>ie := ComObject(&quot;InternetExplorer.Application&quot;)
+
+; Connects events to corresponding script functions with the prefix &quot;IE_&quot;.
+ComObjConnect(ie, &quot;IE_&quot;)
+
+ie.Visible := true  ; This is known to work incorrectly on IE7.
+ie.Navigate(&quot;https://www.autohotkey.com/&quot;)
+Persistent
+
+IE_DocumentComplete(ieEventParam, &amp;url, ieFinalParam) {
+    ; IE passes url as a reference to a VARIANT, therefore &amp;url is used above
+    ; so that the code below can refer to it naturally rather than as %url%.
+    s := &quot;&quot;
+    if (ie != ieEventParam)
+        s .= &quot;First parameter is a new wrapper object.`n&quot;
+    if (ie == ieFinalParam)
+        s .= &quot;Final parameter is the original wrapper object.`n&quot;
+    if (ComObjValue(ieEventParam) == ComObjValue(ieFinalParam))
+        s .= &quot;Both wrapper objects refer to the same IDispatch instance.`n&quot;
+    MsgBox s . &quot;Finished loading &quot; ie.Document.title &quot; @ &quot; url
+    ie.Quit()
+    ExitApp
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ComObjConnect.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#comobjconnect">ComObjConnect</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Usage">Usage</a><ul>
+<li><a href="#event-sink">Event Sink</a></li>
+</ul>
+</li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

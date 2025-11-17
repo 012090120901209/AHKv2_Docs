@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Functions | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Functions for performing various mathematical operations such as">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Math</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="math-functions">Math Functions</h1>
+<p>Functions for performing various mathematical operations such as
+rounding, exponentiation, squaring, etc.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#General">General Math</a>:<ul>
+<li><a href="#Abs">Abs</a>: Returns the absolute value of a number.</li>
+<li><a href="#Ceil">Ceil</a>: Returns a number rounded up to the nearest
+    integer.</li>
+<li><a href="#Exp">Exp</a>: Returns the result of raising e to the <em>N</em>th power.</li>
+<li><a href="#Floor">Floor</a>: Returns a number rounded down to the nearest
+    integer.</li>
+<li><a href="#Log">Log</a>: Returns the logarithm (base 10) of a number.</li>
+<li><a href="#Ln">Ln</a>: Returns the natural logarithm (base e) of a number.</li>
+<li><a href="#Max">Max</a>: Returns the highest number from a set of numbers.</li>
+<li><a href="#Min">Min</a>: Returns the lowest number from a set of numbers.</li>
+<li><a href="#Mod">Mod</a>: Modulo. Returns the remainder of a division.</li>
+<li><a href="#Round">Round</a>: Returns a number rounded to <em>N</em> decimal places.</li>
+<li><a href="#Sqrt">Sqrt</a>: Returns the square root of a number.</li>
+</ul>
+</li>
+<li><a href="#Trigonometry">Trigonometry</a>:<ul>
+<li><a href="#Sin">Sin</a>: Returns the trigonometric sine of a number.</li>
+<li><a href="#Cos">Cos</a>: Returns the trigonometric cosine of a number.</li>
+<li><a href="#Tan">Tan</a>: Returns the trigonometric tangent of a number.</li>
+<li><a href="#ASin">ASin</a>: Returns the arcsine of a number in radians.</li>
+<li><a href="#ACos">ACos</a>: Returns the arccosine of a number in radians.</li>
+<li><a href="#ATan">ATan</a>: Returns the arctangent of a number in radians.</li>
+</ul>
+</li>
+<li><a href="#Errors">Error-handling</a></li>
+</ul>
+<h2 id="General">General Math</h2>
+<h3 id="Abs">Abs</h3>
+<p>Returns the absolute value of the specified number.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Abs(Number)
+</code></pre>
+
+<p>The return value is the same type as <em>Number</em> (integer or floating
+point).</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Abs(-1.2) ; Returns 1.2
+</code></pre>
+
+<h3 id="Ceil">Ceil</h3>
+<p>Returns the specified number rounded up to the nearest integer (without
+any .00 suffix).</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Ceil(Number)
+</code></pre>
+
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Ceil(1.2)  ; Returns 2
+MsgBox Ceil(-1.2) ; Returns -1
+</code></pre>
+
+<h3 id="Exp">Exp</h3>
+<p>Returns the result of raising e (which is approximately
+2.71828182845905) to the <em>N</em>th power.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Exp(N)
+</code></pre>
+
+<p><em>N</em> may be negative and may contain a decimal point. To raise numbers
+other than e to a power, use the <a href="../Variables.htm#pow">** operator</a>.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Exp(1.2) ; Returns 3.320117
+</code></pre>
+
+<h3 id="Floor">Floor</h3>
+<p>Returns the specified number rounded down to the nearest integer
+(without any .00 suffix).</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Floor(Number)
+</code></pre>
+
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Floor(1.2)  ; Returns 1
+MsgBox Floor(-1.2) ; Returns -2
+</code></pre>
+
+<h3 id="Log">Log</h3>
+<p>Returns the logarithm (base 10) of the specified number.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Log(Number)
+</code></pre>
+
+<p>The result is a floating-point number. If <em>Number</em> is negative, a
+<a href="Error.htm#ValueError">ValueError</a> is thrown.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Log(1.2) ; Returns 0.079181
+</code></pre>
+
+<h3 id="Ln">Ln</h3>
+<p>Returns the natural logarithm (base e) of the specified number.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Ln(Number)
+</code></pre>
+
+<p>The result is a floating-point number. If <em>Number</em> is negative, a
+<a href="Error.htm#ValueError">ValueError</a> is thrown.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Ln(1.2) ; Returns 0.182322
+</code></pre>
+
+<h3 id="Max">Max</h3>
+<p>Returns the highest number from a set of numbers.</p>
+<pre class="codehilite"><code class="language-Syntax">Number := Max(Number1 , Number2, ...)
+</code></pre>
+
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Max(2.11, -2, 0) ; Returns 2.11
+</code></pre>
+
+<p>You can also specify a <a href="../Functions.htm#Variadic">variadic parameter</a>
+to pass an <a href="Array.htm">array</a> of numbers. For example:</p>
+<pre class="codehilite"><code class="language-NoIndent">Numbers := [1, 2, 3, 4]
+MsgBox Max(Numbers*) ; Returns 4
+</code></pre>
+
+<h3 id="Min">Min</h3>
+<p>Returns the lowest number from a set of numbers.</p>
+<pre class="codehilite"><code class="language-Syntax">Number := Min(Number1 , Number2, ...)
+</code></pre>
+
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Min(2.11, -2, 0) ; Returns -2
+</code></pre>
+
+<p>You can also specify a <a href="../Functions.htm#Variadic">variadic parameter</a>
+to pass an <a href="Array.htm">array</a> of numbers. For example:</p>
+<pre class="codehilite"><code class="language-NoIndent">Numbers := [1, 2, 3, 4]
+MsgBox Min(Numbers*) ; Returns 1
+</code></pre>
+
+<h3 id="Mod">Mod</h3>
+<p>Modulo. Returns the remainder of a number (dividend) divided by another
+number (divisor).</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Mod(Dividend, Divisor)
+</code></pre>
+
+<p>The sign of the result is always the same as the sign of the first
+parameter. If either input is a floating point number, the result is
+also a floating point number. If the second parameter is zero, a
+<a href="Error.htm#ZeroDivisionError">ZeroDivisionError</a> is thrown.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Mod(7.5, 2) ; Returns 1.5 (2 x 3 + 1.5)
+</code></pre>
+
+<h3 id="Round">Round</h3>
+<p>Returns the specified number rounded to <em>N</em> decimal places.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Round(Number , N)
+</code></pre>
+
+<p>If <em>N</em> is omitted or 0, <em>Number</em> is rounded to the nearest integer:</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Round(3.14)    ; Returns 3
+</code></pre>
+
+<p>If <em>N</em> is positive, <em>Number</em> is rounded to <em>N</em> decimal places:</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Round(3.14, 1) ; Returns 3.1
+</code></pre>
+
+<p>If <em>N</em> is negative, <em>Number</em> is rounded by <em>N</em> digits to the left of the
+decimal point:</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Round(345, -1) ; Returns 350
+MsgBox Round(345, -2) ; Returns 300
+</code></pre>
+
+<p>The result is an integer if <em>N</em> is omitted or less than 1. Otherwise,
+the result is a numeric string with exactly <em>N</em> decimal places. If a
+pure number is needed, simply perform another math operation on Round\'s
+return value; for example: <code>Round(3.333, 1)+0</code>.</p>
+<h3 id="Sqrt">Sqrt</h3>
+<p>Returns the square root of the specified number.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Sqrt(Number)
+</code></pre>
+
+<p>The result is a floating-point number. If <em>Number</em> is negative, a
+<a href="Error.htm#ValueError">ValueError</a> is thrown.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Sqrt(16) ; Returns 4
+</code></pre>
+
+<h2 id="Trigonometry">Trigonometry</h2>
+<p><strong>Note:</strong> To convert a radians value to degrees, multiply it by 180/pi
+(approximately 57.29578). To convert a degrees value to radians,
+multiply it by pi/180 (approximately 0.01745329252). The value of pi
+(approximately 3.141592653589793) is 4 times the arctangent of 1.</p>
+<h3 id="Sin">Sin</h3>
+<p>Returns the trigonometric sine of the specified number.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Sin(Number)
+</code></pre>
+
+<p><em>Number</em> must be expressed in radians.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Sin(1.2) ; Returns 0.932039
+</code></pre>
+
+<h3 id="Cos">Cos</h3>
+<p>Returns the trigonometric cosine of the specified number.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Cos(Number)
+</code></pre>
+
+<p><em>Number</em> must be expressed in radians.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Cos(1.2) ; Returns 0.362358
+</code></pre>
+
+<h3 id="Tan">Tan</h3>
+<p>Returns the trigonometric tangent of the specified number.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := Tan(Number)
+</code></pre>
+
+<p><em>Number</em> must be expressed in radians.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox Tan(1.2) ; Returns 2.572152
+</code></pre>
+
+<h3 id="ASin">ASin</h3>
+<p>Returns the arcsine (the number whose sine is the specified number) in
+radians.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := ASin(Number)
+</code></pre>
+
+<p>If <em>Number</em> is less than -1 or greater than 1, a
+<a href="Error.htm#ValueError">ValueError</a> is thrown.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox ASin(0.2) ; Returns 0.201358
+</code></pre>
+
+<h3 id="ACos">ACos</h3>
+<p>Returns the arccosine (the number whose cosine is the specified number)
+in radians.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := ACos(Number)
+</code></pre>
+
+<p>If <em>Number</em> is less than -1 or greater than 1, a
+<a href="Error.htm#ValueError">ValueError</a> is thrown.</p>
+<pre class="codehilite"><code class="language-NoIndent">MsgBox ACos(0.2) ; Returns 1.369438
+</code></pre>
+
+<h3 id="ATan">ATan</h3>
+<p>Returns the arctangent (the number whose tangent is the specified
+number) in radians.</p>
+<pre class="codehilite"><code class="language-Syntax">Value := ATan(Number)
+</code></pre>
+
+<pre class="codehilite"><code class="language-NoIndent">MsgBox ATan(1.2) ; Returns 0.876058
+</code></pre>
+
+<h2 id="Errors">Error-Handling</h2>
+<p>These functions throw an exception if any incoming parameters are
+non-numeric or an invalid operation (such as divide by zero) is
+attempted.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Math.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#math-functions">Math Functions</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#General">General Math</a><ul>
+<li><a href="#Abs">Abs</a></li>
+<li><a href="#Ceil">Ceil</a></li>
+<li><a href="#Exp">Exp</a></li>
+<li><a href="#Floor">Floor</a></li>
+<li><a href="#Log">Log</a></li>
+<li><a href="#Ln">Ln</a></li>
+<li><a href="#Max">Max</a></li>
+<li><a href="#Min">Min</a></li>
+<li><a href="#Mod">Mod</a></li>
+<li><a href="#Round">Round</a></li>
+<li><a href="#Sqrt">Sqrt</a></li>
+</ul>
+</li>
+<li><a href="#Trigonometry">Trigonometry</a><ul>
+<li><a href="#Sin">Sin</a></li>
+<li><a href="#Cos">Cos</a></li>
+<li><a href="#Tan">Tan</a></li>
+<li><a href="#ASin">ASin</a></li>
+<li><a href="#ACos">ACos</a></li>
+<li><a href="#ATan">ATan</a></li>
+</ul>
+</li>
+<li><a href="#Errors">Error-Handling</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>
