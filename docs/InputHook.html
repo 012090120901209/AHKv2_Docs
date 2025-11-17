@@ -223,7 +223,7 @@ buffer). When an Input is terminated this way,
 <p><em>EndKeys</em> uses a format similar to the <a href="Send.htm">Send</a> function.
 For example, specifying <code>{Enter}.{Esc}</code> would cause either
 [Enter]{.kbd}, [.]{.kbd}, or [Esc]{.kbd} to terminate the Input. To
-use the braces themselves as end keys, specify <code>{{}</code> and/or <code>{}}</code>.</p>
+use the braces themselves as end keys, specify <code>{ {</code> and/or <code>} }</code>.</p>
 <p>To use [Ctrl]{.kbd}, [Alt]{.kbd}, or [Shift]{.kbd} as end keys,
 specify the left and/or right version of the key, not the neutral
 version. For example, specify <code>{LControl}{RControl}</code> rather than
@@ -360,7 +360,7 @@ object, as \"InputHook\" is the class itself.</p>
 <p>Type: <a href="../Concepts.htm#strings">String</a></p>
 <p>A list of keys. Braces are used to enclose key names, virtual key
 codes or scan codes, similar to the <a href="Send.htm">Send</a> function. For
-example, <code>{Enter}.{{}</code> would apply to [Enter]{.kbd}, [.]{.kbd} and
+example, <code>{Enter}.{ {</code> would apply to [Enter]{.kbd}, [.]{.kbd} and
 [{]{.kbd}. Specifying a key by name, by <code>{vkNN}</code> or by <code>{scNNN}</code> may
 produce three different results; see below for details.</p>
 <p>Specify the string <code>{All}</code> (case-insensitive) on its own to apply
