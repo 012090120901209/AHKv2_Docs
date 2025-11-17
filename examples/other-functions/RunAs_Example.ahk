@@ -1,0 +1,29 @@
+/*
+    AutoHotkey v2 Example: RunAs
+    Documentation: RunAs.md
+    Category: Other Functions
+
+    This example demonstrates practical usage of RunAs.
+    Modify and experiment to learn!
+*/
+
+
+; Basic usage of RunAs
+; See documentation for detailed information
+
+; Example 1: Basic usage
+; RunAs()
+
+; Example 2: With parameters
+; RunAs(param1, param2)
+
+; Example 3: Practical application
+; Implement your specific use case here
+
+MsgBox "See RunAs.md for complete documentation"
+
+
+/*
+    For complete documentation, see: RunAs.md
+    AutoHotkey v2 Documentation: https://www.autohotkey.com/docs/v2/
+*/
