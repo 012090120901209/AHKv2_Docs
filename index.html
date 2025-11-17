@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoHotkey v2 Complete Documentation & Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Ultra-dark backgrounds */
+            --bg-primary: #0C0C0F;
+            --bg-secondary: #1A1A1E;
+            --bg-tertiary: #232326;
+            --bg-card: #2A2A2E;
+
+            /* Accent colors */
+            --blue: #3B82F6;
+            --purple: #8B5CF6;
+            --pink: #EC4899;
+            --teal: #14B8A6;
+            --orange: #F97316;
+            --indigo: #6366F1;
+
+            /* Text hierarchy */
+            --text-primary: #FFFFFF;
+            --text-secondary: #E5E5E5;
+            --text-muted: #A0A0A0;
+            --text-dim: #6B6B6B;
+
+            /* Semantic colors */
+            --success: #10B981;
+            --error: #EF4444;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--bg-tertiary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .stat {
+            background: var(--bg-card);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--bg-tertiary);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--blue);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--bg-tertiary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), var(--purple));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
+            border-color: var(--blue);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-accent-blue { border-top-color: var(--blue); }
+        .card-accent-purple { border-top-color: var(--purple); }
+        .card-accent-pink { border-top-color: var(--pink); }
+        .card-accent-teal { border-top-color: var(--teal); }
+        .card-accent-orange { border-top-color: var(--orange); }
+        .card-accent-indigo { border-top-color: var(--indigo); }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+
+        .btn-primary {
+            background: var(--blue);
+            color: white;
+            border-color: var(--blue);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--bg-tertiary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--purple);
+            color: var(--purple);
+        }
+
+        .features {
+            margin-top: 3rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .feature h3 {
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tag-count {
+            background: var(--bg-card);
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-weight: bold;
+            color: var(--blue);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--bg-tertiary);
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            color: var(--pink);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>AutoHotkey v2 Complete Documentation</h1>
+            <p class="subtitle">The most comprehensive AHK v2 resource with full documentation and 412 working examples</p>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">411</div>
+                    <div class="stat-label">Documentation Files</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">412</div>
+                    <div class="stat-label">Working Examples</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">3,192</div>
+                    <div class="stat-label">Topics Covered</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">19</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+            </div>
+
+            <div class="quick-links">
+                <a href="DOCUMENTATION_INVENTORY.md" class="btn btn-primary">📚 Browse Documentation</a>
+                <a href="examples/" class="btn btn-secondary">💻 View Examples</a>
+                <a href="EXAMPLES_SUMMARY.md" class="btn btn-secondary">📊 Examples Summary</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Explore by Category</h2>
+
+            <div class="grid">
+                <div class="card card-accent-blue">
+                    <h2>🪟 Window Management</h2>
+                    <p>Control windows, positions, sizes, and states</p>
+                    <div class="tag">
+                        <span>50 examples</span>
+                        <span class="tag-count">585 topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/window-management/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+
+                <div class="card card-accent-purple">
+                    <h2>🎮 Control Functions</h2>
+                    <p>Interact with window controls and GUI elements</p>
+                    <div class="tag">
+                        <span>34 examples</span>
+                        <span class="tag-count">299 topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/control-functions/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+
+                <div class="card card-accent-pink">
+                    <h2>📁 File & Directory</h2>
+                    <p>File operations, reading, writing, and management</p>
+                    <div class="tag">
+                        <span>31 examples</span>
+                        <span class="tag-count">242 topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/file-directory/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+
+                <div class="card card-accent-teal">
+                    <h2>⌨️ Keyboard & Hotkeys</h2>
+                    <p>Send keys, create hotkeys, and handle input</p>
+                    <div class="tag">
+                        <span>30 examples</span>
+                        <span class="tag-count">185 topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/keyboard-hotkeys/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+
+                <div class="card card-accent-orange">
+                    <h2>🖱️ Mouse Functions</h2>
+                    <p>Mouse automation, clicks, and movements</p>
+                    <div class="tag">
+                        <span>8 examples</span>
+                        <span class="tag-count">42 topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/mouse-functions/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+
+                <div class="card card-accent-indigo">
+                    <h2>🎨 GUI Functions</h2>
+                    <p>Create graphical user interfaces</p>
+                    <div class="tag">
+                        <span>6 examples</span>
+                        <span class="tag-count">103 topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/gui-functions/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+
+                <div class="card card-accent-blue">
+                    <h2>🔤 String Functions</h2>
+                    <p>Text manipulation and processing</p>
+                    <div class="tag">
+                        <span>12 examples</span>
+                        <span class="tag-count">Multiple topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/string-functions/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+
+                <div class="card card-accent-purple">
+                    <h2>🔢 Math Functions</h2>
+                    <p>Mathematical operations and calculations</p>
+                    <div class="tag">
+                        <span>4 examples</span>
+                        <span class="tag-count">27 topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/math-functions/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+
+                <div class="card card-accent-pink">
+                    <h2>🔄 Flow Control</h2>
+                    <p>Loops, conditionals, and program flow</p>
+                    <div class="tag">
+                        <span>15 examples</span>
+                        <span class="tag-count">47 topics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="examples/flow-control/" class="btn btn-primary">View Examples</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Key Features</h2>
+
+                <div class="feature-list">
+                    <div class="feature">
+                        <h3>✅ Complete Coverage</h3>
+                        <p>Every documented function has a working example</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>📝 Well Commented</h3>
+                        <p>Clear explanations in every example</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>🏃 Runnable Code</h3>
+                        <p>All examples work out of the box</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>🗂️ Organized</h3>
+                        <p>Categorized by functionality</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>🔍 Searchable</h3>
+                        <p>Full inventory and index included</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>🎯 Practical</h3>
+                        <p>Real-world use cases demonstrated</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>AutoHotkey v2 Complete Documentation & Examples</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+                Created with ❤️ for the AHK community |
+                <a href="https://www.autohotkey.com/docs/v2/" style="color: var(--blue); text-decoration: none;">Official AHK Docs</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHK v2 Examples Browser</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0C0C0F;
+            --bg-secondary: #1A1A1E;
+            --bg-tertiary: #232326;
+            --bg-card: #2A2A2E;
+            --blue: #3B82F6;
+            --purple: #8B5CF6;
+            --pink: #EC4899;
+            --teal: #14B8A6;
+            --orange: #F97316;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E5E5E5;
+            --text-muted: #A0A0A0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-bottom: 2px solid var(--bg-tertiary);
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .search {
+            margin-bottom: 2rem;
+        }
+
+        .search input {
+            width: 100%;
+            max-width: 600px;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 2px solid var(--bg-tertiary);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .search input:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--bg-tertiary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category:hover {
+            transform: translateY(-4px);
+            border-color: var(--blue);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .category h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--blue);
+        }
+
+        .category-count {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .file-list {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--bg-tertiary);
+        }
+
+        .file-item {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .file-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--blue);
+            padding-left: 1rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid var(--bg-tertiary);
+        }
+
+        .back-link:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / Examples
+            </div>
+            <h1>📚 AHK v2 Examples Browser</h1>
+            <p style="color: var(--text-secondary);">412 working examples across 19 categories</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Home</a>
+
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Search examples... (try 'window', 'file', 'mouse')">
+        </div>
+
+        <div class="categories" id="categories">
+            <div class="category" onclick="location.href='built-in-types/'">
+                <h2>Built-in Types</h2>
+                <p class="category-count">7 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Array, Map, Object, Buffer, Func</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='window-management/'">
+                <h2>Window Management</h2>
+                <p class="category-count">50 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">WinActivate, WinMove, WinClose, WinGetTitle</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='control-functions/'">
+                <h2>Control Functions</h2>
+                <p class="category-count">34 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">ControlClick, ControlGetText, ControlSend</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='gui-functions/'">
+                <h2>GUI Functions</h2>
+                <p class="category-count">6 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Gui, GuiControl, GuiOnEvent</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='file-directory/'">
+                <h2>File & Directory</h2>
+                <p class="category-count">31 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">FileRead, FileAppend, DirCreate, FileCopy</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='keyboard-hotkeys/'">
+                <h2>Keyboard & Hotkeys</h2>
+                <p class="category-count">30 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Send, Hotkey, Hotstring, GetKeyState</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='mouse-functions/'">
+                <h2>Mouse Functions</h2>
+                <p class="category-count">8 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Click, MouseMove, MouseGetPos</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='string-functions/'">
+                <h2>String Functions</h2>
+                <p class="category-count">12 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">StrReplace, InStr, StrSplit, SubStr</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='math-functions/'">
+                <h2>Math Functions</h2>
+                <p class="category-count">4 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Round, Abs, Math operations</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='flow-control/'">
+                <h2>Flow Control</h2>
+                <p class="category-count">15 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">If, Loop, For, While, Switch</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='error-handling/'">
+                <h2>Error Handling</h2>
+                <p class="category-count">6 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Try, Catch, Throw, OnError</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='process-management/'">
+                <h2>Process Management</h2>
+                <p class="category-count">9 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Run, ProcessExist, ProcessClose</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='sound-functions/'">
+                <h2>Sound Functions</h2>
+                <p class="category-count">9 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">SoundPlay, SoundBeep, SoundGet</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='drive-functions/'">
+                <h2>Drive Functions</h2>
+                <p class="category-count">13 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">DriveGet, DriveEject, DriveGetCapacity</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='com-functions/'">
+                <h2>COM Functions</h2>
+                <p class="category-count">13 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">ComObject, ComCall, ComObjActive</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='registry-functions/'">
+                <h2>Registry Functions</h2>
+                <p class="category-count">4 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">RegRead, RegWrite, RegDelete</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='directives-special/'">
+                <h2>Directives & Special</h2>
+                <p class="category-count">12 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">#Include, #HotIf, #Requires</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='core-concepts/'">
+                <h2>Core Concepts</h2>
+                <p class="category-count">6 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Functions, Objects, Variables</small>
+                </div>
+            </div>
+
+            <div class="category" onclick="location.href='other-functions/'">
+                <h2>Other Functions</h2>
+                <p class="category-count">143 examples</p>
+                <div class="file-list">
+                    <small style="color: var(--text-muted);">Miscellaneous utilities and functions</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const categories = document.querySelectorAll('.category');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            categories.forEach(category => {
+                const title = category.querySelector('h2').textContent.toLowerCase();
+                const description = category.querySelector('small').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    category.style.display = 'block';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
