@@ -3,8 +3,8 @@
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
 
-// Get saved theme or default to light
-const currentTheme = localStorage.getItem('theme') || 'light';
+// Get saved theme or default to dark
+const currentTheme = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', currentTheme);
 
 // Update icon

@@ -41,24 +41,28 @@
 
 /* Dark Mode */
 [data-theme="dark"] {
-    --background: #1b1b1d;
-    --surface: #242526;
-    --sidebar-bg: #1b1b1d;
-    --navbar-bg: #1b1b1d;
+    --primary: #5ba2ff;
+    --primary-dark: #4a92ef;
+    --primary-light: #7bb8ff;
 
-    --text-primary: #e3e3e3;
-    --text-secondary: #b4b4b4;
-    --text-tertiary: #8a8a8a;
+    --background: #0d1117;
+    --surface: #161b22;
+    --sidebar-bg: #0d1117;
+    --navbar-bg: #161b22;
 
-    --border: #2e2e30;
-    --border-light: #262628;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-tertiary: #6e7681;
 
-    --code-bg: #242526;
-    --code-border: #2e2e30;
+    --border: #30363d;
+    --border-light: #21262d;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+    --code-bg: #161b22;
+    --code-border: #30363d;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.7);
 }
 
 /* Reset */

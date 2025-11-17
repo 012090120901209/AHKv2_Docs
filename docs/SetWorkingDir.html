@@ -12,10 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/sidebar.css">
-    <link rel="stylesheet" href="/css/markdown.css">
-    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/AHKv2_Docs/css/styles.css">
+    <link rel="stylesheet" href="/AHKv2_Docs/css/sidebar.css">
+    <link rel="stylesheet" href="/AHKv2_Docs/css/markdown.css">
+    <link rel="stylesheet" href="/AHKv2_Docs/css/syntax.css">
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,7 +28,7 @@
                 <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
                     <i class="fas fa-bars"></i>
                 </button>
-                <a href="/" class="navbar-brand">
+                <a href="/AHKv2_Docs/" class="navbar-brand">
                     <span class="logo-icon">⚡</span>
                     <span class="logo-text">AutoHotkey v2</span>
                 </a>
@@ -68,9 +68,9 @@
                             <span>Getting Started</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
-                            <li><a href="/guides/FAQ.html">FAQ</a></li>
-                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                            <li><a href="/AHKv2_Docs/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/AHKv2_Docs/FAQ.html">FAQ</a></li>
+                            <li><a href="/AHKv2_Docs/Concepts.html">Concepts</a></li>
                         </ul>
                     </div>
 
@@ -80,10 +80,10 @@
                             <span>Functions</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/functions/string/">String Functions</a></li>
-                            <li><a href="/functions/window/">Window Functions</a></li>
-                            <li><a href="/functions/file/">File Operations</a></li>
-                            <li><a href="/functions/system/">System Functions</a></li>
+                            <li><a href="/AHKv2_Docs/Functions.html">Functions</a></li>
+                            <li><a href="/AHKv2_Docs/StrLen.html">String Functions</a></li>
+                            <li><a href="/AHKv2_Docs/WinActivate.html">Window Functions</a></li>
+                            <li><a href="/AHKv2_Docs/FileRead.html">File Operations</a></li>
                         </ul>
                     </div>
 
@@ -93,10 +93,10 @@
                             <span>Objects</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/objects/Array.html">Array</a></li>
-                            <li><a href="/objects/Map.html">Map</a></li>
-                            <li><a href="/objects/Object.html">Object</a></li>
-                            <li><a href="/objects/Gui.html">Gui</a></li>
+                            <li><a href="/AHKv2_Docs/Array.html">Array</a></li>
+                            <li><a href="/AHKv2_Docs/Map.html">Map</a></li>
+                            <li><a href="/AHKv2_Docs/Object.html">Object</a></li>
+                            <li><a href="/AHKv2_Docs/Gui.html">Gui</a></li>
                         </ul>
                     </div>
 
@@ -106,9 +106,9 @@
                             <span>Directives</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/directives/_Include.html">#Include</a></li>
-                            <li><a href="/directives/_Requires.html">#Requires</a></li>
-                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                            <li><a href="/AHKv2_Docs/_Include.html">#Include</a></li>
+                            <li><a href="/AHKv2_Docs/_Requires.html">#Requires</a></li>
+                            <li><a href="/AHKv2_Docs/_HotIf.html">#HotIf</a></li>
                         </ul>
                     </div>
 
@@ -118,10 +118,10 @@
                             <span>Reference</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/reference/KeyList.html">Key List</a></li>
-                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
-                            <li><a href="/reference/Variables.html">Variables</a></li>
-                            <li><a href="/reference/Language.html">Language</a></li>
+                            <li><a href="/AHKv2_Docs/KeyList.html">Key List</a></li>
+                            <li><a href="/AHKv2_Docs/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/AHKv2_Docs/Variables.html">Variables</a></li>
+                            <li><a href="/AHKv2_Docs/Language.html">Language</a></li>
                         </ul>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
             <div class="content-wrapper">
                 <!-- Breadcrumb -->
                 <nav class="breadcrumb" aria-label="Breadcrumb">
-                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>SetWorkingDir</span>
+                    <a href="/AHKv2_Docs/">Home</a> <i class="fas fa-chevron-right"></i> <span>SetWorkingDir</span>
                 </nav>
 
                 <!-- Document Content -->
@@ -232,10 +232,14 @@ initially launched from as its working directory.</p>
     </div>
 
     <!-- Scripts -->
-    <script src="/js/theme.js"></script>
-    <script src="/js/sidebar.js"></script>
-    <script src="/js/search.js"></script>
-    <script src="/js/toc.js"></script>
-    <script src="/js/syntax.js"></script>
+    <script>
+        // Set base URL for JavaScript modules
+        window.BASE_URL = '/AHKv2_Docs';
+    </script>
+    <script src="/AHKv2_Docs/js/theme.js"></script>
+    <script src="/AHKv2_Docs/js/sidebar.js"></script>
+    <script src="/AHKv2_Docs/js/search.js"></script>
+    <script src="/AHKv2_Docs/js/toc.js"></script>
+    <script src="/AHKv2_Docs/js/syntax.js"></script>
 </body>
 </html>

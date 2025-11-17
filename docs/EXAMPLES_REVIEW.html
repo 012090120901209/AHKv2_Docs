@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSCURE_EXAMPLES.md - Review & Improvement Report | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="## ✅ What's Correct">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/AHKv2_Docs/css/styles.css">
+    <link rel="stylesheet" href="/AHKv2_Docs/css/sidebar.css">
+    <link rel="stylesheet" href="/AHKv2_Docs/css/markdown.css">
+    <link rel="stylesheet" href="/AHKv2_Docs/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/AHKv2_Docs/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/AHKv2_Docs/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/AHKv2_Docs/FAQ.html">FAQ</a></li>
+                            <li><a href="/AHKv2_Docs/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/AHKv2_Docs/Functions.html">Functions</a></li>
+                            <li><a href="/AHKv2_Docs/StrLen.html">String Functions</a></li>
+                            <li><a href="/AHKv2_Docs/WinActivate.html">Window Functions</a></li>
+                            <li><a href="/AHKv2_Docs/FileRead.html">File Operations</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/AHKv2_Docs/Array.html">Array</a></li>
+                            <li><a href="/AHKv2_Docs/Map.html">Map</a></li>
+                            <li><a href="/AHKv2_Docs/Object.html">Object</a></li>
+                            <li><a href="/AHKv2_Docs/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/AHKv2_Docs/_Include.html">#Include</a></li>
+                            <li><a href="/AHKv2_Docs/_Requires.html">#Requires</a></li>
+                            <li><a href="/AHKv2_Docs/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/AHKv2_Docs/KeyList.html">Key List</a></li>
+                            <li><a href="/AHKv2_Docs/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/AHKv2_Docs/Variables.html">Variables</a></li>
+                            <li><a href="/AHKv2_Docs/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/AHKv2_Docs/">Home</a> <i class="fas fa-chevron-right"></i> <span>EXAMPLES_REVIEW</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="obscure_examplesmd-review-improvement-report">OBSCURE_EXAMPLES.md - Review &amp; Improvement Report</h1>
+<h2 id="whats-correct">✅ What's Correct</h2>
+<h3 id="markdown-code-blocks">Markdown Code Blocks</h3>
+<ul>
+<li>✅ All code blocks properly use triple backticks with <code>ahk</code> language identifier</li>
+<li>✅ Code indentation is consistent within blocks</li>
+<li>✅ No unclosed code blocks</li>
+<li>✅ Proper syntax highlighting markers</li>
+</ul>
+<h3 id="basic-structure">Basic Structure</h3>
+<ul>
+<li>✅ Clear hierarchical organization with headers (##, ###)</li>
+<li>✅ Descriptive titles with emojis for visual categorization</li>
+<li>✅ Numbered examples (1-30) for easy reference</li>
+<li>✅ Comments within code blocks explain functionality</li>
+</ul>
+<hr />
+<h2 id="issues-found">⚠️ Issues Found</h2>
+<h3 id="1-inconsistent-horizontal-rules">1. <strong>Inconsistent Horizontal Rules</strong></h3>
+<ul>
+<li><strong>Issue</strong>: Some sections have <code>---</code> separators, others don't</li>
+<li><strong>Lines</strong>: After sections 1-4, 5-8, 9-11, etc., but not consistently</li>
+<li><strong>Impact</strong>: Visual inconsistency, unclear section boundaries</li>
+</ul>
+<p><strong>Current Pattern:</strong></p>
+<pre class="codehilite"><code>## Section A
+### Example 1
+### Example 2
+---  ← Has separator
+
+## Section B
+### Example 3
+### Example 4
+---  ← Has separator
+
+## Section C (Additional Categories)
+### Subsection 1
+### Subsection 2
+(no separator)  ← Missing
+</code></pre>
+
+<h3 id="2-whitespace-inconsistency">2. <strong>Whitespace Inconsistency</strong></h3>
+<ul>
+<li><strong>Line 292</strong>: Extra space before <code>ExpandFolder</code> function definition</li>
+<li><strong>Should be</strong>: <code>ExpandFolder(tv, itemID) {</code></li>
+<li><strong>Current</strong>: <code>ExpandFolder(tv, itemID) {</code> (extra leading space)</li>
+</ul>
+<h3 id="3-incomplete-examples">3. <strong>Incomplete Examples</strong></h3>
+<p>Several examples are incomplete or lack context:</p>
+<p><strong>Example 16 (COM Event Handler):</strong>
+- Missing: How to keep script running to receive events
+- Missing: Cleanup code (ComObjConnect disconnect)
+- Missing: Error handling for IE not installed</p>
+<p><strong>Example 22 (Mouse Gesture Recognizer):</strong>
+- Variable <code>path</code> is declared twice (line 484 and 485)
+- Redundant: <code>static path := []</code> followed by <code>path := []</code>
+- Should use <code>static</code> OR local, not both</p>
+<p><strong>Example 25 (Named Pipe Communication):</strong>
+- Only shows pipe creation, not reading/writing
+- No client-side code
+- Incomplete implementation</p>
+<p><strong>Example 26 (HTTP Server Response Handler):</strong>
+- Misleading title: "HTTP Server" but it's actually an HTTP <em>client</em>
+- <code>OnMessage</code> callback never triggers (incorrect message handling)
+- Missing async request handling</p>
+<h3 id="4-missing-prerequisitesrequirements">4. <strong>Missing Prerequisites/Requirements</strong></h3>
+<p>Examples that need special setup but don't mention it:</p>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Requirement</th>
+<th>Missing Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#17 Binary Parser</td>
+<td>Needs <code>data.bin</code> file</td>
+<td>No file format specification</td>
+</tr>
+<tr>
+<td>#23 Audio Visualizer</td>
+<td>Needs active audio device</td>
+<td>No error handling if device not found</td>
+</tr>
+<tr>
+<td>#16 IE Automation</td>
+<td>Needs Internet Explorer</td>
+<td>No fallback for Edge/Chrome</td>
+</tr>
+<tr>
+<td>#25 Named Pipe</td>
+<td>Needs Windows API knowledge</td>
+<td>No example usage</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-no-table-of-contents">5. <strong>No Table of Contents</strong></h3>
+<ul>
+<li>30 examples is a lot to scroll through</li>
+<li>No quick navigation to specific categories</li>
+<li>No difficulty indicators</li>
+</ul>
+<h3 id="6-missing-cross-references">6. <strong>Missing Cross-References</strong></h3>
+<p>Examples don't link to official documentation:
+- Example #1 (InputHook) → Should reference <code>InputHook.md</code>
+- Example #13 (TreeView) → Should reference <code>TreeView.md</code>
+- Example #15 (RegEx Callout) → Should reference <code>RegExCallout.md</code></p>
+<h3 id="7-no-difficultycomplexity-indicators">7. <strong>No Difficulty/Complexity Indicators</strong></h3>
+<p>Users can't tell which examples are beginner-friendly vs advanced:
+- Example #3 (Context-Aware Hotstring) = Beginner
+- Example #18 (DllCall with Callbacks) = Advanced
+- No visual indicator of complexity</p>
+<h3 id="8-misleading-titles">8. <strong>Misleading Titles</strong></h3>
+<ul>
+<li><strong>#26</strong>: "HTTP Server" is actually an HTTP <em>client</em></li>
+<li><strong>#8</strong>: "Process Tree Visualizer" just prints to MsgBox (not really a "visualizer")</li>
+</ul>
+<h3 id="9-code-quality-issues">9. <strong>Code Quality Issues</strong></h3>
+<p><strong>Example #22 (Mouse Gesture) - Scope Issue:</strong></p>
+<pre class="codehilite"><code class="language-ahk">~RButton::
+{
+    static path := []  ← static variable
+    path := []         ← Immediately overwrites static!
+</code></pre>
+
+<p><strong>Fix</strong>: Remove the static declaration or the assignment</p>
+<p><strong>Example #19 (Memoization) - Potential Bug:</strong></p>
+<pre class="codehilite"><code class="language-ahk">Fibonacci := Memoize((n) =&gt; n &lt;= 1 ? n : Fibonacci(n-1) + Fibonacci(n-2))
+</code></pre>
+
+<p><strong>Issue</strong>: <code>Fibonacci</code> is being called before it's defined (circular reference)
+<strong>Fix</strong>: Needs forward declaration or different approach</p>
+<p><strong>Example #25 (Named Pipe) - Incomplete:</strong>
+- Only creates pipe, doesn't show how to use it
+- Missing: ConnectNamedPipe, ReadFile, WriteFile</p>
+<h3 id="10-missing-usage-instructions">10. <strong>Missing Usage Instructions</strong></h3>
+<p>Examples show code but not HOW to use them:
+- Do you run them as a full script?
+- Do you copy them into an existing script?
+- Which examples can be combined?
+- Which examples need modification before use?</p>
+<h3 id="11-no-error-handling">11. <strong>No Error Handling</strong></h3>
+<p>Many examples will crash with cryptic errors:
+- Example #13: What if drive access is denied?
+- Example #17: What if file doesn't exist?
+- Example #23: What if audio device is disconnected?</p>
+<h3 id="12-inconsistent-comment-style">12. <strong>Inconsistent Comment Style</strong></h3>
+<pre class="codehilite"><code class="language-ahk">; Full sentence comments with proper grammar.  ← Style A
+; inline comment  ← Style B
+; Parse structure  ← Style B (fragment)
+</code></pre>
+
+<hr />
+<h2 id="recommended-improvements">🔧 Recommended Improvements</h2>
+<h3 id="high-priority">High Priority</h3>
+<ol>
+<li><strong>Add Table of Contents</strong></li>
+</ol>
+<pre class="codehilite"><code class="language-markdown">## 📑 Table of Contents
+- [Input &amp; Keyboard](#-input--keyboard) (4 examples)
+- [System &amp; Windows](#-system--windows) (4 examples)
+...
+</code></pre>
+
+<ol>
+<li><strong>Add Difficulty Indicators</strong></li>
+</ol>
+<pre class="codehilite"><code class="language-markdown">### 1. **Typo Autocorrector** 🟢 Beginner
+### 18. **Dynamic DllCall with Callbacks** 🔴 Advanced
+</code></pre>
+
+<p>Legend:
+- 🟢 Beginner - Easy to understand and modify
+- 🟡 Intermediate - Requires understanding of AHK concepts
+- 🔴 Advanced - Complex, needs deep AHK knowledge</p>
+<ol>
+<li><strong>Fix Code Issues</strong></li>
+<li>Remove redundant <code>path</code> initialization in Example #22</li>
+<li>Fix circular reference in Example #19</li>
+<li>Complete Example #25 (Named Pipe)</li>
+<li>
+<p>Correct Example #26 title to "HTTP Client"</p>
+</li>
+<li>
+<p><strong>Add Prerequisites Section</strong></p>
+</li>
+</ol>
+<pre class="codehilite"><code class="language-markdown">### Prerequisites
+- Windows 10+ for monitor functions
+- Audio device for sound examples
+- Create `data.bin` for binary parser example
+</code></pre>
+
+<ol>
+<li><strong>Add Usage Instructions</strong></li>
+</ol>
+<pre class="codehilite"><code class="language-markdown">## 🚀 How to Use These Examples
+
+**Standalone Scripts:** Examples 1-10 can be saved as `.ahk` files and run directly
+**Code Snippets:** Examples 11-20 need to be integrated into existing scripts
+**Requires Setup:** Examples marked with ⚙️ need additional configuration
+</code></pre>
+
+<ol>
+<li><strong>Standardize Horizontal Rules</strong></li>
+<li>Add <code>---</code> after every major section (Input, System, Clipboard, etc.)</li>
+<li>
+<p>Remove <code>---</code> before "Additional Categories"</p>
+</li>
+<li>
+<p><strong>Add Cross-References</strong></p>
+</li>
+</ol>
+<pre class="codehilite"><code class="language-markdown">### 1. **Typo Autocorrector** 🟢 Beginner
+📚 See also: [InputHook.md](InputHook.md), [SendInput.md](SendInput.md)
+</code></pre>
+
+<ol>
+<li><strong>Add Error Handling Examples</strong></li>
+</ol>
+<pre class="codehilite"><code class="language-ahk">; Example 17 - Improved with error handling
+if !FileExist(&quot;data.bin&quot;) {
+    MsgBox(&quot;Error: data.bin not found!&quot;)
+    return
+}
+file := FileOpen(&quot;data.bin&quot;, &quot;r&quot;)
+if !file {
+    MsgBox(&quot;Error: Cannot open data.bin!&quot;)
+    return
+}
+</code></pre>
+
+<h3 id="medium-priority">Medium Priority</h3>
+<ol>
+<li><strong>Add "Full Example" vs "Code Snippet" Indicators</strong></li>
+<li><strong>Add "Requirements" subsection for complex examples</strong></li>
+<li><strong>Group related examples</strong> (e.g., "See also: Example #12 for GUI basics")</li>
+<li><strong>Add Performance Notes</strong> where relevant</li>
+<li><strong>Add Security Warnings</strong> (e.g., DllCall can crash AHK if used incorrectly)</li>
+</ol>
+<h3 id="low-priority">Low Priority</h3>
+<ol>
+<li><strong>Add Output Examples</strong> - Show what the script produces</li>
+<li><strong>Add Troubleshooting Tips</strong> for common issues</li>
+<li><strong>Add Version Requirements</strong> (e.g., "Requires AHK v2.0.2+")</li>
+<li><strong>Add Screenshots/GIFs</strong> for visual examples</li>
+<li><strong>Add "Try It" links</strong> to online AHK playgrounds (if available)</li>
+</ol>
+<hr />
+<h2 id="specific-line-by-line-fixes">📝 Specific Line-by-Line Fixes</h2>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Issue</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>292</td>
+<td>Extra leading space</td>
+<td>Remove space before <code>ExpandFolder</code></td>
+</tr>
+<tr>
+<td>484-485</td>
+<td>Redundant <code>path</code> initialization</td>
+<td>Remove <code>static path := []</code> or <code>path := []</code> (keep one)</td>
+</tr>
+<tr>
+<td>420</td>
+<td>Circular reference</td>
+<td>Add note about forward declaration requirement</td>
+</tr>
+<tr>
+<td>586</td>
+<td>Misleading title</td>
+<td>Change "HTTP Server" → "HTTP Client Request Handler"</td>
+</tr>
+<tr>
+<td>593</td>
+<td>Incorrect OnMessage usage</td>
+<td>Fix or remove non-functional code</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="proposed-structure-improvements">✨ Proposed Structure Improvements</h2>
+<h3 id="option-a-keep-current-structure-add-enhancements">Option A: Keep Current Structure + Add Enhancements</h3>
+<pre class="codehilite"><code class="language-markdown"># Obscure &amp; Unique AutoHotkey v2 Example Scripts
+
+## 📑 Table of Contents
+[Generated TOC]
+
+## 🚀 How to Use These Examples
+[Usage instructions]
+
+## 📋 Difficulty Legend
+- 🟢 Beginner
+- 🟡 Intermediate
+- 🔴 Advanced
+
+## 🎯 Input &amp; Keyboard (4 examples)
+
+### 1. **Typo Autocorrector** 🟢 Beginner
+📚 **See also:** [InputHook](InputHook.md) | [Map](Map.md)
+⚙️ **Setup:** None required
+
+```ahk
+[code]
+</code></pre>
+
+<p><strong>Usage:</strong> Save as <code>typo-fixer.ahk</code> and run
+<strong>Notes:</strong> Customize <code>typoMap</code> with your own corrections</p>
+<hr />
+<p>[Continue with all examples...]</p>
+<pre class="codehilite"><code>### Option B: Reorganize by Difficulty
+```markdown
+## 🟢 Beginner Examples (10 examples)
+[Simple examples first]
+
+## 🟡 Intermediate Examples (12 examples)
+[Medium complexity]
+
+## 🔴 Advanced Examples (8 examples)
+[Complex examples last]
+</code></pre>
+
+<h3 id="option-c-add-quick-start-section">Option C: Add "Quick Start" Section</h3>
+<pre class="codehilite"><code class="language-markdown">## ⚡ Quick Start - 5 Minute Examples
+(5 simplest, most useful examples)
+
+## 📚 Full Example Collection
+(All 30 examples organized by category)
+</code></pre>
+
+<hr />
+<h2 id="recommendation-summary">🎯 Recommendation Summary</h2>
+<p><strong>Immediate Fixes (Apply Now):</strong>
+1. ✅ Fix line 292 whitespace
+2. ✅ Fix line 484-485 redundant initialization
+3. ✅ Add Table of Contents
+4. ✅ Add difficulty indicators (🟢🟡🔴)
+5. ✅ Standardize horizontal rules
+6. ✅ Fix Example #26 title
+7. ✅ Add "How to Use" section at top</p>
+<p><strong>Phase 2 (Optional):</strong>
+8. Add cross-references to documentation
+9. Add prerequisites for complex examples
+10. Add error handling to examples
+11. Complete incomplete examples (#25, #26)
+12. Add usage notes per example</p>
+<p><strong>Phase 3 (Future Enhancement):</strong>
+13. Add screenshots/visualizations
+14. Add troubleshooting section
+15. Add version requirements
+16. Create companion test files (data.bin, etc.)</p>
+<hr />
+<h2 id="impact-assessment">📊 Impact Assessment</h2>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Effort</th>
+<th>Impact</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fix whitespace (line 292)</td>
+<td>1 min</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Fix redundant init (lines 484-485)</td>
+<td>2 min</td>
+<td>Medium</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Add Table of Contents</td>
+<td>10 min</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Add difficulty indicators</td>
+<td>15 min</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Add "How to Use" section</td>
+<td>20 min</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Standardize separators</td>
+<td>5 min</td>
+<td>Medium</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Fix Example #26 title</td>
+<td>1 min</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Add cross-references</td>
+<td>30 min</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Add error handling</td>
+<td>60 min</td>
+<td>High</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Complete examples</td>
+<td>90 min</td>
+<td>High</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total time for High Priority items: ~54 minutes</strong></p>
+<hr />
+<h2 id="conclusion">✅ Conclusion</h2>
+<p>The file has <strong>excellent content</strong> but needs:
+1. <strong>Structural improvements</strong> (TOC, difficulty levels)
+2. <strong>Small code fixes</strong> (whitespace, redundant code)
+3. <strong>Better user guidance</strong> (how to use, prerequisites)
+4. <strong>Consistency</strong> (separators, comment style)</p>
+<p><strong>None of the issues are critical</strong>, but addressing them would significantly improve usability and professionalism.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/EXAMPLES_REVIEW.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#obscure_examplesmd-review-improvement-report">OBSCURE_EXAMPLES.md - Review &amp; Improvement Report</a><ul>
+<li><a href="#whats-correct">✅ What's Correct</a><ul>
+<li><a href="#markdown-code-blocks">Markdown Code Blocks</a></li>
+<li><a href="#basic-structure">Basic Structure</a></li>
+</ul>
+</li>
+<li><a href="#issues-found">⚠️ Issues Found</a><ul>
+<li><a href="#1-inconsistent-horizontal-rules">1. Inconsistent Horizontal Rules</a></li>
+<li><a href="#2-whitespace-inconsistency">2. Whitespace Inconsistency</a></li>
+<li><a href="#3-incomplete-examples">3. Incomplete Examples</a></li>
+<li><a href="#4-missing-prerequisitesrequirements">4. Missing Prerequisites/Requirements</a></li>
+<li><a href="#5-no-table-of-contents">5. No Table of Contents</a></li>
+<li><a href="#6-missing-cross-references">6. Missing Cross-References</a></li>
+<li><a href="#7-no-difficultycomplexity-indicators">7. No Difficulty/Complexity Indicators</a></li>
+<li><a href="#8-misleading-titles">8. Misleading Titles</a></li>
+<li><a href="#9-code-quality-issues">9. Code Quality Issues</a></li>
+<li><a href="#10-missing-usage-instructions">10. Missing Usage Instructions</a></li>
+<li><a href="#11-no-error-handling">11. No Error Handling</a></li>
+<li><a href="#12-inconsistent-comment-style">12. Inconsistent Comment Style</a></li>
+</ul>
+</li>
+<li><a href="#recommended-improvements">🔧 Recommended Improvements</a><ul>
+<li><a href="#high-priority">High Priority</a></li>
+<li><a href="#medium-priority">Medium Priority</a></li>
+<li><a href="#low-priority">Low Priority</a></li>
+</ul>
+</li>
+<li><a href="#specific-line-by-line-fixes">📝 Specific Line-by-Line Fixes</a></li>
+<li><a href="#proposed-structure-improvements">✨ Proposed Structure Improvements</a><ul>
+<li><a href="#option-a-keep-current-structure-add-enhancements">Option A: Keep Current Structure + Add Enhancements</a></li>
+<li><a href="#option-c-add-quick-start-section">Option C: Add "Quick Start" Section</a></li>
+</ul>
+</li>
+<li><a href="#recommendation-summary">🎯 Recommendation Summary</a></li>
+<li><a href="#impact-assessment">📊 Impact Assessment</a></li>
+<li><a href="#conclusion">✅ Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Set base URL for JavaScript modules
+        window.BASE_URL = '/AHKv2_Docs';
+    </script>
+    <script src="/AHKv2_Docs/js/theme.js"></script>
+    <script src="/AHKv2_Docs/js/sidebar.js"></script>
+    <script src="/AHKv2_Docs/js/search.js"></script>
+    <script src="/AHKv2_Docs/js/toc.js"></script>
+    <script src="/AHKv2_Docs/js/syntax.js"></script>
+</body>
+</html>

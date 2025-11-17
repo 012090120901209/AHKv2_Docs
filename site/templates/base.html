@@ -12,10 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/sidebar.css">
-    <link rel="stylesheet" href="/css/markdown.css">
-    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="{{ base_url }}/css/styles.css">
+    <link rel="stylesheet" href="{{ base_url }}/css/sidebar.css">
+    <link rel="stylesheet" href="{{ base_url }}/css/markdown.css">
+    <link rel="stylesheet" href="{{ base_url }}/css/syntax.css">
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,7 +28,7 @@
                 <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
                     <i class="fas fa-bars"></i>
                 </button>
-                <a href="/" class="navbar-brand">
+                <a href="{{ base_url }}/" class="navbar-brand">
                     <span class="logo-icon">⚡</span>
                     <span class="logo-text">AutoHotkey v2</span>
                 </a>
@@ -68,9 +68,9 @@
                             <span>Getting Started</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
-                            <li><a href="/guides/FAQ.html">FAQ</a></li>
-                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                            <li><a href="{{ base_url }}/Tutorial.html">Tutorial</a></li>
+                            <li><a href="{{ base_url }}/FAQ.html">FAQ</a></li>
+                            <li><a href="{{ base_url }}/Concepts.html">Concepts</a></li>
                         </ul>
                     </div>
 
@@ -80,10 +80,10 @@
                             <span>Functions</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/functions/string/">String Functions</a></li>
-                            <li><a href="/functions/window/">Window Functions</a></li>
-                            <li><a href="/functions/file/">File Operations</a></li>
-                            <li><a href="/functions/system/">System Functions</a></li>
+                            <li><a href="{{ base_url }}/Functions.html">Functions</a></li>
+                            <li><a href="{{ base_url }}/StrLen.html">String Functions</a></li>
+                            <li><a href="{{ base_url }}/WinActivate.html">Window Functions</a></li>
+                            <li><a href="{{ base_url }}/FileRead.html">File Operations</a></li>
                         </ul>
                     </div>
 
@@ -93,10 +93,10 @@
                             <span>Objects</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/objects/Array.html">Array</a></li>
-                            <li><a href="/objects/Map.html">Map</a></li>
-                            <li><a href="/objects/Object.html">Object</a></li>
-                            <li><a href="/objects/Gui.html">Gui</a></li>
+                            <li><a href="{{ base_url }}/Array.html">Array</a></li>
+                            <li><a href="{{ base_url }}/Map.html">Map</a></li>
+                            <li><a href="{{ base_url }}/Object.html">Object</a></li>
+                            <li><a href="{{ base_url }}/Gui.html">Gui</a></li>
                         </ul>
                     </div>
 
@@ -106,9 +106,9 @@
                             <span>Directives</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/directives/_Include.html">#Include</a></li>
-                            <li><a href="/directives/_Requires.html">#Requires</a></li>
-                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                            <li><a href="{{ base_url }}/_Include.html">#Include</a></li>
+                            <li><a href="{{ base_url }}/_Requires.html">#Requires</a></li>
+                            <li><a href="{{ base_url }}/_HotIf.html">#HotIf</a></li>
                         </ul>
                     </div>
 
@@ -118,10 +118,10 @@
                             <span>Reference</span>
                         </div>
                         <ul class="category-items">
-                            <li><a href="/reference/KeyList.html">Key List</a></li>
-                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
-                            <li><a href="/reference/Variables.html">Variables</a></li>
-                            <li><a href="/reference/Language.html">Language</a></li>
+                            <li><a href="{{ base_url }}/KeyList.html">Key List</a></li>
+                            <li><a href="{{ base_url }}/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="{{ base_url }}/Variables.html">Variables</a></li>
+                            <li><a href="{{ base_url }}/Language.html">Language</a></li>
                         </ul>
                     </div>
                 </div>
@@ -184,10 +184,14 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/theme.js"></script>
-    <script src="/js/sidebar.js"></script>
-    <script src="/js/search.js"></script>
-    <script src="/js/toc.js"></script>
-    <script src="/js/syntax.js"></script>
+    <script>
+        // Set base URL for JavaScript modules
+        window.BASE_URL = '{{ base_url }}';
+    </script>
+    <script src="{{ base_url }}/js/theme.js"></script>
+    <script src="{{ base_url }}/js/sidebar.js"></script>
+    <script src="{{ base_url }}/js/search.js"></script>
+    <script src="{{ base_url }}/js/toc.js"></script>
+    <script src="{{ base_url }}/js/syntax.js"></script>
 </body>
 </html>

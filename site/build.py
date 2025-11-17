@@ -19,6 +19,9 @@ TEMPLATE_DIR = Path('templates')
 OUTPUT_DIR = Path('../docs')  # GitHub Pages uses /docs folder
 STATIC_DIRS = ['css', 'js']
 
+# GitHub Pages base URL (empty for root, or '/AHKv2_Docs' for project pages)
+BASE_URL = '/AHKv2_Docs'
+
 class SiteBuilder:
     def __init__(self):
         self.env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
@@ -133,6 +136,7 @@ class SiteBuilder:
                 toc=toc_html,
                 breadcrumb=breadcrumb_html,
                 source_file=str(rel_path),
+                base_url=BASE_URL,
                 prev_page=None,  # TODO: implement
                 next_page=None   # TODO: implement
             )
@@ -146,13 +150,13 @@ class SiteBuilder:
                 'path': str(rel_path),
                 'output': str(output_path.relative_to(OUTPUT_DIR)),
                 'title': metadata['title'],
-                'url': f"/{output_path.relative_to(OUTPUT_DIR)}"
+                'url': f"{BASE_URL}/{output_path.relative_to(OUTPUT_DIR)}"
             })
 
             # Add to search index
             self.search_index.append({
                 'title': metadata['title'],
-                'url': f"/{output_path.relative_to(OUTPUT_DIR)}",
+                'url': f"{BASE_URL}/{output_path.relative_to(OUTPUT_DIR)}",
                 'path': str(rel_path),
                 'content': self.strip_html(html_content)[:500]  # First 500 chars
             })
@@ -199,12 +203,12 @@ class SiteBuilder:
         rel_path = md_file.relative_to(SOURCE_DIR)
         parts = list(rel_path.parts[:-1])  # Exclude filename
 
-        breadcrumb = '<a href="/">Home</a>'
+        breadcrumb = f'<a href="{BASE_URL}/">Home</a>'
 
         current_path = ''
         for part in parts:
             current_path += '/' + part
-            breadcrumb += f' <i class="fas fa-chevron-right"></i> <a href="{current_path}/">{part.title()}</a>'
+            breadcrumb += f' <i class="fas fa-chevron-right"></i> <a href="{BASE_URL}{current_path}/">{part.title()}</a>'
 
         breadcrumb += f' <i class="fas fa-chevron-right"></i> <span>{md_file.stem}</span>'
 
@@ -216,17 +220,17 @@ class SiteBuilder:
 
         template = self.env.get_template('base.html')
 
-        # Create homepage content
-        content = """
+        # Create homepage content with proper BASE_URL substitution
+        html_part = """
         <div class="home-hero">
             <h1>AutoHotkey v2 Documentation</h1>
             <p class="lead">Complete reference documentation for AutoHotkey v2</p>
 
             <div class="home-buttons">
-                <a href="/guides/Tutorial.html" class="btn btn-primary">
+                <a href="BASE_URL_PLACEHOLDER/Tutorial.html" class="btn btn-primary">
                     <i class="fas fa-book"></i> Get Started
                 </a>
-                <a href="/reference/Language.html" class="btn btn-secondary">
+                <a href="BASE_URL_PLACEHOLDER/Language.html" class="btn btn-secondary">
                     <i class="fas fa-code"></i> Language Reference
                 </a>
             </div>
@@ -237,28 +241,28 @@ class SiteBuilder:
                 <div class="feature-icon"><i class="fas fa-code"></i></div>
                 <h3>Functions</h3>
                 <p>200+ built-in functions for string manipulation, file operations, window management, and more.</p>
-                <a href="/functions/">Browse Functions →</a>
+                <a href="BASE_URL_PLACEHOLDER/Functions.html">Browse Functions →</a>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon"><i class="fas fa-cube"></i></div>
                 <h3>Objects</h3>
                 <p>Powerful object system with classes like Array, Map, Gui, and more.</p>
-                <a href="/objects/Array.html">Explore Objects →</a>
+                <a href="BASE_URL_PLACEHOLDER/Array.html">Explore Objects →</a>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon"><i class="fas fa-book"></i></div>
                 <h3>Guides</h3>
                 <p>Learn AutoHotkey with tutorials, examples, and conceptual guides.</p>
-                <a href="/guides/Tutorial.html">Read Guides →</a>
+                <a href="BASE_URL_PLACEHOLDER/Tutorial.html">Read Guides →</a>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon"><i class="fas fa-keyboard"></i></div>
                 <h3>Hotkeys</h3>
                 <p>Create powerful keyboard shortcuts and automate repetitive tasks.</p>
-                <a href="/reference/Hotkeys.html">Learn Hotkeys →</a>
+                <a href="BASE_URL_PLACEHOLDER/Hotkeys.html">Learn Hotkeys →</a>
             </div>
         </div>
 
@@ -373,13 +377,17 @@ class SiteBuilder:
         </style>
         """
 
+        # Replace placeholder with actual BASE_URL
+        content = html_part.replace('BASE_URL_PLACEHOLDER', BASE_URL)
+
         html = template.render(
             title='AutoHotkey v2 Documentation',
             description='Complete reference documentation for AutoHotkey v2',
             content=content,
             toc='',
             breadcrumb='',
-            source_file='index.md'
+            source_file='index.md',
+            base_url=BASE_URL
         )
 
         (OUTPUT_DIR / 'index.html').write_text(html, encoding='utf-8')
