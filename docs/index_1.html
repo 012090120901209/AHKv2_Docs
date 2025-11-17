@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabetical Function Index | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Click on a function name for details. Entries in [large font]{.larger}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>index_1</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="alphabetical-function-index">Alphabetical Function Index</h1>
+<p>Click on a function name for details. Entries in [large font]{.larger}
+are the most commonly used.</p>
+<p>Go to entries starting with: <a href="#E">E</a>,   <a href="#I">I</a>,   <a href="#M">M</a>,   <a href="#S">S</a>,  
+<a href="#W">W</a>,   <a href="#hash">#</a></p>
+<p>+-----------------------------------+-----------------------------------+
+| Name                              | Description                       |
++===================================+===================================+
+| <a href="Block.htm">{ ... } (Block)</a>     | Blocks are one or more            |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | enclosed in braces. Typically     |
+|                                   | used with <a href="../Functions.htm#define">function               |
+|                                   | defi                              |
+|                                   | nitions</a> |
+|                                   | and <a href="../Language.htm#control-flow">control flow                 |
+|                                   | statement                         |
+|                                   | s</a>. |
++-----------------------------------+-----------------------------------+
+| <a href="../Objects.htm#Usage_Objects">{ ... } /                       | Creates an [Object](Object.htm)   |
+| Obje                              | from a list of property name and  |
+| ct</a> | value pairs.                      |
++-----------------------------------+-----------------------------------+
+| <a href="..                         | from a sequence of parameter      |
+| /Objects.htm#Usage_Simple_Arrays">[ ... ] /                     | Creates an [Array](Array.htm)     |
+| Array</a> | values.                           |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Abs">Abs</a>               | Returns the absolute value of the |
+|                                   | specified number.                 |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#ASin">ASin</a>             | Returns the arcsine (the number   |
+|                                   | whose sine is the specified       |
+|                                   | number) in radians.               |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#ACos">ACos</a>             | Returns the arccosine (the number |
+|                                   | whose cosine is the specified     |
+|                                   | number) in radians.               |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#ATan">ATan</a>             | Returns the arctangent (the       |
+|                                   | number whose tangent is the       |
+|                                   | specified number) in radians.     |
++-----------------------------------+-----------------------------------+
+| <a href="BlockInput.htm">BlockInput</a>      | Disables or enables the user\'s   |
+|                                   | ability to interact with the      |
+|                                   | computer via keyboard and mouse.  |
++-----------------------------------+-----------------------------------+
+| <a href="Break.htm">Break</a>                | Exits (terminates) any type of    |
+|                                   | [loop                             |
+|                                   | statement]                        |
+|                                   | (../Language.htm#loop-statement). |
++-----------------------------------+-----------------------------------+
+| <a href="Buffer.htm#Call">Buffer</a>         | Creates a Buffer, which           |
+|                                   | encapsulates a block of memory    |
+|                                   | for use with other functions.     |
++-----------------------------------+-----------------------------------+
+| <a href="CallbackCreate.htm">Ca                               | Creates a machine-code address    |
+| llbackCreate</a> | that when called, redirects the   |
+|                                   | call to a                         |
+|                                   | <a href="../Functions.htm">function</a> in   |
+|                                   | the script.                       |
++-----------------------------------+-----------------------------------+
+| [CallbackFree]                    | Deletes a callback and releases   |
+| (CallbackCreate.htm#CallbackFree) | its reference to the function     |
+|                                   | object.                           |
++-----------------------------------+-----------------------------------+
+| <a href="CaretGetPos.htm">CaretGetPos</a>    | Retrieves the current position of |
+|                                   | the caret (text insertion point). |
++-----------------------------------+-----------------------------------+
+| <a href="Catch.htm">Catch</a>                | Specifies one or more             |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | to execute if a value or error is |
+|                                   | thrown during execution of a      |
+|                                   | <a href="Try.htm">Try</a> statement.         |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Ceil">Ceil</a>             | Returns the specified number      |
+|                                   | rounded up to the nearest integer |
+|                                   | (without any .00 suffix).         |
++-----------------------------------+-----------------------------------+
+| <a href="Chr.htm">Chr</a>                    | Returns the string (usually a     |
+|                                   | single character) corresponding   |
+|                                   | to the character code indicated   |
+|                                   | by the specified number.          |
++-----------------------------------+-----------------------------------+
+| <a href="Click.htm">Click</a>                | Clicks a mouse button at the      |
+|                                   | specified coordinates. It can     |
+|                                   | also hold down a mouse button,    |
+|                                   | turn the mouse wheel, or move the |
+|                                   | mouse.                            |
++-----------------------------------+-----------------------------------+
+| <a href="ClipboardAll.htm">ClipboardAll</a>  | Creates an object containing      |
+|                                   | everything on the clipboard (such |
+|                                   | as pictures and formatting).      |
++-----------------------------------+-----------------------------------+
+| <a href="ClipWait.htm">ClipWait</a>          | Waits until the                   |
+|                                   | <a href="A_Clipboard.htm">clipboard</a>      |
+|                                   | contains data.                    |
++-----------------------------------+-----------------------------------+
+| <a href="ComCall.htm">ComCall</a>            | Calls a native COM interface      |
+|                                   | method by index.                  |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjActive.htm">ComObjActive</a>  | Retrieves a registered COM        |
+|                                   | object.                           |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjArray.htm">ComObjArray</a>    | Creates a SafeArray for use with  |
+|                                   | COM.                              |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjConnect.htm">                                 | Connects a COM object\'s event    |
+| ComObjConnect</a> | source to the script, enabling    |
+|                                   | events to be handled.             |
++-----------------------------------+-----------------------------------+
+| <a href="ComObject.htm">ComObject</a>        | Creates a COM object.             |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjFlags.htm">ComObjFlags</a>    | Retrieves or changes flags which  |
+|                                   | control a COM wrapper object\'s   |
+|                                   | behaviour.                        |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjFromPtr.htm">                                 | Wraps a raw                       |
+| ComObjFromPtr</a> | <a href="https                 |
+|                                   | ://learn.microsoft.com/windows/wi |
+|                                   | n32/api/oaidl/nn-oaidl-idispatch">IDispatch</a> |
+|                                   | pointer (COM object) for use by   |
+|                                   | the script.                       |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjGet.htm">ComObjGet</a>        | Returns a reference to an object  |
+|                                   | provided by a COM component.      |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjQuery.htm">ComObjQuery</a>    | Queries a COM object for an       |
+|                                   | interface or service.             |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjType.htm">ComObjType</a>      | Retrieves type information from a |
+|                                   | COM object.                       |
++-----------------------------------+-----------------------------------+
+| <a href="ComObjValue.htm">ComObjValue</a>    | Retrieves the value or pointer    |
+|                                   | stored in a COM wrapper object.   |
++-----------------------------------+-----------------------------------+
+| <a href="ComValue.htm">ComValue</a>          | Wraps a value, SafeArray or COM   |
+|                                   | object for use by the script or   |
+|                                   | for passing to a COM method.      |
++-----------------------------------+-----------------------------------+
+| <a href="Continue.htm">Continue</a>          | Skips the rest of a <a href=".                      |
+|                                   | ./Language.htm#loop-statement">loop         |
+|                                   | statement</a>\'s |
+|                                   | current iteration and begins a    |
+|                                   | new one.                          |
++-----------------------------------+-----------------------------------+
+| <a href="ControlAddItem.htm">Co                               | Adds the specified string as a    |
+| ntrolAddItem</a> | new entry at the bottom of a      |
+|                                   | ListBox or ComboBox.              |
++-----------------------------------+-----------------------------------+
+| <a href="ControlChooseIndex.htm">ControlCho                       | Sets the selection in a ListBox,  |
+| oseIndex</a> | ComboBox or Tab control to be the |
+|                                   | Nth item.                         |
++-----------------------------------+-----------------------------------+
+| <a href="ControlChooseString.htm">ControlChoos                     | Sets the selection in a ListBox   |
+| eString</a> | or ComboBox to be the first entry |
+|                                   | whose leading part matches the    |
+|                                   | specified string.                 |
++-----------------------------------+-----------------------------------+
+| <a href="ControlClick.htm">ControlClick</a>  | Sends a mouse button or mouse     |
+|                                   | wheel event to a control.         |
++-----------------------------------+-----------------------------------+
+| <a href="ControlDeleteItem.htm">ControlD                         | Deletes the specified entry       |
+| eleteItem</a> | number from a ListBox or          |
+|                                   | ComboBox.                         |
++-----------------------------------+-----------------------------------+
+| <a href="ControlFindItem.htm">Cont                             | Returns the entry number of a     |
+| rolFindItem</a> | ListBox or ComboBox that is a     |
+|                                   | complete match for the specified  |
+|                                   | string.                           |
++-----------------------------------+-----------------------------------+
+| <a href="ControlFocus.htm">ControlFocus</a>  | Sets input focus to a given       |
+|                                   | control on a window.              |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetChecked.htm">ControlG                         | Returns a non-zero value if the   |
+| etChecked</a> | checkbox or radio button is       |
+|                                   | checked.                          |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetChoice.htm">Contro                           | Returns the name of the currently |
+| lGetChoice</a> | selected entry in a ListBox or    |
+|                                   | ComboBox.                         |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetClassNN.htm">ControlG                         | Returns the ClassNN (class name   |
+| etClassNN</a> | and sequence number) of the       |
+|                                   | specified control.                |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetEnabled.htm">ControlG                         | Returns a non-zero value if the   |
+| etEnabled</a> | specified control is enabled.     |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetFocus.htm">Cont                             | Retrieves which control of the    |
+| rolGetFocus</a> | target window has keyboard focus, |
+|                                   | if any.                           |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetHwnd.htm">Co                               | Returns the unique ID number of   |
+| ntrolGetHwnd</a> | the specified control.            |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetIndex.htm">Cont                             | Returns the index of the          |
+| rolGetIndex</a> | currently selected entry or tab   |
+|                                   | in a ListBox, ComboBox or Tab     |
+|                                   | control.                          |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetItems.htm">Cont                             | Returns an array of items/rows    |
+| rolGetItems</a> | from a ListBox, ComboBox, or      |
+|                                   | DropDownList.                     |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetPos.htm">                                 | Retrieves the position and size   |
+| ControlGetPos</a> | of a control.                     |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetStyle.htm">ControlGetStyle\                 | Returns an integer representing   |
+| Contro                            | the style or extended style of    |
+| lGetExStyle</a> | the specified control.            |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetText.htm">Co                               | Retrieves text from a control.    |
+| ntrolGetText</a> |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="ControlGetVisible.htm">ControlG                         | Returns a non-zero value if the   |
+| etVisible</a> | specified control is visible.     |
++-----------------------------------+-----------------------------------+
+| <a href="ControlHide.htm">ControlHide</a>    | Hides the specified control.      |
++-----------------------------------+-----------------------------------+
+| <a href="ControlHideDropDown.htm">ControlHideD                     | Hides the drop-down list of a     |
+| ropDown</a> | ComboBox control.                 |
++-----------------------------------+-----------------------------------+
+| <a href="ControlMove.htm">ControlMove</a>    | Moves or resizes a control.       |
++-----------------------------------+-----------------------------------+
+| <a href="ControlSend.htm">ControlSend\                     | Sends simulated keystrokes or     |
+| ControlSendText</a> | text to a window or control.      |
++-----------------------------------+-----------------------------------+
+| <a href="ControlSetChecked.htm">ControlS                         | Turns on (checks) or turns off    |
+| etChecked</a> | (unchecks) a checkbox or radio    |
+|                                   | button.                           |
++-----------------------------------+-----------------------------------+
+| <a href="ControlSetEnabled.htm">ControlS                         | Enables or disables the specified |
+| etEnabled</a> | control.                          |
++-----------------------------------+-----------------------------------+
+| <a href="ControlSetStyle.htm">ControlSetStyle\                 | Changes the style or extended     |
+| Contro                            | style of the specified control,   |
+| lSetExStyle</a> | respectively.                     |
++-----------------------------------+-----------------------------------+
+| <a href="ControlSetText.htm">Co                               | Changes the text of a control.    |
+| ntrolSetText</a> |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="ControlShow.htm">ControlShow</a>    | Shows the specified control if it |
+|                                   | was previously hidden.            |
++-----------------------------------+-----------------------------------+
+| <a href="ControlShowDropDown.htm">ControlShowD                     | Shows the drop-down list of a     |
+| ropDown</a> | ComboBox control.                 |
++-----------------------------------+-----------------------------------+
+| <a href="CoordMode.htm">CoordMode</a>        | Sets coordinate mode for various  |
+|                                   | built-in functions to be relative |
+|                                   | to either the active window or    |
+|                                   | the screen.                       |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Cos">Cos</a>               | Returns the trigonometric cosine  |
+|                                   | of the specified number.          |
++-----------------------------------+-----------------------------------+
+| <a href="Critical.htm">Critical</a>          | Prevents the <a href="../misc/Threads.htm">current             |
+|                                   | thread</a> from |
+|                                   | being interrupted by other        |
+|                                   | threads, or enables it to be      |
+|                                   | interrupted.                      |
++-----------------------------------+-----------------------------------+
+| <a href="DateAdd.htm">DateAdd</a>            | Adds or subtracts time from a     |
+|                                   | <a href="FileSetTime.htm#YYYYMMDD">dat                              |
+|                                   | e-time</a> |
+|                                   | value.                            |
++-----------------------------------+-----------------------------------+
+| <a href="DateDiff.htm">DateDiff</a>          | Compares two                      |
+|                                   | <a href="FileSetTime.htm#YYYYMMDD">dat                              |
+|                                   | e-time</a> |
+|                                   | values and returns the            |
+|                                   | difference.                       |
++-----------------------------------+-----------------------------------+
+| <a href="DetectHiddenText.htm">Detect                           | Determines whether invisible text |
+| HiddenText</a> | in a window is \"seen\" for the   |
+|                                   | purpose of finding the window.    |
+|                                   | This affects windowing functions  |
+|                                   | such as <a href="WinExist.htm">WinExist</a>  |
+|                                   | and                               |
+|                                   | <a href="WinActivate.htm">WinActivate</a>.   |
++-----------------------------------+-----------------------------------+
+| <a href="DetectHiddenWindows.htm">DetectHidden                     | Determines whether invisible      |
+| Windows</a> | windows are \"seen\" by the       |
+|                                   | script.                           |
++-----------------------------------+-----------------------------------+
+| <a href="DirCopy.htm">DirCopy</a>            | Copies a folder along with all    |
+|                                   | its sub-folders and files         |
+|                                   | (similar to xcopy) or the entire  |
+|                                   | contents of an archive file such  |
+|                                   | as ZIP.                           |
++-----------------------------------+-----------------------------------+
+| <a href="DirCreate.htm">DirCreate</a>        | Creates a folder.                 |
++-----------------------------------+-----------------------------------+
+| <a href="DirDelete.htm">DirDelete</a>        | Deletes a folder.                 |
++-----------------------------------+-----------------------------------+
+| <a href="DirExist.htm">DirExist</a>          | Checks for the existence of a     |
+|                                   | folder and returns its            |
+|                                   | attributes.                       |
++-----------------------------------+-----------------------------------+
+| <a href="DirMove.htm">DirMove</a>            | Moves a folder along with all its |
+|                                   | sub-folders and files. It can     |
+|                                   | also rename a folder.             |
++-----------------------------------+-----------------------------------+
+| <a href="DirSelect.htm">DirSelect</a>        | Displays a standard dialog that   |
+|                                   | allows the user to select a       |
+|                                   | folder.                           |
++-----------------------------------+-----------------------------------+
+| <a href="DllCall.htm">DllCall</a>            | Calls a function inside a DLL,    |
+|                                   | such as a standard Windows API    |
+|                                   | function.                         |
++-----------------------------------+-----------------------------------+
+| <a href="Download.htm">Download</a>          | Downloads a file from the         |
+|                                   | Internet.                         |
++-----------------------------------+-----------------------------------+
+| <a href="DriveEject.htm">DriveEject</a>      | Ejects the tray of the specified  |
+|                                   | CD/DVD drive, or ejects a         |
+|                                   | removable drive.                  |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetCapacity.htm">DriveG                           | Returns the total capacity of the |
+| etCapacity</a> | drive which contains the          |
+|                                   | specified path, in megabytes.     |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetFileSystem.htm">DriveGetFi                       | Returns the type of the specified |
+| leSystem</a> | drive\'s file system.             |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetLabel.htm">                                 | Returns the volume label of the   |
+| DriveGetLabel</a> | specified drive.                  |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetList.htm">DriveGetList</a>  | Returns a string of letters, one  |
+|                                   | character for each drive letter   |
+|                                   | in the system.                    |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetSerial.htm">Dr                               | Returns the volume serial number  |
+| iveGetSerial</a> | of the specified drive.           |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetSpaceFree.htm">DriveGet                         | Returns the free disk space of    |
+| SpaceFree</a> | the drive which contains the      |
+|                                   | specified path, in megabytes.     |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetStatus.htm">Dr                               | Returns the status of the drive   |
+| iveGetStatus</a> | which contains the specified      |
+|                                   | path.                             |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetStatusCD.htm">DriveG                           | Returns the media status of the   |
+| etStatusCD</a> | specified CD/DVD drive.           |
++-----------------------------------+-----------------------------------+
+| <a href="DriveGetType.htm">DriveGetType</a>  | Returns the type of the drive     |
+|                                   | which contains the specified      |
+|                                   | path.                             |
++-----------------------------------+-----------------------------------+
+| <a href="DriveLock.htm">DriveLock</a>        | Prevents the eject feature of the |
+|                                   | specified drive from working.     |
++-----------------------------------+-----------------------------------+
+| <a href="DriveEject.htm">DriveRetract</a>    | Retracts the tray of the          |
+|                                   | specified CD/DVD drive.           |
++-----------------------------------+-----------------------------------+
+| <a href="DriveSetLabel.htm">                                 | Changes the volume label of the   |
+| DriveSetLabel</a> | specified drive.                  |
++-----------------------------------+-----------------------------------+
+| <a href="DriveUnlock.htm">DriveUnlock</a>    | Restores the eject feature of the |
+|                                   | specified drive.                  |
++-----------------------------------+-----------------------------------+
+| <a href="Edit.htm">Edit</a>                  | Opens the current script for      |
+|                                   | editing in the default editor.    |
++-----------------------------------+-----------------------------------+
+| <a href="EditGetCurrentCol.htm">EditGetC                         | Returns the column number in an   |
+| urrentCol</a> | Edit control where the caret      |
+|                                   | (text insertion point) resides.   |
++-----------------------------------+-----------------------------------+
+| <a href="EditGetCurrentLine.htm">EditGetCur                       | Returns the line number in an     |
+| rentLine</a> | Edit control where the caret      |
+|                                   | (text insert point) resides.      |
++-----------------------------------+-----------------------------------+
+| <a href="EditGetLine.htm">EditGetLine</a>    | Returns the text of the specified |
+|                                   | line in an Edit control.          |
++-----------------------------------+-----------------------------------+
+| <a href="EditGetLineCount.htm">EditGe                           | Returns the number of lines in an |
+| tLineCount</a> | Edit control.                     |
++-----------------------------------+-----------------------------------+
+| <a href="EditGetSelectedText.htm">EditGetSelec                     | Returns the selected text in an   |
+| tedText</a> | Edit control.                     |
++-----------------------------------+-----------------------------------+
+| <a href="EditPaste.htm">EditPaste</a>        | Pastes the specified string at    |
+|                                   | the caret (text insertion point)  |
+|                                   | in an Edit control.               |
++-----------------------------------+-----------------------------------+
+| <a href="Else.htm">Else</a>                  | Specifies one or more             |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | to execute if the associated      |
+|                                   | statement\'s body did not         |
+|                                   | execute.                          |
++-----------------------------------+-----------------------------------+
+| <a href="EnvGet.htm">EnvGet</a>              | Retrieves the value of the        |
+|                                   | specified <a href="../Con                  |
+|                                   | cepts.htm#environment-variables">environment            |
+|                                   | variable</a>. |
++-----------------------------------+-----------------------------------+
+| <a href="EnvSet.htm">EnvSet</a>              | Writes a value to the specified   |
+|                                   | <a href="../Con                  |
+|                                   | cepts.htm#environment-variables">environment                      |
+|                                   | variable</a>. |
++-----------------------------------+-----------------------------------+
+| <a href="Exit.htm">Exit</a>                  | Exits the <a href="../misc/Threads.htm">current                |
+|                                   | thread</a>.     |
++-----------------------------------+-----------------------------------+
+| <a href="ExitApp.htm">ExitApp</a>            | Terminates the script.            |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Exp">Exp</a>               | Returns the result of raising e   |
+|                                   | (which is approximately           |
+|                                   | 2.71828182845905) to the <em>N</em>th    |
+|                                   | power.                            |
++-----------------------------------+-----------------------------------+
+| <a href="FileAppend.htm">FileAppend</a>      | Writes text or binary data to the |
+|                                   | end of a file (first creating the |
+|                                   | file, if necessary).              |
++-----------------------------------+-----------------------------------+
+| <a href="FileCopy.htm">FileCopy</a>          | Copies one or more files.         |
++-----------------------------------+-----------------------------------+
+| <a href="FileCreateShortcut.htm">FileCreate                       | Creates a shortcut (.lnk) file.   |
+| Shortcut</a> |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="FileDelete.htm">FileDelete</a>      | Deletes one or more files         |
+|                                   | permanently.                      |
++-----------------------------------+-----------------------------------+
+| <a href="FileEncoding.htm">FileEncoding</a>  | Sets the default encoding for     |
+|                                   | <a href="FileRead.htm">FileRead</a>, <a href="LoopRead.htm">Loop   |
+|                                   | Read</a>,              |
+|                                   | <a href="FileAppend.htm">FileAppend</a>, and |
+|                                   | <a href="FileOpen.htm">FileOpen</a>.         |
++-----------------------------------+-----------------------------------+
+| <a href="FileExist.htm">FileExist</a>        | Checks for the existence of a     |
+|                                   | file or folder and returns its    |
+|                                   | attributes.                       |
++-----------------------------------+-----------------------------------+
+| <a href="FileInstall.htm">FileInstall</a>    | Includes the specified file       |
+|                                   | inside the <a href="../Scripts.htm#ahk2exe">compiled              |
+|                                   | version</a>  |
+|                                   | of the script.                    |
++-----------------------------------+-----------------------------------+
+| <a href="FileGetAttrib.htm">                                 | Reports whether a file or folder  |
+| FileGetAttrib</a> | is read-only, hidden, etc.        |
++-----------------------------------+-----------------------------------+
+| <a href="FileGetShortcut.htm">File                             | Retrieves information about a     |
+| GetShortcut</a> | shortcut (.lnk) file, such as its |
+|                                   | target file.                      |
++-----------------------------------+-----------------------------------+
+| <a href="FileGetSize.htm">FileGetSize</a>    | Retrieves the size of a file.     |
++-----------------------------------+-----------------------------------+
+| <a href="FileGetTime.htm">FileGetTime</a>    | Retrieves the datetime stamp of a |
+|                                   | file or folder.                   |
++-----------------------------------+-----------------------------------+
+| <a href="FileGetVersion.htm">Fi                               | Retrieves the version of a file.  |
+| leGetVersion</a> |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="FileMove.htm">FileMove</a>          | Moves or renames one or more      |
+|                                   | files.                            |
++-----------------------------------+-----------------------------------+
+| <a href="FileOpen.htm">FileOpen</a>          | Opens a file to read specific     |
+|                                   | content from it and/or to write   |
+|                                   | new content into it.              |
++-----------------------------------+-----------------------------------+
+| <a href="FileRead.htm">FileRead</a>          | Retrieves the contents of a file. |
++-----------------------------------+-----------------------------------+
+| <a href="FileRecycle.htm">FileRecycle</a>    | Sends a file or directory to the  |
+|                                   | recycle bin if possible, or       |
+|                                   | permanently deletes it.           |
++-----------------------------------+-----------------------------------+
+| <a href="FileRecycleEmpty.htm">FileRe                           | Empties the recycle bin.          |
+| cycleEmpty</a> |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="FileSelect.htm">FileSelect</a>      | Displays a standard dialog that   |
+|                                   | allows the user to open or save   |
+|                                   | file(s).                          |
++-----------------------------------+-----------------------------------+
+| <a href="FileSetAttrib.htm">                                 | Changes the attributes of one or  |
+| FileSetAttrib</a> | more files or folders. Wildcards  |
+|                                   | are supported.                    |
++-----------------------------------+-----------------------------------+
+| <a href="FileSetTime.htm">FileSetTime</a>    | Changes the datetime stamp of one |
+|                                   | or more files or folders.         |
+|                                   | Wildcards are supported.          |
++-----------------------------------+-----------------------------------+
+| <a href="Finally.htm">Finally</a>            | Ensures that one or more          |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | are always executed after a       |
+|                                   | <a href="Try.htm">Try</a> statement          |
+|                                   | finishes.                         |
++-----------------------------------+-----------------------------------+
+| <a href="Float.htm">Float</a>                | Converts a numeric string or      |
+|                                   | integer value to a floating-point |
+|                                   | number.                           |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Floor">Floor</a>           | Returns the specified number      |
+|                                   | rounded down to the nearest       |
+|                                   | integer (without any .00 suffix). |
++-----------------------------------+-----------------------------------+
+| <a href="For.htm">For</a>                    | Repeats one or more               |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | once for each key-value pair in   |
+|                                   | an object.                        |
++-----------------------------------+-----------------------------------+
+| <a href="Format.htm">Format</a>              | Formats a variable number of      |
+|                                   | input values according to a       |
+|                                   | format string.                    |
++-----------------------------------+-----------------------------------+
+| <a href="FormatTime.htm">FormatTime</a>      | Transforms a                      |
+|                                   | <a href="FileSetTime.htm#YYYYMMDD">YYYYMMDDHH                       |
+|                                   | 24MISS</a> |
+|                                   | timestamp into the specified      |
+|                                   | date/time format.                 |
++-----------------------------------+-----------------------------------+
+| <a href="GetKeyName.htm">GetKeyName</a>      | Retrieves the name/text of a key. |
++-----------------------------------+-----------------------------------+
+| <a href="GetKeyVK.htm">GetKeyVK</a>          | Retrieves the virtual key code of |
+|                                   | a key.                            |
++-----------------------------------+-----------------------------------+
+| <a href="GetKeySC.htm">GetKeySC</a>          | Retrieves the scan code of a key. |
++-----------------------------------+-----------------------------------+
+| <a href="GetKeyState.htm">GetKeyState</a>    | Returns 1 (true) or 0 (false)     |
+|                                   | depending on whether the          |
+|                                   | specified keyboard key or         |
+|                                   | mouse/controller button is down   |
+|                                   | or up. Also retrieves controller  |
+|                                   | status.                           |
++-----------------------------------+-----------------------------------+
+| <a href="GetMethod.htm">GetMethod</a>        | Retrieves the implementation      |
+|                                   | function of a method.             |
++-----------------------------------+-----------------------------------+
+| <a href="Goto.htm">Goto</a>                  | Jumps to the specified label and  |
+|                                   | continues execution.              |
++-----------------------------------+-----------------------------------+
+| <a href="GroupActivate.htm">                                 | Activates the next window in a    |
+| GroupActivate</a> | window group that was defined     |
+|                                   | with <a href="GroupAdd.htm">GroupAdd</a>.    |
++-----------------------------------+-----------------------------------+
+| <a href="GroupAdd.htm">GroupAdd</a>          | Adds a window specification to a  |
+|                                   | window group, creating the group  |
+|                                   | if necessary.                     |
++-----------------------------------+-----------------------------------+
+| <a href="GroupClose.htm">GroupClose</a>      | Closes the active window if it    |
+|                                   | was just activated by             |
+|                                   | <a href="GroupActivate.htm">                                 |
+|                                   | GroupActivate</a> |
+|                                   | or                                |
+|                                   | <a href="GroupDeactivate.htm">Group                            |
+|                                   | Deactivate</a>. |
+|                                   | It then activates the next window |
+|                                   | in the series. It can also close  |
+|                                   | all windows in a group.           |
++-----------------------------------+-----------------------------------+
+| <a href="GroupDeactivate.htm">Grou                             | Similar to                        |
+| pDeactivate</a> | <a href="GroupActivate.htm">                                 |
+|                                   | GroupActivate</a> |
+|                                   | except activates the next window  |
+|                                   | [not]{.underline} in the group.   |
++-----------------------------------+-----------------------------------+
+| <a href="Gui.htm#Call">Gui()</a>             | Creates and returns a new <a href="Gui.htm">Gui    |
+|                                   | object</a>. This can be     |
+|                                   | used to define a custom window,   |
+|                                   | or graphical user interface       |
+|                                   | (GUI), to display information or  |
+|                                   | accept user input.                |
++-----------------------------------+-----------------------------------+
+| <a href="GuiControl.htm">GuiC                             | Retrieves the [GuiControl         |
+| trlFromHwnd](GuiCtrlFromHwnd.htm) | object</a> of a GUI  |
+|                                   | control associated with the       |
+|                                   | specified window handle.          |
++-----------------------------------+-----------------------------------+
+| <a href="GuiFromHwnd.htm">GuiFromHwnd</a>    | Retrieves the <a href="Gui.htm">Gui                |
+|                                   | object</a> of a GUI window  |
+|                                   | associated with the specified     |
+|                                   | window handle.                    |
++-----------------------------------+-----------------------------------+
+| <a href="HasBase.htm">HasBase</a>            | Returns a non-zero number if the  |
+|                                   | specified value is derived from   |
+|                                   | the specified base object.        |
++-----------------------------------+-----------------------------------+
+| <a href="HasMethod.htm">HasMethod</a>        | Returns a non-zero number if the  |
+|                                   | specified value has a method by   |
+|                                   | the specified name.               |
++-----------------------------------+-----------------------------------+
+| <a href="HasProp.htm">HasProp</a>            | Returns a non-zero number if the  |
+|                                   | specified value has a property by |
+|                                   | the specified name.               |
++-----------------------------------+-----------------------------------+
+| <a href="HotIf.htm">HotIf / HotIfWin...</a> | Specifies the criteria for        |
+|                                   | subsequently created or modified  |
+|                                   | <a href="Hotkey.htm#variant">hotkey                           |
+|                                   | variants</a> and |
+|                                   | <a href="Hotstring.htm#variant">hotstring                        |
+|                                   | variants</a>. |
++-----------------------------------+-----------------------------------+
+| <a href="Hotkey.htm">Hotkey</a>              | Creates, modifies, enables, or    |
+|                                   | disables a hotkey while the       |
+|                                   | script is running.                |
++-----------------------------------+-----------------------------------+
+| <a href="Hotstring.htm">Hotstring</a>        | Creates, modifies, enables, or    |
+|                                   | disables a hotstring while the    |
+|                                   | script is running.                |
++-----------------------------------+-----------------------------------+
+| <a href="If.htm">If</a>                      | Specifies one or more             |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | to execute if an                  |
+|                                   | <a href="../Variables.htm#Expressions">expressi                         |
+|                                   | on</a> |
+|                                   | evaluates to true.                |
++-----------------------------------+-----------------------------------+
+| <a href="ListView.htm#IL_Create">IL                               | The means by which icons are      |
+| _Create</a>\ | added to a                        |
+| <a href="ListView.htm#IL_Add">IL_Add</a>\    | <a href="ListView.htm">ListView</a> or       |
+| <a href="ListView.htm#IL_Destroy">IL_                              | [TreeView](TreeView.htm) control. |
+| Destroy</a> |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="ImageSearch.htm">ImageSearch</a>    | Searches a region of the screen   |
+|                                   | for an image.                     |
++-----------------------------------+-----------------------------------+
+| <a href="IniDelete.htm">IniDelete</a>        | Deletes a value from a standard   |
+|                                   | format .ini file.                 |
++-----------------------------------+-----------------------------------+
+| <a href="IniRead.htm">IniRead</a>            | Reads a value, section or list of |
+|                                   | section names from a standard     |
+|                                   | format .ini file.                 |
++-----------------------------------+-----------------------------------+
+| <a href="IniWrite.htm">IniWrite</a>          | Writes a value or section to a    |
+|                                   | standard format .ini file.        |
++-----------------------------------+-----------------------------------+
+| <a href="InputBox.htm">InputBox</a>          | Displays an input box to ask the  |
+|                                   | user to enter a string.           |
++-----------------------------------+-----------------------------------+
+| <a href="InputHook.htm">InputHook</a>        | Creates an object which can be    |
+|                                   | used to collect or intercept      |
+|                                   | keyboard input.                   |
++-----------------------------------+-----------------------------------+
+| <a href="InstallKeybdHook.htm">Instal                           | Installs or uninstalls the        |
+| lKeybdHook</a> | keyboard hook.                    |
++-----------------------------------+-----------------------------------+
+| <a href="InstallMouseHook.htm">Instal                           | Installs or uninstalls the mouse  |
+| lMouseHook</a> | hook.                             |
++-----------------------------------+-----------------------------------+
+| <a href="InStr.htm">InStr</a>                | Searches for a given <em>occurrence</em> |
+|                                   | of a string, from the left or the |
+|                                   | right.                            |
++-----------------------------------+-----------------------------------+
+| <a href="Integer.htm">Integer</a>            | Converts a numeric string or      |
+|                                   | floating-point value to an        |
+|                                   | integer.                          |
++-----------------------------------+-----------------------------------+
+| <a href="IsLabel.htm">IsLabel</a>            | Returns a non-zero number if the  |
+|                                   | specified label exists in the     |
+|                                   | current scope.                    |
++-----------------------------------+-----------------------------------+
+| <a href="IsObject.htm">IsObject</a>          | Returns a non-zero number if the  |
+|                                   | specified value is an object.     |
++-----------------------------------+-----------------------------------+
+| <a href="IsSet.htm">IsSet / IsSetRef</a>     | Returns a non-zero number if the  |
+|                                   | specified variable has been       |
+|                                   | assigned a value.                 |
++-----------------------------------+-----------------------------------+
+| <a href="KeyHistory.htm">KeyHistory</a>      | Displays script info and a        |
+|                                   | history of the most recent        |
+|                                   | keystrokes and mouse clicks.      |
++-----------------------------------+-----------------------------------+
+| <a href="KeyWait.htm">KeyWait</a>            | Waits for a key or                |
+|                                   | mouse/controller button to be     |
+|                                   | released or pressed down.         |
++-----------------------------------+-----------------------------------+
+| <a href="ListHotkeys.htm">ListHotkeys</a>    | Displays the hotkeys in use by    |
+|                                   | the current script, whether their |
+|                                   | subroutines are currently         |
+|                                   | running, and whether or not they  |
+|                                   | use the                           |
+|                                   | <a href="InstallKeybdHook.htm">keyboard</a>  |
+|                                   | or <a href="InstallMouseHook.htm">mouse</a>  |
+|                                   | hook.                             |
++-----------------------------------+-----------------------------------+
+| <a href="ListLines.htm">ListLines</a>        | Enables or disables line logging  |
+|                                   | or displays the script lines most |
+|                                   | recently executed.                |
++-----------------------------------+-----------------------------------+
+| <a href="ListVars.htm">ListVars</a>          | Displays the script\'s            |
+|                                   | <a href="../Variables.htm">variables</a>:    |
+|                                   | their names and current contents. |
++-----------------------------------+-----------------------------------+
+| <a href="ListViewGetContent.htm">ListViewGe                       | Returns a list of items/rows from |
+| tContent</a> | a ListView.                       |
++-----------------------------------+-----------------------------------+
+| <a href="LoadPicture.htm">LoadPicture</a>    | Loads a picture from file and     |
+|                                   | returns a bitmap or icon handle.  |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Log">Log</a>               | Returns the logarithm (base 10)   |
+|                                   | of the specified number.          |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Ln">Ln</a>                 | Returns the natural logarithm     |
+|                                   | (base e) of the specified number. |
++-----------------------------------+-----------------------------------+
+| <a href="Loop.htm">Loop (normal)</a>         | Performs one or more              |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | repeatedly: either the specified  |
+|                                   | number of times or until          |
+|                                   | <a href="Break.htm">Break</a> is             |
+|                                   | encountered.                      |
++-----------------------------------+-----------------------------------+
+| <a href="LoopFiles.htm">Loop Files</a>       | Retrieves the specified files or  |
+|                                   | folders, one at a time.           |
++-----------------------------------+-----------------------------------+
+| <a href="LoopParse.htm">Loop Parse</a>       | Retrieves substrings (fields)     |
+|                                   | from a string, one at a time.     |
++-----------------------------------+-----------------------------------+
+| <a href="LoopRead.htm">Loop Read</a>         | Retrieves the lines in a text     |
+|                                   | file, one at a time.              |
++-----------------------------------+-----------------------------------+
+| <a href="LoopReg.htm">Loop Reg</a>           | Retrieves the contents of the     |
+|                                   | specified registry subkey, one    |
+|                                   | item at a time.                   |
++-----------------------------------+-----------------------------------+
+| <a href="../Obje                     | Creates a [Map](Map.htm) from a   |
+| cts.htm#Usage_Associative_Arrays">Map</a> | list of key-value pairs.          |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Max">Max</a>               | Returns the highest number from a |
+|                                   | set of numbers.                   |
++-----------------------------------+-----------------------------------+
+| <a href="Menu.htm#Call">MenuBar()</a>        | Creates a <a href="Menu.htm">MenuBar                |
+|                                   | object</a>, which can be   |
+|                                   | used to define a <a href="Gui.htm#MenuBar">GUI menu        |
+|                                   | bar</a>.            |
++-----------------------------------+-----------------------------------+
+| <a href="Menu.htm#Call">Menu()</a>           | Creates a <a href="Menu.htm">Menu                   |
+|                                   | object</a>, which can be   |
+|                                   | used to create and display a      |
+|                                   | menu.                             |
++-----------------------------------+-----------------------------------+
+| <a href="Menu.htm">Me                               | Retrieves the [Menu or MenuBar    |
+| nuFromHandle](MenuFromHandle.htm) | object</a> corresponding   |
+|                                   | to a Win32 menu handle.           |
++-----------------------------------+-----------------------------------+
+| <a href="MenuSelect.htm">MenuSelect</a>      | Invokes a menu item from the menu |
+|                                   | bar of the specified window.      |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Min">Min</a>               | Returns the lowest number from a  |
+|                                   | set of numbers.                   |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Mod">Mod</a>               | Modulo. Returns the remainder of  |
+|                                   | a number (dividend) divided by    |
+|                                   | another number (divisor).         |
++-----------------------------------+-----------------------------------+
+| <a href="MonitorGet.htm">MonitorGet</a>      | Checks if the specified monitor   |
+|                                   | exists and optionally retrieves   |
+|                                   | its bounding coordinates.         |
++-----------------------------------+-----------------------------------+
+| <a href="MonitorGetCount.htm">Moni                             | Returns the total number of       |
+| torGetCount</a> | monitors.                         |
++-----------------------------------+-----------------------------------+
+| <a href="MonitorGetName.htm">Mo                               | Returns the operating system\'s   |
+| nitorGetName</a> | name of the specified monitor.    |
++-----------------------------------+-----------------------------------+
+| <a href="MonitorGetPrimary.htm">MonitorG                         | Returns the number of the primary |
+| etPrimary</a> | monitor.                          |
++-----------------------------------+-----------------------------------+
+| <a href="MonitorGetWorkArea.htm">MonitorGet                       | Checks if the specified monitor   |
+| WorkArea</a> | exists and optionally retrieves   |
+|                                   | the bounding coordinates of its   |
+|                                   | working area.                     |
++-----------------------------------+-----------------------------------+
+| <a href="MouseClick.htm">MouseClick</a>      | Clicks or holds down a mouse      |
+|                                   | button, or turns the mouse wheel. |
+|                                   | Note: The <a href="Click.htm">Click</a>      |
+|                                   | function is generally more        |
+|                                   | flexible and easier to use.       |
++-----------------------------------+-----------------------------------+
+| <a href="MouseClickDrag.htm">Mo                               | Clicks and holds the specified    |
+| useClickDrag</a> | mouse button, moves the mouse to  |
+|                                   | the destination coordinates, then |
+|                                   | releases the button.              |
++-----------------------------------+-----------------------------------+
+| <a href="MouseGetPos.htm">MouseGetPos</a>    | Retrieves the current position of |
+|                                   | the mouse cursor, and optionally  |
+|                                   | which window and control it is    |
+|                                   | hovering over.                    |
++-----------------------------------+-----------------------------------+
+| <a href="MouseMove.htm">MouseMove</a>        | Moves the mouse cursor.           |
++-----------------------------------+-----------------------------------+
+| <a href="MsgBox.htm">MsgBox</a>              | Displays the specified text in a  |
+|                                   | small window containing one or    |
+|                                   | more buttons (such as Yes and     |
+|                                   | No).                              |
++-----------------------------------+-----------------------------------+
+| <a href="Number.htm">Number</a>              | Converts a numeric string to a    |
+|                                   | pure integer or floating-point    |
+|                                   | number.                           |
++-----------------------------------+-----------------------------------+
+| <a href="NumGet.htm">NumGet</a>              | Returns the binary number stored  |
+|                                   | at the specified address+offset.  |
++-----------------------------------+-----------------------------------+
+| <a href="NumPut.htm">NumPut</a>              | Stores one or more numbers in     |
+|                                   | binary format at the specified    |
+|                                   | address+offset.                   |
++-----------------------------------+-----------------------------------+
+| <a href="ObjAddRef.htm">ObjAddRef /                      | Increments or decrements an       |
+| ObjRelease</a>        | object\'s <a href="..                         |
+|                                   | /Objects.htm#Reference_Counting">reference              |
+|                                   | count</a>. |
++-----------------------------------+-----------------------------------+
+| <a href="../misc/Functor.htm#BoundFunc">                                 | Creates a [BoundFunc              |
+| ObjBindMethod](ObjBindMethod.htm) | objec                             |
+|                                   | t</a> |
+|                                   | which calls a method of a given   |
+|                                   | object.                           |
++-----------------------------------+-----------------------------------+
+| <a href="Object.htm#HasOwnProp">ObjHa                            | These functions are equivalent to |
+| sOwnProp</a>\ | built-in methods of the           |
+| <a href="Object.htm#OwnProps">O                                | [Object](Object.htm) type. It is  |
+| bjOwnProps</a>\ | usually recommended to use the    |
+|                                   | corresponding method instead.     |
++-----------------------------------+-----------------------------------+
+| <a href="Any.htm#GetBase">ObjGetBase</a>     | Retrieves an object\'s <a href="../Objects.htm#delegation">base      |
+|                                   | ob                                |
+|                                   | ject</a>. |
++-----------------------------------+-----------------------------------+
+| <a href="Object.htm#GetCapacity">ObjGet                           | Returns the current capacity of   |
+| Capacity</a> | the object\'s internal array of   |
+|                                   | properties.                       |
++-----------------------------------+-----------------------------------+
+| <a href="Object.htm#OwnPropCount">ObjOwnPr                         | Returns the number of properties  |
+| opCount</a> | owned by an object.               |
++-----------------------------------+-----------------------------------+
+| <a href="Object.htm#SetBase">ObjSetBase</a>  | Sets an object\'s <a href="../Objects.htm#delegation">base           |
+|                                   | ob                                |
+|                                   | ject</a>. |
++-----------------------------------+-----------------------------------+
+| <a href="Object.htm#SetCapacity">ObjSet                           | Sets the current capacity of the  |
+| Capacity</a> | object\'s internal array of own   |
+|                                   | properties.                       |
++-----------------------------------+-----------------------------------+
+| <a href="OnClipboardChange.htm">OnClipbo                         | Registers a                       |
+| ardChange</a> | <a href="../Functions.htm">function</a> to   |
+|                                   | be called automatically whenever  |
+|                                   | the clipboard\'s content changes. |
++-----------------------------------+-----------------------------------+
+| <a href="OnError.htm">OnError</a>            | Registers a                       |
+|                                   | <a href="../Functions.htm">function</a> to   |
+|                                   | be called automatically whenever  |
+|                                   | an unhandled error occurs.        |
++-----------------------------------+-----------------------------------+
+| <a href="OnExit.htm">OnExit</a>              | Registers a                       |
+|                                   | <a href="../Functions.htm">function</a> to   |
+|                                   | be called automatically whenever  |
+|                                   | the script exits.                 |
++-----------------------------------+-----------------------------------+
+| <a href="OnMessage.htm">OnMessage</a>        | Registers a                       |
+|                                   | <a href="../Functions.htm">function</a> to   |
+|                                   | be called automatically whenever  |
+|                                   | the script receives the specified |
+|                                   | message.                          |
++-----------------------------------+-----------------------------------+
+| <a href="Ord.htm">Ord</a>                    | Returns the ordinal value         |
+|                                   | (numeric character code) of the   |
+|                                   | first character in the specified  |
+|                                   | string.                           |
++-----------------------------------+-----------------------------------+
+| <a href="OutputDebug.htm">OutputDebug</a>    | Sends a string to the debugger    |
+|                                   | (if any) for display.             |
++-----------------------------------+-----------------------------------+
+| <a href="Pause.htm">Pause</a>                | Pauses the script\'s <a href="../misc/Threads.htm">current     |
+|                                   | thread</a> or   |
+|                                   | sets the pause state of the       |
+|                                   | underlying thread.                |
++-----------------------------------+-----------------------------------+
+| <a href="Persistent.htm">Persistent</a>      | Prevents the script from exiting  |
+|                                   | automatically when its last       |
+|                                   | thread completes, allowing it to  |
+|                                   | stay running in an idle state.    |
++-----------------------------------+-----------------------------------+
+| <a href="PixelGetColor.htm">                                 | Retrieves the color of the pixel  |
+| PixelGetColor</a> | at the specified X and Y          |
+|                                   | coordinates.                      |
++-----------------------------------+-----------------------------------+
+| <a href="PixelSearch.htm">PixelSearch</a>    | Searches a region of the screen   |
+|                                   | for a pixel of the specified      |
+|                                   | color.                            |
++-----------------------------------+-----------------------------------+
+| <a href="PostMessage.htm">PostMessage</a>    | Places a message in the message   |
+|                                   | queue of a window or control.     |
++-----------------------------------+-----------------------------------+
+| <a href="ProcessClose.htm">ProcessClose</a>  | Forces the first matching process |
+|                                   | to close.                         |
++-----------------------------------+-----------------------------------+
+| <a href="ProcessExist.htm">ProcessExist</a>  | Checks if the specified process   |
+|                                   | exists.                           |
++-----------------------------------+-----------------------------------+
+| <a href="ProcessGetName.htm">Pr                               | Returns the name of the specified |
+| ocessGetName</a> | process.                          |
++-----------------------------------+-----------------------------------+
+| <a href="ProcessGetParent.htm">Proces                           | Returns the process ID (PID) of   |
+| sGetParent</a> | the process which created the     |
+|                                   | specified process.                |
++-----------------------------------+-----------------------------------+
+| <a href="ProcessGetName.htm">Pr                               | Returns the path of the specified |
+| ocessGetPath</a> | process.                          |
++-----------------------------------+-----------------------------------+
+| <a href="ProcessSetPriority.htm">ProcessSet                       | Changes the priority level of the |
+| Priority</a> | first matching process.           |
++-----------------------------------+-----------------------------------+
+| <a href="ProcessWait.htm">ProcessWait</a>    | Waits for the specified process   |
+|                                   | to exist.                         |
++-----------------------------------+-----------------------------------+
+| <a href="ProcessWaitClose.htm">Proces                           | Waits for all matching processes  |
+| sWaitClose</a> | to close.                         |
++-----------------------------------+-----------------------------------+
+| <a href="Random.htm">Random</a>              | Generates a pseudo-random number. |
++-----------------------------------+-----------------------------------+
+| <a href="RegExMatch.htm">RegExMatch</a>      | Determines whether a string       |
+|                                   | contains a pattern (regular       |
+|                                   | expression).                      |
++-----------------------------------+-----------------------------------+
+| <a href="RegExReplace.htm">RegExReplace</a>  | Replaces occurrences of a pattern |
+|                                   | (regular expression) inside a     |
+|                                   | string.                           |
++-----------------------------------+-----------------------------------+
+| <a href="RegCreateKey.htm">RegCreateKey</a>  | Creates a registry key without    |
+|                                   | writing a value.                  |
++-----------------------------------+-----------------------------------+
+| <a href="RegDelete.htm">RegDelete</a>        | Deletes a value from the          |
+|                                   | registry.                         |
++-----------------------------------+-----------------------------------+
+| <a href="RegDeleteKey.htm">RegDeleteKey</a>  | Deletes a subkey from the         |
+|                                   | registry.                         |
++-----------------------------------+-----------------------------------+
+| <a href="RegRead.htm">RegRead</a>            | Reads a value from the registry.  |
++-----------------------------------+-----------------------------------+
+| <a href="RegWrite.htm">RegWrite</a>          | Writes a value to the registry.   |
++-----------------------------------+-----------------------------------+
+| <a href="Reload.htm">Reload</a>              | Replaces the currently running    |
+|                                   | instance of the script with a new |
+|                                   | one.                              |
++-----------------------------------+-----------------------------------+
+| <a href="Return.htm">Return</a>              | Returns from a function to which  |
+|                                   | execution had previously jumped   |
+|                                   | via                               |
+|                                   | <a href="../Functions.htm">                                 |
+|                                   | function-call</a>, |
+|                                   | <a href="../Hotkeys.htm">Hotkey</a>          |
+|                                   | activation, or other means.       |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Round">Round</a>           | Returns the specified number      |
+|                                   | rounded to <em>N</em> decimal places.    |
++-----------------------------------+-----------------------------------+
+| <a href="Run.htm">Run</a>                    | Runs an external program.         |
++-----------------------------------+-----------------------------------+
+| <a href="RunAs.htm">RunAs</a>                | Specifies a set of user           |
+|                                   | credentials to use for all        |
+|                                   | subsequent <a href="Run.htm">Run</a> and     |
+|                                   | <a href="Run.htm">RunWait</a> functions.     |
++-----------------------------------+-----------------------------------+
+| <a href="Run.htm">RunWait</a>                | Runs an external program and      |
+|                                   | waits until it finishes.          |
++-----------------------------------+-----------------------------------+
+| <a href="Send.htm">Send</a> /                | Sends simulated keystrokes and    |
+| <a href="Send.htm#SendText">SendText</a> /   | mouse clicks to the               |
+| <a href="Send.htm#SendInput">SendInput</a> / | <a href="WinActivate.htm">active</a> window. |
+| <a href="Send.htm#SendPlay">SendPlay</a> /   |                                   |
+| <a href="Send.htm#SendEvent">SendEvent</a>   |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="SendLevel.htm">SendLevel</a>        | Controls which artificial         |
+|                                   | keyboard and mouse events are     |
+|                                   | ignored by hotkeys and            |
+|                                   | hotstrings.                       |
++-----------------------------------+-----------------------------------+
+| <a href="SendMessage.htm">SendMessage</a>    | Sends a message to a window or    |
+|                                   | control and waits for             |
+|                                   | acknowledgement.                  |
++-----------------------------------+-----------------------------------+
+| <a href="SendMode.htm">SendMode</a>          | Makes <a href="Send.htm">Send</a> synonymous |
+|                                   | with SendEvent or SendPlay rather |
+|                                   | than the default (SendInput).     |
+|                                   | Also makes Click and              |
+|                                   | MouseMove/Click/Drag use the      |
+|                                   | specified method.                 |
++-----------------------------------+-----------------------------------+
+| <a href="SetNumScrollCapsLockState.htm">SetCapsLockStat                  | Sets the state of                 |
+| e</a> | [CapsLock]{.kbd}. Can also force  |
+|                                   | the key to stay on or off.        |
++-----------------------------------+-----------------------------------+
+| <a href="SetControlDelay.htm">SetC                             | Sets the delay that will occur    |
+| ontrolDelay</a> | after each control-modifying      |
+|                                   | function.                         |
++-----------------------------------+-----------------------------------+
+| <a href="SetDefaultMouseSpeed.htm">SetDefaultMous                   | Sets the mouse speed that will be |
+| eSpeed</a> | used if unspecified in            |
+|                                   | <a href="Click.htm">Click</a>,               |
+|                                   | <a href="MouseMove.htm">MouseMove</a>,       |
+|                                   | <a href="MouseClick.htm">MouseClick</a>, and |
+|                                   | <a href="MouseClickDrag.htm">Mou                              |
+|                                   | seClickDrag</a>. |
++-----------------------------------+-----------------------------------+
+| <a href="SetKeyDelay.htm">SetKeyDelay</a>    | Sets the delay that will occur    |
+|                                   | after each keystroke sent by      |
+|                                   | <a href="Send.htm">Send</a> or               |
+|                                   | <a href="ControlSend.htm">ControlSend</a>.   |
++-----------------------------------+-----------------------------------+
+| <a href="SetMouseDelay.htm">                                 | Sets the delay that will occur    |
+| SetMouseDelay</a> | after each mouse movement or      |
+|                                   | click.                            |
++-----------------------------------+-----------------------------------+
+| <a href="SetNumScrollCapsLockState.htm">SetNumLockStat                   | Sets the state of                 |
+| e</a> | [NumLock]{.kbd}. Can also force   |
+|                                   | the key to stay on or off.        |
++-----------------------------------+-----------------------------------+
+| <a href="SetNumScrollCapsLockState.htm">SetScrollLockStat                | Sets the state of                 |
+| e</a> | [ScrollLock]{.kbd}. Can also      |
+|                                   | force the key to stay on or off.  |
++-----------------------------------+-----------------------------------+
+| <a href="SetRegView.htm">SetRegView</a>      | Sets the registry view used by    |
+|                                   | <a href="RegRead.htm">RegRead</a>,           |
+|                                   | <a href="RegWrite.htm">RegWrite</a>,         |
+|                                   | <a href="RegDelete.htm">RegDelete</a>,       |
+|                                   | <a href="RegDeleteKey.htm">RegDeleteKey</a>  |
+|                                   | and <a href="LoopReg.htm">Loop Reg</a>,      |
+|                                   | allowing them in a 32-bit script  |
+|                                   | to access the 64-bit registry     |
+|                                   | view and vice versa.              |
++-----------------------------------+-----------------------------------+
+| <a href="SetStoreCapsLockMode.htm">SetStoreCapsLo                   | Whether to restore the state of   |
+| ckMode</a> | [CapsLock]{.kbd} after a          |
+|                                   | <a href="Send.htm">Send</a>.                 |
++-----------------------------------+-----------------------------------+
+| <a href="SetTimer.htm">SetTimer</a>          | Causes a function to be called    |
+|                                   | automatically and repeatedly at a |
+|                                   | specified time interval.          |
++-----------------------------------+-----------------------------------+
+| <a href="SetTitleMatchMode.htm">SetTitle                         | Sets the matching behavior of the |
+| MatchMode</a> | <a href="../misc/WinTitle.htm"><em>WinTitle</em>                       |
+|                                   | parameter</a>  |
+|                                   | in built-in functions such as     |
+|                                   | <a href="WinWait.htm">WinWait</a>.           |
++-----------------------------------+-----------------------------------+
+| <a href="SetWinDelay.htm">SetWinDelay</a>    | Sets the delay that will occur    |
+|                                   | after each windowing function,    |
+|                                   | such as                           |
+|                                   | <a href="WinActivate.htm">WinActivate</a>.   |
++-----------------------------------+-----------------------------------+
+| <a href="SetWorkingDir.htm">                                 | Changes the script\'s current     |
+| SetWorkingDir</a> | working directory.                |
++-----------------------------------+-----------------------------------+
+| <a href="Shutdown.htm">Shutdown</a>          | Shuts down, restarts, or logs off |
+|                                   | the system.                       |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Sin">Sin</a>               | Returns the trigonometric sine of |
+|                                   | the specified number.             |
++-----------------------------------+-----------------------------------+
+| <a href="Sleep.htm">Sleep</a>                | Waits the specified amount of     |
+|                                   | time before continuing.           |
++-----------------------------------+-----------------------------------+
+| <a href="Sort.htm">Sort</a>                  | Arranges a variable\'s contents   |
+|                                   | in alphabetical, numerical, or    |
+|                                   | random order (optionally removing |
+|                                   | duplicates).                      |
++-----------------------------------+-----------------------------------+
+| <a href="SoundBeep.htm">SoundBeep</a>        | Emits a tone from the PC speaker. |
++-----------------------------------+-----------------------------------+
+| <a href="SoundGetInterface.htm">SoundGet                         | Retrieves a native COM interface  |
+| Interface</a> | of a sound device or component.   |
++-----------------------------------+-----------------------------------+
+| <a href="SoundGetMute.htm">SoundGetMute</a>  | Retrieves a mute setting of a     |
+|                                   | sound device.                     |
++-----------------------------------+-----------------------------------+
+| <a href="SoundGetName.htm">SoundGetName</a>  | Retrieves the name of a sound     |
+|                                   | device or component.              |
++-----------------------------------+-----------------------------------+
+| <a href="SoundGetVolume.htm">So                               | Retrieves a volume setting of a   |
+| undGetVolume</a> | sound device.                     |
++-----------------------------------+-----------------------------------+
+| <a href="SoundPlay.htm">SoundPlay</a>        | Plays a sound, video, or other    |
+|                                   | supported file type.              |
++-----------------------------------+-----------------------------------+
+| <a href="SoundSetMute.htm">SoundSetMute</a>  | Changes a mute setting of a sound |
+|                                   | device.                           |
++-----------------------------------+-----------------------------------+
+| <a href="SoundSetVolume.htm">So                               | Changes a volume setting of a     |
+| undSetVolume</a> | sound device.                     |
++-----------------------------------+-----------------------------------+
+| <a href="SplitPath.htm">SplitPath</a>        | Separates a file name or URL into |
+|                                   | its name, directory, extension,   |
+|                                   | and drive.                        |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Sqrt">Sqrt</a>             | Returns the square root of the    |
+|                                   | specified number.                 |
++-----------------------------------+-----------------------------------+
+| <a href="StatusBarGetText.htm">Status                           | Retrieves the text from a         |
+| BarGetText</a> | standard status bar control.      |
++-----------------------------------+-----------------------------------+
+| <a href="StatusBarWait.htm">                                 | Waits until a window\'s status    |
+| StatusBarWait</a> | bar contains the specified        |
+|                                   | string.                           |
++-----------------------------------+-----------------------------------+
+| <a href="StrCompare.htm">StrCompare</a>      | Compares two strings              |
+|                                   | alphabetically.                   |
++-----------------------------------+-----------------------------------+
+| <a href="StrGet.htm">StrGet</a>              | Copies a string from a memory     |
+|                                   | address or buffer, optionally     |
+|                                   | converting it from a given code   |
+|                                   | page.                             |
++-----------------------------------+-----------------------------------+
+| <a href="String.htm">String</a>              | Converts a value to a string.     |
++-----------------------------------+-----------------------------------+
+| <a href="StrLen.htm">StrLen</a>              | Retrieves the count of how many   |
+|                                   | characters are in a string.       |
++-----------------------------------+-----------------------------------+
+| <a href="StrLower.htm">StrLower</a>          | Converts a string to lowercase.   |
++-----------------------------------+-----------------------------------+
+| <a href="StrPtr.htm">StrPtr</a>              | Returns the current memory        |
+|                                   | address of a string.              |
++-----------------------------------+-----------------------------------+
+| <a href="StrPut.htm">StrPut</a>              | Copies a string to a memory       |
+|                                   | address or buffer, optionally     |
+|                                   | converting it to a given code     |
+|                                   | page.                             |
++-----------------------------------+-----------------------------------+
+| <a href="StrReplace.htm">StrReplace</a>      | Replaces the specified substring  |
+|                                   | with a new string.                |
++-----------------------------------+-----------------------------------+
+| <a href="StrSplit.htm">StrSplit</a>          | Separates a string into an array  |
+|                                   | of substrings using the specified |
+|                                   | delimiters.                       |
++-----------------------------------+-----------------------------------+
+| <a href="StrLower.htm">StrTitle</a>          | Converts a string to title case.  |
++-----------------------------------+-----------------------------------+
+| <a href="StrLower.htm">StrUpper</a>          | Converts a string to uppercase.   |
++-----------------------------------+-----------------------------------+
+| <a href="SubStr.htm">SubStr</a>              | Retrieves one or more characters  |
+|                                   | from the specified position in a  |
+|                                   | string.                           |
++-----------------------------------+-----------------------------------+
+| <a href="Suspend.htm">Suspend</a>            | Disables or enables all or        |
+|                                   | selected                          |
+|                                   | <a href="../Hotkeys.htm">hotkeys</a> and     |
+|                                   | <a href="../Hotstrings.htm">hotstrings</a>.  |
++-----------------------------------+-----------------------------------+
+| <a href="Switch.htm">Switch</a>              | Compares a value with multiple    |
+|                                   | cases and executes the            |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | of the first match.               |
++-----------------------------------+-----------------------------------+
+| <a href="SysGet.htm">SysGet</a>              | Retrieves dimensions of system    |
+|                                   | objects, and other system         |
+|                                   | properties.                       |
++-----------------------------------+-----------------------------------+
+| <a href="SysGetIPAddresses.htm">SysGetIP                         | Returns an array of the system\'s |
+| Addresses</a> | IPv4 addresses.                   |
++-----------------------------------+-----------------------------------+
+| <a href="Math.htm#Tan">Tan</a>               | Returns the trigonometric tangent |
+|                                   | of the specified number.          |
++-----------------------------------+-----------------------------------+
+| <a href="Thread.htm">Thread</a>              | Sets the priority or              |
+|                                   | interruptibility of               |
+|                                   | <a href="../misc/Threads.htm">threads</a>.   |
+|                                   | It can also temporarily disable   |
+|                                   | all <a href="SetTimer.htm">timers</a>.       |
++-----------------------------------+-----------------------------------+
+| <a href="Throw.htm">Throw</a>                | Signals the occurrence of an      |
+|                                   | error. This signal can be caught  |
+|                                   | by a                              |
+|                                   | <a href="Try.htm">Try</a>-<a href="Catch.htm">Catch</a> |
+|                                   | statement.                        |
++-----------------------------------+-----------------------------------+
+| <a href="ToolTip.htm">ToolTip</a>            | Shows an always-on-top window     |
+|                                   | anywhere on the screen.           |
++-----------------------------------+-----------------------------------+
+| <a href="TraySetIcon.htm">TraySetIcon</a>    | Changes the script\'s <a href="../Program.htm#tray-icon">tray       |
+|                                   | icon</a>   |
+|                                   | (which is also used by            |
+|                                   | <a href="Gui.htm">GUI</a> and dialog         |
+|                                   | windows).                         |
++-----------------------------------+-----------------------------------+
+| <a href="TrayTip.htm">TrayTip</a>            | Shows a balloon message window    |
+|                                   | or, on Windows 10 and later, a    |
+|                                   | toast notification near the <a href="../Program.htm#tray-icon">tray |
+|                                   | icon</a>.  |
++-----------------------------------+-----------------------------------+
+| <a href="Trim.htm">Trim / LTrim / RTrim</a>  | Trims characters from the         |
+|                                   | beginning and/or end of a string. |
++-----------------------------------+-----------------------------------+
+| <a href="Try.htm">Try</a>                    | Guards one or more                |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | against runtime errors and values |
+|                                   | thrown by the <a href="Throw.htm">Throw</a>  |
+|                                   | statement.                        |
++-----------------------------------+-----------------------------------+
+| <a href="Type.htm">Type</a>                  | Returns the class name of a       |
+|                                   | value.                            |
++-----------------------------------+-----------------------------------+
+| <a href="Until.htm">Until</a>                | Applies a condition to the        |
+|                                   | continuation of a Loop or         |
+|                                   | For-loop.                         |
++-----------------------------------+-----------------------------------+
+| <a href="VarSetStrCapacity.htm">VarSetSt                         | Enlarges a variable\'s holding    |
+| rCapacity</a> | capacity or frees its memory.     |
+|                                   | This is not normally needed, but  |
+|                                   | may be used with                  |
+|                                   | <a href="DllCall.htm">DllCall</a> or         |
+|                                   | <a href="SendMessage.htm">SendMessage</a> or |
+|                                   | to optimize repeated              |
+|                                   | concatenation.                    |
++-----------------------------------+-----------------------------------+
+| <a href="VerCompare.htm">VerCompare</a>      | Compares two version strings.     |
++-----------------------------------+-----------------------------------+
+| <a href="While.htm">While-loop</a>           | Performs one or more              |
+|                                   | <a href="../Concepts.htm#statement">state                            |
+|                                   | ments</a> |
+|                                   | repeatedly until the specified    |
+|                                   | <a href="../Variables.htm#Expressions">expressi                         |
+|                                   | on</a> |
+|                                   | evaluates to false.               |
++-----------------------------------+-----------------------------------+
+| <a href="WinActivate.htm">WinActivate</a>    | Activates the specified window.   |
++-----------------------------------+-----------------------------------+
+| <a href="WinActivateBottom.htm">WinActiv                         | Same as                           |
+| ateBottom</a> | <a href="WinActivate.htm">WinActivate</a>    |
+|                                   | except that it activates the      |
+|                                   | bottommost matching window rather |
+|                                   | than the topmost.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinActive.htm">WinActive</a>        | Checks if the specified window is |
+|                                   | active and returns its unique ID  |
+|                                   | (HWND).                           |
++-----------------------------------+-----------------------------------+
+| <a href="WinClose.htm">WinClose</a>          | Closes the specified window.      |
++-----------------------------------+-----------------------------------+
+| <a href="WinExist.htm">WinExist</a>          | Checks if the specified window    |
+|                                   | exists and returns the unique ID  |
+|                                   | (HWND) of the first matching      |
+|                                   | window.                           |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetClass.htm">WinGetClass</a>    | Retrieves the specified window\'s |
+|                                   | class name.                       |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetClientPos.htm">WinG                             | Retrieves the position and size   |
+| etClientPos</a> | of the specified window\'s client |
+|                                   | area.                             |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetControls.htm">Wi                               | Returns an array of names         |
+| nGetControls</a> | (ClassNNs) for all controls in    |
+|                                   | the specified window.             |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetControlsHwnd.htm">WinGetCont                       | Returns an array of unique ID     |
+| rolsHwnd</a> | numbers (HWNDs) for all controls  |
+|                                   | in the specified window.          |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetCount.htm">WinGetCount</a>    | Returns the number of existing    |
+|                                   | windows that match the specified  |
+|                                   | criteria.                         |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetID.htm">WinGetID</a>          | Returns the unique ID number      |
+|                                   | (HWND) of the specified window.   |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetIDLast.htm">WinGetIDLast</a>  | Returns the unique ID number      |
+|                                   | (HWND) of the last/bottommost     |
+|                                   | window if there is more than one  |
+|                                   | match.                            |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetList.htm">WinGetList</a>      | Returns an array of unique ID     |
+|                                   | numbers (HWNDs) for all existing  |
+|                                   | windows that match the specified  |
+|                                   | criteria.                         |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetMinMax.htm">WinGetMinMax</a>  | Returns a non-zero number if the  |
+|                                   | specified window is maximized or  |
+|                                   | minimized.                        |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetPID.htm">WinGetPID</a>        | Returns the Process ID number     |
+|                                   | (PID) of the specified window.    |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetPos.htm">WinGetPos</a>        | Retrieves the position and size   |
+|                                   | of the specified window.          |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetProcessName.htm">WinGetPr                         | Returns the name of the process   |
+| ocessName</a> | that owns the specified window.   |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetProcessPath.htm">WinGetPr                         | Returns the full path and name of |
+| ocessPath</a> | the process that owns the         |
+|                                   | specified window.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetStyle.htm">WinGetStyle\                     | Returns the style or extended     |
+| WinGetExStyle</a>   | style (respectively) of the       |
+|                                   | specified window.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetText.htm">WinGetText</a>      | Retrieves the text from the       |
+|                                   | specified window.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetTitle.htm">WinGetTitle</a>    | Retrieves the title of the        |
+|                                   | specified window.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetTransColor.htm">WinGet                           | Returns the color that is marked  |
+| TransColor</a> | transparent in the specified      |
+|                                   | window.                           |
++-----------------------------------+-----------------------------------+
+| <a href="WinGetTransparent.htm">WinGetTr                         | Returns the degree of             |
+| ansparent</a> | transparency of the specified     |
+|                                   | window.                           |
++-----------------------------------+-----------------------------------+
+| <a href="WinHide.htm">WinHide</a>            | Hides the specified window.       |
++-----------------------------------+-----------------------------------+
+| <a href="WinKill.htm">WinKill</a>            | Forces the specified window to    |
+|                                   | close.                            |
++-----------------------------------+-----------------------------------+
+| <a href="WinMaximize.htm">WinMaximize</a>    | Enlarges the specified window to  |
+|                                   | its maximum size.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinMinimize.htm">WinMinimize</a>    | Collapses the specified window    |
+|                                   | into a button on the task bar.    |
++-----------------------------------+-----------------------------------+
+| <a href="WinMinimizeAll.htm">WinMinimizeAll /                 | Minimizes or unminimizes all      |
+| WinMin                            | windows.                          |
+| imizeAllUndo</a> |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="WinMove.htm">WinMove</a>            | Changes the position and/or size  |
+|                                   | of the specified window.          |
++-----------------------------------+-----------------------------------+
+| <a href="WinMoveBottom.htm">                                 | Sends the specified window to the |
+| WinMoveBottom</a> | bottom of stack; that is, beneath |
+|                                   | all other windows.                |
++-----------------------------------+-----------------------------------+
+| <a href="WinMoveTop.htm">WinMoveTop</a>      | Brings the specified window to    |
+|                                   | the top of the stack without      |
+|                                   | explicitly activating it.         |
++-----------------------------------+-----------------------------------+
+| <a href="WinRedraw.htm">WinRedraw</a>        | Redraws the specified window.     |
++-----------------------------------+-----------------------------------+
+| <a href="WinRestore.htm">WinRestore</a>      | Unminimizes or unmaximizes the    |
+|                                   | specified window if it is         |
+|                                   | minimized or maximized.           |
++-----------------------------------+-----------------------------------+
+| <a href="WinSetAlwaysOnTop.htm">WinSetAl                         | Makes the specified window stay   |
+| waysOnTop</a> | on top of all other windows       |
+|                                   | (except other always-on-top       |
+|                                   | windows).                         |
++-----------------------------------+-----------------------------------+
+| <a href="WinSetEnabled.htm">                                 | Enables or disables the specified |
+| WinSetEnabled</a> | window.                           |
++-----------------------------------+-----------------------------------+
+| <a href="WinSetRegion.htm">WinSetRegion</a>  | Changes the shape of the          |
+|                                   | specified window to be the        |
+|                                   | specified rectangle, ellipse, or  |
+|                                   | polygon.                          |
++-----------------------------------+-----------------------------------+
+| <a href="WinSetStyle.htm">WinSetStyle\                     | Changes the style or extended     |
+| WinSetExStyle</a>   | style of the specified window,    |
+|                                   | respectively.                     |
++-----------------------------------+-----------------------------------+
+| <a href="WinSetTitle.htm">WinSetTitle</a>    | Changes the title of the          |
+|                                   | specified window.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinSetTransColor.htm">WinSet                           | Makes all pixels of the chosen    |
+| TransColor</a> | color invisible inside the        |
+|                                   | specified window.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinSetTransparent.htm">WinSetTr                         | Makes the specified window        |
+| ansparent</a> | semi-transparent.                 |
++-----------------------------------+-----------------------------------+
+| <a href="WinShow.htm">WinShow</a>            | Unhides the specified window.     |
++-----------------------------------+-----------------------------------+
+| <a href="WinWait.htm">WinWait</a>            | Waits until the specified window  |
+|                                   | exists.                           |
++-----------------------------------+-----------------------------------+
+| <a href="WinWaitActive.htm">WinWaitActive /                  | Waits until the specified window  |
+| Win                               | is active or not active.          |
+| WaitNotActive</a> |                                   |
++-----------------------------------+-----------------------------------+
+| <a href="WinWaitClose.htm">WinWaitClose</a>  | Waits until no matching windows   |
+|                                   | can be found.                     |
++-----------------------------------+-----------------------------------+
+| <a href="_ClipboardTimeout.htm">#Clipboa                         | Changes how long the script keeps |
+| rdTimeout</a> | trying to access the clipboard    |
+|                                   | when the first attempt fails.     |
++-----------------------------------+-----------------------------------+
+| <a href="_DllLoad.htm">#DllLoad</a>          | <a href="DllCall.htm#load">Loads</a> a DLL   |
+|                                   | or EXE file before the script     |
+|                                   | starts executing.                 |
++-----------------------------------+-----------------------------------+
+| <a href="_ErrorStdOut.htm">#ErrorStdOut</a>  | Sends any syntax error that       |
+|                                   | prevents a script from launching  |
+|                                   | to the standard error stream      |
+|                                   | (stderr) rather than displaying a |
+|                                   | dialog.                           |
++-----------------------------------+-----------------------------------+
+| <a href="_Hotstring.htm">#Hotstring</a>      | Changes                           |
+|                                   | <a href="../Hotstrings.htm">hotstring</a>    |
+|                                   | options or ending characters.     |
++-----------------------------------+-----------------------------------+
+| <a href="_HotIf.htm">#HotIf</a>              | Creates context-sensitive         |
+|                                   | <a href="../Hotkeys.htm">hotkeys</a> and     |
+|                                   | <a href="../Hotstrings.htm">hotstrings</a>.  |
+|                                   | They perform a different action   |
+|                                   | (or none at all) depending on any |
+|                                   | condition (an                     |
+|                                   | <a href="../Language.htm#expressions">expressio                        |
+|                                   | n</a>). |
++-----------------------------------+-----------------------------------+
+| <a href="_HotIfTimeout.htm">                                 | Sets the maximum time that may be |
+| #HotIfTimeout</a> | spent evaluating a single         |
+|                                   | <a href="_HotIf.htm">#HotIf</a> expression.  |
++-----------------------------------+-----------------------------------+
+| <a href="_Include.htm">#Include /                       | Causes the script to behave as    |
+| #IncludeAgain</a>      | though the specified file\'s      |
+|                                   | contents are present at this      |
+|                                   | exact position.                   |
++-----------------------------------+-----------------------------------+
+| <a href="_InputLevel.htm">#InputLevel</a>    | Controls which artificial         |
+|                                   | keyboard and mouse events are     |
+|                                   | ignored by hotkeys and            |
+|                                   | hotstrings.                       |
++-----------------------------------+-----------------------------------+
+| <a href="_MaxThreads.htm">#MaxThreads</a>    | Sets the maximum number of        |
+|                                   | simultaneous                      |
+|                                   | <a href="../misc/Threads.htm">threads</a>.   |
++-----------------------------------+-----------------------------------+
+| <a href="_MaxThreadsBuffer.htm">#MaxThre                         | Causes some or all                |
+| adsBuffer</a> | <a href="../Hotkeys.htm">hotkeys</a> to      |
+|                                   | buffer rather than ignore         |
+|                                   | keypresses when their             |
+|                                   | <a href="_MaxThreadsPerHotkey.htm">#MaxThreadsPer                   |
+|                                   | Hotkey</a> |
+|                                   | limit has been reached.           |
++-----------------------------------+-----------------------------------+
+| <a href="_MaxThreadsPerHotkey.htm">#MaxThreadsPer                   | Sets the maximum number of        |
+| Hotkey</a> | simultaneous                      |
+|                                   | <a href="../misc/Threads.htm">threads</a>    |
+|                                   | per <a href="../Hotkeys.htm">hotkey</a> or   |
+|                                   | <a href="../Hotstrings.htm">hotstring</a>.   |
++-----------------------------------+-----------------------------------+
+| <a href="_NoTrayIcon.htm">#NoTrayIcon</a>    | Disables the showing of a <a href="../Program.htm#tray-icon">tray   |
+|                                   | icon</a>.  |
++-----------------------------------+-----------------------------------+
+| <a href="_Requires.htm">#Requires</a>        | Displays an error and quits if a  |
+|                                   | version requirement is not met.   |
++-----------------------------------+-----------------------------------+
+| <a href="_SingleInstance.htm">#Sin                             | Determines whether a script is    |
+| gleInstance</a> | allowed to run again when it is   |
+|                                   | already running.                  |
++-----------------------------------+-----------------------------------+
+| <a href="_SuspendExempt.htm">#S                               | Exempts subsequent                |
+| uspendExempt</a> | <a href="../Hotkeys.htm">hotkeys</a> and     |
+|                                   | <a href="../Hotstrings.htm">hotstrings</a>   |
+|                                   | from <a href="Suspend.htm">suspension</a>.   |
++-----------------------------------+-----------------------------------+
+| <a href="_UseHook.htm">#UseHook</a>          | Forces the use of the hook to     |
+|                                   | implement all or some keyboard    |
+|                                   | <a href="../Hotkeys.htm">hotkeys</a>.        |
++-----------------------------------+-----------------------------------+
+| <a href="_Warn.htm">#Warn</a>                | Enables or disables warnings for  |
+|                                   | specific conditions which may     |
+|                                   | indicate an error, such as a typo |
+|                                   | or missing \"global\"             |
+|                                   | declaration.                      |
++-----------------------------------+-----------------------------------+
+| <a href="_WinActivateForce.htm">#WinActi                         | Skips the gentle method of        |
+| vateForce</a> | activating a window and goes      |
+|                                   | straight to the forceful method.  |
++-----------------------------------+-----------------------------------+</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/index_1.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#alphabetical-function-index">Alphabetical Function Index</a></li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Codes | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="The following list contains language names, each of which is associated">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Languages</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="language-codes">Language Codes</h1>
+<p>The following list contains language names, each of which is associated
+with a language code (also known as a locale identifier, LCID) that can
+be contained in the <a href="../Variables.htm#Language">A_Language</a> variable.
+The language code itself is the last four digits on the left side of the
+first comma below. For example, if A_Language contains 0436, the
+system\'s default language is Afrikaans (South Africa).</p>
+<p><strong>Note:</strong> Codes that contain letters might use either uppercase or
+lowercase.</p>
+<p>You can compare A_Language directly to one or more of the 4-digit codes
+below; for example: <code>if (A_Language = "0436")</code>. Alternatively, you can
+paste the entire list into a script and then access the name of the
+current language as demonstrated at the bottom of the list.</p>
+<pre class="codehilite"><code class="language-NoIndent">LCID := Map(
+  &quot;0036&quot;, &quot;Afrikaans&quot;,  ; af
+  &quot;0436&quot;, &quot;Afrikaans (South Africa)&quot;,  ; af-ZA
+  &quot;001C&quot;, &quot;Albanian&quot;,  ; sq
+  &quot;041C&quot;, &quot;Albanian (Albania)&quot;,  ; sq-AL
+  &quot;0484&quot;, &quot;Alsatian (France)&quot;,  ; gsw-FR
+  &quot;005E&quot;, &quot;Amharic&quot;,  ; am
+  &quot;045E&quot;, &quot;Amharic (Ethiopia)&quot;,  ; am-ET
+  &quot;0001&quot;, &quot;Arabic&quot;,  ; ar
+  &quot;1401&quot;, &quot;Arabic (Algeria)&quot;,  ; ar-DZ
+  &quot;3C01&quot;, &quot;Arabic (Bahrain)&quot;,  ; ar-BH
+  &quot;0C01&quot;, &quot;Arabic (Egypt)&quot;,  ; ar-EG
+  &quot;0801&quot;, &quot;Arabic (Iraq)&quot;,  ; ar-IQ
+  &quot;2C01&quot;, &quot;Arabic (Jordan)&quot;,  ; ar-JO
+  &quot;3401&quot;, &quot;Arabic (Kuwait)&quot;,  ; ar-KW
+  &quot;3001&quot;, &quot;Arabic (Lebanon)&quot;,  ; ar-LB
+  &quot;1001&quot;, &quot;Arabic (Libya)&quot;,  ; ar-LY
+  &quot;1801&quot;, &quot;Arabic (Morocco)&quot;,  ; ar-MA
+  &quot;2001&quot;, &quot;Arabic (Oman)&quot;,  ; ar-OM
+  &quot;4001&quot;, &quot;Arabic (Qatar)&quot;,  ; ar-QA
+  &quot;0401&quot;, &quot;Arabic (Saudi Arabia)&quot;,  ; ar-SA
+  &quot;2801&quot;, &quot;Arabic (Syria)&quot;,  ; ar-SY
+  &quot;1C01&quot;, &quot;Arabic (Tunisia)&quot;,  ; ar-TN
+  &quot;3801&quot;, &quot;Arabic (United Arab Emirates)&quot;,  ; ar-AE
+  &quot;2401&quot;, &quot;Arabic (Yemen)&quot;,  ; ar-YE
+  &quot;002B&quot;, &quot;Armenian&quot;,  ; hy
+  &quot;042B&quot;, &quot;Armenian (Armenia)&quot;,  ; hy-AM
+  &quot;004D&quot;, &quot;Assamese&quot;,  ; as
+  &quot;044D&quot;, &quot;Assamese (India)&quot;,  ; as-IN
+  &quot;002C&quot;, &quot;Azerbaijani&quot;,  ; az
+  &quot;742C&quot;, &quot;Azerbaijani (Cyrillic)&quot;,  ; az-Cyrl
+  &quot;082C&quot;, &quot;Azerbaijani (Cyrillic, Azerbaijan)&quot;,  ; az-Cyrl-AZ
+  &quot;782C&quot;, &quot;Azerbaijani (Latin)&quot;,  ; az-Latn
+  &quot;042C&quot;, &quot;Azerbaijani (Latin, Azerbaijan)&quot;,  ; az-Latn-AZ
+  &quot;0045&quot;, &quot;Bangla&quot;,  ; bn
+  &quot;0845&quot;, &quot;Bangla (Bangladesh)&quot;,  ; bn-BD
+  &quot;006D&quot;, &quot;Bashkir&quot;,  ; ba
+  &quot;046D&quot;, &quot;Bashkir (Russia)&quot;,  ; ba-RU
+  &quot;002D&quot;, &quot;Basque&quot;,  ; eu
+  &quot;042D&quot;, &quot;Basque (Basque)&quot;,  ; eu-ES
+  &quot;0023&quot;, &quot;Belarusian&quot;,  ; be
+  &quot;0423&quot;, &quot;Belarusian (Belarus)&quot;,  ; be-BY
+  &quot;0445&quot;, &quot;Bengali (India)&quot;,  ; bn-IN
+  &quot;781A&quot;, &quot;Bosnian&quot;,  ; bs
+  &quot;641A&quot;, &quot;Bosnian (Cyrillic)&quot;,  ; bs-Cyrl
+  &quot;201A&quot;, &quot;Bosnian (Cyrillic, Bosnia and Herzegovina)&quot;,  ; bs-Cyrl-BA
+  &quot;681A&quot;, &quot;Bosnian (Latin)&quot;,  ; bs-Latn
+  &quot;141A&quot;, &quot;Bosnian (Latin, Bosnia &amp; Herzegovina)&quot;,  ; bs-Latn-BA
+  &quot;007E&quot;, &quot;Breton&quot;,  ; br
+  &quot;047E&quot;, &quot;Breton (France)&quot;,  ; br-FR
+  &quot;0002&quot;, &quot;Bulgarian&quot;,  ; bg
+  &quot;0402&quot;, &quot;Bulgarian (Bulgaria)&quot;,  ; bg-BG
+  &quot;0055&quot;, &quot;Burmese&quot;,  ; my
+  &quot;0455&quot;, &quot;Burmese (Myanmar)&quot;,  ; my-MM
+  &quot;0003&quot;, &quot;Catalan&quot;,  ; ca
+  &quot;0403&quot;, &quot;Catalan (Catalan)&quot;,  ; ca-ES
+  &quot;005F&quot;, &quot;Central Atlas Tamazight&quot;,  ; tzm
+  &quot;045F&quot;, &quot;Central Atlas Tamazight (Arabic, Morocco)&quot;,  ; tzm-Arab-MA
+  &quot;7C5F&quot;, &quot;Central Atlas Tamazight (Latin)&quot;,  ; tzm-Latn
+  &quot;085F&quot;, &quot;Central Atlas Tamazight (Latin, Algeria)&quot;,  ; tzm-Latn-DZ
+  &quot;785F&quot;, &quot;Central Atlas Tamazight (Tifinagh)&quot;,  ; tzm-Tfng
+  &quot;105F&quot;, &quot;Central Atlas Tamazight (Tifinagh, Morocco)&quot;,  ; tzm-Tfng-MA
+  &quot;0092&quot;, &quot;Central Kurdish&quot;,  ; ku
+  &quot;7C92&quot;, &quot;Central Kurdish&quot;,  ; ku-Arab
+  &quot;0492&quot;, &quot;Central Kurdish (Iraq)&quot;,  ; ku-Arab-IQ
+  &quot;005C&quot;, &quot;Cherokee&quot;,  ; chr
+  &quot;7C5C&quot;, &quot;Cherokee&quot;,  ; chr-Cher
+  &quot;045C&quot;, &quot;Cherokee (Cherokee, United States)&quot;,  ; chr-Cher-US
+  &quot;7804&quot;, &quot;Chinese&quot;,  ; zh
+  &quot;0004&quot;, &quot;Chinese (Simplified)&quot;,  ; zh-Hans
+  &quot;0804&quot;, &quot;Chinese (Simplified, China)&quot;,  ; zh-CN
+  &quot;1004&quot;, &quot;Chinese (Simplified, Singapore)&quot;,  ; zh-SG
+  &quot;7C04&quot;, &quot;Chinese (Traditional)&quot;,  ; zh-Hant
+  &quot;0C04&quot;, &quot;Chinese (Traditional, Hong Kong SAR)&quot;,  ; zh-HK
+  &quot;1404&quot;, &quot;Chinese (Traditional, Macao SAR)&quot;,  ; zh-MO
+  &quot;0404&quot;, &quot;Chinese (Traditional, Taiwan)&quot;,  ; zh-TW
+  &quot;0083&quot;, &quot;Corsican&quot;,  ; co
+  &quot;0483&quot;, &quot;Corsican (France)&quot;,  ; co-FR
+  &quot;001A&quot;, &quot;Croatian&quot;,  ; hr
+  &quot;101A&quot;, &quot;Croatian (Bosnia &amp; Herzegovina)&quot;,  ; hr-BA
+  &quot;041A&quot;, &quot;Croatian (Croatia)&quot;,  ; hr-HR
+  &quot;0005&quot;, &quot;Czech&quot;,  ; cs
+  &quot;0405&quot;, &quot;Czech (Czechia)&quot;,  ; cs-CZ
+  &quot;0006&quot;, &quot;Danish&quot;,  ; da
+  &quot;0406&quot;, &quot;Danish (Denmark)&quot;,  ; da-DK
+  &quot;0065&quot;, &quot;Divehi&quot;,  ; dv
+  &quot;0465&quot;, &quot;Divehi (Maldives)&quot;,  ; dv-MV
+  &quot;0013&quot;, &quot;Dutch&quot;,  ; nl
+  &quot;0813&quot;, &quot;Dutch (Belgium)&quot;,  ; nl-BE
+  &quot;0413&quot;, &quot;Dutch (Netherlands)&quot;,  ; nl-NL
+  &quot;0C51&quot;, &quot;Dzongkha (Bhutan)&quot;,  ; dz-BT
+  &quot;0066&quot;, &quot;Edo&quot;,  ; bin
+  &quot;0466&quot;, &quot;Edo (Nigeria)&quot;,  ; bin-NG
+  &quot;0009&quot;, &quot;English&quot;,  ; en
+  &quot;0C09&quot;, &quot;English (Australia)&quot;,  ; en-AU
+  &quot;2809&quot;, &quot;English (Belize)&quot;,  ; en-BZ
+  &quot;1009&quot;, &quot;English (Canada)&quot;,  ; en-CA
+  &quot;2409&quot;, &quot;English (Caribbean)&quot;,  ; en-029
+  &quot;3C09&quot;, &quot;English (Hong Kong SAR)&quot;,  ; en-HK
+  &quot;4009&quot;, &quot;English (India)&quot;,  ; en-IN
+  &quot;3809&quot;, &quot;English (Indonesia)&quot;,  ; en-ID
+  &quot;1809&quot;, &quot;English (Ireland)&quot;,  ; en-IE
+  &quot;2009&quot;, &quot;English (Jamaica)&quot;,  ; en-JM
+  &quot;4409&quot;, &quot;English (Malaysia)&quot;,  ; en-MY
+  &quot;1409&quot;, &quot;English (New Zealand)&quot;,  ; en-NZ
+  &quot;3409&quot;, &quot;English (Philippines)&quot;,  ; en-PH
+  &quot;4809&quot;, &quot;English (Singapore)&quot;,  ; en-SG
+  &quot;1C09&quot;, &quot;English (South Africa)&quot;,  ; en-ZA
+  &quot;2C09&quot;, &quot;English (Trinidad &amp; Tobago)&quot;,  ; en-TT
+  &quot;4C09&quot;, &quot;English (United Arab Emirates)&quot;,  ; en-AE
+  &quot;0809&quot;, &quot;English (United Kingdom)&quot;,  ; en-GB
+  &quot;0409&quot;, &quot;English (United States)&quot;,  ; en-US
+  &quot;3009&quot;, &quot;English (Zimbabwe)&quot;,  ; en-ZW
+  &quot;0025&quot;, &quot;Estonian&quot;,  ; et
+  &quot;0425&quot;, &quot;Estonian (Estonia)&quot;,  ; et-EE
+  &quot;0038&quot;, &quot;Faroese&quot;,  ; fo
+  &quot;0438&quot;, &quot;Faroese (Faroe Islands)&quot;,  ; fo-FO
+  &quot;0064&quot;, &quot;Filipino&quot;,  ; fil
+  &quot;0464&quot;, &quot;Filipino (Philippines)&quot;,  ; fil-PH
+  &quot;000B&quot;, &quot;Finnish&quot;,  ; fi
+  &quot;040B&quot;, &quot;Finnish (Finland)&quot;,  ; fi-FI
+  &quot;000C&quot;, &quot;French&quot;,  ; fr
+  &quot;080C&quot;, &quot;French (Belgium)&quot;,  ; fr-BE
+  &quot;2C0C&quot;, &quot;French (Cameroon)&quot;,  ; fr-CM
+  &quot;0C0C&quot;, &quot;French (Canada)&quot;,  ; fr-CA
+  &quot;1C0C&quot;, &quot;French (Caribbean)&quot;,  ; fr-029
+  &quot;300C&quot;, &quot;French (Côte d’Ivoire)&quot;,  ; fr-CI
+  &quot;040C&quot;, &quot;French (France)&quot;,  ; fr-FR
+  &quot;3C0C&quot;, &quot;French (Haiti)&quot;,  ; fr-HT
+  &quot;140C&quot;, &quot;French (Luxembourg)&quot;,  ; fr-LU
+  &quot;340C&quot;, &quot;French (Mali)&quot;,  ; fr-ML
+  &quot;180C&quot;, &quot;French (Monaco)&quot;,  ; fr-MC
+  &quot;380C&quot;, &quot;French (Morocco)&quot;,  ; fr-MA
+  &quot;200C&quot;, &quot;French (Réunion)&quot;,  ; fr-RE
+  &quot;280C&quot;, &quot;French (Senegal)&quot;,  ; fr-SN
+  &quot;100C&quot;, &quot;French (Switzerland)&quot;,  ; fr-CH
+  &quot;240C&quot;, &quot;French Congo (DRC)&quot;,  ; fr-CD
+  &quot;0067&quot;, &quot;Fulah&quot;,  ; ff
+  &quot;7C67&quot;, &quot;Fulah (Latin)&quot;,  ; ff-Latn
+  &quot;0467&quot;, &quot;Fulah (Latin, Nigeria)&quot;,  ; ff-Latn-NG
+  &quot;0867&quot;, &quot;Fulah (Latin, Senegal)&quot;,  ; ff-Latn-SN
+  &quot;0056&quot;, &quot;Galician&quot;,  ; gl
+  &quot;0456&quot;, &quot;Galician (Galician)&quot;,  ; gl-ES
+  &quot;0037&quot;, &quot;Georgian&quot;,  ; ka
+  &quot;0437&quot;, &quot;Georgian (Georgia)&quot;,  ; ka-GE
+  &quot;0007&quot;, &quot;German&quot;,  ; de
+  &quot;0C07&quot;, &quot;German (Austria)&quot;,  ; de-AT
+  &quot;0407&quot;, &quot;German (Germany)&quot;,  ; de-DE
+  &quot;1407&quot;, &quot;German (Liechtenstein)&quot;,  ; de-LI
+  &quot;1007&quot;, &quot;German (Luxembourg)&quot;,  ; de-LU
+  &quot;0807&quot;, &quot;German (Switzerland)&quot;,  ; de-CH
+  &quot;0008&quot;, &quot;Greek&quot;,  ; el
+  &quot;0408&quot;, &quot;Greek (Greece)&quot;,  ; el-GR
+  &quot;0074&quot;, &quot;Guarani&quot;,  ; gn
+  &quot;0474&quot;, &quot;Guarani (Paraguay)&quot;,  ; gn-PY
+  &quot;0047&quot;, &quot;Gujarati&quot;,  ; gu
+  &quot;0447&quot;, &quot;Gujarati (India)&quot;,  ; gu-IN
+  &quot;0068&quot;, &quot;Hausa&quot;,  ; ha
+  &quot;7C68&quot;, &quot;Hausa (Latin)&quot;,  ; ha-Latn
+  &quot;0468&quot;, &quot;Hausa (Latin, Nigeria)&quot;,  ; ha-Latn-NG
+  &quot;0075&quot;, &quot;Hawaiian&quot;,  ; haw
+  &quot;0475&quot;, &quot;Hawaiian (United States)&quot;,  ; haw-US
+  &quot;000D&quot;, &quot;Hebrew&quot;,  ; he
+  &quot;040D&quot;, &quot;Hebrew (Israel)&quot;,  ; he-IL
+  &quot;0039&quot;, &quot;Hindi&quot;,  ; hi
+  &quot;0439&quot;, &quot;Hindi (India)&quot;,  ; hi-IN
+  &quot;000E&quot;, &quot;Hungarian&quot;,  ; hu
+  &quot;040E&quot;, &quot;Hungarian (Hungary)&quot;,  ; hu-HU
+  &quot;0069&quot;, &quot;Ibibio&quot;,  ; ibb
+  &quot;0469&quot;, &quot;Ibibio (Nigeria)&quot;,  ; ibb-NG
+  &quot;000F&quot;, &quot;Icelandic&quot;,  ; is
+  &quot;040F&quot;, &quot;Icelandic (Iceland)&quot;,  ; is-IS
+  &quot;0070&quot;, &quot;Igbo&quot;,  ; ig
+  &quot;0470&quot;, &quot;Igbo (Nigeria)&quot;,  ; ig-NG
+  &quot;0021&quot;, &quot;Indonesian&quot;,  ; id
+  &quot;0421&quot;, &quot;Indonesian (Indonesia)&quot;,  ; id-ID
+  &quot;005D&quot;, &quot;Inuktitut&quot;,  ; iu
+  &quot;7C5D&quot;, &quot;Inuktitut (Latin)&quot;,  ; iu-Latn
+  &quot;085D&quot;, &quot;Inuktitut (Latin, Canada)&quot;,  ; iu-Latn-CA
+  &quot;785D&quot;, &quot;Inuktitut (Syllabics)&quot;,  ; iu-Cans
+  &quot;045D&quot;, &quot;Inuktitut (Syllabics, Canada)&quot;,  ; iu-Cans-CA
+  &quot;003C&quot;, &quot;Irish&quot;,  ; ga
+  &quot;083C&quot;, &quot;Irish (Ireland)&quot;,  ; ga-IE
+  &quot;0034&quot;, &quot;isiXhosa&quot;,  ; xh
+  &quot;0434&quot;, &quot;isiXhosa (South Africa)&quot;,  ; xh-ZA
+  &quot;0035&quot;, &quot;isiZulu&quot;,  ; zu
+  &quot;0435&quot;, &quot;isiZulu (South Africa)&quot;,  ; zu-ZA
+  &quot;0010&quot;, &quot;Italian&quot;,  ; it
+  &quot;0410&quot;, &quot;Italian (Italy)&quot;,  ; it-IT
+  &quot;0810&quot;, &quot;Italian (Switzerland)&quot;,  ; it-CH
+  &quot;0011&quot;, &quot;Japanese&quot;,  ; ja
+  &quot;0411&quot;, &quot;Japanese (Japan)&quot;,  ; ja-JP
+  &quot;006F&quot;, &quot;Kalaallisut&quot;,  ; kl
+  &quot;046F&quot;, &quot;Kalaallisut (Greenland)&quot;,  ; kl-GL
+  &quot;004B&quot;, &quot;Kannada&quot;,  ; kn
+  &quot;044B&quot;, &quot;Kannada (India)&quot;,  ; kn-IN
+  &quot;0071&quot;, &quot;Kanuri&quot;,  ; kr
+  &quot;0471&quot;, &quot;Kanuri (Latin, Nigeria)&quot;,  ; kr-Latn-NG
+  &quot;0060&quot;, &quot;Kashmiri&quot;,  ; ks
+  &quot;0460&quot;, &quot;Kashmiri (Arabic)&quot;,  ; ks-Arab
+  &quot;1000&quot;, &quot;Kashmiri (Arabic)&quot;,  ; ks-Arab-IN
+  &quot;0860&quot;, &quot;Kashmiri (Devanagari)&quot;,  ; ks-Deva-IN
+  &quot;003F&quot;, &quot;Kazakh&quot;,  ; kk
+  &quot;043F&quot;, &quot;Kazakh (Kazakhstan)&quot;,  ; kk-KZ
+  &quot;0053&quot;, &quot;Khmer&quot;,  ; km
+  &quot;0453&quot;, &quot;Khmer (Cambodia)&quot;,  ; km-KH
+  &quot;0087&quot;, &quot;Kinyarwanda&quot;,  ; rw
+  &quot;0487&quot;, &quot;Kinyarwanda (Rwanda)&quot;,  ; rw-RW
+  &quot;0041&quot;, &quot;Kiswahili&quot;,  ; sw
+  &quot;0441&quot;, &quot;Kiswahili (Kenya)&quot;,  ; sw-KE
+  &quot;0057&quot;, &quot;Konkani&quot;,  ; kok
+  &quot;0457&quot;, &quot;Konkani (India)&quot;,  ; kok-IN
+  &quot;0012&quot;, &quot;Korean&quot;,  ; ko
+  &quot;0412&quot;, &quot;Korean (Korea)&quot;,  ; ko-KR
+  &quot;0040&quot;, &quot;Kyrgyz&quot;,  ; ky
+  &quot;0440&quot;, &quot;Kyrgyz (Kyrgyzstan)&quot;,  ; ky-KG
+  &quot;0086&quot;, &quot;Kʼicheʼ&quot;,  ; quc
+  &quot;7C86&quot;, &quot;Kʼicheʼ (Latin)&quot;,  ; quc-Latn
+  &quot;0486&quot;, &quot;Kʼicheʼ (Latin, Guatemala)&quot;,  ; quc-Latn-GT
+  &quot;0054&quot;, &quot;Lao&quot;,  ; lo
+  &quot;0454&quot;, &quot;Lao (Laos)&quot;,  ; lo-LA
+  &quot;0076&quot;, &quot;Latin&quot;,  ; la
+  &quot;0476&quot;, &quot;Latin (Vatican City)&quot;,  ; la-VA
+  &quot;0026&quot;, &quot;Latvian&quot;,  ; lv
+  &quot;0426&quot;, &quot;Latvian (Latvia)&quot;,  ; lv-LV
+  &quot;0027&quot;, &quot;Lithuanian&quot;,  ; lt
+  &quot;0427&quot;, &quot;Lithuanian (Lithuania)&quot;,  ; lt-LT
+  &quot;7C2E&quot;, &quot;Lower Sorbian&quot;,  ; dsb
+  &quot;082E&quot;, &quot;Lower Sorbian (Germany)&quot;,  ; dsb-DE
+  &quot;006E&quot;, &quot;Luxembourgish&quot;,  ; lb
+  &quot;046E&quot;, &quot;Luxembourgish (Luxembourg)&quot;,  ; lb-LU
+  &quot;002F&quot;, &quot;Macedonian&quot;,  ; mk
+  &quot;042F&quot;, &quot;Macedonian (North Macedonia)&quot;,  ; mk-MK
+  &quot;003E&quot;, &quot;Malay&quot;,  ; ms
+  &quot;083E&quot;, &quot;Malay (Brunei)&quot;,  ; ms-BN
+  &quot;043E&quot;, &quot;Malay (Malaysia)&quot;,  ; ms-MY
+  &quot;004C&quot;, &quot;Malayalam&quot;,  ; ml
+  &quot;044C&quot;, &quot;Malayalam (India)&quot;,  ; ml-IN
+  &quot;003A&quot;, &quot;Maltese&quot;,  ; mt
+  &quot;043A&quot;, &quot;Maltese (Malta)&quot;,  ; mt-MT
+  &quot;0058&quot;, &quot;Manipuri&quot;,  ; mni
+  &quot;0458&quot;, &quot;Manipuri (Bangla, India)&quot;,  ; mni-IN
+  &quot;0081&quot;, &quot;Maori&quot;,  ; mi
+  &quot;0481&quot;, &quot;Maori (New Zealand)&quot;,  ; mi-NZ
+  &quot;007A&quot;, &quot;Mapuche&quot;,  ; arn
+  &quot;047A&quot;, &quot;Mapuche (Chile)&quot;,  ; arn-CL
+  &quot;004E&quot;, &quot;Marathi&quot;,  ; mr
+  &quot;044E&quot;, &quot;Marathi (India)&quot;,  ; mr-IN
+  &quot;007C&quot;, &quot;Mohawk&quot;,  ; moh
+  &quot;047C&quot;, &quot;Mohawk (Canada)&quot;,  ; moh-CA
+  &quot;0050&quot;, &quot;Mongolian&quot;,  ; mn
+  &quot;7850&quot;, &quot;Mongolian&quot;,  ; mn-Cyrl
+  &quot;0450&quot;, &quot;Mongolian (Mongolia)&quot;,  ; mn-MN
+  &quot;7C50&quot;, &quot;Mongolian (Traditional Mongolian)&quot;,  ; mn-Mong
+  &quot;0850&quot;, &quot;Mongolian (Traditional Mongolian, China)&quot;,  ; mn-Mong-CN
+  &quot;0C50&quot;, &quot;Mongolian (Traditional Mongolian, Mongolia)&quot;,  ; mn-Mong-MN
+  &quot;0061&quot;, &quot;Nepali&quot;,  ; ne
+  &quot;0861&quot;, &quot;Nepali (India)&quot;,  ; ne-IN
+  &quot;0461&quot;, &quot;Nepali (Nepal)&quot;,  ; ne-NP
+  &quot;003B&quot;, &quot;Northern Sami&quot;,  ; se
+  &quot;0014&quot;, &quot;Norwegian&quot;,  ; no
+  &quot;7C14&quot;, &quot;Norwegian Bokmål&quot;,  ; nb
+  &quot;0414&quot;, &quot;Norwegian Bokmål (Norway)&quot;,  ; nb-NO
+  &quot;7814&quot;, &quot;Norwegian Nynorsk&quot;,  ; nn
+  &quot;0814&quot;, &quot;Norwegian Nynorsk (Norway)&quot;,  ; nn-NO
+  &quot;0082&quot;, &quot;Occitan&quot;,  ; oc
+  &quot;0482&quot;, &quot;Occitan (France)&quot;,  ; oc-FR
+  &quot;0048&quot;, &quot;Odia&quot;,  ; or
+  &quot;0448&quot;, &quot;Odia (India)&quot;,  ; or-IN
+  &quot;0072&quot;, &quot;Oromo&quot;,  ; om
+  &quot;0472&quot;, &quot;Oromo (Ethiopia)&quot;,  ; om-ET
+  &quot;0079&quot;, &quot;Papiamento&quot;,  ; pap
+  &quot;0479&quot;, &quot;Papiamento (Caribbean)&quot;,  ; pap-029
+  &quot;0063&quot;, &quot;Pashto&quot;,  ; ps
+  &quot;0463&quot;, &quot;Pashto (Afghanistan)&quot;,  ; ps-AF
+  &quot;0029&quot;, &quot;Persian&quot;,  ; fa
+  &quot;008C&quot;, &quot;Persian&quot;,  ; fa
+  &quot;048C&quot;, &quot;Persian (Afghanistan)&quot;,  ; fa-AF
+  &quot;0429&quot;, &quot;Persian (Iran)&quot;,  ; fa-IR
+  &quot;0015&quot;, &quot;Polish&quot;,  ; pl
+  &quot;0415&quot;, &quot;Polish (Poland)&quot;,  ; pl-PL
+  &quot;0016&quot;, &quot;Portuguese&quot;,  ; pt
+  &quot;0416&quot;, &quot;Portuguese (Brazil)&quot;,  ; pt-BR
+  &quot;0816&quot;, &quot;Portuguese (Portugal)&quot;,  ; pt-PT
+  &quot;05FE&quot;, &quot;Pseudo (Pseudo Asia)&quot;,  ; qps-ploca
+  &quot;09FF&quot;, &quot;Pseudo (Pseudo Mirrored)&quot;,  ; qps-plocm
+  &quot;0901&quot;, &quot;Pseudo (Pseudo Selfhost)&quot;,  ; qps-Latn-x-sh
+  &quot;0501&quot;, &quot;Pseudo (Pseudo)&quot;,  ; qps-ploc
+  &quot;0046&quot;, &quot;Punjabi&quot;,  ; pa
+  &quot;7C46&quot;, &quot;Punjabi&quot;,  ; pa-Arab
+  &quot;0446&quot;, &quot;Punjabi (India)&quot;,  ; pa-IN
+  &quot;0846&quot;, &quot;Punjabi (Pakistan)&quot;,  ; pa-Arab-PK
+  &quot;006B&quot;, &quot;Quechua&quot;,  ; quz
+  &quot;046B&quot;, &quot;Quechua (Bolivia)&quot;,  ; quz-BO
+  &quot;086B&quot;, &quot;Quechua (Ecuador)&quot;,  ; quz-EC
+  &quot;0C6B&quot;, &quot;Quechua (Peru)&quot;,  ; quz-PE
+  &quot;0018&quot;, &quot;Romanian&quot;,  ; ro
+  &quot;0818&quot;, &quot;Romanian (Moldova)&quot;,  ; ro-MD
+  &quot;0418&quot;, &quot;Romanian (Romania)&quot;,  ; ro-RO
+  &quot;0017&quot;, &quot;Romansh&quot;,  ; rm
+  &quot;0417&quot;, &quot;Romansh (Switzerland)&quot;,  ; rm-CH
+  &quot;0019&quot;, &quot;Russian&quot;,  ; ru
+  &quot;0819&quot;, &quot;Russian (Moldova)&quot;,  ; ru-MD
+  &quot;0419&quot;, &quot;Russian (Russia)&quot;,  ; ru-RU
+  &quot;0085&quot;, &quot;Sakha&quot;,  ; sah
+  &quot;0485&quot;, &quot;Sakha (Russia)&quot;,  ; sah-RU
+  &quot;703B&quot;, &quot;Sami (Inari)&quot;,  ; smn
+  &quot;7C3B&quot;, &quot;Sami (Lule)&quot;,  ; smj
+  &quot;743B&quot;, &quot;Sami (Skolt)&quot;,  ; sms
+  &quot;783B&quot;, &quot;Sami (Southern)&quot;,  ; sma
+  &quot;243B&quot;, &quot;Sami, Inari (Finland)&quot;,  ; smn-FI
+  &quot;103B&quot;, &quot;Sami, Lule (Norway)&quot;,  ; smj-NO
+  &quot;143B&quot;, &quot;Sami, Lule (Sweden)&quot;,  ; smj-SE
+  &quot;0C3B&quot;, &quot;Sami, Northern (Finland)&quot;,  ; se-FI
+  &quot;043B&quot;, &quot;Sami, Northern (Norway)&quot;,  ; se-NO
+  &quot;083B&quot;, &quot;Sami, Northern (Sweden)&quot;,  ; se-SE
+  &quot;203B&quot;, &quot;Sami, Skolt (Finland)&quot;,  ; sms-FI
+  &quot;183B&quot;, &quot;Sami, Southern (Norway)&quot;,  ; sma-NO
+  &quot;1C3B&quot;, &quot;Sami, Southern (Sweden)&quot;,  ; sma-SE
+  &quot;004F&quot;, &quot;Sanskrit&quot;,  ; sa
+  &quot;044F&quot;, &quot;Sanskrit (India)&quot;,  ; sa-IN
+  &quot;0091&quot;, &quot;Scottish Gaelic&quot;,  ; gd
+  &quot;0491&quot;, &quot;Scottish Gaelic (United Kingdom)&quot;,  ; gd-GB
+  &quot;7C1A&quot;, &quot;Serbian&quot;,  ; sr
+  &quot;6C1A&quot;, &quot;Serbian (Cyrillic)&quot;,  ; sr-Cyrl
+  &quot;1C1A&quot;, &quot;Serbian (Cyrillic, Bosnia and Herzegovina)&quot;,  ; sr-Cyrl-BA
+  &quot;301A&quot;, &quot;Serbian (Cyrillic, Montenegro)&quot;,  ; sr-Cyrl-ME
+  &quot;0C1A&quot;, &quot;Serbian (Cyrillic, Serbia and Montenegro (Former))&quot;,  ; sr-Cyrl-CS
+  &quot;281A&quot;, &quot;Serbian (Cyrillic, Serbia)&quot;,  ; sr-Cyrl-RS
+  &quot;701A&quot;, &quot;Serbian (Latin)&quot;,  ; sr-Latn
+  &quot;181A&quot;, &quot;Serbian (Latin, Bosnia &amp; Herzegovina)&quot;,  ; sr-Latn-BA
+  &quot;2C1A&quot;, &quot;Serbian (Latin, Montenegro)&quot;,  ; sr-Latn-ME
+  &quot;081A&quot;, &quot;Serbian (Latin, Serbia and Montenegro (Former))&quot;,  ; sr-Latn-CS
+  &quot;241A&quot;, &quot;Serbian (Latin, Serbia)&quot;,  ; sr-Latn-RS
+  &quot;0030&quot;, &quot;Sesotho&quot;,  ; st
+  &quot;0430&quot;, &quot;Sesotho (South Africa)&quot;,  ; st-ZA
+  &quot;006C&quot;, &quot;Sesotho sa Leboa&quot;,  ; nso
+  &quot;046C&quot;, &quot;Sesotho sa Leboa (South Africa)&quot;,  ; nso-ZA
+  &quot;0032&quot;, &quot;Setswana&quot;,  ; tn
+  &quot;0832&quot;, &quot;Setswana (Botswana)&quot;,  ; tn-BW
+  &quot;0432&quot;, &quot;Setswana (South Africa)&quot;,  ; tn-ZA
+  &quot;0059&quot;, &quot;Sindhi&quot;,  ; sd
+  &quot;7C59&quot;, &quot;Sindhi&quot;,  ; sd-Arab
+  &quot;0459&quot;, &quot;Sindhi (Devanagari, India)&quot;,  ; sd-Deva-IN
+  &quot;0859&quot;, &quot;Sindhi (Pakistan)&quot;,  ; sd-Arab-PK
+  &quot;005B&quot;, &quot;Sinhala&quot;,  ; si
+  &quot;045B&quot;, &quot;Sinhala (Sri Lanka)&quot;,  ; si-LK
+  &quot;001B&quot;, &quot;Slovak&quot;,  ; sk
+  &quot;041B&quot;, &quot;Slovak (Slovakia)&quot;,  ; sk-SK
+  &quot;0024&quot;, &quot;Slovenian&quot;,  ; sl
+  &quot;0424&quot;, &quot;Slovenian (Slovenia)&quot;,  ; sl-SI
+  &quot;0077&quot;, &quot;Somali&quot;,  ; so
+  &quot;0477&quot;, &quot;Somali (Somalia)&quot;,  ; so-SO
+  &quot;000A&quot;, &quot;Spanish&quot;,  ; es
+  &quot;2C0A&quot;, &quot;Spanish (Argentina)&quot;,  ; es-AR
+  &quot;400A&quot;, &quot;Spanish (Bolivia)&quot;,  ; es-BO
+  &quot;340A&quot;, &quot;Spanish (Chile)&quot;,  ; es-CL
+  &quot;240A&quot;, &quot;Spanish (Colombia)&quot;,  ; es-CO
+  &quot;140A&quot;, &quot;Spanish (Costa Rica)&quot;,  ; es-CR
+  &quot;5C0A&quot;, &quot;Spanish (Cuba)&quot;,  ; es-CU
+  &quot;1C0A&quot;, &quot;Spanish (Dominican Republic)&quot;,  ; es-DO
+  &quot;300A&quot;, &quot;Spanish (Ecuador)&quot;,  ; es-EC
+  &quot;440A&quot;, &quot;Spanish (El Salvador)&quot;,  ; es-SV
+  &quot;100A&quot;, &quot;Spanish (Guatemala)&quot;,  ; es-GT
+  &quot;480A&quot;, &quot;Spanish (Honduras)&quot;,  ; es-HN
+  &quot;580A&quot;, &quot;Spanish (Latin America)&quot;,  ; es-419
+  &quot;080A&quot;, &quot;Spanish (Mexico)&quot;,  ; es-MX
+  &quot;4C0A&quot;, &quot;Spanish (Nicaragua)&quot;,  ; es-NI
+  &quot;180A&quot;, &quot;Spanish (Panama)&quot;,  ; es-PA
+  &quot;3C0A&quot;, &quot;Spanish (Paraguay)&quot;,  ; es-PY
+  &quot;280A&quot;, &quot;Spanish (Peru)&quot;,  ; es-PE
+  &quot;500A&quot;, &quot;Spanish (Puerto Rico)&quot;,  ; es-PR
+  &quot;0C0A&quot;, &quot;Spanish (Spain, International Sort)&quot;,  ; es-ES
+  &quot;040A&quot;, &quot;Spanish (Spain, Traditional Sort)&quot;,  ; es-ES_tradnl
+  &quot;540A&quot;, &quot;Spanish (United States)&quot;,  ; es-US
+  &quot;380A&quot;, &quot;Spanish (Uruguay)&quot;,  ; es-UY
+  &quot;200A&quot;, &quot;Spanish (Venezuela)&quot;,  ; es-VE
+  &quot;001D&quot;, &quot;Swedish&quot;,  ; sv
+  &quot;081D&quot;, &quot;Swedish (Finland)&quot;,  ; sv-FI
+  &quot;041D&quot;, &quot;Swedish (Sweden)&quot;,  ; sv-SE
+  &quot;0084&quot;, &quot;Swiss German&quot;,  ; gsw
+  &quot;005A&quot;, &quot;Syriac&quot;,  ; syr
+  &quot;045A&quot;, &quot;Syriac (Syria)&quot;,  ; syr-SY
+  &quot;0028&quot;, &quot;Tajik&quot;,  ; tg
+  &quot;7C28&quot;, &quot;Tajik (Cyrillic)&quot;,  ; tg-Cyrl
+  &quot;0428&quot;, &quot;Tajik (Cyrillic, Tajikistan)&quot;,  ; tg-Cyrl-TJ
+  &quot;0049&quot;, &quot;Tamil&quot;,  ; ta
+  &quot;0449&quot;, &quot;Tamil (India)&quot;,  ; ta-IN
+  &quot;0849&quot;, &quot;Tamil (Sri Lanka)&quot;,  ; ta-LK
+  &quot;0044&quot;, &quot;Tatar&quot;,  ; tt
+  &quot;0444&quot;, &quot;Tatar (Russia)&quot;,  ; tt-RU
+  &quot;004A&quot;, &quot;Telugu&quot;,  ; te
+  &quot;044A&quot;, &quot;Telugu (India)&quot;,  ; te-IN
+  &quot;001E&quot;, &quot;Thai&quot;,  ; th
+  &quot;041E&quot;, &quot;Thai (Thailand)&quot;,  ; th-TH
+  &quot;0051&quot;, &quot;Tibetan&quot;,  ; bo
+  &quot;0451&quot;, &quot;Tibetan (China)&quot;,  ; bo-CN
+  &quot;0073&quot;, &quot;Tigrinya&quot;,  ; ti
+  &quot;0873&quot;, &quot;Tigrinya (Eritrea)&quot;,  ; ti-ER
+  &quot;0473&quot;, &quot;Tigrinya (Ethiopia)&quot;,  ; ti-ET
+  &quot;001F&quot;, &quot;Turkish&quot;,  ; tr
+  &quot;041F&quot;, &quot;Turkish (Turkey)&quot;,  ; tr-TR
+  &quot;0042&quot;, &quot;Turkmen&quot;,  ; tk
+  &quot;0442&quot;, &quot;Turkmen (Turkmenistan)&quot;,  ; tk-TM
+  &quot;0022&quot;, &quot;Ukrainian&quot;,  ; uk
+  &quot;0422&quot;, &quot;Ukrainian (Ukraine)&quot;,  ; uk-UA
+  &quot;002E&quot;, &quot;Upper Sorbian&quot;,  ; hsb
+  &quot;042E&quot;, &quot;Upper Sorbian (Germany)&quot;,  ; hsb-DE
+  &quot;0020&quot;, &quot;Urdu&quot;,  ; ur
+  &quot;0820&quot;, &quot;Urdu (India)&quot;,  ; ur-IN
+  &quot;0420&quot;, &quot;Urdu (Pakistan)&quot;,  ; ur-PK
+  &quot;0080&quot;, &quot;Uyghur&quot;,  ; ug
+  &quot;0480&quot;, &quot;Uyghur (China)&quot;,  ; ug-CN
+  &quot;0043&quot;, &quot;Uzbek&quot;,  ; uz
+  &quot;7843&quot;, &quot;Uzbek (Cyrillic)&quot;,  ; uz-Cyrl
+  &quot;0843&quot;, &quot;Uzbek (Cyrillic, Uzbekistan)&quot;,  ; uz-Cyrl-UZ
+  &quot;7C43&quot;, &quot;Uzbek (Latin)&quot;,  ; uz-Latn
+  &quot;0443&quot;, &quot;Uzbek (Latin, Uzbekistan)&quot;,  ; uz-Latn-UZ
+  &quot;0803&quot;, &quot;Valencian (Spain)&quot;,  ; ca-ES-valencia
+  &quot;0033&quot;, &quot;Venda&quot;,  ; ve
+  &quot;0433&quot;, &quot;Venda (South Africa)&quot;,  ; ve-ZA
+  &quot;002A&quot;, &quot;Vietnamese&quot;,  ; vi
+  &quot;042A&quot;, &quot;Vietnamese (Vietnam)&quot;,  ; vi-VN
+  &quot;0052&quot;, &quot;Welsh&quot;,  ; cy
+  &quot;0452&quot;, &quot;Welsh (United Kingdom)&quot;,  ; cy-GB
+  &quot;0062&quot;, &quot;Western Frisian&quot;,  ; fy
+  &quot;0462&quot;, &quot;Western Frisian (Netherlands)&quot;,  ; fy-NL
+  &quot;0088&quot;, &quot;Wolof&quot;,  ; wo
+  &quot;0488&quot;, &quot;Wolof (Senegal)&quot;,  ; wo-SN
+  &quot;0031&quot;, &quot;Xitsonga&quot;,  ; ts
+  &quot;0431&quot;, &quot;Xitsonga (South Africa)&quot;,  ; ts-ZA
+  &quot;0078&quot;, &quot;Yi&quot;,  ; ii
+  &quot;0478&quot;, &quot;Yi (China)&quot;,  ; ii-CN
+  &quot;003D&quot;, &quot;Yiddish&quot;,  ; yi
+  &quot;043D&quot;, &quot;Yiddish (World)&quot;,  ; yi-001
+  &quot;006A&quot;, &quot;Yoruba&quot;,  ; yo
+  &quot;046A&quot;, &quot;Yoruba (Nigeria)&quot;  ; yo-NG
+)
+
+the_language := LCID[A_Language]  ; Get the name of the system's default language.
+MsgBox the_language  ; Display the language name.
+</code></pre>
+
+<p>The following script was used to create the list above:</p>
+<pre class="codehilite"><code class="language-NoIndent">G := Gui()
+LV := G.Add(&quot;ListView&quot;, &quot;w500 r20&quot;, [&quot;LCID&quot;, &quot;Display Name&quot;, &quot;Locale Name&quot;])
+G.Show()
+
+LOCALE_ALLOW_NEUTRAL_NAMES := 0x08000000
+LOCALE_SENGLISHDISPLAYNAME := 0x72
+LOCALE_SLOCALIZEDDISPLAYNAME := 0x2
+loop 0xFFFF
+{
+    LCID := Format(&quot;{:04X}&quot;, A_Index)
+    if (LCID ~= &quot;(04|08|0C|14|20|24|28|2C|30|34|38|3C|40|44|48|4C)00&quot;)
+        continue  ; Skip default and transient LCIDs.
+    LocaleName := LCIDToLocaleName(A_Index, LOCALE_ALLOW_NEUTRAL_NAMES)
+    if not LocaleName
+        continue  ; Skip unknown LCIDs.
+    DisplayName := GetLocaleInfo(LocaleName, LOCALE_SENGLISHDISPLAYNAME)
+    ; DisplayName := GetLocaleInfo(LocaleName, LOCALE_SLOCALIZEDDISPLAYNAME)
+    LV.Add(, LCID, DisplayName, LocaleName)
+    ; A_Clipboard .= LCID &quot;`t&quot; DisplayName &quot;`t&quot; LocaleName &quot;`n&quot;
+}
+LV.ModifyCol()  ; Auto-size each column to fit its contents.
+
+LCIDToLocaleName(LCID, Flags := 0)
+{
+    reqBufSize := DllCall(&quot;LCIDToLocaleName&quot;, &quot;UInt&quot;, LCID, &quot;Ptr&quot;, 0, &quot;UInt&quot;, 0, &quot;UInt&quot;, Flags)
+    out := Buffer(reqBufSize*2)
+    DllCall(&quot;LCIDToLocaleName&quot;, &quot;UInt&quot;, LCID, &quot;Ptr&quot;, out, &quot;UInt&quot;, out.Size, &quot;UInt&quot;, Flags)
+    return StrGet(out)
+}
+
+GetLocaleInfo(LocaleName, LCType)
+{
+    reqBufSize := DllCall(&quot;GetLocaleInfoEx&quot;, &quot;Str&quot;, LocaleName, &quot;UInt&quot;, LCType, &quot;Ptr&quot;, 0, &quot;UInt&quot;, 0)
+    out := Buffer(reqBufSize*2)
+    DllCall(&quot;GetLocaleInfoEx&quot;, &quot;Str&quot;, LocaleName, &quot;UInt&quot;, LCType, &quot;Ptr&quot;, out, &quot;UInt&quot;, out.Size)
+    return StrGet(out)
+}
+</code></pre>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Languages.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#language-codes">Language Codes</a></li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

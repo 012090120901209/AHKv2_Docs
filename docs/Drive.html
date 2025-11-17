@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Functions | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Functions for retrieving information about the computer\'s drive(s) or">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Drive</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="drive-functions">Drive Functions</h1>
+<p>Functions for retrieving information about the computer\'s drive(s) or
+for performing various operations on a drive. Click on a function name
+for details.</p>
+<p>Function                                       Description</p>
+<hr />
+<p><a href="DriveEject.htm">DriveEject</a>                   Ejects the tray of the specified CD/DVD drive, or ejects a removable drive.
+  <a href="DriveGetCapacity.htm">DriveGetCapacity</a>       Returns the total capacity of the drive which contains the specified path, in megabytes.
+  <a href="DriveGetFileSystem.htm">DriveGetFileSystem</a>   Returns the type of the specified drive\'s file system.
+  <a href="DriveGetLabel.htm">DriveGetLabel</a>             Returns the volume label of the specified drive.
+  <a href="DriveGetList.htm">DriveGetList</a>               Returns a string of letters, one character for each drive letter in the system.
+  <a href="DriveGetSerial.htm">DriveGetSerial</a>           Returns the volume serial number of the specified drive.
+  <a href="DriveGetSpaceFree.htm">DriveGetSpaceFree</a>     Returns the free disk space of the drive which contains the specified path, in megabytes.
+  <a href="DriveGetStatus.htm">DriveGetStatus</a>           Returns the status of the drive which contains the specified path.
+  <a href="DriveGetStatusCD.htm">DriveGetStatusCD</a>       Returns the media status of the specified CD/DVD drive.
+  <a href="DriveGetType.htm">DriveGetType</a>               Returns the type of the drive which contains the specified path.
+  <a href="DriveLock.htm">DriveLock</a>                     Prevents the eject feature of the specified drive from working.
+  <a href="DriveEject.htm">DriveRetract</a>                 Retracts the tray of the specified CD/DVD drive.
+  <a href="DriveSetLabel.htm">DriveSetLabel</a>             Changes the volume label of the specified drive.
+  <a href="DriveUnlock.htm">DriveUnlock</a>                 Restores the eject feature of the specified drive.</p>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An exception is thrown on failure.</p>
+<h2 id="Related">Related</h2>
+<p><a href="index.htm">List of all functions</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExAnalyzeDrive .ex}
+<a class="ex_number" href="#ExAnalyzeDrive"></a> Allows the user to select a drive in
+order to analyze it.</p>
+<pre class="codehilite"><code>folder := DirSelect( , 3, &quot;Pick a drive to analyze:&quot;)
+if not folder
+    return
+MsgBox
+(
+    &quot;All Drives: &quot; DriveGetList() &quot;
+    Selected Drive: &quot; folder &quot;
+    Drive Type: &quot; DriveGetType(folder) &quot;
+    Status: &quot; DriveGetStatus(folder) &quot;
+    Capacity: &quot; DriveGetCapacity(folder) &quot; MB
+    Free Space: &quot; DriveGetSpaceFree(folder) &quot; MB
+    Filesystem: &quot; DriveGetFilesystem(folder) &quot;
+    Volume Label: &quot; DriveGetLabel(folder) &quot;
+    Serial Number: &quot; DriveGetSerial(folder)
+)
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Drive.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#drive-functions">Drive Functions</a><ul>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

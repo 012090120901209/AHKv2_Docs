@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Manage Windows | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="One of the easiest and most useful things AutoHotkey can do is allow you">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ManageWindows</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="how-to-manage-windows">How to Manage Windows</h1>
+<p>One of the easiest and most useful things AutoHotkey can do is allow you
+to create keyboard shortcuts (hotkeys) that manipulate windows. A script
+can activate, close, minimize, maximize, restore, hide, show or move
+almost any window. This is done by calling the appropriate <a href="../lib/Win.htm">Win
+function</a>, specifying the window by title or some other
+criteria:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;
+WinWait &quot;Untitled - Notepad&quot;
+WinActivate &quot;Untitled - Notepad&quot;
+WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2, &quot;Untitled - Notepad&quot;
+</code></pre>
+
+<p>This example should open a new Notepad window and then move it to fill a
+portion of the primary screen (¼ of its width and ½ its height). To
+learn how to try it out, refer to <a href="RunExamples.htm">How to Run Example
+Code</a>.</p>
+<p>We won\'t go into detail about many of the functions for manipulating
+windows, since there\'s not much to it. For instance, to minimize a
+window instead of activating it, replace <code>WinActivate</code> with
+<code>WinMinimize</code>. See <a href="../lib/Win.htm">Win functions</a> for a list of
+functions which can manipulate windows or retrieve information.</p>
+<p>Most of this tutorial is about ways to <em>identify</em> which window you want
+to operate on, since that is often the most troublesome part. For
+instance, there are a number of problems with the example above:</p>
+<ul>
+<li>The title is repeated unnecessarily.</li>
+<li>The title is correct only for systems with UI language set to
+    English.</li>
+<li>It might move an existing untitled Notepad window instead of the new
+    one.</li>
+<li>If for some reason no matching window appears, the script will stall
+    indefinitely.</li>
+</ul>
+<p>We\'ll address these issues one at a time, after covering a few basics.</p>
+<p><strong>Tip:</strong> AutoHotkey comes with a script called <em>Window Spy</em>, which can
+be used to confirm the title, class and process name of a window. The
+class and process name are often used when identifying a window by title
+alone is not feasible. You can find Window Spy in the script\'s <a href="../Program.htm#tray-icon">tray
+menu</a> or the <a href="../Program.htm#dash">AutoHotkey
+Dash</a>.</p>
+<h2 id="ttm">Title Matching</h2>
+<p>There are a few things to know when specifying a window by title:</p>
+<ul>
+<li>Window titles are always case-sensitive, except when using the RegEx
+    matching mode with the <a href="../misc/RegEx-QuickRef.htm#opt_i">i)
+    modifier</a>.</li>
+<li>By default, functions expect a substring of the window title. For
+    example, \"Notepad\" could match both \"Untitled - Notepad\" and
+    \"C:\A\B.ahk - Notepad++\".
+    <a href="../lib/SetTitleMatchMode.htm">SetTitleMatchMode</a> can be used to
+    make functions expect a prefix, exact match, or RegEx pattern
+    instead.</li>
+<li>By default, hidden windows are ignored (except by
+    <a href="../lib/WinShow.htm">WinShow</a>).
+    <a href="../lib/DetectHiddenWindows.htm">DetectHiddenWindows</a> can be used to
+    change this.</li>
+</ul>
+<p>See <a href="../misc/WinTitle.htm#Matching">Matching Behaviour</a> for more
+details.</p>
+<h2 id="A">Active Window</h2>
+<p>To refer to the active window, use the letter \"A\" in place of a window
+title. For example, this minimizes the active window:</p>
+<pre class="codehilite"><code>WinMinimize &quot;A&quot;
+</code></pre>
+
+<h2 id="lfw">Last Found Window</h2>
+<p>When <a href="../lib/WinWait.htm">WinWait</a>, <a href="../lib/WinExist.htm">WinExist</a>,
+<a href="../lib/WinActive.htm">WinActive</a>,
+<a href="../lib/WinWaitActive.htm">WinWaitActive</a> or
+<a href="../lib/WinWaitActive.htm">WinWaitNotActive</a> find a matching window,
+they set it as the <a href="../misc/WinTitle.htm#LastFoundWindow"><em>last found
+window</em></a>. Most window functions
+allow the window title (and related parameters) to be omitted, and will
+in that case default to the last found window. For example:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;
+WinWait &quot;Untitled - Notepad&quot;
+WinActivate
+WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2
+</code></pre>
+
+<p>This saves repeating the window title, which saves a little of your
+time, makes the script easier to update if the window title needs to be
+changed, and might make the code easier to read. It makes the script
+more reliable by ensuring that it operates on the same window each time,
+even when there are multiple matching windows, or if the window title
+changes after the window is \"found\". It also makes the script execute
+more efficiently, but not by much.</p>
+<h2 id="class">Window Class</h2>
+<p>A window class is a set of attributes that is used as a template to
+create a window. Often the name of a window\'s class is related to the
+app or the purpose of the window. A window\'s class never changes while
+the window exists, so we can often use it to identify a window when
+identifying by title is impractical or impossible.</p>
+<p>For example, instead of the window title \"Untitled - Notepad\", we can
+use the window\'s class, which in this case happens to be \"Notepad\"
+<em>regardless</em> of the system language:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;
+WinWait &quot;ahk_class Notepad&quot;
+WinActivate
+WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2
+</code></pre>
+
+<p>A window class is distinguished from a title by using the word
+\"ahk_class\" as shown above. To combine multiple criteria, list the
+window title first. For example: <code>"Untitled ahk_class Notepad"</code>.</p>
+<p><strong>Related:</strong> <a href="../misc/WinTitle.htm#ahk_class">ahk_class</a></p>
+<h2 id="exe">Process Name/Path</h2>
+<p>Windows can be identified by the process which created them by using the
+word \"ahk_exe\" followed by the name or path of the process. For
+example:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;
+WinWait &quot;ahk_exe notepad.exe&quot;
+WinActivate
+WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2
+</code></pre>
+
+<p><strong>Related:</strong> <a href="../misc/WinTitle.htm#ahk_exe">ahk_exe</a></p>
+<h2 id="pid">Process ID (PID)</h2>
+<p>Each process has an ID number which remains unique until the process
+exits. We can use this to make our Notepad example more reliable by
+ensuring that it ignores any Notepad window except the one that is
+created by the new process:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;,,, &amp;notepad_pid
+WinWait &quot;ahk_pid &quot; notepad_pid
+WinActivate
+WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2
+</code></pre>
+
+<p>We need three commas in a row; two of them are just to skip the unused
+<em>WorkingDir</em> and <em>Options</em> parameters of the Run function, since the one
+we want (<em>OutputVarPID</em>) is the fourth parameter.</p>
+<p>Ampersand (&amp;) is the <a href="../Variables.htm#ref">reference operator</a>. This is
+used to pass the <code>notepad_pid</code> variable to the Run function <em>by
+reference</em> (in other words, to pass the variable itself instead of its
+value), allowing the function to assign a new value to the variable.
+Then <code>notepad_pid</code> becomes a placeholder for the actual process ID.</p>
+<p>The <a href="../Concepts.htm#strings">string</a> \"ahk_pid \" is
+<a href="../Variables.htm#concat">concatenated</a> with the process ID contained by
+the notepad_pid variable by simply writing them in sequence, separated
+by whitespace. The result is a string like \"ahk_pid 1040\", but the
+number isn\'t predictable.</p>
+<p>If the new process might create multiple windows, a window title and
+other criteria can be combined by delimiting them with spaces. The
+window title must always come first. For example:
+<code>"Untitled ahk_class Notepad ahk_pid " notepad_pid</code>.</p>
+<p><strong>Related:</strong> <a href="../misc/WinTitle.htm#ahk_pid">ahk_pid</a></p>
+<h2 id="hwnd">Window ID (HWND)</h2>
+<p>Each window has an ID number which remains unique until the window is
+destroyed. In programming parlance, this is known as a \"window handle\"
+or HWND. Although not as convenient as using the <em>last found window</em>,
+the window\'s ID can be stored in a variable so that the script can
+refer to it by a name of your choice, even if the title changes. There
+can be only one <em>last found window</em> at a time, but you can use as many
+window IDs as you can make up variable names for (or you can use an
+<a href="../lib/Array.htm">array</a>).</p>
+<p>A window ID is <a href="../Concepts.htm#return-a-value">returned</a> by
+<a href="../lib/WinWait.htm">WinWait</a>, <a href="../lib/WinExist.htm">WinExist</a> or
+<a href="../lib/WinActive.htm">WinActive</a>, or can come from some other sources.
+The Notepad example can be rewritten to take advantage of this:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;
+notepad_id := WinWait(&quot;Untitled - Notepad&quot;)
+WinActivate notepad_id
+WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2, notepad_id
+</code></pre>
+
+<p>This assigns the return value of WinWait to the variable \"notepad_id\".
+In other words, when WinWait finds the window, it produces the window\'s
+ID as its result, and the script then stores this result in the
+variable. \"notepad_id\" is just a name that I\'ve made up for this
+example; you can use whatever variable names make sense to you (within
+<a href="../Concepts.htm#names">certain constraints</a>).</p>
+<p>Notice that I added parentheses around the window title, <em>immediately</em>
+following the function name. Parentheses can be omitted in <a href="../Language.htm#function-call-statements">function
+call statements</a> (that is,
+function calls at the very beginning of the line), but in that case you
+cannot get the function\'s return value.</p>
+<p>The script can also retain the <a href="../Concepts.htm#variables">variable</a>
+<code>notepad_id</code> for later use, such as to close or reactivate the window or
+move it somewhere else.</p>
+<p><strong>Related:</strong> <a href="../misc/WinTitle.htm#ahk_id">ahk_id</a></p>
+<h2 id="timeout">Timeout</h2>
+<p>By default, WinWait will wait indefinitely for a matching window to
+appear. You can determine whether this has happened by opening the
+script\'s <a href="../Program.htm#main-window">main window</a> via the <a href="../Program.htm#tray-icon">tray
+icon</a> (unless you\'ve <a href="../lib/_NoTrayIcon.htm">disabled
+it</a>). The window normally opens on
+<a href="../lib/ListLines.htm#Remarks">ListLines</a> view by default. If WinWait is
+still waiting, it will appear at the very bottom of the list of lines,
+followed by the number of seconds since it began waiting. The number
+doesn\'t update unless you select \"Refresh\" from the View menu.</p>
+<p>Try running this example and opening the main window as described above:</p>
+<pre class="codehilite"><code>WinWait &quot;Untitled - Notpad&quot;  ; (intentional typo)
+</code></pre>
+
+<p>If the script is stuck waiting for a window, you will usually need to
+exit or reload the script to get it unstuck. To prevent that from
+happening in the first place (or happening again), you can use the
+<em>Timeout</em> parameter of WinWait. For example, this will wait at most 5
+seconds for the window to appear:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;,,, &amp;notepad_pid
+if WinWait(&quot;ahk_pid &quot; notepad_pid,, 5)
+{
+    WinActivate
+    WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2
+}
+</code></pre>
+
+<p>The <a href="../lib/Block.htm">block</a> below the if statement is executed only if
+WinWait finds a matching window. If it times out, the block is skipped
+and execution continues after the closing brace (if there is any code
+after it).</p>
+<p>Note that the parentheses after \"WinWait\" are required when we want to
+use the function\'s result in an
+<a href="../Language.htm#expressions">expression</a> (such as the condition of an
+<a href="../lib/If.htm">if statement</a>). You can think of the <a href="../Language.htm#function-calls">function
+call</a> itself as a substitute for the
+result of the function. For instance, if WinWait finds a match before
+timing out, the result is non-zero. <code>if 1</code> would execute the block below
+the if statement, whereas <code>if 0</code> would skip it.</p>
+<p>Another way to write it is to return early (in other words, abort) if
+the wait times out. For example:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;,,, &amp;notepad_pid
+if !WinWait(&quot;ahk_pid &quot; notepad_pid,, 5)
+    return
+WinActivate
+WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2
+</code></pre>
+
+<p>The result is inverted by applying the
+<a href="../Variables.htm#unary">logical-not</a> operator (<code>!</code> or <code>not</code>). If
+WinWait times out, its result is 0. The result of <code>!0</code> is 1, so when
+WinWait times out, the if statement executes the <code>return</code>.</p>
+<p>WinWait\'s result is actually the ID of the window (as described above)
+or zero if it timed out. If you also want to refer to the window by ID,
+you can assign the result to a variable instead of using it directly in
+the if statement:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;,,, &amp;notepad_pid
+notepad_id := WinWait(&quot;ahk_pid &quot; notepad_pid,, 5)
+if notepad_id
+{
+    WinActivate notepad_id
+    WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2, notepad_id
+}
+</code></pre>
+
+<p>To avoid repeating the variable name, you can both assign the result to
+a variable and check that it is non-zero
+(<a href="../Concepts.htm#boolean"><em>true</em></a>) at the same time:</p>
+<pre class="codehilite"><code>Run &quot;notepad.exe&quot;,,, &amp;notepad_pid
+if notepad_id := WinWait(&quot;ahk_pid &quot; notepad_pid,, 2)
+{
+    WinActivate notepad_id
+    WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2, notepad_id
+}
+</code></pre>
+
+<p>In that case, be careful not to confuse <code>:=</code> (assignment) with <code>=</code> or
+<code>==</code> (comparison). For example, <code>if myvar := 0</code> assigns a new value and
+gives the same result every time (false), whereas <code>if myvar = 0</code>
+compares a previously-assigned value with 0.</p>
+<h2 id="math">Expressions (Math etc.)</h2>
+<p>When you want to move a window, it is often useful to move or size it
+relative to its previous position or size, which can be retrieved by
+using the <a href="../lib/WinGetPos.htm">WinGetPos</a> function. For example, the
+following set of hotkeys can be used to move the active window by 10
+pixels in each direction, by holding [RCtrl]{.kbd} and pressing the
+arrow keys:</p>
+<pre class="codehilite"><code>&gt;^Left::    MoveActiveWindowBy(-10,   0)
+&gt;^Right::   MoveActiveWindowBy(+10,   0)
+&gt;^Up::      MoveActiveWindowBy(  0, -10)
+&gt;^Down::    MoveActiveWindowBy(  0, +10)
+
+MoveActiveWindowBy(x, y) {
+    WinExist &quot;A&quot;  ; Make the active window the Last Found Window  
+    WinGetPos &amp;current_x, &amp;current_y
+    WinMove current_x + x, current_y + y
+}
+</code></pre>
+
+<p>The example <a href="../Functions.htm#intro">defines a function</a> to avoid
+repeating code several times. <code>x</code> and <code>y</code> become placeholders for the
+two numbers specified in each hotkey. WinGetPos stores the current
+position in <code>current_x</code> and <code>current_y</code>, which we then add to <code>x</code> and
+<code>y</code>.</p>
+<p>Simple expressions such as this should look fairly familiar. For more
+details, see <a href="../Variables.htm#Expressions">Expressions</a>; but be aware
+there is a lot of detail that you probably won\'t need to learn
+immediately.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ManageWindows.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#how-to-manage-windows">How to Manage Windows</a><ul>
+<li><a href="#ttm">Title Matching</a></li>
+<li><a href="#A">Active Window</a></li>
+<li><a href="#lfw">Last Found Window</a></li>
+<li><a href="#class">Window Class</a></li>
+<li><a href="#exe">Process Name/Path</a></li>
+<li><a href="#pid">Process ID (PID)</a></li>
+<li><a href="#hwnd">Window ID (HWND)</a></li>
+<li><a href="#timeout">Timeout</a></li>
+<li><a href="#math">Expressions (Math etc.)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

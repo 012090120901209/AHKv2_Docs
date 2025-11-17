@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MenuSelect | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Invokes a menu item from the menu bar of the specified window.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>MenuSelect</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="menuselect">MenuSelect</h1>
+<p>Invokes a menu item from the menu bar of the specified window.</p>
+<pre class="codehilite"><code class="language-Syntax">MenuSelect WinTitle, WinText, Menu , SubMenu1, SubMenu2, SubMenu3, SubMenu4, SubMenu5, SubMenu6, ExcludeTitle, ExcludeText
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>WinTitle, WinText, ExcludeTitle, ExcludeText</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a>,
+<a href="../Concepts.htm#numbers">Integer</a> or
+<a href="../Concepts.htm#objects">Object</a></p>
+<p>If each of these is blank or omitted, the <a href="../misc/WinTitle.htm#LastFoundWindow">Last Found
+Window</a> will be used.
+Otherwise, specify for <em>WinTitle</em> a <a href="../misc/WinTitle.htm">window title or other
+criteria</a> to identify the target window and/or
+for <em>WinText</em> a substring from a single text element of the target
+window (as revealed by the included Window Spy utility).</p>
+<p><em>ExcludeTitle</em> and <em>ExcludeText</em> can be used to exclude one or more
+windows by their title or text. Their specification is similar to
+<em>WinTitle</em> and <em>WinText</em>, except that <em>ExcludeTitle</em> does not
+recognize any criteria other than the window title.</p>
+<p>Window titles and text are case-sensitive. By default, hidden
+windows are not detected and hidden text elements are detected,
+unless changed with <a href="DetectHiddenWindows.htm">DetectHiddenWindows</a>
+and <a href="DetectHiddenText.htm">DetectHiddenText</a>; however, when using
+<a href="../misc/WinTitle.htm#ahk_id">pure HWNDs</a>, hidden windows are always
+detected regardless of DetectHiddenWindows. By default, a window
+title can contain <em>WinTitle</em> or <em>ExcludeTitle</em> anywhere inside it to
+be a match, unless changed with
+<a href="SetTitleMatchMode.htm">SetTitleMatchMode</a>.</p>
+</dd>
+<dt>Menu</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name (or a prefix of the name) of the top-level menu item, e.g.
+<code>"File"</code>, <code>"Edit"</code>, <code>"View"</code>. It can also be the position of the
+desired menu item by using <code>"1&amp;"</code> to represent the first menu,
+<code>"2&amp;"</code> the second, and so on.</p>
+<p>The search is case-insensitive according to the rules of the current
+user\'s locale, and stops at the first matching item. The use of
+ampersand (&amp;) to indicate the underlined letter in a menu item is
+<em>usually</em> not necessary (i.e. <code>"&amp;File"</code> is the same as <code>"File"</code>).</p>
+<p><strong>Known limitation:</strong> If the parameter contains an ampersand, it
+must match the item name exactly, including all non-literal
+ampersands (which are hidden or displayed as an underline). If the
+parameter does not contain an ampersand, all ampersands are ignored,
+including literal ones. For example, an item displayed as \"a &amp; b\"
+may match a parameter value of <code>a &amp;&amp; b</code> or <code>a b</code>.</p>
+<p>Specify <code>"0&amp;"</code> to use the window\'s <a href="#sys">system menu</a>.</p>
+</dd>
+<dt>SubMenu1</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name of the menu item to select or its position. This can be
+omitted if the top-level item does not contain a menu (rare).</p>
+</dd>
+<dt>SubMenu2, SubMenu3, SubMenu4, SubMenu5, SubMenu6</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If the previous submenu itself contains a menu, this is the name of
+the menu item inside, or its position.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>A <a href="Error.htm#TargetError">TargetError</a> is thrown if the window or
+control could not be found, or does not have a standard Win32 menu.</p>
+<p>A <a href="Error.htm#ValueError">ValueError</a> is thrown if a menu, submenu or
+menu item could not be found, or if the final menu parameter corresponds
+to a menu item which opens a submenu.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>For this function to work, the target window need not be active.
+However, some windows might need to be in a
+<a href="WinRestore.htm">non-minimized</a> state.</p>
+<p>This function <strong>will not work</strong> with applications that use non-standard
+menu bars. Examples include Microsoft Outlook and Outlook Express, which
+use disguised toolbars for their menu bars. In these cases, consider
+using <a href="ControlSend.htm">ControlSend</a> or <a href="PostMessage.htm">PostMessage</a>,
+which should be able to interact with some of these non-standard menu
+bars.</p>
+<p>The menu name parameters can also specify positions. This method exists
+to support menus that don\'t contain text (perhaps because they contain
+pictures of text rather than actual text). Position 1&amp; is the first menu
+item (e.g. the File menu), position 2&amp; is the second menu item (e.g. the
+Edit menu), and so on. Menu separator lines count as menu items for the
+purpose of determining the position of a menu item.</p>
+<h2 id="sys">System Menu</h2>
+<p><em>Menu</em> can be <code>"0&amp;"</code> to select an item within the window\'s system menu,
+which typically appears when the user presses [Alt]{.kbd}+[Space]{.kbd}
+or clicks on the icon in the window\'s title bar. For example:</p>
+<pre class="codehilite"><code>; Paste a command into cmd.exe without activating the window.
+A_Clipboard := &quot;echo Hello, world!`r&quot;
+MenuSelect &quot;ahk_exe cmd.exe&quot;,, &quot;0&amp;&quot;, &quot;Edit&quot;, &quot;Paste&quot;
+</code></pre>
+
+<p><strong>Caution:</strong> Use this only on windows which have custom items in their
+system menu.</p>
+<p>If the window does not already have a custom system menu, a copy of the
+standard system menu will be created and assigned to the target window
+as a side effect. This copy is destroyed by the system when the script
+exits, leaving other scripts unable to access it. Therefore, avoid using
+0&amp; for the standard items which appear on all windows. Instead, post the
+<a href="https://learn.microsoft.com/windows/win32/menurc/wm-syscommand">WM_SYSCOMMAND</a>
+message directly. For example:</p>
+<pre class="codehilite"><code>; Like [WinMinimize &quot;A&quot;], but also play the system sound for minimizing.
+WM_SYSCOMMAND := 0x0112
+SC_MINIMIZE := 0xF020
+PostMessage WM_SYSCOMMAND, SC_MINIMIZE, 0,, &quot;A&quot;
+</code></pre>
+
+<h2 id="Related">Related</h2>
+<p><a href="ControlSend.htm">ControlSend</a>, <a href="PostMessage.htm">PostMessage</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Selects <code class="no-highlight">File -&gt; Open</code> in
+Notepad. This example may fail on Windows 11 or later, as it requires
+the classic version of Notepad.</p>
+<pre class="codehilite"><code>MenuSelect &quot;Untitled - Notepad&quot;,, &quot;File&quot;, &quot;Open&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExPos .ex}
+<a class="ex_number" href="#ExPos"></a> Same as above except it is done by position
+instead of name. On Windows 10, 2&amp; must be replaced with 3&amp; due to the
+new \"New Window\" menu item. This example may fail on Windows 11 or
+later, as it requires the classic version of Notepad.</p>
+<pre class="codehilite"><code>MenuSelect &quot;Untitled - Notepad&quot;,, &quot;1&amp;&quot;, &quot;2&amp;&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExMainWin .ex}
+<a class="ex_number" href="#ExMainWin"></a> Selects
+<code class="no-highlight">View -&gt; Lines most recently executed</code> in the <a href="../Program.htm#main-window">main
+window</a>.</p>
+<pre class="codehilite"><code>WinShow &quot;ahk_class AutoHotkey&quot;
+MenuSelect &quot;ahk_class AutoHotkey&quot;,, &quot;View&quot;, &quot;Lines most recently executed&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/MenuSelect.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#menuselect">MenuSelect</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#sys">System Menu</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

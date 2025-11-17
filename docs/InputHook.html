@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InputHook | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Creates an object which can be used to collect or intercept keyboard">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>InputHook</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="inputhook">InputHook</h1>
+<p>Creates an object which can be used to collect or intercept keyboard
+input.</p>
+<pre class="codehilite"><code class="language-Syntax">InputHookObj := InputHook(Options, EndKeys, MatchList)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A string of zero or more of the following options (in any order,
+with optional spaces in between):</p>
+<p><strong>B:</strong> Sets <a href="#BackspaceIsUndo">BackspaceIsUndo</a> to 0 (false), which
+causes [Backspace]{.kbd} to be ignored.</p>
+<p><strong>C:</strong> Sets <a href="#CaseSensitive">CaseSensitive</a> to 1 (true), making
+<em>MatchList</em> case-sensitive.</p>
+<p><strong>I:</strong> Sets <a href="#MinSendLevel">MinSendLevel</a> to 1 or a given value,
+causing any input with <a href="SendLevel.htm">send level</a> below this value
+to be ignored. For example, <code>I2</code> would ignore any input with a level
+of 0 (the default) or 1, but would capture input at level 2.</p>
+<p><strong>L:</strong> Length limit (e.g. <code>L5</code>). The maximum allowed length of the
+input. When the text reaches this length, the Input is terminated
+and <a href="#EndReason">EndReason</a> is set to the word Max (unless the text
+matches one of the <em>MatchList</em> phrases, in which case
+<a href="#EndReason">EndReason</a> is set to the word Match). If unspecified,
+the length limit is 1023.</p>
+<p>Specifying <code>L0</code> disables collection of text and the length limit,
+but does not affect which keys are counted as producing text (see
+<a href="#VisibleText">VisibleText</a>). This can be useful in combination with
+<a href="#OnChar">OnChar</a>, <a href="#OnKeyDown">OnKeyDown</a>, <a href="#KeyOpt">KeyOpt</a> or the
+<em>EndKeys</em> parameter.</p>
+<p><strong>M:</strong> Allows a greater range of modified keypresses to produce
+text. Normally, a key is treated as non-text if it is modified by
+any combination <em>other than</em> [Shift]{.kbd}, [Ctrl]{.kbd}+[Alt]{.kbd}
+(i.e. [AltGr]{.kbd}) or [Ctrl]{.kbd}+[Alt]{.kbd}+[Shift]{.kbd} (i.e.
+[AltGr]{.kbd}+[Shift]{.kbd}). This option causes translation to be
+attempted for other combinations of modifiers. Consider this
+example, which typically recognizes [Ctrl]{.kbd}+[C]{.kbd}:</p>
+<pre class="codehilite"><code>CtrlC := Chr(3) ; Store the character for Ctrl-C in the CtrlC var.
+ih := InputHook(&quot;L1 M&quot;)
+ih.Start()
+ih.Wait()
+if (ih.Input = CtrlC)
+    MsgBox &quot;You pressed Control-C.&quot;
+</code></pre>
+
+<p>By default, the system maps [Ctrl]{.kbd}+[A]{.kbd} through
+[Ctrl]{.kbd}+[Z]{.kbd} to ASCII control characters <a href="Chr.htm">Chr(1)</a>
+through <a href="Chr.htm">Chr(26)</a>. Other translations may be defined by the
+system or the active window\'s keyboard layout. Translation may
+ignore any modifier key for which the keyboard layout does not
+define a modifier bitmask. For example, [Win]{.kbd}+[E]{.kbd}
+typically transcribes to \"e\" if the M option is used.</p>
+<p>The M option might cause some keyboard shortcuts such as
+[Ctrl]{.kbd}+[←]{.kbd} to misbehave while an Input is in progress.</p>
+<p><strong>T:</strong> Sets <a href="#Timeout">Timeout</a> (e.g. <code>T3</code> or
+<code class="no-highlight">T2.5</code>).</p>
+<p><strong>V:</strong> Sets <a href="#VisibleText">VisibleText</a> and
+<a href="#VisibleNonText">VisibleNonText</a> to 1 (true). Normally, the user\'s
+input is blocked (hidden from the system). Use this option to have
+the user\'s keystrokes sent to the active window.</p>
+<p><strong>*:</strong> Wildcard. Sets <a href="#FindAnywhere">FindAnywhere</a> to 1 (true),
+allowing matches to be found anywhere within what the user types.</p>
+<p><strong>E:</strong> Handle single-character end keys by character code instead of
+by keycode. This provides more consistent results if the active
+window\'s keyboard layout is different to the script\'s keyboard
+layout. It also prevents key combinations which don\'t actually
+produce the given end characters from ending input; for example, if
+@ is an end key, on the US layout [Shift]{.kbd}+[2]{.kbd} will
+trigger it but [Ctrl]{.kbd}+[Shift]{.kbd}+[2]{.kbd} will not (if the
+<a href="#E">E option</a> is used). If the <a href="#option-c">C option</a> is also used,
+the end character is case-sensitive.</p>
+</dd>
+<dt>EndKeys</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A list of zero or more keys, any one of which terminates the Input
+when pressed (the end key itself is not written to the Input
+buffer). When an Input is terminated this way,
+<a href="#EndReason">EndReason</a> is set to the word EndKey and
+<a href="#EndKey">EndKey</a> is set to the name of the key.</p>
+<p><em>EndKeys</em> uses a format similar to the <a href="Send.htm">Send</a> function.
+For example, specifying <code>{Enter}.{Esc}</code> would cause either
+[Enter]{.kbd}, [.]{.kbd}, or [Esc]{.kbd} to terminate the Input. To
+use the braces themselves as end keys, specify <code>{{}</code> and/or <code>{}}</code>.</p>
+<p>To use [Ctrl]{.kbd}, [Alt]{.kbd}, or [Shift]{.kbd} as end keys,
+specify the left and/or right version of the key, not the neutral
+version. For example, specify <code>{LControl}{RControl}</code> rather than
+<code>{Control}</code>.</p>
+<p>Although modified keys such as [Alt]{.kbd}+[C]{.kbd} (!c) are not
+supported, non-alphanumeric characters such as <code>?!:@&amp;{}</code> by default
+require [Shift]{.kbd} or [AltGr]{.kbd} to be pressed or not pressed
+depending on how the character is normally typed. If the <a href="#E">E
+option</a> is present, single character key names are interpreted
+as characters instead, and in those cases the modifier keys must be
+in the correct state to produce that character. When both the <a href="#E">E
+option</a> and <a href="#option-m">M option</a> are used,
+[Ctrl]{.kbd}+[A]{.kbd} through [Ctrl]{.kbd}+[Z]{.kbd} are supported
+by including the corresponding ASCII control characters in
+<em>EndKeys</em>.</p>
+<p>An explicit key code such as <code>{vkFF}</code> or <code>{sc001}</code> may also be
+specified. This is useful in the rare case where a key has no name
+and produces no visible character when pressed. Its key code can be
+determined by following the steps at the bottom of the <a href="../KeyList.htm#SpecialKeys">key list
+page</a>.</p>
+</dd>
+<dt>MatchList</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A comma-separated list of key phrases, any of which will cause the
+Input to be terminated (in which case <a href="#EndReason">EndReason</a> will
+be set to the word Match). The entirety of what the user types must
+exactly match one of the phrases for a match to occur (unless the
+<a href="#asterisk">* option</a> is present). In addition, <strong>any spaces or
+tabs around the delimiting commas are significant</strong>, meaning that
+they are part of the match string. For example, if <em>MatchList</em> is
+<code>ABC , XYZ</code>, the user must type a space after ABC or before XYZ to
+cause a match.</p>
+<p>Two consecutive commas results in a single literal comma. For
+example, the following would produce a single literal comma at the
+end of string1: <code>string1,,,string2</code>. Similarly, the following list
+contains only a single item with a literal comma inside it:
+<code>single,,item</code>.</p>
+<p>Because the items in <em>MatchList</em> are not treated as individual
+parameters, the list can be contained entirely within a variable.
+For example, <em>MatchList</em> might consist of
+<code>List1 "," List2 "," List3</code> -- where each of the variables contains
+a large sub-list of match phrases.</p>
+</dd>
+</dl>
+<h2 id="stack">Input Stack</h2>
+<p>Any number of InputHook objects can be created and in progress at any
+time, but the order in which they are started affects how input is
+collected.</p>
+<p>When each Input is started (by the <a href="#Start">Start</a> method), it is pushed
+onto the top of a stack, and is removed from this stack only when the
+Input is terminated. Keyboard events are passed to each Input in order
+of most recently started to least. If an Input suppresses a given
+keyboard event, it is passed no further down the stack.</p>
+<p><a href="Send.htm">Sent</a> keystrokes are ignored if the <a href="SendLevel.htm">send
+level</a> of the keystroke is below the InputHook\'s
+<a href="#MinSendLevel">MinSendLevel</a>. In such cases, the keystroke may still be
+processed by an Input lower on the stack.</p>
+<p>Multiple InputHooks can be used in combination with
+<a href="#MinSendLevel">MinSendLevel</a> to separately collect both sent keystrokes
+and real ones.</p>
+<h2 id="object">InputHook Object</h2>
+<p>The InputHook function returns an InputHook object, which has the
+following methods and properties.</p>
+<p>\"InputHookObj\" is used below as a placeholder for any InputHook
+object, as \"InputHook\" is the class itself.</p>
+<ul>
+<li><a href="#Methods">Methods</a>:<ul>
+<li><a href="#KeyOpt">KeyOpt</a>: Sets options for a key or list of keys.</li>
+<li><a href="#Start">Start</a>: Starts collecting input.</li>
+<li><a href="#Stop">Stop</a>: Terminates the Input and sets EndReason to the
+    word Stopped.</li>
+<li><a href="#Wait">Wait</a>: Waits until the Input is terminated (InProgress
+    is false).</li>
+</ul>
+</li>
+<li><a href="#General_Properties">General Properties</a>:<ul>
+<li><a href="#EndKey">EndKey</a>: Returns the name of the end key which was
+    pressed to terminate the Input.</li>
+<li><a href="#EndMods">EndMods</a>: Returns a string of the modifiers which
+    were logically down when Input was terminated.</li>
+<li><a href="#EndReason">EndReason</a>: Returns an EndReason string indicating
+    how Input was terminated.</li>
+<li><a href="#InProgress">InProgress</a>: Returns 1 (true) if the Input is in
+    progress, otherwise 0 (false).</li>
+<li><a href="#Input">Input</a>: Returns any text collected since the last time
+    Input was started.</li>
+<li><a href="#Match">Match</a>: Returns the <em>MatchList</em> item which caused the
+    Input to terminate.</li>
+<li><a href="#OnEnd">OnEnd</a>: Retrieves or sets the function object which is
+    called when Input is terminated.</li>
+<li><a href="#OnChar">OnChar</a>: Retrieves or sets the function object which
+    is called after a character is added to the input buffer.</li>
+<li><a href="#OnKeyDown">OnKeyDown</a>: Retrieves or sets the function object
+    which is called when a notification-enabled key is pressed.</li>
+<li><a href="#OnKeyUp">OnKeyUp</a>: Retrieves or sets the function object which
+    is called when a notification-enabled key is released.</li>
+</ul>
+</li>
+<li><a href="#Option_Properties">Option Properties</a>:<ul>
+<li><a href="#BackspaceIsUndo">BackspaceIsUndo</a>: Controls whether the
+    Backspace key removes the most recently pressed character from
+    the end of the Input buffer.</li>
+<li><a href="#CaseSensitive">CaseSensitive</a>: Controls whether <em>MatchList</em> is
+    case-sensitive.</li>
+<li><a href="#FindAnywhere">FindAnywhere</a>: Controls whether each match can
+    be a substring of the input text.</li>
+<li><a href="#MinSendLevel">MinSendLevel</a>: Retrieves or sets the minimum
+    send level of input to collect.</li>
+<li><a href="#NotifyNonText">NotifyNonText</a>: Controls whether the OnKeyDown
+    and OnKeyUp callbacks are called whenever a non-text key is
+    pressed.</li>
+<li><a href="#Timeout">Timeout</a>: Retrieves or sets the timeout value in
+    seconds.</li>
+<li><a href="#VisibleNonText">VisibleNonText</a>: Controls whether keys or key
+    combinations which do not produce text are visible (not
+    blocked).</li>
+<li><a href="#VisibleText">VisibleText</a>: Controls whether keys or key
+    combinations which produce text are visible (not blocked).</li>
+</ul>
+</li>
+</ul>
+<h3 id="Methods">Methods</h3>
+<p>::: {#KeyOpt .methodShort}</p>
+<h3 id="keyopt">KeyOpt</h3>
+<p>Sets options for a key or list of keys.</p>
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.KeyOpt(Keys, KeyOptions)
+</code></pre>
+
+<h4 id="KeyOpt_Parameters">Parameters</h4>
+<dl>
+<dt>Keys</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A list of keys. Braces are used to enclose key names, virtual key
+codes or scan codes, similar to the <a href="Send.htm">Send</a> function. For
+example, <code>{Enter}.{{}</code> would apply to [Enter]{.kbd}, [.]{.kbd} and
+[{]{.kbd}. Specifying a key by name, by <code>{vkNN}</code> or by <code>{scNNN}</code> may
+produce three different results; see below for details.</p>
+<p>Specify the string <code>{All}</code> (case-insensitive) on its own to apply
+<em>KeyOptions</em> to all VK and all SC, including <code>{vkE7}</code> and <code>{sc000}</code>
+as described below. KeyOpt may then be called a second time to
+remove options from specific keys.</p>
+<p>Specify <code>{sc000}</code> to apply <em>KeyOptions</em> to all events which lack a
+scan code.</p>
+<p>Specify <code>{vkE7}</code> to apply <em>KeyOptions</em> to Unicode events, such as
+those sent by <code>SendEvent "{U+221e}"</code> or <code>SendEvent "{Text}∞"</code>.</p>
+</dd>
+<dt>KeyOptions</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>One or more of the following single-character options (spaces and
+tabs are ignored).</p>
+<p><strong>-</strong> (minus): Removes any of the options following the <code>-</code>, up to
+the next <code>+</code>.</p>
+<p><strong>+</strong> (plus): Cancels any previous <code>-</code>, otherwise has no effect.</p>
+<p><strong>E:</strong> End key. If enabled, pressing the key terminates Input, sets
+<a href="#EndReason">EndReason</a> to the word EndKey and <a href="#EndKey">EndKey</a> to
+the key\'s normalized name. Unlike the <em>EndKeys</em> parameter, the
+state of [Shift]{.kbd} or [AltGr]{.kbd} is ignored. For example, <code>@</code>
+and <code class="no-highlight">2</code> are both equivalent to <code>{vk32}</code> on the US
+keyboard layout.</p>
+<p><strong>I:</strong> Ignore text. Any text normally produced by this key is
+ignored, and the key is treated as a non-text key (see
+<a href="#VisibleNonText">VisibleNonText</a>). Has no effect if the key
+normally does not produce text.</p>
+<p><strong>N:</strong> Notify. Causes the <a href="#OnKeyDown">OnKeyDown</a> and
+<a href="#OnKeyUp">OnKeyUp</a> callbacks to be called each time the key is
+pressed.</p>
+<p><strong>S:</strong> Suppresses (blocks) the key after processing it. This
+overrides <a href="#VisibleText">VisibleText</a> or
+<a href="#VisibleNonText">VisibleNonText</a> until <code>-S</code> is used. <code>+S</code> implies
+<code>-V</code>.</p>
+<p><strong>V:</strong> Visible. Prevents the key from being suppressed (blocked).
+This overrides <a href="#VisibleText">VisibleText</a> or
+<a href="#VisibleNonText">VisibleNonText</a> until <code>-V</code> is used. <code>+V</code> implies
+<code>-S</code>.</p>
+</dd>
+</dl>
+<h4 id="KeyOpt_Remarks">Remarks</h4>
+<p>Options can be set by both virtual key code (VK) and scan code (SC), and
+are accumulative.</p>
+<p>When a key is specified by name, options are added either by VK or by
+SC. Where two physical keys share the same VK but differ by SC (such as
+[Up]{.kbd} and [NumpadUp]{.kbd}), they are handled by SC. By contrast,
+if a VK number is used, it will apply to any physical key which produces
+that VK (and this may vary over time as it depends on the active
+keyboard layout).</p>
+<p>Removing an option by VK number does not affect any options that were
+set by SC, or vice versa. However, when an option is removed by key name
+and that name is handled by VK, the option is also removed for the
+corresponding SC (according to the script\'s keyboard layout). This
+allows keys to be excluded by name after applying an option to <a href="#all-keys">all
+keys</a>.</p>
+<p>To prevent an option from affecting a key, the option must be removed
+from both the VK and the SC of that key, or sc000 if the key has no SC.</p>
+<p>Unicode events, such as those sent by <code>SendEvent "{U+221e}"</code> or
+<code>SendEvent "{Text}∞"</code>, are affected by options which have been set for
+either <a href="#vke7">vkE7</a> or <a href="#sc000">sc000</a>. Any option applied to
+<a href="#all-keys">{All}</a> is applied to both vkE7 and sc000, so to exclude
+Unicode events, remove the option from both. For example:</p>
+<pre class="codehilite"><code>InputHookObj.KeyOpt(&quot;{All}&quot;, &quot;+I&quot;)  ; Ignore text produced by any event
+InputHookObj.KeyOpt(&quot;{vkE7}{sc000}&quot;, &quot;-I&quot;)  ; except Unicode events.
+</code></pre>
+
+<p>:::</p>
+<p>::: {#Start .methodShort}</p>
+<h3 id="start">Start</h3>
+<p>Starts collecting input.</p>
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.Start()
+</code></pre>
+
+<p>Has no effect if the Input is already in progress.</p>
+<p>The newly started Input is placed on the top of the <a href="#stack">InputHook
+stack</a>, which allows it to override any previously started
+Input.</p>
+<p>This method installs the <a href="InstallKeybdHook.htm">keyboard hook</a> (if it
+was not already).
+:::</p>
+<p>::: {#Stop .methodShort}</p>
+<h3 id="stop">Stop</h3>
+<p>Terminates the Input and sets <a href="#EndReason">EndReason</a> to the word
+Stopped.</p>
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.Stop()
+</code></pre>
+
+<p>Has no effect if the Input is not in progress.
+:::</p>
+<p>::: {#Wait .methodShort}</p>
+<h3 id="wait">Wait</h3>
+<p>Waits until the Input is terminated (<a href="#InProgress">InProgress</a> is
+false).</p>
+<pre class="codehilite"><code class="language-Syntax">EndReason := InputHookObj.Wait(MaxTime)
+</code></pre>
+
+<h4 id="Wait_Parameters">Parameters</h4>
+<dl>
+<dt>MaxTime</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Float</a></p>
+<p>If omitted, the wait is indefinitely. Otherwise, specify the maximum
+number of seconds to wait. If Input is still in progress after
+<em>MaxTime</em> seconds, the method returns and does not terminate Input.</p>
+</dd>
+</dl>
+<h4 id="Wait_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>This method returns <a href="#EndReason">EndReason</a>.
+:::</p>
+<h3 id="General_Properties">General Properties</h3>
+<p>::: {#EndKey .methodShort}</p>
+<h3 id="endkey">EndKey</h3>
+<p>Returns the name of the <a href="#EndKeys">end key</a> which was pressed to
+terminate the Input.</p>
+<pre class="codehilite"><code class="language-Syntax">KeyName := InputHookObj.EndKey
+</code></pre>
+
+<p>Note that EndKey returns the \"normalized\" name of the key regardless
+of how it was written in the <em>EndKeys</em> parameter. For example, <code>{Esc}</code>
+and <code>{vk1B}</code> both produce <code>Escape</code>. <a href="GetKeyName.htm">GetKeyName</a> can be
+used to retrieve the normalized name.</p>
+<p>If the <a href="#E">E option</a> was used, EndKey returns the actual character
+which was typed (if applicable). Otherwise, the key name is determined
+according to the script\'s active keyboard layout.</p>
+<p>EndKey returns an empty string if <a href="#EndReason">EndReason</a> is not
+\"EndKey\".
+:::</p>
+<p>::: {#EndMods .methodShort}</p>
+<h3 id="endmods">EndMods</h3>
+<p>Returns a string of the modifiers which were logically down when Input
+was terminated.</p>
+<pre class="codehilite"><code class="language-Syntax">Mods := InputHookObj.EndMods
+</code></pre>
+
+<p>If all modifiers were logically down (pressed), the full string is:</p>
+<pre class="codehilite"><code>&lt;^&gt;^&lt;!&gt;!&lt;+&gt;+&lt;#&gt;#
+</code></pre>
+
+<p>These modifiers have the same meaning as with <a href="../Hotkeys.htm">hotkeys</a>.
+Each modifier is always qualified with \&lt; (left) or &gt; (right). The
+corresponding key names are: LCtrl, RCtrl, LAlt, RAlt, LShift, RShift,
+LWin, RWin.</p>
+<p><a href="InStr.htm">InStr</a> can be used to check whether a given modifier (such
+as <code>&gt;!</code> or <code>^</code>) is present. The following line can be used to convert
+<em>Mods</em> to a string of neutral modifiers, such as <code>^!+#</code>:</p>
+<pre class="codehilite"><code>Mods := RegExReplace(Mods, &quot;[&lt;&gt;](.)(?:&gt;\1)?&quot;, &quot;$1&quot;)
+</code></pre>
+
+<p>Due to split-second timing, this property may be more reliable than
+<a href="GetKeyState.htm">GetKeyState</a> even if it is used immediately after
+Input terminates, or in the <a href="#OnEnd">OnEnd</a> callback.
+:::</p>
+<p>::: {#EndReason .methodShort}</p>
+<h3 id="endreason">EndReason</h3>
+<p>Returns an <a href="#EndReasons">EndReason string</a> indicating how Input was
+terminated.</p>
+<pre class="codehilite"><code class="language-Syntax">Reason := InputHookObj.EndReason
+</code></pre>
+
+<p>If the Input is still in progress, an empty string is returned.
+:::</p>
+<p>::: {#InProgress .methodShort}</p>
+<h3 id="inprogress">InProgress</h3>
+<p>Returns 1 (true) if the Input is in progress, otherwise 0 (false).</p>
+<pre class="codehilite"><code class="language-Syntax">Boolean := InputHookObj.InProgress
+</code></pre>
+
+<p>:::</p>
+<p>::: {#Input .methodShort}</p>
+<h3 id="input">Input</h3>
+<p>Returns any text collected since the last time Input was started.</p>
+<pre class="codehilite"><code class="language-Syntax">String := InputHookObj.Input
+</code></pre>
+
+<p>This property can be used while the Input is in progress, or after it
+has ended.
+:::</p>
+<p>::: {#Match .methodShort}</p>
+<h3 id="match">Match</h3>
+<p>Returns the <em><a href="#MatchList">MatchList</a></em> item which caused the Input to
+terminate.</p>
+<pre class="codehilite"><code class="language-Syntax">String := InputHookObj.Match
+</code></pre>
+
+<p>This property returns the matched item with its original case, which may
+differ from what the user typed if the <a href="#option-c">C option</a> was
+omitted, or an empty string if <a href="#EndReason">EndReason</a> is not \"Match\".
+:::</p>
+<p>::: {#OnEnd .methodShort}</p>
+<h3 id="onend">OnEnd</h3>
+<p>Retrieves or sets the <a href="../misc/Functor.htm">function object</a> which is
+called when Input is terminated.</p>
+<pre class="codehilite"><code class="language-Syntax">MyCallback := InputHookObj.OnEnd
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.OnEnd := MyCallback
+</code></pre>
+
+<p><em>MyCallback</em> is the <a href="../misc/Functor.htm">function object</a> to call. An
+empty string means no function object.</p>
+<p>The callback accepts one parameter and can be
+<a href="../Functions.htm#intro">defined</a> as follows:</p>
+<pre class="codehilite"><code class="language-NoIndent">MyCallback(InputHookObj) { ...
+</code></pre>
+
+<p>Although the name you give the parameter does not matter, it is assigned
+a reference to the InputHook object.</p>
+<p>You can omit the callback\'s parameter if the corresponding information
+is not needed, but in this case an asterisk must be specified, e.g.
+<code>MyCallback(*)</code>.</p>
+<p>The function is called as a new <a href="../misc/Threads.htm">thread</a>, so starts
+off fresh with the default values for settings such as
+<a href="SendMode.htm">SendMode</a> and
+<a href="DetectHiddenWindows.htm">DetectHiddenWindows</a>.
+:::</p>
+<p>::: {#OnChar .methodShort}</p>
+<h3 id="onchar">OnChar</h3>
+<p>Retrieves or sets the <a href="../misc/Functor.htm">function object</a> which is
+called after a character is added to the input buffer.</p>
+<pre class="codehilite"><code class="language-Syntax">MyCallback := InputHookObj.OnChar
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.OnChar := MyCallback
+</code></pre>
+
+<p><em>MyCallback</em> is the <a href="../misc/Functor.htm">function object</a> to call. An
+empty string means no function object.</p>
+<p>The callback accepts two parameters and can be
+<a href="../Functions.htm#intro">defined</a> as follows:</p>
+<pre class="codehilite"><code class="language-NoIndent">MyCallback(InputHookObj, Char) { ...
+</code></pre>
+
+<p>Although the names you give the parameters do not matter, the following
+values are sequentially assigned to them:</p>
+<ol>
+<li>A reference to the InputHook object.</li>
+<li>A string containing the character (or multiple characters, see below
+    for details).</li>
+</ol>
+<p>You can omit one or more parameters from the end of the callback\'s
+parameter list if the corresponding information is not needed, but in
+this case an asterisk must be specified as the final parameter, e.g.
+<code>MyCallback(Param1, *)</code>.</p>
+<p>The presence of multiple characters indicates that a dead key was used
+prior to the last keypress, but the two keys could not be transliterated
+to a single character. For example, on some keyboard layouts
+[`]{.kbd}[e]{.kbd} produces <code>è</code> while [`]{.kbd}[z]{.kbd} produces
+<code>`z</code>.</p>
+<p>The function is never called when an end key is pressed.
+:::</p>
+<p>::: {#OnKeyDown .methodShort}</p>
+<h3 id="onkeydown">OnKeyDown</h3>
+<p>Retrieves or sets the <a href="../misc/Functor.htm">function object</a> which is
+called when a notification-enabled key is pressed.</p>
+<pre class="codehilite"><code class="language-Syntax">MyCallback := InputHookObj.OnKeyDown
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.OnKeyDown := MyCallback
+</code></pre>
+
+<p>Key-down notifications must first be enabled by <a href="#KeyOpt">KeyOpt</a> or
+<a href="#NotifyNonText">NotifyNonText</a>.</p>
+<p><em>MyCallback</em> is the <a href="../misc/Functor.htm">function object</a> to call. An
+empty string means no function object.</p>
+<p>The callback accepts three parameters and can be
+<a href="../Functions.htm#intro">defined</a> as follows:</p>
+<pre class="codehilite"><code class="language-NoIndent">MyCallback(InputHookObj, VK, SC) { ...
+</code></pre>
+
+<p>Although the names you give the parameters do not matter, the following
+values are sequentially assigned to them:</p>
+<ol>
+<li>A reference to the InputHook object.</li>
+<li>An integer representing the virtual key code of the key.</li>
+<li>An integer representing the scan code of the key.</li>
+</ol>
+<p>You can omit one or more parameters from the end of the callback\'s
+parameter list if the corresponding information is not needed, but in
+this case an asterisk must be specified as the final parameter, e.g.
+<code>MyCallback(Param1, *)</code>.</p>
+<p>To retrieve the key name (if any), use
+<code>GetKeyName(Format("vk{:x}sc{:x}", VK, SC))</code>.</p>
+<p>The function is called as a new <a href="../misc/Threads.htm">thread</a>, so starts
+off fresh with the default values for settings such as
+<a href="SendMode.htm">SendMode</a> and
+<a href="DetectHiddenWindows.htm">DetectHiddenWindows</a>.</p>
+<p>The function is never called when an end key is pressed.
+:::</p>
+<p>::: {#OnKeyUp .methodShort}</p>
+<h3 id="onkeyup">OnKeyUp</h3>
+<p>Retrieves or sets the <a href="../misc/Functor.htm">function object</a> which is
+called when a notification-enabled key is released.</p>
+<pre class="codehilite"><code class="language-Syntax">MyCallback := InputHookObj.OnKeyUp
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.OnKeyUp := MyCallback
+</code></pre>
+
+<p>Key-up notifications must first be enabled by <a href="#KeyOpt">KeyOpt</a> or
+<a href="#NotifyNonText">NotifyNonText</a>. Whether a key is considered text or
+non-text is determined when the key is pressed. If an InputHook detects
+a key-up without having detected key-down, it is considered non-text.</p>
+<p><em>MyCallback</em> is the <a href="../misc/Functor.htm">function object</a> to call. An
+empty string means no function object.</p>
+<p>The callback accepts three parameters and can be
+<a href="../Functions.htm#intro">defined</a> as follows:</p>
+<pre class="codehilite"><code class="language-NoIndent">MyCallback(InputHookObj, VK, SC) { ...
+</code></pre>
+
+<p>Although the names you give the parameters do not matter, the following
+values are sequentially assigned to them:</p>
+<ol>
+<li>A reference to the InputHook object.</li>
+<li>An integer representing the virtual key code of the key.</li>
+<li>An integer representing the scan code of the key.</li>
+</ol>
+<p>You can omit one or more parameters from the end of the callback\'s
+parameter list if the corresponding information is not needed, but in
+this case an asterisk must be specified as the final parameter, e.g.
+<code>MyCallback(Param1, *)</code>.</p>
+<p>To retrieve the key name (if any), use
+<code>GetKeyName(Format("vk{:x}sc{:x}", VK, SC))</code>.</p>
+<p>The function is called as a new <a href="../misc/Threads.htm">thread</a>, so starts
+off fresh with the default values for settings such as
+<a href="SendMode.htm">SendMode</a> and
+<a href="DetectHiddenWindows.htm">DetectHiddenWindows</a>.
+:::</p>
+<h3 id="Option_Properties">Option Properties</h3>
+<p>::: {#BackspaceIsUndo .methodShort}</p>
+<h3 id="backspaceisundo">BackspaceIsUndo</h3>
+<p>Controls whether [Backspace]{.kbd} removes the most recently pressed
+character from the end of the Input buffer.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentSetting := InputHookObj.BackspaceIsUndo
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.BackspaceIsUndo := NewSetting
+</code></pre>
+
+<p><em>CurrentSetting</em> is <em>NewSetting</em> if assigned, otherwise 1 (true) by
+default unless overwritten by the <a href="#option-b">B option</a>.</p>
+<p><em>NewSetting</em> is a <a href="../Concepts.htm#boolean">boolean value</a> that enables
+or disables this setting.</p>
+<p>When [Backspace]{.kbd} acts as undo, it is treated as a text entry key.
+Specifically, whether the key is suppressed depends on
+<a href="#VisibleText">VisibleText</a> rather than
+<a href="#VisibleNonText">VisibleNonText</a>.</p>
+<p>[Backspace]{.kbd} is always ignored if pressed in combination with a
+modifier key such as [Ctrl]{.kbd} (the logical modifier state is checked
+rather than the physical state).</p>
+<p><strong>Note:</strong> If the input text is visible (such as in an editor) and the
+arrow keys or other means are used to navigate within it,
+[Backspace]{.kbd} will still remove the last character rather than the
+one behind the caret (insertion point).
+:::</p>
+<p>::: {#CaseSensitive .methodShort}</p>
+<h3 id="casesensitive">CaseSensitive</h3>
+<p>Controls whether <a href="#MatchList"><em>MatchList</em></a> is case-sensitive.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentSetting := InputHookObj.CaseSensitive
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.CaseSensitive := NewSetting
+</code></pre>
+
+<p><em>CurrentSetting</em> is <em>NewSetting</em> if assigned, otherwise 0 (false) by
+default unless overwritten by the <a href="#option-c">C option</a>.</p>
+<p><em>NewSetting</em> is a <a href="../Concepts.htm#boolean">boolean value</a> that enables
+or disables this setting.
+:::</p>
+<p>::: {#FindAnywhere .methodShort}</p>
+<h3 id="findanywhere">FindAnywhere</h3>
+<p>Controls whether each match can be a substring of the input text.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentSetting := InputHookObj.FindAnywhere
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.FindAnywhere := NewSetting
+</code></pre>
+
+<p><em>CurrentSetting</em> is <em>NewSetting</em> if assigned, otherwise 0 (false) by
+default unless overwritten by the <a href="#asterisk">* option</a>.</p>
+<p><em>NewSetting</em> is a <a href="../Concepts.htm#boolean">boolean value</a> that enables
+or disables this setting. If true, a match can be found anywhere within
+what the user types (the match can be a substring of the input text). If
+false, the entirety of what the user types must match one of the
+<em>MatchList</em> phrases. In both cases, one of the <em>MatchList</em> phrases must
+be typed in full.
+:::</p>
+<p>::: {#MinSendLevel .methodShort}</p>
+<h3 id="minsendlevel">MinSendLevel</h3>
+<p>Retrieves or sets the minimum <a href="SendLevel.htm">send level</a> of input to
+collect.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentLevel := InputHookObj.MinSendLevel
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.MinSendLevel := NewLevel
+</code></pre>
+
+<p><em>CurrentLevel</em> is <em>NewLevel</em> if assigned, otherwise 0 by default unless
+overwritten by the <a href="#option-i">I option</a>.</p>
+<p><em>NewLevel</em> should be an <a href="../Concepts.htm#numbers">integer</a> between 0 and
+101. Events which have a send level [lower]{.underline} than this value
+are ignored. For example, a value of 101 causes all input generated by
+<a href="Send.htm">SendEvent</a> to be ignored, while a value of 1 only ignores
+input at the default send level (zero).</p>
+<p>The <a href="Send.htm#SendInput">SendInput</a> and <a href="Send.htm#SendPlay">SendPlay</a>
+methods are always ignored, regardless of this setting. Input generated
+by any source other than AutoHotkey is never ignored as a result of this
+setting.
+:::</p>
+<p>::: {#NotifyNonText .methodShort}</p>
+<h3 id="notifynontext">NotifyNonText</h3>
+<p>Controls whether the <a href="#OnKeyDown">OnKeyDown</a> and <a href="#OnKeyUp">OnKeyUp</a>
+callbacks are called whenever a non-text key is pressed.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentSetting := InputHookObj.NotifyNonText
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.NotifyNonText := NewSetting
+</code></pre>
+
+<p><em>CurrentSetting</em> is <em>NewSetting</em> if assigned, otherwise 0 (false) by
+default.</p>
+<p><em>NewSetting</em> is a <a href="../Concepts.htm#boolean">boolean value</a> that enables
+or disables this setting. If true, notifications are enabled for all
+keypresses which do not produce text, such as when pressing [←]{.kbd} or
+[Alt]{.kbd}+[F]{.kbd}. Setting this property does not affect a key\'s
+<a href="#KeyOpt">options</a>, since the production of text depends on the active
+window\'s keyboard layout at the time the key is pressed.</p>
+<p>NotifyNonText is applied to key-up events by considering whether a
+previous key-down with a matching VK code was classified as text or
+non-text. For example, if NotifyNonText is true, pressing
+[Ctrl]{.kbd}+[A]{.kbd} will produce <a href="#OnKeyDown">OnKeyDown</a> and
+<a href="#OnKeyUp">OnKeyUp</a> calls for both [Ctrl]{.kbd} and [A]{.kbd}, while
+pressing [A]{.kbd} on its own will not call OnKeyDown or OnKeyUp unless
+<a href="#KeyOpt">KeyOpt</a> has been used to enable notifications for that key.</p>
+<p>See <a href="#VisibleText">VisibleText</a> for details about which keys are counted
+as producing text.
+:::</p>
+<p>::: {#Timeout .methodShort}</p>
+<h3 id="timeout">Timeout</h3>
+<p>Retrieves or sets the timeout value in seconds.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentSeconds := InputHookObj.Timeout
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.Timeout := NewSeconds
+</code></pre>
+
+<p><em>CurrentSeconds</em> is <em>NewSeconds</em> if assigned, otherwise 0 by default
+unless overwritten by the <a href="#option-t">T option</a>.</p>
+<p><em>NewSeconds</em> is a <a href="../Concepts.htm#numbers">floating-point number</a>
+representing the timeout. 0 means no timeout.</p>
+<p>The timeout period ordinarily starts when <a href="#Start">Start</a> is called, but
+will restart if this property is assigned a value while Input is in
+progress. If Input is still in progress when the timeout period elapses,
+it is terminated and <a href="#EndReason">EndReason</a> is set to the word Timeout.
+:::</p>
+<p>::: {#VisibleNonText .methodShort}</p>
+<h3 id="visiblenontext">VisibleNonText</h3>
+<p>Controls whether keys or key combinations which do not produce text are
+visible (not blocked).</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentSetting := InputHookObj.VisibleNonText
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.VisibleNonText := NewSetting
+</code></pre>
+
+<p><em>CurrentSetting</em> is <em>NewSetting</em> if assigned, otherwise 1 (true) by
+default. The <a href="#vis">V option</a> sets this to 1 (true).</p>
+<p><em>NewSetting</em> is a <a href="../Concepts.htm#boolean">boolean value</a> that enables
+or disables this setting. If true, keys and key combinations which do
+not produce text may trigger hotkeys or be passed on to the active
+window. If false, they are blocked.</p>
+<p>See <a href="#VisibleText">VisibleText</a> for details about which keys are counted
+as producing text.
+:::</p>
+<p>::: {#VisibleText .methodShort}</p>
+<h3 id="visibletext">VisibleText</h3>
+<p>Controls whether keys or key combinations which produce text are visible
+(not blocked).</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentSetting := InputHookObj.VisibleText
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">InputHookObj.VisibleText := NewSetting
+</code></pre>
+
+<p><em>CurrentSetting</em> is <em>NewSetting</em> if assigned, otherwise 0 (false) by
+default unless overwritten by the <a href="#vis">V option</a>.</p>
+<p><em>NewSetting</em> is a <a href="../Concepts.htm#boolean">boolean value</a> that enables
+or disables this setting. If true, keys and key combinations which
+produce text may trigger hotkeys or be passed on to the active window.
+If false, they are blocked.</p>
+<p>Any keystrokes which cause text to be appended to the Input buffer are
+counted as producing text, even if they do not normally do so in other
+applications. For instance, [Ctrl]{.kbd}+[A]{.kbd} produces text if the
+<a href="#option-m">M option</a> is used, and [Esc]{.kbd} produces the control
+character <code>Chr(27)</code>.</p>
+<p>Dead keys are counted as producing text, although they do not typically
+produce an immediate effect. Pressing a dead key might also cause the
+following key to produce text (if only the dead key\'s character).</p>
+<p>[Backspace]{.kbd} is counted as producing text only when it <a href="#BackspaceIsUndo">acts as
+undo</a>.</p>
+<p>The <a href="../KeyList.htm#modifier">standard modifier keys</a> and
+[CapsLock]{.kbd}, [NumLock]{.kbd} and [ScrollLock]{.kbd} are always
+visible (not blocked).
+:::</p>
+<h2 id="EndReasons">EndReason</h2>
+<p>The <a href="#EndReason">EndReason</a> property returns one of the following
+strings:</p>
+<p>String    Description</p>
+<hr />
+<p>Stopped   The <a href="#Stop">Stop</a> method was called or the <a href="#Start">Start</a> method has not yet been called for the first time.
+  Max       The Input reached the maximum allowed length and it does not match any of the items in <a href="#MatchList"><em>MatchList</em></a>.
+  Timeout   The Input timed out.
+  Match     The Input matches one of the items in <a href="#MatchList"><em>MatchList</em></a>. The <a href="#Match">Match</a> property contains the matched item.
+  EndKey    One of the <em>EndKeys</em> was pressed to terminate the Input. The <a href="#EndKey">EndKey</a> property contains the terminating key name or character without braces.
+            If the Input is in progress, EndReason is blank.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>The <a href="#Start">Start</a> method must be called before input will be
+collected.</p>
+<p>InputHook is designed to allow different parts of the script to monitor
+input, with minimal conflicts. It can operate continuously, such as to
+watch for <a href="#ExSac">arbitrary words</a> or other patterns. It can also
+operate temporarily, such as to collect user input or temporarily
+override specific (or <a href="#ExKeyWaitAny">non-specific</a>) keys without
+interfering with hotkeys.</p>
+<p>Keyboard <a href="../Hotkeys.htm">hotkeys</a> are still in effect while an Input is
+in progress, but cannot activate if any of the required modifier keys
+are suppressed, or if the hotkey uses the <em>reg</em> method and its suffix
+key is suppressed. For example, the hotkey <code>^+a::</code> <em>might</em> be overridden
+by InputHook, whereas the hotkey <code>$^+a::</code> would take priority unless the
+InputHook suppressed [Ctrl]{.kbd} or [Shift]{.kbd}.</p>
+<p>Keys are either suppressed (blocked) or not depending on the following
+factors (in order):</p>
+<ul>
+<li>If the <a href="#KeyOpt-v">V option</a> is in effect for this VK or SC, it is
+    not suppressed.</li>
+<li>If the <a href="#KeyOpt-s">S option</a> is in effect for this VK or SC, it is
+    suppressed.</li>
+<li>If the key is a <a href="../KeyList.htm#modifier">standard modifier key</a> or
+    [CapsLock]{.kbd}, [NumLock]{.kbd} or [ScrollLock]{.kbd}, it is not
+    suppressed.</li>
+<li><a href="#VisibleText">VisibleText</a> or <a href="#VisibleNonText">VisibleNonText</a> is
+    consulted, depending on whether the key produces text. If the
+    property is 0 (false), the key is suppressed. See
+    <a href="#VisibleText">VisibleText</a> for details about which keys are counted
+    as producing text.</li>
+</ul>
+<p>The <a href="InstallKeybdHook.htm">keyboard hook</a> is required while an Input is
+in progress, but will be uninstalled automatically if it is no longer
+needed when the Input is terminated.</p>
+<p>The script is <a href="../Scripts.htm#persistent">automatically persistent</a>
+while an Input is in progress, so it will continue monitoring input even
+if there are no running <a href="../misc/Threads.htm">threads</a>. The script may
+exit automatically when input ends (if there are no running threads and
+the script is not persistent for some other reason).</p>
+<p>AutoHotkey does not support Input Method Editors (IME). The keyboard
+hook intercepts keyboard events and translates them to text by using
+<a href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tounicodeex">ToUnicodeEx</a>
+or ToAsciiEx (except in the case of
+<a href="https://learn.microsoft.com/windows/win32/inputdev/virtual-key-codes#vk_packet">VK_PACKET</a>
+events, which encapsulate a single character).</p>
+<p>If you use multiple languages or keyboard layouts, InputHook uses the
+keyboard layout of the active window rather than the script\'s
+(regardless of whether the Input is <a href="#vis">visible</a>).</p>
+<p>Although not as flexible, <a href="../Hotstrings.htm">hotstrings</a> are generally
+easier to use.</p>
+<h2 id="comparison">InputHook vs. Input (v1)</h2>
+<p>In AutoHotkey v1.1, InputHook is a replacement for the Input command,
+offering greater flexbility. The Input command was removed for v2.0, but
+the code below is mostly equivalent:</p>
+<pre class="codehilite"><code>; Input OutputVar, % Options, % EndKeys, % MatchList  ; v1
+ih := InputHook(Options, EndKeys, MatchList)
+ih.Start()
+ErrorLevel := ih.Wait()
+if (ErrorLevel = &quot;EndKey&quot;)
+    ErrorLevel .= &quot;:&quot; ih.EndKey
+OutputVar := ih.Input
+</code></pre>
+
+<p>The Input command terminates any previous Input which it started,
+whereas InputHook allows <a href="#stack">more than one Input</a> at a time.</p>
+<p><em>Options</em> is interpreted the same, but the default settings differ:</p>
+<ul>
+<li>The Input command limits the length of the input to 16383, while
+    InputHook limits it to 1023. This can be overridden with the <a href="#option-l">L
+    option</a>, and there is no absolute maximum.</li>
+<li>The Input command blocks both text and non-text keystrokes by
+    default, and blocks neither if the <a href="#vis">V option</a> is present. By
+    contrast, InputHook blocks only text keystrokes by default
+    (<a href="#VisibleNonText">VisibleNonText</a> defaults to true), so most
+    hotkeys can be used while an Input is in progress.</li>
+</ul>
+<p>The Input command blocks the <a href="../misc/Threads.htm">thread</a> while it is
+in progress, whereas InputHook allows the thread to continue, or even
+exit (which allows any thread that it interrupted to resume). Instead of
+waiting, the script can register an <a href="#OnEnd">OnEnd</a> function to be
+called when the Input is terminated.</p>
+<p>The Input command returns the user\'s input only after the Input is
+terminated, whereas InputHook\'s <a href="#Input">Input</a> property allows it to
+be retrieved at any time. The script can register an <a href="#OnChar">OnChar</a>
+function to be called whenever a character is added, instead of
+continuously checking the Input property.</p>
+<p>InputHook gives much more control over individual keys via the
+<a href="#KeyOpt">KeyOpt</a> method. This includes adding or removing end keys,
+suppressing or not suppressing specific keys, or ignoring the text
+produced by specific keys.</p>
+<p>Unlike the Input command, InputHook can be used to detect keys which do
+not produce text, <em>without</em> terminating the Input. This is done by
+registering an <a href="#OnKeyDown">OnKeyDown</a> function and using
+<a href="#KeyOpt">KeyOpt</a> or <a href="#NotifyNonText">NotifyNonText</a> to specify which
+keys are of interest.</p>
+<p>If a <em>MatchList</em> item caused the Input to terminate, the <a href="#Match">Match</a>
+property can be consulted to determine exactly which match (this is more
+useful when the <a href="#asterisk">* option</a> is present).</p>
+<p>Although the script can consult <a href="GetKeyState.htm">GetKeyState</a> after the
+Input command returns, sometimes it does not accurately reflect which
+keys were pressed when the Input was terminated. InputHook\'s
+<a href="#EndMods">EndMods</a> property reflects the logical state of the modifier
+keys at the time Input was terminated.</p>
+<p>There are some differences relating to backward-compatibility:</p>
+<ul>
+<li>
+<p>The Input command stores end keys [A]{.kbd}-[Z]{.kbd} in uppercase
+    even though other letters on some keyboard layouts are lowercase.
+    Passing the value to <a href="Send.htm">Send</a> would produce a shifted
+    keystroke instead of a plain one. By contrast, InputHook\'s
+    <a href="#EndKeys">EndKeys</a> property always returns the normalized name;
+    i.e. whichever character is produced by pressing the key without
+    holding [Shift]{.kbd} or other modifiers.</p>
+</li>
+<li>
+<p>If a key name used in <em>EndKeys</em> corresponds to a VK which is shared
+    between two physical keys (such as [NumpadUp]{.kbd} and [Up]{.kbd}),
+    the Input command handles the primary key by VK and the secondary
+    key by SC, whereas InputHook handles both by SC. <code>{vkNN}</code> notation
+    can be used to handle the key by VK.</p>
+<p>When the end key is handled by VK, both physical keys can terminate
+the Input. For example, <code>{NumpadUp}</code> would cause the Input command
+to be terminated by pressing [Up]{.kbd}, but ErrorLevel would
+contain <code>EndKey:NumpadUp</code> since only the VK is considered.</p>
+<p>When an end key is handled by SC, the Input command always produces
+names for the known secondary SC of any given VK, and always
+produces <code>sc</code><em><code>NNN</code></em> for any other key (even if it has a name). By
+contrast, InputHook produces a name if the key has one.</p>
+</li>
+</ul>
+<h2 id="Related">Related</h2>
+<p><a href="KeyWait.htm">KeyWait</a>, <a href="../Hotstrings.htm">Hotstrings</a>,
+<a href="InputBox.htm">InputBox</a>, <a href="InstallKeybdHook.htm">InstallKeybdHook</a>,
+<a href="../misc/Threads.htm">Threads</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExKeyWaitAny .ex}
+<a class="ex_number" href="#ExKeyWaitAny"></a> Waits for the user to press any single
+key.</p>
+<pre class="codehilite"><code>MsgBox KeyWaitAny()
+
+; Same again, but don't block the key.
+MsgBox KeyWaitAny(&quot;V&quot;)
+
+KeyWaitAny(Options:=&quot;&quot;)
+{
+    ih := InputHook(Options)
+    if !InStr(Options, &quot;V&quot;)
+        ih.VisibleNonText := false
+    ih.KeyOpt(&quot;{All}&quot;, &quot;E&quot;)  ; End
+    ih.Start()
+    ih.Wait()
+    return ih.EndKey  ; Return the key name
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExKeyWaitCombo .ex}
+<a class="ex_number" href="#ExKeyWaitCombo"></a> Waits for any key in combination with
+Ctrl/Alt/Shift/Win.</p>
+<pre class="codehilite"><code>MsgBox KeyWaitCombo()
+
+KeyWaitCombo(Options:=&quot;&quot;)
+{
+    ih := InputHook(Options)
+    if !InStr(Options, &quot;V&quot;)
+        ih.VisibleNonText := false
+    ih.KeyOpt(&quot;{All}&quot;, &quot;E&quot;)  ; End
+    ; Exclude the modifiers
+    ih.KeyOpt(&quot;{LCtrl}{RCtrl}{LAlt}{RAlt}{LShift}{RShift}{LWin}{RWin}&quot;, &quot;-E&quot;)
+    ih.Start()
+    ih.Wait()
+    return ih.EndMods . ih.EndKey  ; Return a string like &lt;^&lt;+Esc
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExSac .ex}
+<a class="ex_number" href="#ExSac"></a> Simple auto-complete: any day of the week. Pun
+aside, this is a mostly functional example. Simply run the script and
+start typing today, press [Tab]{.kbd} to complete or press [Esc]{.kbd}
+to exit.</p>
+<pre class="codehilite"><code>WordList := &quot;Monday`nTuesday`nWednesday`nThursday`nFriday`nSaturday`nSunday&quot;
+
+Suffix := &quot;&quot;
+
+SacHook := InputHook(&quot;V&quot;, &quot;{Esc}&quot;)
+SacHook.OnChar := SacChar
+SacHook.OnKeyDown := SacKeyDown
+SacHook.KeyOpt(&quot;{Backspace}&quot;, &quot;N&quot;)
+SacHook.Start()
+
+SacChar(ih, char)  ; Called when a character is added to SacHook.Input.
+{
+    global Suffix := &quot;&quot;
+    if RegExMatch(ih.Input, &quot;`nm)\w+$&quot;, &amp;prefix)
+        &amp;&amp; RegExMatch(WordList, &quot;`nmi)^&quot; prefix[0] &quot;\K.*&quot;, &amp;Suffix)
+        Suffix := Suffix[0]
+
+    if CaretGetPos(&amp;cx, &amp;cy)
+        ToolTip Suffix, cx + 15, cy
+    else
+        ToolTip Suffix
+
+    ; Intercept Tab only while we're showing a tooltip.
+    ih.KeyOpt(&quot;{Tab}&quot;, Suffix = &quot;&quot; ? &quot;-NS&quot; : &quot;+NS&quot;)
+}
+
+SacKeyDown(ih, vk, sc)
+{
+    if (vk = 8) ; Backspace
+        SacChar(ih, &quot;&quot;)
+    else if (vk = 9) ; Tab
+        Send &quot;{Text}&quot; Suffix
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExAnyKey .ex}
+<a class="ex_number" href="#ExAnyKey"></a> Waits for the user to press any key. Keys that
+produce no visible character -- such as the modifier keys, function
+keys, and arrow keys -- are listed as end keys so that they will be
+detected too.</p>
+<pre class="codehilite"><code>ih := InputHook(&quot;L1&quot;, &quot;{LControl}{RControl}{LAlt}{RAlt}{LShift}{RShift}{LWin}{RWin}{AppsKey}{F1}{F2}{F3}{F4}{F5}{F6}{F7}{F8}{F9}{F10}{F11}{F12}{Left}{Right}{Up}{Down}{Home}{End}{PgUp}{PgDn}{Del}{Ins}{BS}{CapsLock}{NumLock}{PrintScreen}{Pause}&quot;)
+ih.Start()
+ih.Wait()
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExHotkey .ex}
+<a class="ex_number" href="#ExHotkey"></a> This is a working hotkey example. Since the
+hotkey has the tilde (\~) prefix, its own keystroke will pass through to
+the active window. Thus, if you type <code>[btw</code> (or one of the other match
+phrases) in any editor, the script will automatically perform an action
+of your choice (such as replacing the typed text). For an alternative
+version of this example, see <a href="Switch.htm#ExInput">Switch</a>.</p>
+<pre class="codehilite"><code>~[::
+{
+    msg := &quot;&quot;
+    ih := InputHook(&quot;V T5 L4 C&quot;, &quot;{enter}.{esc}{tab}&quot;, &quot;btw,otoh,fl,ahk,ca&quot;)
+    ih.Start()
+    ih.Wait()
+    if (ih.EndReason = &quot;Max&quot;)
+        msg := 'You entered &quot;{1}&quot;, which is the maximum length of text.'
+    else if (ih.EndReason = &quot;Timeout&quot;)
+        msg := 'You entered &quot;{1}&quot; at which time the input timed out.'
+    else if (ih.EndReason = &quot;EndKey&quot;)
+        msg := 'You entered &quot;{1}&quot; and terminated the input with {2}.'
+
+    if msg  ; If an EndReason was found, skip the rest below.
+    {
+        MsgBox Format(msg, ih.Input, ih.EndKey)
+        return
+    }
+
+    ; Otherwise, a match was found.
+    if (ih.Input = &quot;btw&quot;)
+        Send(&quot;{backspace 4}by the way&quot;)
+    else if (ih.Input = &quot;otoh&quot;)
+        Send(&quot;{backspace 5}on the other hand&quot;)
+    else if (ih.Input = &quot;fl&quot;)
+        Send(&quot;{backspace 3}Florida&quot;)
+    else if (ih.Input = &quot;ca&quot;)
+        Send(&quot;{backspace 3}California&quot;)
+    else if (ih.Input = &quot;ahk&quot;)
+        Run(&quot;https://www.autohotkey.com&quot;)
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/InputHook.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#inputhook">InputHook</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#stack">Input Stack</a></li>
+<li><a href="#object">InputHook Object</a><ul>
+<li><a href="#Methods">Methods</a></li>
+<li><a href="#keyopt">KeyOpt</a><ul>
+<li><a href="#KeyOpt_Parameters">Parameters</a></li>
+<li><a href="#KeyOpt_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#start">Start</a></li>
+<li><a href="#stop">Stop</a></li>
+<li><a href="#wait">Wait</a><ul>
+<li><a href="#Wait_Parameters">Parameters</a></li>
+<li><a href="#Wait_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#General_Properties">General Properties</a></li>
+<li><a href="#endkey">EndKey</a></li>
+<li><a href="#endmods">EndMods</a></li>
+<li><a href="#endreason">EndReason</a></li>
+<li><a href="#inprogress">InProgress</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#match">Match</a></li>
+<li><a href="#onend">OnEnd</a></li>
+<li><a href="#onchar">OnChar</a></li>
+<li><a href="#onkeydown">OnKeyDown</a></li>
+<li><a href="#onkeyup">OnKeyUp</a></li>
+<li><a href="#Option_Properties">Option Properties</a></li>
+<li><a href="#backspaceisundo">BackspaceIsUndo</a></li>
+<li><a href="#casesensitive">CaseSensitive</a></li>
+<li><a href="#findanywhere">FindAnywhere</a></li>
+<li><a href="#minsendlevel">MinSendLevel</a></li>
+<li><a href="#notifynontext">NotifyNonText</a></li>
+<li><a href="#timeout">Timeout</a></li>
+<li><a href="#visiblenontext">VisibleNonText</a></li>
+<li><a href="#visibletext">VisibleText</a></li>
+</ul>
+</li>
+<li><a href="#EndReasons">EndReason</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#comparison">InputHook vs. Input (v1)</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

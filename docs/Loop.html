@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop (normal) | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Performs one or more [statements](../Concepts.htm#statement) repeatedly:">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Loop</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="loop-normal">Loop (normal)</h1>
+<p>Performs one or more <a href="../Concepts.htm#statement">statements</a> repeatedly:
+either the specified number of times or until <a href="Break.htm">Break</a> is
+encountered.</p>
+<pre class="codehilite"><code class="language-Syntax">Loop Count
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Count</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, the loop continues indefinitely until a
+<a href="Break.htm">Break</a> or <a href="Return.htm">Return</a> is encountered.
+Otherwise, specify how many times (iterations) to perform the loop.
+However, an explicit blank value or number less than 1 causes the
+loop to be skipped entirely.</p>
+<p><em>Count</em> is evaluated only once, right before the loop begins. For
+instance, if <em>Count</em> is an expression with side-effects such as
+function calls or assignments, the side-effects occur only once.</p>
+<p>If <em>Count</em> is enclosed in parentheses, a space or tab is not
+required. For example: <code>Loop(2)</code></p>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>The loop statement is usually followed by a <a href="Block.htm">block</a>, which is
+a collection of statements that form the <em>body</em> of the loop. However, a
+loop with only a single statement does not require a block (an \"if\"
+and its \"else\" count as a single statement for this purpose).</p>
+<p>A common use of this statement is an infinite loop that uses the
+<a href="Break.htm">Break</a> statement somewhere in the loop\'s <em>body</em> to
+determine when to stop the loop.</p>
+<p>The use of <a href="Break.htm">Break</a> and <a href="Continue.htm">Continue</a> inside a loop
+are encouraged as alternatives to <a href="Goto.htm">Goto</a>, since they generally
+make a script more understandable and maintainable. One can also create
+a \"While\" or \"Do...While/Until\" loop by making the first or last
+statement of the loop\'s <em>body</em> an IF statement that conditionally
+issues the <a href="Break.htm">Break</a> statement, but the use of
+<a href="While.htm">While</a> or <a href="Until.htm">Loop...Until</a> is usually preferred.</p>
+<p>The built-in variable <strong>A_Index</strong> contains the number of the current
+loop iteration. It contains 1 the first time the loop\'s <em>body</em> is
+executed. For the second time, it contains 2; and so on. If an inner
+loop is enclosed by an outer loop, the inner loop takes precedence.
+A_Index works inside all types of loops, including <a href="LoopFiles.htm">file
+loops</a> and <a href="LoopReg.htm">registry loops</a>; but A_Index
+contains 0 outside of a loop.</p>
+<p>A_Index can be assigned any integer value by the script. If <em>Count</em> is
+specified, changing A_Index affects the number of iterations that will
+be performed. For example, <code>A_Index := 3</code> would make the loop statement
+act as though it is on the third iteration (A_Index will be 4 on the
+next iteration), while <code>A_Index--</code> would prevent the current iteration
+from being counted toward the total.</p>
+<p>The loop may optionally be followed by an <a href="Else.htm">Else</a> statement,
+which is executed if <em>Count</em> is zero.</p>
+<p>The <a href="Block.htm#otb">One True Brace (OTB) style</a> may optionally be used.
+For example:</p>
+<pre class="codehilite"><code>Loop {
+    ...
+}
+Loop RepeatCount {
+    ...
+}
+</code></pre>
+
+<p>Specialized loops: Loops can be used to automatically retrieve files,
+folders, or registry items (one at a time). See <a href="LoopFiles.htm">file
+loop</a> and <a href="LoopReg.htm">registry loop</a> for details. In
+addition, <a href="LoopRead.htm">file-reading loops</a> can operate on the entire
+contents of a file, one line at a time. Finally, <a href="LoopParse.htm">parsing
+loops</a> can operate on the individual fields contained
+inside a delimited string.</p>
+<h2 id="Related">Related</h2>
+<p><a href="Until.htm">Until</a>, <a href="While.htm">While-loop</a>, <a href="For.htm">For-loop</a>,
+<a href="LoopFiles.htm">Files-and-folders loop</a>, <a href="LoopReg.htm">Registry loop</a>,
+<a href="LoopRead.htm">File-reading loop</a>, <a href="LoopParse.htm">Parsing loop</a>,
+<a href="Break.htm">Break</a>, <a href="Continue.htm">Continue</a>, <a href="Block.htm">Blocks</a>,
+<a href="Else.htm">Else</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Creates a loop with 3 iterations.</p>
+<pre class="codehilite"><code>Loop 3
+{
+    MsgBox &quot;Iteration number is &quot; A_Index  ; A_Index will be 1, 2, then 3
+    Sleep 100
+}
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExBreakContinue .ex}
+<a class="ex_number" href="#ExBreakContinue"></a> Creates an infinite loop, but it will
+be terminated after the 25th iteration.</p>
+<pre class="codehilite"><code>Loop
+{
+    if (A_Index &gt; 25)
+        break  ; Terminate the loop
+    if (A_Index &lt; 20)
+        continue ; Skip the below and start a new iteration
+    MsgBox &quot;A_Index = &quot; A_Index ; This will display only the numbers 20 through 25
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Loop.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#loop-normal">Loop (normal)</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

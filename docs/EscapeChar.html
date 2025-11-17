@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Sequences | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="The escape character `` ` `` (back-tick or grave accent) is used to">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>EscapeChar</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="escape-sequences">Escape Sequences</h1>
+<p>The escape character <code>`</code> (back-tick or grave accent) is used to
+indicate that the character immediately following it should be
+interpreted differently than it normally would. This character is at the
+upper left corner of most English keyboards.</p>
+<p>In AutoHotkey the following escape sequences can be used:</p>
+<p>+-----------------------------------+-----------------------------------+
+| Sequence                          | Result                            |
++===================================+===================================+
+| <code>``</code>                        | <code>`</code> (literal accent; i.e. two |
+|                                   | consecutive escape characters     |
+|                                   | result in a single literal        |
+|                                   | character)                        |
++-----------------------------------+-----------------------------------+
+| <code>`;</code>                          | <code class="no-highlight">;</code> (literal       |
+|                                   | semicolon)                        |
+|                                   |                                   |
+|                                   | <strong>Note:</strong> It is not necessary to  |
+|                                   | escape a semicolon which has any  |
+|                                   | character [other                  |
+|                                   | than]{.underline} space or tab to |
+|                                   | its immediate left, since it      |
+|                                   | would not be interpreted as a     |
+|                                   | comment anyway.                   |
++-----------------------------------+-----------------------------------+
+| <code>`:</code>                          | <code>:</code> (literal colon). This is      |
+|                                   | necessary only in a hotstring\'s  |
+|                                   | triggering abbreviation.          |
++-----------------------------------+-----------------------------------+
+| <code>`{</code>                          | [{]{.kbd} (keyboard key). This is |
+|                                   | only valid, and is required, when |
+|                                   | <a href="Remap.htm#EscapeBrace">                                 |
+|                                   | remapping</a> |
+|                                   | a key to [{]{.kbd}.               |
++-----------------------------------+-----------------------------------+
+| <code>`n</code>                          | newline (linefeed/LF)             |
++-----------------------------------+-----------------------------------+
+| <code>`r</code>                          | carriage return (CR)              |
++-----------------------------------+-----------------------------------+
+| <code>`b</code>                          | backspace                         |
++-----------------------------------+-----------------------------------+
+| <code>`t</code>                          | tab (the more typical horizontal  |
+|                                   | variety)                          |
++-----------------------------------+-----------------------------------+
+| <code>`s</code>                          | space                             |
++-----------------------------------+-----------------------------------+
+| <code>`v</code>                          | vertical tab -- corresponds to   |
+|                                   | Ascii value 11. It can also be    |
+|                                   | manifest in some applications by  |
+|                                   | typing [Ctrl]{.kbd}+[K]{.kbd}.    |
++-----------------------------------+-----------------------------------+
+| <code>`a</code>                          | alert (bell) -- corresponds to   |
+|                                   | Ascii value 7. It can also be     |
+|                                   | manifest in some applications by  |
+|                                   | typing [Ctrl]{.kbd}+[G]{.kbd}.    |
++-----------------------------------+-----------------------------------+
+| <code>`f</code>                          | formfeed -- corresponds to Ascii |
+|                                   | value 12. It can also be manifest |
+|                                   | in some applications by typing    |
+|                                   | [Ctrl]{.kbd}+[L]{.kbd}.           |
++-----------------------------------+-----------------------------------+
+| <code>`"</code> or <code>`'</code>              | Single-quote marks (\') and       |
+|                                   | double-quote marks (\") function  |
+|                                   | identically, except that a string |
+|                                   | enclosed in single-quote marks    |
+|                                   | can contain literal double-quote  |
+|                                   | marks and vice versa. Therefore,  |
+|                                   | to include an actual quote mark   |
+|                                   | inside a literal string, escape   |
+|                                   | the quote mark or enclose the     |
+|                                   | string in the opposite type of    |
+|                                   | quote mark. For example:          |
+|                                   | <code>Var :=                         |
+|                                   | "The color `"red`" was found."</code> |
+|                                   | or                                |
+|                                   | <code>Var                              |
+|                                   | := 'The color "red" was found.'</code>. |
++-----------------------------------+-----------------------------------+</p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Reports a multi-line string. The lines are
+separated by a linefeed character.</p>
+<pre class="codehilite"><code>MsgBox &quot;Line 1`nLine 2&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/EscapeChar.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#escape-sequences">Escape Sequences</a><ul>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

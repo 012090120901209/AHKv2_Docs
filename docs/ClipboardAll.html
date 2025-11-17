@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipboardAll | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Creates an object containing everything on the clipboard (such as">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ClipboardAll</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="clipboardall">ClipboardAll</h1>
+<p>Creates an object containing everything on the clipboard (such as
+pictures and formatting).</p>
+<pre class="codehilite"><code class="language-Syntax">ClipSaved := ClipboardAll(Data, Size)
+</code></pre>
+
+<p><code>ClipboardAll</code> itself is a <a href="Class.htm">class</a> derived from <code>Buffer</code>.</p>
+<h2 id="Parameters">Parameters</h2>
+<p>Omit both parameters to retrieve the current contents of the clipboard.
+Otherwise, specify one or both parameters to create an object containing
+the given binary clipboard data.</p>
+<dl>
+<dt>Data</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#objects">Object</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>A <a href="Buffer.htm">Buffer</a>-like object or a pure integer which is the
+address of the binary data. The data must be in a specific format,
+so typically originates from a previous call to ClipboardAll. See
+<a href="#ExFile">example #2</a> below.</p>
+</dd>
+<dt>Size</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The number of bytes of data to use. This is optional when <em>Data</em> is
+an object.</p>
+</dd>
+</dl>
+<h2 id="clipboardall-object">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>This function returns a ClipboardAll object, which has two properties
+(inherited from <a href="Buffer.htm">Buffer</a>):</p>
+<ul>
+<li><a href="Buffer.htm#Ptr">Ptr</a>: The address of the data contained by the
+    object. This address is valid until the object is freed.</li>
+<li><a href="Buffer.htm#Size">Size</a>: The size, in bytes, of the raw binary data.</li>
+</ul>
+<h2 id="Remarks">Remarks</h2>
+<p>The built-in variable <a href="A_Clipboard.htm">A_Clipboard</a> reflects the
+current contents of the Windows clipboard expressed as plain text, but
+can be assigned a ClipboardAll object to restore its content to the
+clipboard.</p>
+<p><em>ClipboardAll</em> is most commonly used to save the clipboard\'s contents
+so that the script can temporarily use the clipboard for an operation.
+When the operation is completed, the script restores the original
+clipboard contents as shown in <a href="#ExVar">example #1</a> and [example</p>
+<h1 id="2exfile">2](#ExFile).</h1>
+<p>If <em>ClipboardAll</em> cannot retrieve one or more of the data objects
+(formats) on the clipboard, they will be omitted but all the remaining
+objects will be stored.</p>
+<p><a href="ClipWait.htm">ClipWait</a> may be used to detect when the clipboard
+contains data (optionally including non-text data).</p>
+<p>The binary data contained by the object consists of a four-byte format
+type, followed by a four-byte data-block size, followed by the
+data-block for that format. If the clipboard contained more than one
+format (which is almost always the case), these three items are repeated
+until all the formats are included. The data ends with a four-byte
+format type of 0.</p>
+<h2 id="Related">Related</h2>
+<p><a href="A_Clipboard.htm">A_Clipboard</a>, <a href="ClipWait.htm">ClipWait</a>,
+<a href="OnClipboardChange.htm">OnClipboardChange</a>,
+<a href="_ClipboardTimeout.htm">#ClipboardTimeout</a>, <a href="Buffer.htm">Buffer</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExVar .ex}
+<a class="ex_number" href="#ExVar"></a> Saves and restores everything on the clipboard
+using a variable.</p>
+<pre class="codehilite"><code>ClipSaved := ClipboardAll()   ; Save the entire clipboard to a variable of your choice.
+; ... here make temporary use of the clipboard, such as for quickly pasting large amounts of text ...
+A_Clipboard := ClipSaved   ; Restore the original clipboard. Note the use of A_Clipboard (not ClipboardAll).
+ClipSaved := &quot;&quot;  ; Free the memory in case the clipboard was very large.
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExFile .ex}
+<a class="ex_number" href="#ExFile"></a> Saves and restores everything on the clipboard
+using a file.</p>
+<pre class="codehilite"><code>; Option 1: Delete any existing file and then use FileAppend.
+FileDelete &quot;Company Logo.clip&quot;
+FileAppend ClipboardAll(), &quot;Company Logo.clip&quot; ; The file extension does not matter.
+
+; Option 2: Use FileOpen in overwrite mode and File.RawWrite.
+ClipData := ClipboardAll()
+FileOpen(&quot;Company Logo.clip&quot;, &quot;w&quot;).RawWrite(ClipData)
+</code></pre>
+
+<p>To later load the file back onto the clipboard (or into a variable),
+follow this example:</p>
+<pre class="codehilite"><code>ClipData := FileRead(&quot;Company Logo.clip&quot;, &quot;RAW&quot;)  ; In this case, FileRead returns a Buffer.
+A_Clipboard := ClipboardAll(ClipData)  ; Convert the Buffer to a ClipboardAll and assign it.
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ClipboardAll.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#clipboardall">ClipboardAll</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#clipboardall-object">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#2exfile">2](#ExFile).</a><ul>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

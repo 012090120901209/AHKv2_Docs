@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinSetTransColor | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Makes all pixels of the chosen color invisible inside the specified">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>WinSetTransColor</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="winsettranscolor">WinSetTransColor</h1>
+<p>Makes all pixels of the chosen color invisible inside the specified
+window.</p>
+<pre class="codehilite"><code class="language-Syntax">WinSetTransColor Color , WinTitle, WinText, ExcludeTitle, ExcludeText
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Color</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>Specify a color name or RGB value (see the <a href="../misc/Colors.htm">color
+chart</a> for guidance, or use
+<a href="PixelGetColor.htm">PixelGetColor</a> in its RGB mode). To additionally
+make the visible part of the window partially transparent, append a
+space (not a comma) followed by the transparency level (0-255). For
+example: <code>WinSetTransColor "EEAA99 150"</code>.</p>
+<p>If the value is a string, any numeric color value must be in
+hexadecimal format. The color value can be omitted; for example,
+<code>WinSetTransColor " 150"</code> (with the leading space) is equivalent to
+<code>WinSetTransparent 150</code>.</p>
+<p><code>"Off"</code> (case-insensitive) or an empty string may be specified to
+completely turn off transparency for a window. This is functionally
+identical to <a href="WinSetTransparent.htm"><code>WinSetTransparent</code></a><code>"Off"</code>.
+Specifying Off is different than specifying 255 because it may
+improve performance and reduce usage of system resources (but
+probably only when desktop composition is disabled).</p>
+</dd>
+<dt>WinTitle, WinText, ExcludeTitle, ExcludeText</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a>,
+<a href="../Concepts.htm#numbers">Integer</a> or
+<a href="../Concepts.htm#objects">Object</a></p>
+<p>If each of these is blank or omitted, the <a href="../misc/WinTitle.htm#LastFoundWindow">Last Found
+Window</a> will be used.
+Otherwise, specify for <em>WinTitle</em> a <a href="../misc/WinTitle.htm">window title or other
+criteria</a> to identify the target window and/or
+for <em>WinText</em> a substring from a single text element of the target
+window (as revealed by the included Window Spy utility).</p>
+<p><em>ExcludeTitle</em> and <em>ExcludeText</em> can be used to exclude one or more
+windows by their title or text. Their specification is similar to
+<em>WinTitle</em> and <em>WinText</em>, except that <em>ExcludeTitle</em> does not
+recognize any criteria other than the window title.</p>
+<p>Window titles and text are case-sensitive. By default, hidden
+windows are not detected and hidden text elements are detected,
+unless changed with <a href="DetectHiddenWindows.htm">DetectHiddenWindows</a>
+and <a href="DetectHiddenText.htm">DetectHiddenText</a>; however, when using
+<a href="../misc/WinTitle.htm#ahk_id">pure HWNDs</a>, hidden windows are always
+detected regardless of DetectHiddenWindows. By default, a window
+title can contain <em>WinTitle</em> or <em>ExcludeTitle</em> anywhere inside it to
+be a match, unless changed with
+<a href="SetTitleMatchMode.htm">SetTitleMatchMode</a>.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>A <a href="Error.htm#TargetError">TargetError</a> is thrown if the window could not
+be found.</p>
+<p>An <a href="Error.htm#OSError">OSError</a> is thrown if the change could not be
+applied.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>This allows the contents of the window behind it to show through. If the
+user clicks on an invisible pixel, the click will \"fall through\" to
+the window behind it.</p>
+<p>To change a window\'s existing TransColor, it may be necessary to turn
+off transparency before making the change.</p>
+<p>The ID of the window under the mouse cursor can be retrieved with
+<a href="MouseGetPos.htm">MouseGetPos</a>.</p>
+<p>This function is often used to create on-screen displays and other
+visual effects. There is an example of an on-screen display <a href="Gui.htm#ExOSD">at the
+bottom of the Gui object page</a>. For a simple
+demonstration via hotkeys, see [WinSetTransparent example</p>
+<h1 id="4winsettransparenthtmextranshotkey">4](WinSetTransparent.htm#ExTransHotkey).</h1>
+<h2 id="Related">Related</h2>
+<p><a href="WinSetTransparent.htm">WinSetTransparent</a>, <a href="Win.htm">Win functions</a>,
+<a href="Control.htm">Control functions</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Makes all white pixels in Notepad invisible.
+This example may not work well with the new Notepad on Windows 11 or
+later.</p>
+<pre class="codehilite"><code>WinSetTransColor &quot;White&quot;, &quot;Untitled - Notepad&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/WinSetTransColor.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#winsettranscolor">WinSetTransColor</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#4winsettransparenthtmextranshotkey">4](WinSetTransparent.htm#ExTransHotkey).</a><ul>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

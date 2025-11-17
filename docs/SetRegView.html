@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetRegView | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Sets the registry view used by [RegRead](RegRead.htm),">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>SetRegView</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="setregview">SetRegView</h1>
+<p>Sets the registry view used by <a href="RegRead.htm">RegRead</a>,
+<a href="RegWrite.htm">RegWrite</a>, <a href="RegDelete.htm">RegDelete</a>,
+<a href="RegDeleteKey.htm">RegDeleteKey</a> and <a href="LoopReg.htm">Loop Reg</a>, allowing
+them in a 32-bit script to access the 64-bit registry view and vice
+versa.</p>
+<pre class="codehilite"><code class="language-Syntax">SetRegView RegView
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>RegView</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a> or
+<a href="../Concepts.htm#strings">String</a></p>
+<p>Specify <strong>32</strong> to view the registry as a 32-bit application would,
+or <strong>64</strong> to view the registry as a 64-bit application would.</p>
+<p>Specify the word <strong>Default</strong> to restore normal behaviour.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>This function returns the previous setting; either 32, 64 or Default.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>If SetRegView is not used, the default setting is <em>Default</em>.</p>
+<p>This function is only useful on Windows 64-bit. It has no effect on
+Windows 32-bit.</p>
+<p>On 64-bit systems, 32-bit applications run on a subsystem of Windows
+called
+<a href="https://learn.microsoft.com/windows/win32/winprog64/running-32-bit-applications">WOW64</a>.
+By default, the system redirects certain <a href="https://learn.microsoft.com/windows/win32/winprog64/shared-registry-keys">registry
+keys</a>
+to prevent conflicts. For example, in a 32-bit script,
+<code>HKLM\SOFTWARE\AutoHotkey</code> is redirected to
+<code>HKLM\SOFTWARE\Wow6432Node\AutoHotkey</code>. SetRegView allows the registry
+functions in a 32-bit script to access redirected keys in the 64-bit
+registry view and vice versa.</p>
+<p>The built-in variable <strong>A_RegView</strong> contains the current setting.</p>
+<p>Every newly launched <a href="../misc/Threads.htm">thread</a> (such as a
+<a href="../Hotkeys.htm">hotkey</a>, <a href="Menu.htm">custom menu item</a>, or
+<a href="SetTimer.htm">timed</a> subroutine) starts off fresh with the default
+setting for this function. That default may be changed by using this
+function during <a href="../Scripts.htm#auto">script startup</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="RegRead.htm">RegRead</a>, <a href="RegWrite.htm">RegWrite</a>,
+<a href="RegCreateKey.htm">RegCreateKey</a>, <a href="RegDelete.htm">RegDelete</a>,
+<a href="RegDeleteKey.htm">RegDeleteKey</a>, <a href="LoopReg.htm">Loop Reg</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Shows how to set a specific registry view, and
+how registry redirection affects the script.</p>
+<pre class="codehilite"><code>; Access the registry as a 32-bit application would.
+SetRegView 32
+RegWrite &quot;REG_SZ&quot;, &quot;HKLM\SOFTWARE\Test.ahk&quot;, &quot;Value&quot;, 123
+
+; Access the registry as a 64-bit application would.
+SetRegView 64
+value := RegRead(&quot;HKLM\SOFTWARE\Wow6432Node\Test.ahk&quot;, &quot;Value&quot;)
+RegDelete &quot;HKLM\SOFTWARE\Wow6432Node\Test.ahk&quot;
+
+MsgBox &quot;Read value '&quot; value &quot;' via Wow6432Node.&quot;
+
+; Restore the registry view to the default, which
+; depends on whether the script is 32-bit or 64-bit.
+SetRegView &quot;Default&quot;
+;...
+</code></pre>
+
+<p>:::</p>
+<p>::: {#Ex32Or64 .ex}
+<a class="ex_number" href="#Ex32Or64"></a> Shows how to detect the type of EXE and
+operating system on which the script is running.</p>
+<pre class="codehilite"><code>if (A_PtrSize = 8)
+    script_is := &quot;64-bit&quot;
+else ; if (A_PtrSize = 4)
+    script_is := &quot;32-bit&quot;
+
+if (A_Is64bitOS)
+    OS_is := &quot;64-bit&quot;
+else
+    OS_is := &quot;32-bit, which has only a single registry view&quot;
+
+MsgBox &quot;This script is &quot; script_is &quot;, and the OS is &quot; OS_is &quot;.&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/SetRegView.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#setregview">SetRegView</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

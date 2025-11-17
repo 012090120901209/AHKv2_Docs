@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetControlDelay | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Sets the delay that will occur after each control-modifying function.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>SetControlDelay</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="setcontroldelay">SetControlDelay</h1>
+<p>Sets the delay that will occur after each control-modifying function.</p>
+<pre class="codehilite"><code class="language-Syntax">SetControlDelay Delay
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Delay</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>Time in milliseconds. Specify -1 for no delay at all or 0 for the
+smallest possible delay.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This function returns the previous setting.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>If SetControlDelay is not used, the default delay is 20.</p>
+<p>A short delay (sleep) is done automatically after every Control function
+that changes a control. This is done to improve the reliability of
+scripts because a control sometimes needs a period of \"rest\" after
+being changed by one of these functions, so that the control has a
+chance to update itself and respond to the next function that the script
+may attempt to send to it.</p>
+<p>Specifically, SetControlDelay affects the following functions:
+<a href="ControlAddItem.htm">ControlAddItem</a>,
+<a href="ControlChooseIndex.htm">ControlChooseIndex</a>,
+<a href="ControlChooseString.htm">ControlChooseString</a>,
+<a href="ControlClick.htm">ControlClick</a>,
+<a href="ControlDeleteItem.htm">ControlDeleteItem</a>, <a href="EditPaste.htm">EditPaste</a>,
+<a href="ControlFindItem.htm">ControlFindItem</a>,
+<a href="ControlFocus.htm">ControlFocus</a>, <a href="ControlHide.htm">ControlHide</a>,
+<a href="ControlHideDropDown.htm">ControlHideDropDown</a>,
+<a href="ControlMove.htm">ControlMove</a>,
+<a href="ControlSetChecked.htm">ControlSetChecked</a>,
+<a href="ControlSetEnabled.htm">ControlSetEnabled</a>,
+<a href="ControlSetText.htm">ControlSetText</a>, <a href="ControlShow.htm">ControlShow</a>,
+<a href="ControlShowDropDown.htm">ControlShowDropDown</a>.</p>
+<p><a href="ControlSend.htm">ControlSend</a> is not affected; it uses
+<a href="SetKeyDelay.htm">SetKeyDelay</a>.</p>
+<p>Although a delay of -1 (no delay at all) is allowed, it is recommended
+that at least 0 be used, to increase confidence that the script will run
+correctly even when the CPU is under load.</p>
+<p>A delay of 0 internally executes a Sleep(0), which yields the remainder
+of the script\'s timeslice to any other process that may need it. If
+there is none, Sleep(0) will not sleep at all.</p>
+<p>If the CPU is slow or under load, or if window animation is enabled,
+higher delay values may be needed.</p>
+<p>The built-in variable <strong>A_ControlDelay</strong> contains the current setting
+and can also be assigned a new value instead of calling SetControlDelay.</p>
+<p>Every newly launched <a href="../misc/Threads.htm">thread</a> (such as a
+<a href="../Hotkeys.htm">hotkey</a>, <a href="Menu.htm">custom menu item</a>, or
+<a href="SetTimer.htm">timed</a> subroutine) starts off fresh with the default
+setting for this function. That default may be changed by using this
+function during <a href="../Scripts.htm#auto">script startup</a>.</p>
+<h2 id="Related">Related</h2>
+<p><a href="Control.htm">Control functions</a>, <a href="SetWinDelay.htm">SetWinDelay</a>,
+<a href="SetKeyDelay.htm">SetKeyDelay</a>, <a href="SetMouseDelay.htm">SetMouseDelay</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Causes the smallest possible delay to occur
+after each control-modifying function.</p>
+<pre class="codehilite"><code>SetControlDelay 0
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/SetControlDelay.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#setcontroldelay">SetControlDelay</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

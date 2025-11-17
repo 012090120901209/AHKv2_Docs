@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DirMove | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Moves a folder along with all its sub-folders and files. It can also">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>DirMove</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="dirmove">DirMove</h1>
+<p>Moves a folder along with all its sub-folders and files. It can also
+rename a folder.</p>
+<pre class="codehilite"><code class="language-Syntax">DirMove Source, Dest , OverwriteOrRename
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Source</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Name of the source directory (with no trailing backslash), which is
+assumed to be in <a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an
+absolute path isn\'t specified. For example: C:\My Folder</p>
+</dd>
+<dt>Dest</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The new path and name of the directory (with no trailing baskslash),
+which is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified. For example: D:\My Folder.</p>
+<p><strong>Note:</strong> <em>Dest</em> is the actual path and name that the directory will
+have after it is moved; it is <em>not</em> the directory into which
+<em>Source</em> is moved (except for the known limitation mentioned below).</p>
+</dd>
+<dt>OverwriteOrRename</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If omitted, it defaults to 0. Otherwise, specify one of the
+following values to indicate whether to overwrite or rename existing
+files:</p>
+<p><strong>0:</strong> Do not overwrite existing files. The operation will fail if
+<em>Dest</em> already exists as a file or directory.</p>
+<p><strong>1:</strong> Overwrite existing files. However, any files or subfolders
+inside <em>Dest</em> that do not have a counterpart in <em>Source</em> will not be
+deleted. <strong>Known limitation:</strong> If <em>Dest</em> already exists as a folder
+and it is on the same volume as <em>Source</em>, <em>Source</em> will be moved
+into it rather than overwriting it. To avoid this, see the next
+option.</p>
+<p><strong>2:</strong> The same as mode 1 above except that the limitation is
+absent.</p>
+<p><strong>R:</strong> Rename the directory rather than moving it. Although renaming
+normally has the same effect as moving, it is helpful in cases where
+you want \"all or none\" behavior; that is, when you don\'t want the
+operation to be only partially successful when <em>Source</em> or one of
+its files is locked (in use). Although this method cannot move
+<em>Source</em> onto a different volume, it can move it to any other
+directory on its own volume. The operation will fail if <em>Dest</em>
+already exists as a file or directory.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An exception is thrown if an error occurs.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>DirMove moves a single folder to a new location. To instead move the
+contents of a folder (all its files and subfolders), see the examples
+section of <a href="FileMove.htm">FileMove</a>.</p>
+<p>If the source and destination are on different volumes or UNC paths, a
+copy/delete operation will be performed rather than a move.</p>
+<h2 id="Related">Related</h2>
+<p><a href="DirCopy.htm">DirCopy</a>, <a href="FileCopy.htm">FileCopy</a>,
+<a href="FileMove.htm">FileMove</a>, <a href="FileDelete.htm">FileDelete</a>, <a href="LoopFiles.htm">file
+loops</a>, <a href="DirSelect.htm">DirSelect</a>,
+<a href="SplitPath.htm">SplitPath</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExNewDrive .ex}
+<a class="ex_number" href="#ExNewDrive"></a> Moves a directory to a new drive.</p>
+<pre class="codehilite"><code>DirMove &quot;C:\My Folder&quot;, &quot;D:\My Folder&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExRename .ex}
+<a class="ex_number" href="#ExRename"></a> Performs a simple rename.</p>
+<pre class="codehilite"><code>DirMove &quot;C:\My Folder&quot;, &quot;C:\My Folder (renamed)&quot;, &quot;R&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExNewLocation .ex}
+<a class="ex_number" href="#ExNewLocation"></a> Directories can be \"renamed into\"
+another location as long as it\'s on the same volume.</p>
+<pre class="codehilite"><code>DirMove &quot;C:\My Folder&quot;, &quot;C:\New Location\My Folder&quot;, &quot;R&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/DirMove.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#dirmove">DirMove</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

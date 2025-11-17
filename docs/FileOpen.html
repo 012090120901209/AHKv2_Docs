@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileOpen | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Opens a file to read specific content from it and/or to write new">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>FileOpen</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="fileopen">FileOpen</h1>
+<p>Opens a file to read specific content from it and/or to write new
+content into it.</p>
+<pre class="codehilite"><code class="language-Syntax">FileObj := FileOpen(Filename, Flags , Encoding)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Filename</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The path of the file to open, which is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified.</p>
+<p>Specify an asterisk (or two) as shown below to open the standard
+input/output/error stream:</p>
+<pre class="codehilite"><code>FileOpen(&quot;*&quot;, &quot;r&quot;)   ; for stdin
+FileOpen(&quot;*&quot;, &quot;w&quot;)   ; for stdout
+FileOpen(&quot;**&quot;, &quot;w&quot;)  ; for stderr
+</code></pre>
+
+</dd>
+<dt>Flags</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>Either a string of characters indicating the desired access mode
+followed by other options (with optional spaces or tabs in between);
+or a combination (sum) of numeric flags. Supported values are
+described in the tables below.</p>
+</dd>
+<dt>Encoding</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, the default encoding (as set by
+<a href="FileEncoding.htm">FileEncoding</a> or CP0 otherwise) will be used. If
+blank, it defaults to CP0 (the system default ANSI code page).
+Otherwise, specify the encoding or code page to use for text I/O,
+e.g. <code>"UTF-8"</code>, <code>"UTF-16"</code>, <code>"CP936"</code> or <code>936</code>.</p>
+<p>If the file contains a UTF-8 or UTF-16 byte order mark (BOM), or if
+the <code>h</code> (handle) flag is used, this parameter and the default
+encoding will be ignored, unless the file is being opened with
+write-only access (i.e. the previous contents of the file are being
+discarded).</p>
+</dd>
+</dl>
+<h2 id="Flags">Flags</h2>
+<h3 id="Access_modes">Access modes (mutually-exclusive)</h3>
+<p>Flag   Dec   Hex   Description</p>
+<hr />
+<p>r      0     0x0   <em>Read:</em> Fails if the file doesn\'t exist.
+  w      1     0x1   <em>Write:</em> Creates a new file, <strong>overwriting any existing file</strong>.
+  a      2     0x2   <em>Append:</em> Creates a new file if the file didn\'t exist, otherwise moves the file pointer to the end of the file.
+  rw     3     0x3   <em>Read/Write:</em> Creates a new file if the file didn\'t exist.
+  h                  Indicates that <em>Filename</em> is a file handle to wrap in an object. Sharing mode flags are ignored and the file or stream represented by the handle is not checked for a byte order mark. The file handle is [not]{.underline} closed automatically when the file object is destroyed and calling <a href="File.htm#Close">File.Close</a> has no effect. Note that <a href="File.htm#Seek">File.Seek</a>, <a href="File.htm#Pos">File.Pos</a> and <a href="File.htm#Length">File.Length</a> should not be used if <em>Filename</em> is a handle to a nonseeking device such as a pipe or a communications device.</p>
+<h3 id="Sharing_mode_flags">Sharing mode flags</h3>
+<p>Flag   Dec    Hex     Description</p>
+<hr />
+<p>-rwd                  Locks the file for read, write and/or delete access. Any combination of <code>r</code>, <code>w</code> and <code>d</code> may be used. Specifying <code>-</code> is the same as specifying <code>-rwd</code>. If omitted entirely, the default is to share all access.
+         0      0x0     If <em>Flags</em> is numeric, the absence of sharing mode flags causes the file to be locked.
+         256    0x100   Shares <em>read</em> access.
+         512    0x200   Shares <em>write</em> access.
+         1024   0x400   Shares <em>delete</em> access.</p>
+<h3 id="EOL_options">End of line (EOL) options</h3>
+<p>Flag   Dec   Hex   Description</p>
+<hr />
+<p>`n    4     0x4   Replace <code>`r`n</code> with <code>`n</code> when reading and <code>`n</code> with <code>`r`n</code> when writing.
+  `r    8     0x8   Replace standalone <code>`r</code> with <code>`n</code> when reading.</p>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>The return value is a new <a href="File.htm">File object</a> encapsulating the open
+handle to the file. Use the methods and properties of this object to
+access the file\'s contents.</p>
+<h2 id="Errors">Errors</h2>
+<p>If the file cannot be opened, an <a href="Error.htm#OSError">OSError</a> is thrown.</p>
+<h2 id="Remarks">Remarks</h2>
+<p><a href="File.htm#ReadLine">File.ReadLine</a> always supports <code>`n</code>, <code>`r`n</code>
+and <code>`r</code> as line endings and does not include them in its return
+value, regardless of whether the <code>`r</code> or <code>`n</code> options are used.
+The options only affect translation of line endings within the text
+returned by <a href="File.htm#Read">File.Read</a> or written by
+<a href="File.htm#Write">File.Write</a> or <a href="File.htm#WriteLine">File.WriteLine</a>.</p>
+<p>When a UTF-8 or UTF-16 file is created, a byte order mark (BOM) is
+written to the file [unless]{.underline} <em>Encoding</em> or the default
+encoding (as set by <a href="FileEncoding.htm">FileEncoding</a>) is <code>"UTF-8-RAW"</code>
+or <code>"UTF-16-RAW"</code>.</p>
+<p>When a file containing a UTF-8 or UTF-16 byte order mark (BOM) is opened
+with read access, the BOM is excluded from the output by positioning the
+file pointer after it. Therefore, <a href="File.htm#Pos">File.Pos</a> may report 3
+or 2 immediately after opening the file.</p>
+<p>If necessary, the write buffer can be flushed using
+<a href="File.htm#Read">File.Read</a> such as <code>FileObj.Read(0)</code>. See [example</p>
+<h1 id="3exstreams-below">3](#ExStreams) below.</h1>
+<h2 id="Related">Related</h2>
+<p><a href="FileEncoding.htm">FileEncoding</a>, <a href="File.htm">File Object</a>,
+<a href="FileRead.htm">FileRead</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExWriteRead .ex}
+<a class="ex_number" href="#ExWriteRead"></a> Writes some text to a file then reads it
+back into memory (it provides the same functionality as <a href="DllCall.htm#ExFile">this DllCall
+example</a>).</p>
+<pre class="codehilite"><code>FileName := FileSelect(&quot;S16&quot;,, &quot;Create a new file:&quot;)
+if (FileName = &quot;&quot;)
+    return
+try
+    FileObj := FileOpen(FileName, &quot;w&quot;)
+catch as Err
+{
+    MsgBox &quot;Can't open '&quot; FileName &quot;' for writing.&quot;
+        . &quot;`n`n&quot; Type(Err) &quot;: &quot; Err.Message
+    return
+}
+TestString := &quot;This is a test string.`r`n&quot;  ; When writing a file this way, use `r`n rather than `n to start a new line.
+FileObj.Write(TestString)
+FileObj.Close()
+
+; Now that the file was written, read its contents back into memory.
+try
+    FileObj := FileOpen(FileName, &quot;r-d&quot;) ; read the file (&quot;r&quot;), share all access except for delete (&quot;-d&quot;)
+catch as Err
+{
+    MsgBox &quot;Can't open '&quot; FileName &quot;' for reading.&quot;
+        . &quot;`n`n&quot; Type(Err) &quot;: &quot; Err.Message
+    return
+}
+CharsToRead := StrLen(TestString)
+TestString := FileObj.Read(CharsToRead)
+FileObj.Close()
+MsgBox &quot;The following string was read from the file: &quot; TestString
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExReadLine .ex}
+<a class="ex_number" href="#ExReadLine"></a> Opens the script in read-only mode and read
+its first line.</p>
+<pre class="codehilite"><code>Script := FileOpen(A_ScriptFullPath, &quot;r&quot;)
+MsgBox Script.ReadLine()
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExStreams .ex}
+<a class="ex_number" href="#ExStreams"></a> Demonstrates the usage of the standard
+input/output streams.</p>
+<pre class="codehilite"><code>; Open a console window for this demonstration:
+DllCall(&quot;AllocConsole&quot;)
+; Open the application's stdin/stdout streams.
+stdin  := FileOpen(&quot;*&quot;, &quot;r&quot;)
+stdout := FileOpen(&quot;*&quot;, &quot;w&quot;)
+stdout.Write(&quot;Enter your query.`n\&gt; &quot;)
+stdout.Read(0) ; Flush the write buffer.
+query := RTrim(stdin.ReadLine(), &quot;`n&quot;)
+stdout.WriteLine(&quot;Your query was '&quot; query &quot;'. Have a nice day.&quot;)
+stdout.Read(0) ; Flush the write buffer.
+Sleep 5000
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/FileOpen.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#fileopen">FileOpen</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Flags">Flags</a><ul>
+<li><a href="#Access_modes">Access modes (mutually-exclusive)</a></li>
+<li><a href="#Sharing_mode_flags">Sharing mode flags</a></li>
+<li><a href="#EOL_options">End of line (EOL) options</a></li>
+</ul>
+</li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Errors">Errors</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#3exstreams-below">3](#ExStreams) below.</a><ul>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

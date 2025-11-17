@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Directory Structure for Vectorization | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="## Proposed Organization">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>vectorization_structure</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="recommended-directory-structure-for-vectorization">Recommended Directory Structure for Vectorization</h1>
+<h2 id="proposed-organization">Proposed Organization</h2>
+<pre class="codehilite"><code>/docs/
+  /functions/           # Built-in functions (200+ files)
+    /string/           # String functions (Str*, InStr, Format, etc.)
+    /file/             # File operations (File*, Dir*)
+    /window/           # Window management (Win*, Control*)
+    /system/           # System functions (Process*, Run, etc.)
+    /gui/              # GUI-related functions
+    /misc/             # Other functions
+
+  /objects/            # Object/Class documentation (30+ files)
+    Array.md
+    Map.md
+    Gui.md
+    GuiControl.md
+    Error.md
+    Buffer.md
+    etc.
+
+  /directives/         # Compiler directives (20+ files)
+    _Include.md
+    _Requires.md
+    _HotIf.md
+    etc.
+
+  /guides/             # Tutorials and guides (20+ files)
+    Tutorial.md
+    FAQ.md
+    Concepts.md
+    Scripts.md
+    Program.md
+    etc.
+
+  /reference/          # Reference materials (30+ files)
+    /hotkeys/
+      Hotkeys.md
+      Hotstring.md
+      WriteHotkeys.md
+    /language/
+      Language.md
+      Variables.md
+      Functions.md
+      Objects.md
+    /tables/
+      KeyList.md
+      Colors.md
+      Styles.md
+      SendKeys.md
+
+  /changelog/
+    ChangeLog.md
+    v2-changes.md
+    v1-changes.md
+    Compat.md
+</code></pre>
+
+<h2 id="vectorization-benefits">Vectorization Benefits</h2>
+<h3 id="1-metadata-structure">1. Metadata Structure</h3>
+<p>Each chunk gets automatic metadata:</p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;file_path&quot;: &quot;functions/string/StrSplit.md&quot;,
+  &quot;category&quot;: &quot;functions&quot;,
+  &quot;subcategory&quot;: &quot;string&quot;,
+  &quot;doc_type&quot;: &quot;function_reference&quot;,
+  &quot;title&quot;: &quot;StrSplit&quot;,
+  &quot;chunk_id&quot;: &quot;functions_string_strsplit_1&quot;
+}
+</code></pre>
+
+<h3 id="2-contextual-chunking-strategy">2. Contextual Chunking Strategy</h3>
+<p><strong>Small Chunks with Rich Context:</strong>
+- Chunk size: 500-1000 tokens
+- Include file path in metadata
+- Preserve section headers
+- Add category tags</p>
+<p><strong>Example Chunk:</strong></p>
+<pre class="codehilite"><code>[Category: functions/string]
+[File: StrSplit.md]
+[Section: Parameters]
+
+StrSplit splits a string into an array of substrings using
+the specified delimiters.
+
+Parameters:
+- String: The string to split
+- Delimiters: Characters to split on
+- OmitChars: Characters to exclude
+...
+</code></pre>
+
+<h3 id="3-retrieval-strategies">3. Retrieval Strategies</h3>
+<p><strong>Hybrid Search:</strong>
+1. Semantic search across all chunks
+2. Filter by category metadata
+3. Re-rank by relevance + category match</p>
+<p><strong>Category-Specific Queries:</strong>
+- "array methods" → Filter: category=objects, file=Array.md
+- "string functions" → Filter: category=functions, subcategory=string
+- "hotkey syntax" → Filter: category=reference, subcategory=hotkeys</p>
+<h3 id="4-chunk-overlap-strategy">4. Chunk Overlap Strategy</h3>
+<p>For better context preservation:
+- 100-200 token overlap between chunks
+- Preserve section boundaries
+- Keep code examples intact
+- Maintain heading hierarchy</p>
+<h2 id="implementation-notes">Implementation Notes</h2>
+<h3 id="file-categorization-rules">File Categorization Rules</h3>
+<p><strong>Functions</strong> (files matching pattern):
+- Win<em>.md → functions/window/
+- Control</em>.md → functions/window/
+- File<em>.md, Dir</em>.md → functions/file/
+- Str<em>.md, InStr.md, etc. → functions/string/
+- Process</em>.md, Run<em>.md → functions/system/
+- Sound</em>.md, Mouse*.md, etc. → functions/misc/</p>
+<p><strong>Objects</strong> (files with "Object" or class-like structure):
+- Array.md, Map.md, Object.md → objects/
+- Gui.md, GuiControl.md → objects/
+- Error.md, Buffer.md, File.md → objects/</p>
+<p><strong>Directives</strong> (files starting with <em>):
+- </em>*.md → directives/</p>
+<p><strong>Guides</strong> (conceptual/tutorial content):
+- Tutorial.md, FAQ.md, Concepts.md → guides/
+- Scripts.md, Program.md → guides/</p>
+<p><strong>Reference</strong> (lookup tables, comprehensive lists):
+- KeyList.md, Colors.md, Styles.md → reference/tables/
+- Hotkeys.md, Hotstrings.md → reference/hotkeys/
+- Language.md, Variables.md, Functions.md, Objects.md → reference/language/</p>
+<h3 id="embedding-model-considerations">Embedding Model Considerations</h3>
+<p><strong>Recommended Models:</strong>
+- OpenAI: text-embedding-3-large (3072 dimensions)
+- Open source: all-MiniLM-L6-v2 (384 dimensions) for smaller deployment
+- Cohere: embed-english-v3.0 for better technical docs</p>
+<p><strong>Chunk Size Optimization:</strong>
+- Target: 512-768 tokens per chunk
+- Max: 1024 tokens
+- Overlap: 128 tokens</p>
+<h3 id="vector-db-schema">Vector DB Schema</h3>
+<pre class="codehilite"><code class="language-python">{
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;content&quot;: &quot;chunk text&quot;,
+    &quot;embedding&quot;: [vector],
+    &quot;metadata&quot;: {
+        &quot;file_path&quot;: &quot;str&quot;,
+        &quot;category&quot;: &quot;str&quot;,
+        &quot;subcategory&quot;: &quot;str&quot;,
+        &quot;title&quot;: &quot;str&quot;,
+        &quot;section&quot;: &quot;str&quot;,
+        &quot;chunk_index&quot;: int,
+        &quot;total_chunks&quot;: int,
+        &quot;version&quot;: &quot;v2&quot;,
+        &quot;has_code_example&quot;: bool,
+        &quot;doc_type&quot;: &quot;function|object|guide|reference|directive&quot;
+    }
+}
+</code></pre>
+
+<h3 id="query-enhancement">Query Enhancement</h3>
+<p><strong>Pre-processing queries:</strong>
+1. Classify intent (function lookup, how-to, reference)
+2. Extract key terms (function names, object types)
+3. Apply category filters
+4. Expand synonyms (e.g., "array" → ["Array", "list", "collection"])</p>
+<p><strong>Post-processing results:</strong>
+1. Group by file (show related sections together)
+2. Highlight code examples
+3. Show breadcrumb (category/subcategory/file)
+4. Include related links from same category</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/vectorization_structure.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#recommended-directory-structure-for-vectorization">Recommended Directory Structure for Vectorization</a><ul>
+<li><a href="#proposed-organization">Proposed Organization</a></li>
+<li><a href="#vectorization-benefits">Vectorization Benefits</a><ul>
+<li><a href="#1-metadata-structure">1. Metadata Structure</a></li>
+<li><a href="#2-contextual-chunking-strategy">2. Contextual Chunking Strategy</a></li>
+<li><a href="#3-retrieval-strategies">3. Retrieval Strategies</a></li>
+<li><a href="#4-chunk-overlap-strategy">4. Chunk Overlap Strategy</a></li>
+</ul>
+</li>
+<li><a href="#implementation-notes">Implementation Notes</a><ul>
+<li><a href="#file-categorization-rules">File Categorization Rules</a></li>
+<li><a href="#embedding-model-considerations">Embedding Model Considerations</a></li>
+<li><a href="#vector-db-schema">Vector DB Schema</a></li>
+<li><a href="#query-enhancement">Query Enhancement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

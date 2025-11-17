@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinSetRegion | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Changes the shape of the specified window to be the specified rectangle,">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>WinSetRegion</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="winsetregion">WinSetRegion</h1>
+<p>Changes the shape of the specified window to be the specified rectangle,
+ellipse, or polygon.</p>
+<pre class="codehilite"><code class="language-Syntax">WinSetRegion Options, WinTitle, WinText, ExcludeTitle, ExcludeText
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the window is restored to its original/default
+display area. Otherwise, specify one or more of the following
+options, each separated from the others with space(s):</p>
+<p><strong>W</strong><em>n</em>: Width of rectangle or ellipse. For example: <code>w200</code>.</p>
+<p><strong>H</strong><em>n</em>: Height of rectangle or ellipse. For example: <code>h200</code>.</p>
+<p><strong>X-Y:</strong> Each of these is a pair of X/Y coordinates. For example,
+<code class="no-highlight">200-0</code> would use 200 for the X coordinate and 0 for
+the Y.</p>
+<p><strong>E:</strong> Makes the region an ellipse rather than a rectangle. This
+option is valid only when W and H are present.</p>
+<p><strong>R</strong><em>w-h</em>: Makes the region a rectangle with rounded corners. For
+example, <code class="no-highlight">r30-30</code> would use a 30x30 ellipse for each
+corner. If <em>w-h</em> is omitted, 30-30 is used. R is valid only when W
+and H are present.</p>
+<p><strong>Rectangle or ellipse:</strong> If the W and H options are present, the
+new display area will be a rectangle whose upper left corner is
+specified by the first (and only) pair of X-Y coordinates. However,
+if the E option is also present, the new display area will be an
+ellipse rather than a rectangle. For example:
+<code>WinSetRegion "50-0 w200 h250 E"</code>.</p>
+<p><strong>Polygon:</strong> When the W and H options are absent, the new display
+area will be a polygon determined by multiple pairs of X-Y
+coordinates (each pair of coordinates is a point inside the window
+relative to its upper left corner). For example, if three pairs of
+coordinates are specified, the new display area will be a triangle
+in most cases. The order of the coordinate pairs with respect to
+each other is sometimes important. In addition, the word <strong>Wind</strong>
+may be present in <em>Options</em> to use the winding method instead of the
+alternating method to determine the polygon\'s region.</p>
+</dd>
+<dt>WinTitle, WinText, ExcludeTitle, ExcludeText</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a>,
+<a href="../Concepts.htm#numbers">Integer</a> or
+<a href="../Concepts.htm#objects">Object</a></p>
+<p>If each of these is blank or omitted, the <a href="../misc/WinTitle.htm#LastFoundWindow">Last Found
+Window</a> will be used.
+Otherwise, specify for <em>WinTitle</em> a <a href="../misc/WinTitle.htm">window title or other
+criteria</a> to identify the target window and/or
+for <em>WinText</em> a substring from a single text element of the target
+window (as revealed by the included Window Spy utility).</p>
+<p><em>ExcludeTitle</em> and <em>ExcludeText</em> can be used to exclude one or more
+windows by their title or text. Their specification is similar to
+<em>WinTitle</em> and <em>WinText</em>, except that <em>ExcludeTitle</em> does not
+recognize any criteria other than the window title.</p>
+<p>Window titles and text are case-sensitive. By default, hidden
+windows are not detected and hidden text elements are detected,
+unless changed with <a href="DetectHiddenWindows.htm">DetectHiddenWindows</a>
+and <a href="DetectHiddenText.htm">DetectHiddenText</a>; however, when using
+<a href="../misc/WinTitle.htm#ahk_id">pure HWNDs</a>, hidden windows are always
+detected regardless of DetectHiddenWindows. By default, a window
+title can contain <em>WinTitle</em> or <em>ExcludeTitle</em> anywhere inside it to
+be a match, unless changed with
+<a href="SetTitleMatchMode.htm">SetTitleMatchMode</a>.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>A <a href="Error.htm#TargetError">TargetError</a> is thrown if the window could not
+be found.</p>
+<p>A <a href="Error.htm#ValueError">ValueError</a> is thrown if one or more <em>Options</em>
+are invalid, or if more than 2000 pairs of coordinates were specified.</p>
+<p>An <a href="Error.htm#OSError">OSError</a> is thrown if the specified region is
+invalid or could not be applied to the target window.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>The ID of the window under the mouse cursor can be retrieved with
+<a href="MouseGetPos.htm">MouseGetPos</a>.</p>
+<p>When a region is set for a window owned by the script, the system may
+automatically change the method it uses to render the window\'s frame,
+thereby altering its appearance. The effect is similar to workaround #2
+shown below, but only affects the window until its region is reset.</p>
+<p><strong>Known limitation:</strong> Setting a region for a window not owned by the
+script may produce unexpected results if the window has a caption (title
+bar), and the system has desktop composition enabled. This is because
+the visible frame is not actually part of the window, but rendered by a
+separate system process known as Desktop Window Manager (DWM). Note that
+desktop composition is <a href="https://learn.microsoft.com/windows/compatibility/desktop-window-manager-is-always-on">always
+enabled</a>
+on Windows 8 and later. One of the following two workarounds can be
+used:</p>
+<pre class="codehilite"><code>; #1: Remove the window's caption.
+WinSetStyle &quot;-0xC00000&quot;, &quot;Window Title&quot;
+
+; To undo it:
+WinSetStyle &quot;+0xC00000&quot;, &quot;Window Title&quot;
+
+; #2: Disable DWM rendering of the window's frame.
+DllCall(&quot;dwmapi\DwmSetWindowAttribute&quot;, &quot;ptr&quot;, WinExist(&quot;Window Title&quot;)
+  , &quot;uint&quot;, DWMWA_NCRENDERING_POLICY := 2, &quot;int*&quot;, DWMNCRP_DISABLED := 1, &quot;uint&quot;, 4)
+
+; To undo it (this might also cause any set region to be ignored):
+DllCall(&quot;dwmapi\DwmSetWindowAttribute&quot;, &quot;ptr&quot;, WinExist(&quot;Window Title&quot;)
+  , &quot;uint&quot;, DWMWA_NCRENDERING_POLICY := 2, &quot;int*&quot;, DWMNCRP_ENABLED := 2, &quot;uint&quot;, 4)
+</code></pre>
+
+<h2 id="Related">Related</h2>
+<p><a href="Win.htm">Win functions</a>, <a href="Control.htm">Control functions</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Makes all parts of Notepad outside this
+rectangle invisible. This example may not work well with the new Notepad
+on Windows 11 or later.</p>
+<pre class="codehilite"><code>WinSetRegion &quot;50-0 w200 h250&quot;, &quot;ahk_class Notepad&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExRounded .ex}
+<a class="ex_number" href="#ExRounded"></a> Same as above but with corners rounded to
+40x40. This example may not work well with the new Notepad on Windows 11
+or later.</p>
+<pre class="codehilite"><code>WinSetRegion &quot;50-0 w200 h250 r40-40&quot;, &quot;ahk_class Notepad&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExEllipse .ex}
+<a class="ex_number" href="#ExEllipse"></a> Creates an ellipse instead of a rectangle.
+This example may not work well with the new Notepad on Windows 11 or
+later.</p>
+<pre class="codehilite"><code>WinSetRegion &quot;50-0 w200 h250 E&quot;, &quot;ahk_class Notepad&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExTriangle .ex}
+<a class="ex_number" href="#ExTriangle"></a> Creates a triangle with apex pointing down.
+This example may not work well with the new Notepad on Windows 11 or
+later.</p>
+<pre class="codehilite"><code>WinSetRegion &quot;50-0 250-0 150-250&quot;, &quot;ahk_class Notepad&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExRestore .ex}
+<a class="ex_number" href="#ExRestore"></a> Restores the window to its original/default
+display area. This example may not work well with the new Notepad on
+Windows 11 or later.</p>
+<pre class="codehilite"><code>WinSetRegion , &quot;ahk_class Notepad&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExAdvanced .ex}
+<a class="ex_number" href="#ExAdvanced"></a> Creates a see-through rectangular hole
+inside Notepad (or any other window). There are two rectangles specified
+below: an outer and an inner. Each rectangle consists of 5 pairs of X/Y
+coordinates because the first pair is repeated at the end to \"close
+off\" each rectangle. This example may not work well with the new
+Notepad on Windows 11 or later.</p>
+<pre class="codehilite"><code>WinSetRegion &quot;0-0 300-0 300-300 0-300 0-0   100-100 200-100 200-200 100-200 100-100&quot;, &quot;ahk_class Notepad&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/WinSetRegion.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#winsetregion">WinSetRegion</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

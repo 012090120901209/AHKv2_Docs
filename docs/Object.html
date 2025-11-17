@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="``` NoIndent">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Object</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="object">Object</h1>
+<pre class="codehilite"><code class="language-NoIndent">class Object extends Any
+</code></pre>
+
+<p><strong>Object</strong> is the basic class from which other AutoHotkey object classes
+derive. Each instance of Object consists of a set of \"own properties\"
+and a base object, from which more properties are inherited. Objects
+also have methods, but these are just properties which can be called.</p>
+<p>There are value properties and dynamic properties. Value properties
+simply contain a value. Dynamic properties do not contain a value, but
+instead call an <em>accessor function</em> depending on how they are accessed
+(get, set or call).</p>
+<p>\"Obj\" is used below as a placeholder for any instance of the Object
+class.</p>
+<p>All instances of Object are based on <code>Object.Prototype</code>, which is based
+on <code>Any.Prototype</code>. In addition to the methods and property inherited
+from <a href="Any.htm">Any</a>, Objects have the following predefined methods and
+properties.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#StaticMethods">Static Methods</a>:<ul>
+<li><a href="#Call">Call</a>: Creates a new Object.</li>
+</ul>
+</li>
+<li><a href="#Methods">Methods</a>:<ul>
+<li><a href="#Clone">Clone</a>: Returns a shallow copy of an object.</li>
+<li><a href="#DefineProp">DefineProp</a>: Defines a new own property.</li>
+<li><a href="#DeleteProp">DeleteProp</a>: Removes an own property from an
+    object.</li>
+<li><a href="#GetOwnPropDesc">GetOwnPropDesc</a>: Returns a descriptor for a
+    given own property, compatible with DefineProp.</li>
+<li><a href="#HasOwnProp">HasOwnProp</a>: Returns 1 (true) if an object owns a
+    property by the specified name.</li>
+<li><a href="#OwnProps">OwnProps</a>: Enumerates an object\'s own properties.</li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a>:<ul>
+<li><a href="#Base">Base</a>: Retrieves or sets an object\'s base object.</li>
+</ul>
+</li>
+<li><a href="#Functions">Functions</a>:<ul>
+<li><a href="#SetBase">ObjSetBase</a>: Set an object\'s base object.</li>
+<li><a href="#GetCapacity">ObjGetCapacity</a>, <a href="#SetCapacity">ObjSetCapacity</a>:
+    Retrieve or set an Object\'s capacity to contain properties.</li>
+<li><a href="#OwnPropCount">ObjOwnPropCount</a>: Retrieve the number of own
+    properties contained by an object.</li>
+<li>ObjHasOwnProp, ObjOwnProps: Equivalent to the corresponding
+    predefined method, but cannot be overridden.</li>
+</ul>
+</li>
+</ul>
+<h2 id="StaticMethods">Static Methods</h2>
+<p>::: {#Call .methodShort}</p>
+<h3 id="call">Call</h3>
+<p>Creates a new Object.</p>
+<pre class="codehilite"><code class="language-Syntax">Obj := Object()
+Obj := Object.Call()
+</code></pre>
+
+<p>:::</p>
+<h2 id="Methods">Methods</h2>
+<p>::: {#Clone .methodShort}</p>
+<h3 id="clone">Clone</h3>
+<p>Returns a shallow copy of an object.</p>
+<pre class="codehilite"><code class="language-Syntax">Clone := Obj.Clone()
+</code></pre>
+
+<p>Each property or method owned by the object is copied into the clone.
+Object <em>references</em> are copied (like with a normal assignment), not the
+objects themselves; in other words, if a property contains a reference
+to an object, the clone will contain a reference to the same object.</p>
+<p>Dynamic properties are copied, not invoked.</p>
+<p>The clone has the same base object as the original object.</p>
+<p>A TypeError is thrown if <em>Obj</em> is derived from an unsupported built-in
+type. This implementation of Clone supports Object, Class and Error
+objects. See also: <a href="Array.htm#Clone">Clone (Array)</a>, <a href="Map.htm#Clone">Clone
+(Map)</a>.
+:::</p>
+<p>::: {#DefineProp .methodShort}</p>
+<h3 id="defineprop">DefineProp</h3>
+<p>Defines a new own property.</p>
+<pre class="codehilite"><code class="language-Syntax">Obj := Obj.DefineProp(Name, Descriptor)
+</code></pre>
+
+<h4 id="DefineProp_Parameters">Parameters</h4>
+<dl>
+<dt>Name</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name of the property.</p>
+</dd>
+<dt>Descriptor</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>An object with one of the following own properties, or both <em>Get</em>
+and <em>Set</em>:</p>
+<p><strong>Get:</strong> The <a href="../misc/Functor.htm">function object</a> to call when the
+property\'s value is retrieved.</p>
+<p><strong>Set:</strong> The <a href="../misc/Functor.htm">function object</a> to call when the
+property is assigned a value. Its second parameter is the value
+being assigned.</p>
+<p><strong>Call:</strong> The <a href="../misc/Functor.htm">function object</a> to call when
+the property is called.</p>
+<p><strong>Value:</strong> Any value to assign to the property.</p>
+</dd>
+</dl>
+<h4 id="DefineProp_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>This method returns the target object.</p>
+<h4 id="DefineProp_Remarks">Remarks</h4>
+<p>This method can be used to convert a value property to a dynamic
+property or vice versa, but it is not possible to specify both a value
+and accessor functions.</p>
+<p>If any one of the accessor functions is omitted, behavior is inherited
+from a base object.</p>
+<ul>
+<li>An inherited value property is equivalent to a set of accessor
+    functions which return or call the value, or store a new value in
+    <code>this</code>. Note that a new value would overwrite any dynamic property
+    in <code>this</code> itself, and override any inherited accessor functions.</li>
+<li>If no <em>Set</em> or value is defined or inherited, attempting to set the
+    property will throw an exception.</li>
+<li>If no <em>Call</em> is defined or inherited, <em>Get</em> may be called to
+    retrieve a function object, which is then called.</li>
+<li>If no <em>Get</em> is defined or inherited but there is a <em>Call</em> accessor
+    function, the function itself becomes the property\'s value
+    (read-only).</li>
+</ul>
+<p>As with methods, the first parameter of <em>Get</em>, <em>Set</em> or <em>Call</em> is <code>this</code>
+(the target object). For <em>Set</em>, the second parameter is <code>value</code> (the
+value being assigned). These parameters are defined automatically by
+method and property definitions within a class, but must be defined
+explicitly if using normal functions. Any other parameters passed by the
+caller are appended to the parameter list.</p>
+<p>The <a href="Func.htm#MaxParams">MaxParams</a> and
+<a href="Func.htm#IsVariadic">IsVariadic</a> properties of the function objects are
+evaluated to determine whether the property may accept parameters. If
+MaxParams is 1 for <em>Get</em> or 2 for <em>Set</em> and IsVariadic is false or
+undefined, the property cannot accept parameters; they are instead
+forwarded to the <a href="../Objects.htm#__Item">__Item</a> property of the
+object returned by <em>get</em>.
+:::</p>
+<p>::: {#DeleteProp .methodShort}</p>
+<h3 id="deleteprop">DeleteProp</h3>
+<p>Removes an own property from an object.</p>
+<pre class="codehilite"><code class="language-Syntax">RemovedValue := Obj.DeleteProp(Name)
+</code></pre>
+
+<h4 id="DeleteProp_Parameters">Parameters</h4>
+<dl>
+<dt>Name</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A property name.</p>
+</dd>
+</dl>
+<h4 id="DeleteProp_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#values">Any</a></p>
+<p>This method returns the value of the removed property (blank if none).
+:::</p>
+<p>::: {#GetOwnPropDesc .methodShort}</p>
+<h3 id="getownpropdesc">GetOwnPropDesc</h3>
+<p>Returns a descriptor for a given own property, compatible with
+<a href="#DefineProp">DefineProp</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">Descriptor := Obj.GetOwnPropDesc(Name)
+</code></pre>
+
+<h4 id="GetOwnPropDesc_Parameters">Parameters</h4>
+<dl>
+<dt>Name</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>A property name.</p>
+</dd>
+</dl>
+<h4 id="GetOwnPropDesc_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#objects">Object</a></p>
+<p>For a dynamic property, the return value is a new object with an own
+property for each accessor function: <em>Get</em>, <em>Set</em>, <em>Call</em>. Each property
+is present only if the corresponding accessor function is defined in
+<em>Obj</em> itself. For a value property, the return value is a new object
+with a property named <em>Value</em>. In such cases,
+<code>Obj.GetOwnPropDesc(Name).Value == Obj.%Name%</code>.</p>
+<p>Modifying the returned object has no effect on <em>Obj</em> unless
+<a href="#DefineProp">DefineProp</a> is called.</p>
+<h4 id="GetOwnPropDesc_Error_Handling">Error Handling</h4>
+<p>A <a href="Error.htm#PropertyError">PropertyError</a> is thrown if <em>Obj</em> does not
+own a property by that name. The script can determine whether a property
+is dynamic by checking <code>not desc.HasProp("Value")</code>, where <em>desc</em> is the
+return value of GetOwnPropDesc.
+:::</p>
+<p>::: {#HasOwnProp .methodShort}</p>
+<h3 id="hasownprop">HasOwnProp</h3>
+<p>Returns 1 (true) if an object owns a property by the specified name,
+otherwise 0 (false).</p>
+<pre class="codehilite"><code class="language-Syntax">HasOwnProp := Obj.HasOwnProp(Name)
+</code></pre>
+
+<p>The default implementation of this method is also defined as a function:
+<code>ObjHasOwnProp(Obj, Name)</code>.
+:::</p>
+<p>::: {#OwnProps .methodShort}</p>
+<h3 id="ownprops">OwnProps</h3>
+<p>Enumerates an object\'s own properties.</p>
+<pre class="codehilite"><code class="language-Syntax">For Name , Value in Obj.OwnProps()
+</code></pre>
+
+<p>This method returns a new <a href="Enumerator.htm">enumerator</a>. The enumerator
+is typically passed directly to a <a href="For.htm">for-loop</a>, which calls the
+enumerator once for each iteration of the loop. Each call to the
+enumerator returns the next property name and/or value. The for-loop\'s
+variables correspond to the enumerator\'s parameters, which are:</p>
+<dl>
+<dt>Name</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The property\'s name.</p>
+</dd>
+<dt>Value</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#values">Any</a></p>
+<p>The property\'s value.</p>
+<p>If the property has a getter method, it is called to obtain the
+value (unless <em>Value</em> is omitted).</p>
+</dd>
+</dl>
+<p>Dynamic properties are included in the enumeration. However:</p>
+<ul>
+<li>Since only the object\'s own properties are enumerated, the property
+    must be defined directly in <em>Obj</em>.</li>
+<li>If only the first variable was specified, the property\'s name is
+    returned and its getter is not called.</li>
+<li>
+<p>If two variables were specified, the enumerator attempts to call the
+    property\'s getter to retrieve the value.</p>
+<ul>
+<li>
+<p>If the getter requires parameters, the property is skipped.</p>
+</li>
+<li>
+<p>If <em>Obj</em> itself does not define a getter for this property, it
+    is skipped.</p>
+<p><strong>Note:</strong> Properties defined by a method definition typically do
+not have a getter, so are skipped.</p>
+</li>
+<li>
+<p>If <em>Obj</em> is a class prototype object, the getter should not (and
+    in some cases cannot) be called; so the property is skipped.</p>
+</li>
+<li>
+<p>If the getter throws an exception, it is propagated (not
+    suppressed). The caller can continue enumeration at the next
+    property only if it retained a reference to the enumerator (i.e.
+    not if it passed the enumerator directly to a for-loop, since in
+    that case the enumerator is freed when the for-loop aborts).</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>To enumerate own properties without calling property getters, or to
+enumerate all properties regardless of type, pass only a single variable
+to the for-loop or enumerator. <a href="#GetOwnPropDesc">GetOwnPropDesc</a> can be
+used to differentiate value properties from dynamic properties, while
+also retrieving the value or getter/setter/method.</p>
+<p>Methods are typically excluded from enumeration in the two-parameter
+mode, because evaluation of the property normally depends on whether the
+object has a corresponding getter or value, either in the same object or
+a base object. To avoid inconsistency when two variables are specified,
+OwnProps skips over own properties that have only a <em>Call</em> accessor
+function. For example:</p>
+<ul>
+<li>If OwnProps returned the method itself when no getter is defined,
+    defining a getter would then prevent the method from being returned.
+    Scripts relying on the two variable mode to retrieve methods would
+    then miss some methods.</li>
+<li>If OwnProps returned the method itself when a getter is defined by a
+    base object, this would be inconsistent with normal evaluation of
+    the property.</li>
+</ul>
+<p>The default implementation of this method is also defined as a function:
+<code>ObjOwnProps(Obj)</code>.
+:::</p>
+<h2 id="Properties">Properties</h2>
+<p>::: {#Base .methodShort}</p>
+<h3 id="base">Base</h3>
+<p>Retrieves or sets an object\'s <a href="../Objects.htm#delegation">base object</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">CurrentBaseObj := Obj.Base
+</code></pre>
+
+<pre class="codehilite"><code class="language-Syntax">Obj.Base := NewBaseObj
+</code></pre>
+
+<p><em>NewBaseObj</em> must be an Object.</p>
+<p>If assigning the new base would change the native type of the object, an
+exception is thrown. An object\'s native type is decided by the nearest
+prototype object belonging to a built-in class, such as
+<code>Object.Prototype</code> or <code>Array.Prototype</code>. For example, an instance of
+Array must always derive from <code>Array.Prototype</code>, either directly or
+indirectly.</p>
+<p>Properties and methods are inherited from the base object dynamically,
+so changing an object\'s base also changes which inherited properties
+and methods are available.</p>
+<p>This property is inherited from <a href="Any.htm">Any</a>; however, it can be set
+only for instances of Object.</p>
+<p>See also: <a href="Any.htm#GetBase">ObjGetBase</a>, <a href="#SetBase">ObjSetBase</a>
+:::</p>
+<h2 id="Functions">Functions</h2>
+<h3 id="SetBase">ObjSetBase</h3>
+<p>Sets an object\'s <a href="../Objects.htm#delegation">base object</a>.</p>
+<pre class="codehilite"><code class="language-Syntax">ObjSetBase(Obj, BaseObj)
+</code></pre>
+
+<p>No <a href="../Objects.htm#Meta_Functions">meta-functions</a> or <a href="../Objects.htm#Custom_Classes_property">property
+functions</a> are called.
+Overriding the <a href="#Base">Base</a> property does not affect the behaviour of
+this function.</p>
+<p>An exception is thrown if <em>Obj</em> or <em>BaseObj</em> is of an incorrect type.</p>
+<p>See also: <a href="Any.htm#GetBase">ObjGetBase</a>, <a href="#Base">Base property</a></p>
+<h3 id="OwnPropCount">ObjOwnPropCount</h3>
+<p>Returns the number of properties owned by an object.</p>
+<pre class="codehilite"><code class="language-Syntax">Count := ObjOwnPropCount(Obj)
+</code></pre>
+
+<h3 id="SetCapacity">ObjSetCapacity</h3>
+<p>Sets the current capacity of the object\'s internal array of own
+properties.</p>
+<pre class="codehilite"><code class="language-Syntax">MaxProps := ObjSetCapacity(Obj, MaxProps)
+</code></pre>
+
+<h4 class="func_section" id="SetCapacity_Parameters">Parameters</h4>
+<dl>
+<dt>MaxProps</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The new capacity. If less than the current number of own properties,
+that number is used instead, and any unused space is freed.</p>
+</dd>
+</dl>
+<h4 class="func_section" id="SetCapacity_Return_Value">Return Value</h4>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This function returns the new capacity.</p>
+<h4 class="func_section" id="SetCapacity_Error_Handling">Error Handling</h4>
+<p>An exception is thrown if <em>Obj</em> is of an incorrect type.</p>
+<h3 id="GetCapacity">ObjGetCapacity</h3>
+<p>Returns the current capacity of the object\'s internal array of
+properties.</p>
+<pre class="codehilite"><code class="language-Syntax">MaxItems := ObjGetCapacity(Obj)
+</code></pre>
+
+<p>An exception is thrown if <em>Obj</em> is of an incorrect type.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Object.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#object">Object</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#StaticMethods">Static Methods</a><ul>
+<li><a href="#call">Call</a></li>
+</ul>
+</li>
+<li><a href="#Methods">Methods</a><ul>
+<li><a href="#clone">Clone</a></li>
+<li><a href="#defineprop">DefineProp</a><ul>
+<li><a href="#DefineProp_Parameters">Parameters</a></li>
+<li><a href="#DefineProp_Return_Value">Return Value</a></li>
+<li><a href="#DefineProp_Remarks">Remarks</a></li>
+</ul>
+</li>
+<li><a href="#deleteprop">DeleteProp</a><ul>
+<li><a href="#DeleteProp_Parameters">Parameters</a></li>
+<li><a href="#DeleteProp_Return_Value">Return Value</a></li>
+</ul>
+</li>
+<li><a href="#getownpropdesc">GetOwnPropDesc</a><ul>
+<li><a href="#GetOwnPropDesc_Parameters">Parameters</a></li>
+<li><a href="#GetOwnPropDesc_Return_Value">Return Value</a></li>
+<li><a href="#GetOwnPropDesc_Error_Handling">Error Handling</a></li>
+</ul>
+</li>
+<li><a href="#hasownprop">HasOwnProp</a></li>
+<li><a href="#ownprops">OwnProps</a></li>
+</ul>
+</li>
+<li><a href="#Properties">Properties</a><ul>
+<li><a href="#base">Base</a></li>
+</ul>
+</li>
+<li><a href="#Functions">Functions</a><ul>
+<li><a href="#SetBase">ObjSetBase</a></li>
+<li><a href="#OwnPropCount">ObjOwnPropCount</a></li>
+<li><a href="#SetCapacity">ObjSetCapacity</a><ul>
+<li><a href="#SetCapacity_Parameters">Parameters</a></li>
+<li><a href="#SetCapacity_Return_Value">Return Value</a></li>
+<li><a href="#SetCapacity_Error_Handling">Error Handling</a></li>
+</ul>
+</li>
+<li><a href="#GetCapacity">ObjGetCapacity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

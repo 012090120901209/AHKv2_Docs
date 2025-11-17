@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileSetTime | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Changes the datetime stamp of one or more files or folders. Wildcards">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>FileSetTime</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="filesettime">FileSetTime</h1>
+<p>Changes the datetime stamp of one or more files or folders. Wildcards
+are supported.</p>
+<pre class="codehilite"><code class="language-Syntax">FileSetTime YYYYMMDDHH24MISS, FilePattern, WhichTime, Mode
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>YYYYMMDDHH24MISS</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, it defaults to the current local date and time.
+Otherwise, specify the time to use for the operation (see
+<a href="#Remarks">Remarks</a> for the format). Years prior to 1601 are not
+supported.</p>
+</dd>
+<dt>FilePattern</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If omitted, the current file of the innermost enclosing <a href="LoopFiles.htm">file
+loop</a> will be used. Otherwise, specify the name of a
+single file or folder, or a wildcard pattern such as
+<code>"C:\Temp\*.tmp"</code>. <em>FilePattern</em> is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified.</p>
+<p>Both asterisks (<code>*</code>) and question marks (<code>?</code>) are supported as
+wildcards. <code>*</code> matches zero or more characters and <code>?</code> matches any
+single character. Usage examples:</p>
+<ul>
+<li><code>*.*</code> or <code>*</code> matches all files.</li>
+<li><code>*.htm</code> matches files with the extension .htm, .html, etc.</li>
+<li><code>*.</code> matches files without an extension.</li>
+<li><code>log?.txt</code> matches e.g. log1.txt but not log10.txt.</li>
+<li><code>*report*</code> matches any filename containing the word \"report\".</li>
+</ul>
+</dd>
+<dt>WhichTime</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, it defaults to M. Otherwise, specify one of the
+following letters to set which timestamp should be changed:</p>
+<ul>
+<li>M = Modification time</li>
+<li>C = Creation time</li>
+<li>A = Last access time</li>
+</ul>
+</dd>
+<dt>Mode</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, only files are operated upon and subdirectories
+are not recursed into. Otherwise, specify one or more of the
+following letters:</p>
+<ul>
+<li>D = Include directories (folders).</li>
+<li>F = Include files. If both F and D are omitted, files are
+    included but not folders.</li>
+<li>R = Subfolders are recursed into so that files and folders
+    contained therein are operated upon if they match <em>FilePattern</em>.
+    All subfolders will be recursed into, not just those whose names
+    match <em>FilePattern</em>. If R is omitted, files and folders in
+    subfolders are not included.</li>
+</ul>
+<p><strong>Note:</strong> If <em>FilePattern</em> is a single folder rather than a wildcard
+pattern, it will always be operated upon regardless of this setting.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An <a href="Error.htm">Error</a> is thrown if any files failed to be changed, with
+its <a href="Error.htm#Extra">Extra</a> property set to the number of failures.</p>
+<p>If files were found, <a href="../Variables.htm#LastError">A_LastError</a> is set to
+0 (zero) or the result of the operating system\'s GetLastError()
+function immediately after the last failure. Otherwise A_LastError
+contains an error code that might indicate why no files were found.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>A file\'s last access time might not be as precise on FAT16 &amp; FAT32
+volumes as it is on NTFS volumes.</p>
+<p>The elements of the YYYYMMDDHH24MISS format are:</p>
+<p>Element   Description</p>
+<hr />
+<p>YYYY      The 4-digit year
+  MM        The 2-digit month (01-12)
+  DD        The 2-digit day of the month (01-31)
+  HH24      The 2-digit hour in 24-hour format (00-23). For example, 09 is 9am and 21 is 9pm.
+  MI        The 2-digit minutes (00-59)
+  SS        The 2-digit seconds (00-59)</p>
+<p>If only a partial string is given for YYYYMMDDHH24MISS (e.g. 200403),
+any remaining element that has been omitted will be supplied with the
+following default values:</p>
+<ul>
+<li>MM = Month 01</li>
+<li>DD = Day 01</li>
+<li>HH24 = Hour 00</li>
+<li>MI = Minute 00</li>
+<li>SS = Second 00</li>
+</ul>
+<p>The built-in variable <a href="../Variables.htm#Now">A_Now</a> contains the current
+local time in the above format. Similarly,
+<a href="../Variables.htm#NowUTC">A_NowUTC</a> contains the current Coordinated
+Universal Time.</p>
+<p><strong>Note:</strong> Date-time values can be compared, added to, or subtracted from
+via <a href="DateAdd.htm">DateAdd</a> and <a href="DateDiff.htm">DateDiff</a>. Also, it is
+best to not use greater-than or less-than to compare times unless they
+are both the same string length. This is because they would be compared
+as numbers; for example, 20040201 is always numerically less (but
+chronologically greater) than 200401010533. So instead use
+<a href="DateDiff.htm">DateDiff</a> to find out whether the amount of time between
+them is positive or negative.</p>
+<h2 id="Related">Related</h2>
+<p><a href="FileGetTime.htm">FileGetTime</a>, <a href="FileGetAttrib.htm">FileGetAttrib</a>,
+<a href="FileSetAttrib.htm">FileSetAttrib</a>, <a href="FileGetSize.htm">FileGetSize</a>,
+<a href="FileGetVersion.htm">FileGetVersion</a>, <a href="FormatTime.htm">FormatTime</a>,
+<a href="LoopFiles.htm">file loop</a>, <a href="DateAdd.htm">DateAdd</a>,
+<a href="DateDiff.htm">DateDiff</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExOmitted .ex}
+<a class="ex_number" href="#ExOmitted"></a> Sets the modification time to the current
+time for all matching files.</p>
+<pre class="codehilite"><code>FileSetTime &quot;&quot;, &quot;C:\temp\*.txt&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExModTime .ex}
+<a class="ex_number" href="#ExModTime"></a> Sets the modification date (time will be
+midnight).</p>
+<pre class="codehilite"><code>FileSetTime 20040122, &quot;C:\My Documents\test.doc&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExCreateTime .ex}
+<a class="ex_number" href="#ExCreateTime"></a> Sets the creation date. The time will be
+set to 4:55pm.</p>
+<pre class="codehilite"><code>FileSetTime 200401221655, &quot;C:\My Documents\test.doc&quot;, &quot;C&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExPattern .ex}
+<a class="ex_number" href="#ExPattern"></a> Changes the mod-date of all files that match
+a pattern. Any matching folders will also be changed due to the last
+parameter.</p>
+<pre class="codehilite"><code>FileSetTime 20040122165500, &quot;C:\Temp\*.*&quot;, &quot;M&quot;, &quot;DF&quot;
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/FileSetTime.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#filesettime">FileSetTime</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

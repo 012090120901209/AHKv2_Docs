@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Handles | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="To use an icon or bitmap handle in place of an image filename, use the">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ImageHandles</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="image-handles">Image Handles</h1>
+<p>To use an icon or bitmap handle in place of an image filename, use the
+following syntax:</p>
+<pre class="codehilite"><code class="language-Syntax">HBITMAP:BitmapHandle
+HICON:IconHandle
+</code></pre>
+
+<p>Replace <em>BitmapHandle</em> or <em>IconHandle</em> with the actual handle value. For
+example, <code>"hicon:" handle</code>, where <em>handle</em> is a variable containing an
+icon handle.</p>
+<p>The following things support this syntax:</p>
+<ul>
+<li><a href="../lib/GuiControls.htm#Picture">Gui.AddPicture</a> (and
+    <a href="../lib/GuiControl.htm#Value">GuiControl.Value</a> when setting a
+    Picture control\'s content).</li>
+<li><a href="../lib/ListView.htm#IL_Add">IL_Add</a></li>
+<li><a href="../lib/LoadPicture.htm">LoadPicture</a></li>
+<li><a href="../lib/GuiControls.htm#SB_SetIcon">SB.SetIcon</a></li>
+<li><a href="../lib/ImageSearch.htm">ImageSearch</a></li>
+<li><a href="../lib/TraySetIcon.htm">TraySetIcon</a> or
+    <a href="../lib/Menu.htm#SetIcon">Menu.SetIcon</a></li>
+</ul>
+<p>A bitmap or icon handle is a numeric value which identifies a bitmap or
+icon in memory. The majority of scripts never need to deal with handles,
+as in most cases AutoHotkey takes care of loading the image from file
+and freeing it when it is no longer needed. The syntax shown above is
+intended for use when the script obtains an icon or bitmap handle from
+another source, such as by sending the WM_GETICON message to a window.
+It can also be used in combination with
+<a href="../lib/LoadPicture.htm">LoadPicture</a> to avoid loading an image from
+file multiple times.</p>
+<p>By default, AutoHotkey treats the handle as though it loaded the image
+from file - for example, a bitmap used on a Picture control is deleted
+when the GUI is destroyed, and an image will generally be deleted
+immediately if it needs to be resized. To avoid this, put an asterisk
+between the colon and handle. For example: <code>"hbitmap:*" handle</code>. With
+the exception of ImageSearch, this forces the function to take a copy of
+the image.</p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExHICON .ex}
+<a class="ex_number" href="#ExHICON"></a> Shows a menu of the first <em>n</em> files matching a
+pattern, and their icons.</p>
+<pre class="codehilite"><code>pattern := A_ScriptDir &quot;\*&quot;
+n := 15
+
+; Create a menu.
+Fmenu := Menu()
+
+; Allocate memory for a SHFILEINFOW struct.
+fileinfo := Buffer(fisize := A_PtrSize + 688)
+
+Loop Files, pattern, &quot;FD&quot;
+{
+    ; Add a menu item for each file.
+    Fmenu.Add(A_LoopFileName, (*) =&gt; &quot;&quot;) ; Do nothing.
+
+    ; Get the file's icon.
+    if DllCall(&quot;shell32\SHGetFileInfoW&quot;, &quot;WStr&quot;, A_LoopFileFullPath
+        , &quot;UInt&quot;, 0, &quot;Ptr&quot;, fileinfo, &quot;UInt&quot;, fisize, &quot;UInt&quot;, 0x100)
+    {
+        hicon := NumGet(fileinfo, 0, &quot;Ptr&quot;)
+        ; Set the menu item's icon.
+        Fmenu.SetIcon(A_Index &quot;&amp;&quot;, &quot;HICON:&quot; hicon)
+        ; Because we used &quot;:&quot; and not &quot;:*&quot;, the icon will be automatically
+        ; freed when the program exits or if the menu or item is deleted.
+    }
+}
+until A_Index = n
+Fmenu.Show()
+</code></pre>
+
+<p>:::</p>
+<p>See also <a href="../lib/LoadPicture.htm#ExSlideShow">LoadPicture example #1</a>.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ImageHandles.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#image-handles">Image Handles</a><ul>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

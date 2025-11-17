@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acknowledgements | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="In addition to the AutoIt authors already [mentioned](../index.htm):">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Acknowledgements</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="acknowledgements">Acknowledgements</h1>
+<p>In addition to the AutoIt authors already <a href="../index.htm">mentioned</a>:</p>
+<p><strong>Robert Yaklin:</strong> A lot of tireless testing to isolate bugs, a great
+first draft of the installer, as well as great suggestions for how
+commands <strong>ought</strong> to work :)</p>
+<p><strong>Jason Payam Ahdoot:</strong> For suggesting and describing floating point
+support.</p>
+<p><strong>Jay D. Novak:</strong> For discovering many Win9x problems with the Send
+command, CapsLock, and hotkey modifiers; and for generously sharing his
+wealth of code and wisdom for hotkeys, hot-strings, hook usage, and
+typing acceleration.</p>
+<p><strong>Rajat:</strong> For creating stylish replacements for the original AHK icons;
+a great product logo; making the syntax customizations for TextPad;
+discovering some bugs with the registry commands and AutoIt v2
+compatibility; making SmartGUI Creator; and many other things.</p>
+<p><strong>Thaddeus Beck (Beardboy):</strong> For NT4 testing to fix GetKeyState and the
+Send command; for a lot of help on the forum; and for many suggestions
+and bug reports.</p>
+<p><strong>Gregory F. Hogg of Hogg\'s Software:</strong> For writing the source code for
+multi-monitor support in the <a href="../lib/SysGet.htm">SysGet</a> command.</p>
+<p><strong>Aurelian Maga:</strong> For writing the source code for
+<a href="../lib/ImageSearch.htm">ImageSearch</a> and the faster
+<a href="../lib/PixelSearch.htm">PixelSearch</a>.</p>
+<p><strong>Joost Mulders:</strong> Whose source code provided the foundation for
+<a href="../Variables.htm#Expressions">expressions</a>.</p>
+<p><strong>Laszlo Hars:</strong> For advice about data structures and algorithms, which
+helped greatly speed up arrays and dynamic variables.</p>
+<p><strong>Marcus Sonntag (Ultra):</strong> For the research, design, coding, and
+testing of <a href="../lib/DllCall.htm">DllCall</a>.</p>
+<p><strong>Gena Shimanovich:</strong> For debugging and coding assistance; and for some
+advanced prototype scripts upon which future features may be based.</p>
+<p><strong>Eric Morin (numEric):</strong> For advice on mathematics; for steadfast
+debugging of areas like <a href="../lib/OnMessage.htm">OnMessage</a>, floating
+point computations, and mouse movement; and for improvements to overall
+quality.</p>
+<p><strong>Philip Hazel:</strong> For <a href="http://www.pcre.org/">Perl-Compatible Regular Expressions
+(PCRE)</a>.</p>
+<p><strong>Titan/polyethene:</strong> For providing community hosting on autohotkey.net,
+creating many useful scripts and libraries, creating the JavaScript to
+colorize code-comments in the forum, and many other things.</p>
+<p><strong>Philippe Lhoste (PhiLho):</strong> For tireless moderation and support in the
+forum, RegEx advice and testing, syntax and design ideas, and many other
+things.</p>
+<p><strong>John Biederman:</strong> For greatly improving the presentation and
+ergonomics of the documentation.</p>
+<p><strong>Jonathan Rennison (JGR):</strong> For developing RegisterCallback (now called
+<a href="../lib/CallbackCreate.htm">CallbackCreate</a>), and for beneficial
+suggestions.</p>
+<p><strong>Steve Gray (Lexikos):</strong> For developing dynamic function calling and
+other new functionality; analyzing and fixing bugs; and valuable support
+and advice for hundreds of individual visitors at the forum.</p>
+<p>[AutoHotkey_L:]{.underline}</p>
+<p><strong>jackieku:</strong> For developing Unicode support and other new
+functionality.</p>
+<p><strong>fincs:</strong> For developing native 64-bit support and try/catch/throw,
+writing a replacement for the old compiler, analyzing and fixing bugs.</p>
+<p><strong>Sean:</strong> For developing built-in COM functionality and providing
+valuable insight into COM.</p>
+<p><strong>TheGood:</strong> For merging the documentation and adapting the installer
+script.</p>
+<p><strong>ac:</strong> For developing #Warn.</p>
+<p><strong>Russell Davis:</strong> For developing A_PriorKey, ahk_path (the basis of
+ahk_exe in WinTitle parameters), #InputLevel and SendLevel.</p>
+<p><strong>Christian Sander:</strong> For developing support for SysLink controls.</p>
+<p><em>And to everyone else who\'s contributed or sent in bug reports or
+suggestions: Thanks!</em></p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Acknowledgements.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

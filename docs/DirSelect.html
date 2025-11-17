@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DirSelect | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Displays a standard dialog that allows the user to select a folder.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>DirSelect</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="dirselect">DirSelect</h1>
+<p>Displays a standard dialog that allows the user to select a folder.</p>
+<pre class="codehilite"><code class="language-Syntax">SelectedFolder := DirSelect(StartingFolder, Options, Prompt)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>StartingFolder</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, the dialog\'s initial selection will be the
+user\'s My Documents folder or possibly This PC (formerly My
+Computer or Computer). A <a href="../misc/CLSID-List.htm">CLSID folder</a> such
+as <code>"::{20D04FE0-3AEA-1069-A2D8-08002B30309D}"</code> (i.e. This PC) may
+be specified start navigation at a specific special folder.</p>
+<p>Otherwise, the most common usage of this parameter is an asterisk
+followed immediately by the absolute path of the drive or folder to
+be initially selected. For example, <code>"*C:\"</code> would initially select
+the C drive. Similarly, <code>"*C:\My Folder"</code> would initially select
+that particular folder.</p>
+<p>The asterisk indicates that the user is permitted to navigate upward
+(closer to the root) from the starting folder. Without the asterisk,
+the user would be forced to select a folder inside <em>StartingFolder</em>
+(or <em>StartingFolder</em> itself). One benefit of omitting the asterisk
+is that <em>StartingFolder</em> is initially shown in a tree-expanded
+state, which may save the user from having to click the first plus
+sign.</p>
+<p>If the asterisk is present, upward navigation may optionally be
+restricted to a folder other than Desktop. This is done by preceding
+the asterisk with the absolute path of the uppermost folder followed
+by exactly one space or tab. For example,
+<code>"C:\My Folder *C:\My Folder\Projects"</code> would not allow the user to
+navigate any higher than C:\My Folder (but the initial selection
+would be C:\My Folder\Projects).</p>
+</dd>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 1. Otherwise, specify one of the
+following numbers:</p>
+<p><strong>0:</strong> The options below are all disabled.</p>
+<p><strong>1:</strong> A button is provided that allows the user to create new
+folders.</p>
+<p><strong>Add 2</strong> to the above number to provide an edit field that allows
+the user to type the name of a folder. For example, a value of 3 for
+this parameter provides both an edit field and a \"make new folder\"
+button.</p>
+<p><strong>Add 4</strong> to the above number to omit the BIF_NEWDIALOGSTYLE
+property. Adding 4 ensures that DirSelect will work properly even in
+a Preinstallation Environment like WinPE or BartPE. However, this
+prevents the appearance of a \"make new folder\" button.</p>
+<p>If the user types an invalid folder name in the edit field,
+<em>SelectedFolder</em> will be set to the folder selected in the
+navigation tree rather than what the user entered.</p>
+</dd>
+<dt>Prompt</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, it defaults to
+<code>"Select Folder - "</code><a href="../Variables.htm#ScriptName"><code>A_ScriptName</code></a>
+(i.e. the name of the current script). Otherwise, specify the text
+displayed in the window to instruct the user what to do.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>This function returns the full path and name of the folder chosen by the
+user. If the user cancels the dialog (i.e. does not wish to select a
+folder), an empty string is returned. If the user selects a root
+directory (such as C:\), the return value will contain a trailing
+backslash. If this is undesirable, remove it as follows:</p>
+<pre class="codehilite"><code>Folder := RegExReplace(DirSelect(), &quot;\\$&quot;)  ; Removes the trailing backslash, if present.
+</code></pre>
+
+<p>An empty string is also returned if the system refused to show the
+dialog, but this is very rare.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>A folder-selection dialog usually looks like this:</p>
+<p><img alt="DirSelect" src="../static/dlg_folder.png" /></p>
+<p>A GUI window may display a modal folder-selection dialog by means of the
+<a href="Gui.htm#OwnDialogs">+OwnDialogs</a> option. A modal dialog prevents the
+user from interacting with the GUI window until the dialog is dismissed.</p>
+<h2 id="Related">Related</h2>
+<p><a href="FileSelect.htm">FileSelect</a>, <a href="MsgBox.htm">MsgBox</a>,
+<a href="InputBox.htm">InputBox</a>, <a href="ToolTip.htm">ToolTip</a>, <a href="Gui.htm">GUI</a>, <a href="../misc/CLSID-List.htm">CLSID
+List</a>, <a href="DirCopy.htm">DirCopy</a>,
+<a href="DirMove.htm">DirMove</a>, <a href="SplitPath.htm">SplitPath</a></p>
+<p>Also, the operating system offers standard dialog boxes that prompt the
+user to pick a font, color, or icon. These dialogs can be displayed via
+<a href="DllCall.htm">DllCall</a> in combination with
+<a href="https://learn.microsoft.com/previous-versions/windows/desktop/legacy/ms646914(v=vs.85)">comdlg32\ChooseFont</a>,
+<a href="https://learn.microsoft.com/previous-versions/windows/desktop/legacy/ms646912(v=vs.85)">comdlg32\ChooseColor</a>,
+or
+<a href="https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pickicondlg">shell32\PickIconDlg</a>.
+Search the forums for examples.</p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Allows the user to select a folder and provides
+both an edit field and a \"make new folder\" button.</p>
+<pre class="codehilite"><code>SelectedFolder := DirSelect(, 3)
+if SelectedFolder = &quot;&quot;
+    MsgBox &quot;You didn't select a folder.&quot;
+else
+    MsgBox &quot;You selected folder '&quot; SelectedFolder &quot;'.&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExCLSID .ex}
+<a class="ex_number" href="#ExCLSID"></a> A <a href="../misc/CLSID-List.htm">CLSID</a> example.
+Allows the user to select a folder in This PC (formerly My Computer or
+Computer).</p>
+<pre class="codehilite"><code>SelectedFolder := DirSelect(&quot;::{20D04FE0-3AEA-1069-A2D8-08002B30309D}&quot;)
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/DirSelect.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#dirselect">DirSelect</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

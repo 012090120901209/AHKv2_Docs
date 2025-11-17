@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComCall | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Calls a native COM interface method by index.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>ComCall</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="comcall">ComCall</h1>
+<p>Calls a native COM interface method by index.</p>
+<pre class="codehilite"><code class="language-Syntax">Result := ComCall(Index, ComObj , Type1, Arg1, Type2, Arg2, ReturnType)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Index</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The zero-based index of the method within the virtual function
+table.</p>
+<p><em>Index</em> corresponds to the position of the method within the
+original interface definition. Microsoft documentation usually lists
+methods in alphabetical order, which is not relevant. In order to
+determine the correct index, locate the original interface
+definition. This may be in a header file or type library.</p>
+<p>It is important to take into account methods which are inherited
+from parent interfaces. Since all COM interfaces ultimately derive
+from
+<a href="https://learn.microsoft.com/windows/win32/api/unknwn/nn-unknwn-iunknown">IUnknown</a>,
+the first three methods are always QueryInterface (0), AddRef (1)
+and Release (2). For example, <em>IShellItem2</em> is an extension of
+<em>IShellItem</em>, which starts at index 3 and contains 5 methods, so
+<em>IShellItem2</em>\'s first method (GetPropertyStore) is at index 8.</p>
+<p><strong>Tip:</strong> For COM interfaces defined by Microsoft, try searching the
+Internet or Windows SDK for \"<em>IInterfaceName</em><strong>Vtbl</strong>\" - for
+example, \"IUnknownVtbl\". Microsoft\'s own interface definitions
+are accompanied by this plain-C definition of the interface\'s
+virtual function table, which lists all methods explicitly, in the
+correct order.</p>
+<p>Passing an invalid index may cause undefined behaviour, including
+(but not limited to) program termination.</p>
+</dd>
+<dt>ComObj</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a> or
+<a href="../Concepts.htm#objects">Object</a></p>
+<p>The target COM object; that is, a COM interface pointer. The pointer
+value can be passed directly or encapsulated within an object with
+the <code>Ptr</code> property, such as a <a href="ComValue.htm">ComValue</a> with variant
+type VT_UNKNOWN.</p>
+<p>The interface pointer is used to locate the address of the virtual
+function which implements the interface method, and is also passed
+as a parameter. This parameter is generally not explicitly present
+in languages which natively support interfaces, but is shown in the
+C style \"Vtbl\" definition.</p>
+<p>Passing an invalid pointer may cause undefined behaviour, including
+(but not limited to) program termination.</p>
+</dd>
+<dt>Type1, Arg1</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>Each of these pairs represents a single parameter to be passed to
+the method. The number of pairs is unlimited. For <em>Type</em>, see the
+<a href="DllCall.htm#types">DllCall types table</a>. For <em>Arg</em>, specify the
+value to be passed to the method.</p>
+</dd>
+<dt>ReturnType</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If omitted, the return type defaults to
+<a href="DllCall.htm#HRESULT">HRESULT</a>, which is most the common return type
+for COM interface methods. Any result indicating failure causes an
+<a href="Error.htm#OSError">OSError</a> to be thrown; therefore, the return
+type must not be omitted unless the actual return type is HRESULT.</p>
+<p>If the method is of a type that does not return a value (the <code>void</code>
+return type in C), specify \"Int\" or any other numeric type without
+any suffix (except HRESULT), and ignore the return value. As the
+content of the return value register is arbitrary in such cases, an
+exception may or may not be thrown if <em>ReturnType</em> is omitted.</p>
+<p>Otherwise, specify one of the argument types from the <a href="DllCall.htm#types">DllCall types
+table</a>. The <a href="DllCall.htm#asterisk">asterisk
+suffix</a> is also supported.</p>
+<p>Although ComCall supports the <em>Cdecl</em> keyword as per
+<a href="DllCall.htm#cdecl">DllCall</a>, it is generally not used by COM
+interface methods.</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or
+<a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If <em>ReturnType</em> is <a href="DllCall.htm#HRESULT">HRESULT</a> (or omitted) and the
+method returned an error value (as defined by the <a href="https://learn.microsoft.com/windows/win32/api/winerror/nf-winerror-failed">FAILED
+macro</a>),
+an <a href="Error.htm#OSError">OSError</a> is thrown.</p>
+<p>Otherwise, ComCall returns the actual value returned by the method. If
+the method is of a type that does not return a value (with return type
+defined in C as <code>void</code>), the result is undefined and should be ignored.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>The following DllCall topics are also applicable to ComCall:</p>
+<ul>
+<li><a href="DllCall.htm#types">Types of Arguments and Return Values</a></li>
+<li><a href="DllCall.htm#error">Errors</a></li>
+<li><a href="DllCall.htm#except">Native Exceptions and A_LastError</a></li>
+<li><a href="DllCall.htm#struct">Structures and Arrays</a></li>
+<li><a href="DllCall.htm#limits">Known Limitations</a></li>
+<li><a href="DllCall.htm#dotnet">.NET Framework</a></li>
+</ul>
+<h2 id="Related">Related</h2>
+<p><a href="ComObject.htm">ComObject</a>, <a href="ComObjQuery.htm">ComObjQuery</a>,
+<a href="ComValue.htm">ComValue</a>, <a href="Buffer.htm">Buffer object</a>,
+<a href="CallbackCreate.htm">CallbackCreate</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExTaskbar .ex}
+<a class="ex_number" href="#ExTaskbar"></a> Removes the active window from the taskbar
+for 3 seconds. Compare this to the <a href="DllCall.htm#ExTaskbar">equivalent DllCall
+example</a>.</p>
+<pre class="codehilite"><code>/*
+  Methods in ITaskbarList's VTable:
+    IUnknown:
+      0 QueryInterface  -- use ComObjQuery instead
+      1 AddRef          -- use ObjAddRef instead
+      2 Release         -- use ObjRelease instead
+    ITaskbarList:
+      3 HrInit
+      4 AddTab
+      5 DeleteTab
+      6 ActivateTab
+      7 SetActiveAlt
+*/
+IID_ITaskbarList  := &quot;{56FDF342-FD6D-11d0-958A-006097C9A090}&quot;
+CLSID_TaskbarList := &quot;{56FDF344-FD6D-11d0-958A-006097C9A090}&quot;
+
+; Create the TaskbarList object.
+tbl := ComObject(CLSID_TaskbarList, IID_ITaskbarList)
+
+activeHwnd := WinExist(&quot;A&quot;)
+
+ComCall(3, tbl)                     ; tbl.HrInit()
+ComCall(5, tbl, &quot;ptr&quot;, activeHwnd)  ; tbl.DeleteTab(activeHwnd)
+Sleep 3000
+ComCall(4, tbl, &quot;ptr&quot;, activeHwnd)  ; tbl.AddTab(activeHwnd)
+
+; When finished with the object, simply replace any references with
+; some other value (or if its a local variable, just return):
+tbl := &quot;&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExTaskbarClass .ex}
+<a class="ex_number" href="#ExTaskbarClass"></a> Demonstrates some techniques for
+wrapping COM interfaces. Equivalent to the previous example.</p>
+<pre class="codehilite"><code>tbl := TaskbarList()
+
+activeHwnd := WinExist(&quot;A&quot;)
+
+tbl.DeleteTab(activeHwnd)
+Sleep 3000
+tbl.AddTab(activeHwnd)
+
+tbl := &quot;&quot;
+
+
+class TaskbarList {
+    static IID := &quot;{56FDF342-FD6D-11d0-958A-006097C9A090}&quot;
+    static CLSID := &quot;{56FDF344-FD6D-11d0-958A-006097C9A090}&quot;
+
+    ; Called on startup to initialize the class.
+    static __new() {
+        ; Get the base object for all instances of TaskbarList.
+        proto := this.Prototype
+
+        ; Bound functions can be used to predefine parameters, making
+        ; the methods more usable without requiring wrapper functions.
+        ; HrInit itself has no parameters, so bind only the index,
+        ; and the caller will implicitly provide 'this'.
+        proto.HrInit := ComCall.Bind(3)
+
+        ; Leave a parameter blank to let the caller provide a value.
+        ; In this case, the blank parameter is 'this' (normally hidden).
+        proto.AddTab := ComCall.Bind(4,, &quot;ptr&quot;)
+
+        ; An object or Map can be used to reduce repetition.
+        for name, args in Map(
+            &quot;DeleteTab&quot;, [5,,&quot;ptr&quot;],
+            &quot;ActivateTab&quot;, [6,,&quot;ptr&quot;],
+            &quot;SetActiveAlt&quot;, [7,,&quot;ptr&quot;]) {
+            proto.%name% := ComCall.Bind(args*)
+        }
+    }
+
+    ; Called by TaskbarList() on the new instance.
+    __new() {
+        this.comobj := ComObject(TaskbarList.CLSID, TaskbarList.IID)
+        this.ptr := this.comobj.ptr
+        ; Request initialization via ITaskbarList.
+        this.HrInit()
+    }
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/ComCall.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#comcall">ComCall</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

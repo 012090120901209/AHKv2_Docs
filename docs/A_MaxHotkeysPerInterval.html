@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A_MaxHotkeysPerInterval / A_HotkeyInterval | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="*A_MaxHotkeysPerInterval* and *A_HotkeyInterval* are [built-in">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>A_MaxHotkeysPerInterval</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="a_maxhotkeysperinterval-a_hotkeyinterval">A_MaxHotkeysPerInterval / A_HotkeyInterval</h1>
+<p><em>A_MaxHotkeysPerInterval</em> and <em>A_HotkeyInterval</em> are <a href="../Concepts.htm#built-in-variables">built-in
+variables</a> that control the rate of
+<a href="../Hotkeys.htm">hotkey</a> activations beyond which a warning dialog will
+be displayed.</p>
+<p><em>A_MaxHotkeysPerInterval</em> can be used to get or set an
+<a href="../Concepts.htm#numbers">integer</a> representing the maximum number of
+hotkeys that can be pressed within the interval without triggering a
+warning dialog.</p>
+<p><em>A_HotkeyInterval</em> can be used to get or set an
+<a href="../Concepts.htm#numbers">integer</a> representing the length of the
+interval in milliseconds.</p>
+<p>The default settings are 70 (ms) for <em>A_MaxHotkeysPerInterval</em> and 2000
+(ms) for <em>A_HotkeyInterval</em>.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>These built-in variables should usually be assigned values when the
+script starts (if the default settings are not suitable), but the script
+can get or set their values at any time.</p>
+<p>Care should be taken not to make the setting too lenient because if you
+ever inadvertently introduce an infinite loop of keystrokes (via a
+<a href="Send.htm">Send</a> function that accidentally triggers other hotkeys),
+your computer could become unresponsive due to the rapid flood of
+keyboard events.</p>
+<p>As an oversimplified example, the hotkey <code>^c::Send "^c"</code> would produce
+an infinite loop of keystrokes. To avoid this, add the <a href="../Hotkeys.htm#prefixdollar">\$
+prefix</a> to the hotkey definition (e.g.
+<code>$^c::</code>) so that the hotkey cannot be triggered by the Send function.</p>
+<p>The limit might be reached by means other than an infinite loop, such
+as:</p>
+<ul>
+<li>Key-repeat when the limit is too low relative to the key-repeat
+    rate, or the system is under heavy load.</li>
+<li>Keyboard or mouse hardware which sends input events more rapidly
+    than the typical key-repeat rate. For example, tilting the wheel
+    left or right on some mice sends a rapid flood of events which may
+    reach the limit for hotkeys such as <code>WheelLeft::</code> and
+    <code>WheelRight::</code>.</li>
+</ul>
+<p>To disable the warning dialog entirely, use <code>A_HotkeyInterval := 0</code>.</p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> Allows a maximum of 200 hotkeys to be pressed
+within 2000 ms without triggering a warning dialog.</p>
+<pre class="codehilite"><code>A_HotkeyInterval := 2000  ; This is the default value (milliseconds).
+A_MaxHotkeysPerInterval := 200
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/A_MaxHotkeysPerInterval.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#a_maxhotkeysperinterval-a_hotkeyinterval">A_MaxHotkeysPerInterval / A_HotkeyInterval</a><ul>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

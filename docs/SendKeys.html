@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Send Keystrokes | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Send "Hello, world{!}{Left}^+{Left}"">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>SendKeys</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="how-to-send-keystrokes">How to Send Keystrokes</h1>
+<pre class="codehilite"><code>Send &quot;Hello, world{!}{Left}^+{Left}&quot;
+</code></pre>
+
+<p>Sending keystrokes (or keys for short) is the most common method of
+automating programs, because it is the one that works most generally.
+More direct methods tend to work only in particular types of app.</p>
+<p>There are broadly two parts to learning how to send keys:</p>
+<ol>
+<li>How to write the code so that the program knows which keys you want
+    to send.</li>
+<li>How to use the available modes and options to get the right end
+    result.</li>
+</ol>
+<p>It is important to understand that sending a key does not perfectly
+replicate the act of physically pressing the key, even if you slow it
+down to human speeds. But before we go into that, we\'ll cover some
+basics.</p>
+<h2 id="Trying_the_examples">Trying the examples</h2>
+<p>If you run an example like <code>SendText "Hi!"</code>, the text will be
+immediately sent to the active (focused) window, which might be less
+than useful depending on how you ran the example. It\'s usually better
+to define a hotkey, run the example to load it up, and press the hotkey
+when you want to test its effect. Some of the examples below will use
+numbered hotkeys like <code>^1::</code> ([Ctrl]{.kbd} and a number, so you can try
+multiple examples at once if there are no duplicates), but you can
+change that to whatever suits you.</p>
+<p>To learn how to customize the hotkeys or create your own, see <a href="WriteHotkeys.htm">How to
+Write Hotkeys</a>.</p>
+<p>If you\'re not sure how to try out the examples, see <a href="RunExamples.htm">How to Run Example
+Code</a>.</p>
+<h2 id="How_to_write_the_code">How to write the code</h2>
+<p>When sending keys, you generally want to either send a key or key
+combination for its effect (like [Ctrl]{.kbd}+[C]{.kbd} to copy to the
+clipboard), or type some text. Typing text is simpler, so we\'ll start
+there: just call the <a href="../lib/Send.htm">SendText</a> function,
+<a href="../Concepts.htm#pass-parameters">passing</a> it the exact text you want to
+send.</p>
+<pre class="codehilite"><code>^1::SendText &quot;To Whom It May Concern&quot;
+</code></pre>
+
+<p>Technically SendText actually sends Unicode character packets and not
+keystrokes, and that makes it much more reliable for characters that are
+normally typed with a key-combination like [Shift]{.kbd}+[2]{.kbd} or
+[AltGr]{.kbd}+[a]{.kbd}.</p>
+<h3 id="Rules_of_quoted_strings">Rules of quoted strings</h3>
+<p>SendText sends the text verbatim, but keep in mind the rules of the
+<a href="../Language.htm">language</a>. For instance, <a href="../Language.htm#strings">literal
+text</a> must be enclosed in quote marks (double
+<code>"</code> or single <code>'</code>), and the quote marks themselves aren\'t \"seen\" by
+the SendText function. To send a literal quote mark, you can enclose it
+in the opposite type of quote mark. For example:</p>
+<pre class="codehilite"><code>^2::SendText 'Quote marks are also known as &quot;quotes&quot;.'
+</code></pre>
+
+<p>Alternatively, use an <a href="../misc/EscapeChar.htm">escape sequence</a>. Inside
+a quoted string, <code>`"</code> translates to a literal <code>"</code> and <code>`'</code>
+translates to a literal <code>'</code>. For example:</p>
+<pre class="codehilite"><code>^3::{
+    SendText &quot;Double quote (`&quot;)&quot;
+    SendText 'Single quote (`')'
+}
+</code></pre>
+
+<p>You can also alternate the quote marks:</p>
+<pre class="codehilite"><code>^4::SendText 'Double (&quot;) and' . &quot; single (') quote&quot;
+</code></pre>
+
+<p>The two strings are joined together
+(<a href="../Variables.htm#concat">concatenated</a>) before being passed to the
+SendText function. The dot (<code>.</code>) can be omitted, but that makes it
+harder to see where one ends and the other begins.</p>
+<p>As you\'ve seen above, the escape character <code>`</code> (known by
+<em>backquote</em>, <em>backtick</em>, <em>grave accent</em> and other names) has special
+meaning, so if you want to send that character literally (or send the
+corresponding key), you need to double it up, as in <code>Send "``"</code>.
+Other common escape sequences include <code>`n</code> for linefeed (Enter) and
+<code>`t</code> for tab. See <a href="../misc/EscapeChar.htm">Escape Sequences</a> for
+more.</p>
+<h3 id="Sending_keys_and_key_combinations">Sending keys and key combinations</h3>
+<p><a href="../lib/Send.htm">SendText</a> is best for sending text verbatim, but it
+can\'t send keys that don\'t produce text, like [Left]{.kbd} or
+[Home]{.kbd}. <a href="../lib/Send.htm">Send</a>,
+<a href="../lib/Send.htm#SendInput">SendInput</a>,
+<a href="../lib/Send.htm#SendPlay">SendPlay</a>,
+<a href="../lib/Send.htm#SendEvent">SendEvent</a> and
+<a href="../lib/ControlSend.htm">ControlSend</a> can send both text and key
+combinations, or keys which don\'t produce text. To do all of this, they
+add special meaning to the following symbols: <code>^!+#{}</code></p>
+<p>The first four symbols correspond to the standard modifier keys, Ctrl
+(<code>^</code>), Alt (<code>!</code>), Shift (<code>+</code>) and Win (<code>#</code>). They can be used in
+combination, but otherwise affect only the next key.</p>
+<p>To send a key by name, or to send any one of the above symbols
+literally, enclose it in braces. For example:</p>
+<ul>
+<li><code>^+{Left}</code> produces [Ctrl]{.kbd}+[Shift]{.kbd}+[Left]{.kbd}</li>
+<li><code>^{+}{Left}</code> produces [Ctrl]{.kbd}+[+]{.kbd} followed by
+    [Left]{.kbd}</li>
+<li><code>^+Left</code> produces [Ctrl]{.kbd}+[Shift]{.kbd}+[L]{.kbd} followed
+    literally by the letters <code>eft</code></li>
+</ul>
+<p>When you press [Ctrl]{.kbd}+[Shift]{.kbd}+[\"]{.kbd}, the following
+example sends two quote marks and then moves the insertion point to the
+left, ready to type inside the quote marks:</p>
+<pre class="codehilite"><code>^+&quot;::Send '&quot;&quot;{Left}'
+</code></pre>
+
+<p>For any single character other than <code>^!+#{}</code>, Send translates it to the
+corresponding key combination and presses and releases that combination.
+For example, <code>Send "aB"</code> presses and releases [A]{.kbd} and then presses
+and releases [Shift]{.kbd}+[B]{.kbd}. Similarly, any key name enclosed
+in braces is pressed and released by default. For example,
+<code>Send "{Ctrl}a"</code> would press and release [Ctrl]{.kbd}, then press and
+release [A]{.kbd}; probably not what you want.</p>
+<p>To only press (hold down) or release a key, enclose the key name in
+braces, followed by a space and then the word \"down\" or \"up\". The
+following example causes [Ctrl]{.kbd}+[CapsLock]{.kbd} to act as a
+toggle for [Shift]{.kbd}:</p>
+<pre class="codehilite"><code>*^CapsLock::{
+    if GetKeyState(&quot;Shift&quot;)
+        Send &quot;{Shift up}&quot;
+    else
+        Send &quot;{Shift down}&quot;
+}
+</code></pre>
+
+<h3 id="Hotkeys_vs_Send">Hotkeys vs. Send</h3>
+<p><strong>Warning:</strong> Hotkeys and Send have some differences that you should be
+aware of.</p>
+<p>Although <a href="../Hotkeys.htm">hotkeys</a> also use the symbols <code>^!+#</code> and the
+same key names, there are several important differences:</p>
+<ul>
+<li>Other hotkey modifier symbols are not supported by Send. For
+    example, <code>&gt;^a::</code> corresponds to [RCtrl]{.kbd}+[A]{.kbd}, but to send
+    that combination, you need to spell out the key name in full, as in
+    <code>Send "{RCtrl down}a{RCtrl up}"</code>.</li>
+<li>Key names are never enclosed in braces within hotkeys, but must
+    always be enclosed in braces for Send (if longer than one
+    character).</li>
+<li>Send is case-sensitive. For example, <code>Send "^A"</code> sends the
+    combination of [Ctrl]{.kbd} with <em>upper-case</em> \"a\", so
+    [Ctrl]{.kbd}+[Shift]{.kbd}+[A]{.kbd}. By contrast, <code>^a::</code> and <code>^A::</code>
+    are equivalent.</li>
+</ul>
+<p>This is because Send serves multiple purposes, whereas hotkeys are
+optimized for key combinations.</p>
+<p>On a related note, <a href="../Hotstrings.htm">hotstrings</a> are exclusively for
+detecting text entry, so the symbols <code>^!+#{}</code> have no special meaning
+within the hotstring trigger text. However, a hotstring\'s <em>replacement</em>
+text uses the same syntax as Send (except when the <a href="../Hotstrings.htm#T">T
+option</a> is used). Whenever you type \"{\" with the
+following hotstring active, it sends \"}\" and then [Left]{.kbd} to move
+the insertion point back between the braces:</p>
+<pre class="codehilite"><code>:*?B0:{::{}}{Left}
+</code></pre>
+
+<h3 id="Blind_mode">Blind mode</h3>
+<p>Normally, Send assumes that any modifier keys you are physically holding
+down should not be combined with the keys you are asking it to send. For
+instance, if you are holding [Ctrl]{.kbd} and you call <code>Send "Hi"</code>, Send
+will automatically release [Ctrl]{.kbd} before sending \"Hi\" and press
+it back down afterward.</p>
+<p>Sometimes what you want is to send some keys in combination with other
+modifiers that were previously pressed or sent. To do this, you can use
+the <code>{Blind}</code> prefix. While running the following example, try focusing
+a non-empty text editor or input field and pressing [1]{.kbd} or
+[2]{.kbd} while holding [Ctrl]{.kbd} or [Ctrl]{.kbd}+[Shift]{.kbd}:</p>
+<pre class="codehilite"><code>*^1::Send &quot;{Blind}{Home}&quot;
+*^2::Send &quot;{Blind}{End}&quot;
+</code></pre>
+
+<p>For more about <code>{Blind}</code>, see <a href="../lib/Send.htm#Blind">Blind mode</a>.</p>
+<h3 id="Others">Others</h3>
+<p>Send supports a few other special constructs, such as:</p>
+<ul>
+<li><code>{U+00B5}</code> to send a Unicode character by its ordinal value
+    (character code).</li>
+<li><code>{ASC 0181}</code> to send an Alt+Numpad sequence.</li>
+<li><code class="no-highlight">{Click</code><em><code class="no-highlight">Options</code></em><code class="no-highlight">}</code>
+    to click or move the mouse.</li>
+</ul>
+<p>For a full list, see <a href="../lib/Send.htm#keynames">Key names</a>.</p>
+<h2 id="Modes_and_options">Modes and options</h2>
+<p>Sending a key does not perfectly replicate the act of physically
+pressing the key. The operating system provides several different ways
+to send keys, with different caveats for each. Sometimes to get the
+result you want, you will need to not only try different methods but
+also tweak the timing.</p>
+<p>The <a href="../lib/Send.htm#Send_variants">main methods</a> are SendInput,
+SendEvent and SendPlay. SendInput is generally the most reliable, so by
+default, Send is synonymous with SendInput.
+<a href="../lib/SendMode.htm">SendMode</a> can be used to make Send synonymous with
+SendEvent or SendPlay instead. The documentation describes other pros
+and cons of <a href="../lib/Send.htm#SendInputDetail">SendInput</a> and
+<a href="../lib/Send.htm#SendPlayDetail">SendPlay</a> at length, but I would
+suggest just trying SendEvent or SendPlay when you have issues with
+SendInput.</p>
+<p><strong>Warning:</strong> SendPlay doesn\'t tend to work on modern systems unless you
+<a href="../Program.htm#Installer_uiAccess">run with UI access</a>. On Windows 11
+and later, SendPlay may have no effect at all.</p>
+<p>Another option worth trying is <a href="../lib/ControlSend.htm">ControlSend</a>.
+This doesn\'t use an official method of sending keystrokes, but instead
+sends messages directly to the window that you specify. The main
+advantage is that the window usually doesn\'t need to be active to
+receive these messages. But since it bypasses the normal processing of
+keyboard input by the system, sometimes it doesn\'t work.</p>
+<h3 id="Timing_and_delays">Timing and delays</h3>
+<p>Sometimes you can get away with sending a flood of keystrokes faster
+than humanly possible, and sometimes you can\'t. There are generally two
+situations where you might need a delay:</p>
+<ul>
+<li>A keypress is supposed to trigger some change within the target app
+    (such as showing a new control or window), and sending another
+    keypress before that happens will have the wrong effect.</li>
+<li>The app can\'t keep up with a rapid stream of keystrokes, and you
+    need to slow them all down.</li>
+</ul>
+<p>For the first case, you can simply call Send, then
+<a href="../lib/Sleep.htm">Sleep</a>, then Send, and so on.</p>
+<p><a href="../lib/SetKeyDelay.htm">SetKeyDelay</a> exists for the second case. This
+function can set a delay to be performed between each keystroke, and the
+duration of the keystroke (i.e. the delay between pressing and releasing
+the key).</p>
+<pre class="codehilite"><code>^1::{
+    SetKeyDelay 75, 25  ; 75ms between keys, 25ms between down/up.
+    SendEvent &quot;You should see the keys{bs 4}text appear gradually.&quot;
+}
+</code></pre>
+
+<p><strong>Warning:</strong> SendInput does not support key delays, nor does Send by
+default.</p>
+<p>In order to make SetKeyDelay effective, you must generally either use
+<code>SendMode "Event"</code> or call SendEvent, SendPlay or ControlSend instead of
+Send or SendText.</p>
+<h2 id="Sending_a_lot_of_text">Sending a lot of text</h2>
+<p>One way to send multiple lines of text is to use a <a href="../Scripts.htm#continuation-section">continuation
+section</a>:</p>
+<pre class="codehilite"><code>SendText &quot;
+(
+    Leading indentation is stripped out,
+    based on the first line.
+    Line breaks are kept
+    unless you use the &quot;Join&quot; option.
+)&quot;
+</code></pre>
+
+<p>Although it is generally quite fast, SendText still has to send each
+character one at a time, while Send generally needs to send at least
+twice as many messages (key-down <em>and</em> key-up). This adds up to a
+noticeable delay when sending a large amount of text. It can also become
+unreliable, as a longer delay means higher risk of conflict with input
+by the user, the keyboard focus shifting, or other conditions changing.</p>
+<p>Generally it is faster and more reliable to instead place the text on
+the clipboard and <em>paste</em> it. For example:</p>
+<pre class="codehilite"><code>^1::{
+    old_clip := ClipboardAll()  ; Save all clipboard content
+    A_Clipboard := &quot;
+    (Join`s
+        This text is placed on the clipboard,
+        and will be pasted below by sending Ctrl+V.
+    )&quot;
+    Send &quot;^v&quot;
+    Sleep 500  ; Wait a bit for Ctrl+V to be processed
+    A_Clipboard := old_clip  ; Restore previous clipboard content
+}
+</code></pre>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/SendKeys.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#how-to-send-keystrokes">How to Send Keystrokes</a><ul>
+<li><a href="#Trying_the_examples">Trying the examples</a></li>
+<li><a href="#How_to_write_the_code">How to write the code</a><ul>
+<li><a href="#Rules_of_quoted_strings">Rules of quoted strings</a></li>
+<li><a href="#Sending_keys_and_key_combinations">Sending keys and key combinations</a></li>
+<li><a href="#Hotkeys_vs_Send">Hotkeys vs. Send</a></li>
+<li><a href="#Blind_mode">Blind mode</a></li>
+<li><a href="#Others">Others</a></li>
+</ul>
+</li>
+<li><a href="#Modes_and_options">Modes and options</a><ul>
+<li><a href="#Timing_and_delays">Timing and delays</a></li>
+</ul>
+</li>
+<li><a href="#Sending_a_lot_of_text">Sending a lot of text</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

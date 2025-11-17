@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoadPicture | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Loads a picture from file and returns a bitmap or icon handle.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>LoadPicture</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="loadpicture">LoadPicture</h1>
+<p>Loads a picture from file and returns a bitmap or icon handle.</p>
+<pre class="codehilite"><code class="language-Syntax">Handle := LoadPicture(Filename , Options, &amp;OutImageType)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Filename</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The filename of the picture, which is usually assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified. If the name of a DLL or EXE file is given without
+a path, it may be loaded from the directory of the current
+executable (AutoHotkey.exe or a compiled script) or a system
+directory.</p>
+</dd>
+<dt>Options</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>If blank or omitted, it defaults to no options. Otherwise, specify a
+string of one or more of the following options, each separated from
+the next with a space or tab:</p>
+<p><strong>W</strong><em>n</em> and <strong>H</strong><em>n</em>: The width and height to load the image at,
+where <em>n</em> is an integer. If one dimension is omitted or -1, it is
+calculated automatically based on the other dimension, preserving
+aspect ratio. If both are omitted, the image\'s original size is
+used. If either dimension is 0, the original size is used for that
+dimension. For example: <code>"w80 h50"</code>, <code>"w48 h-1"</code> or <code>"w48"</code>
+(preserve aspect ratio), <code>"h0 w100"</code> (use original height but
+override width).</p>
+<p><strong>Icon</strong><em>n</em>: Indicates which icon to load from a file with multiple
+icons (generally an EXE or DLL file). For example, <code>"Icon2"</code> loads
+the file\'s second icon. If negative, the absolute value is assumed
+to be the resource ID of an icon within an executable file. Any
+supported image format can be converted to an icon by specifying
+<code>"Icon1"</code>. However, the icon is converted back to a bitmap if the
+<em>OutImageType</em> parameter is omitted.</p>
+<p><strong>GDI+:</strong> Use GDI+ to load the image, if available. For example,
+<code>"GDI+ w100"</code>.</p>
+</dd>
+<dt>&amp;OutImageType</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#variable-references">VarRef</a></p>
+<p>If omitted, the corresponding value will not be stored, and the
+return value will always be a bitmap handle (icons/cursors are
+converted if necessary) because reliably using or deleting an
+icon/cursor/bitmap handle requires knowing which type it is.
+Otherwise, specify a reference to the output variable in which to
+store a number indicating the type of handle being returned: 0
+(IMAGE_BITMAP), 1 (IMAGE_ICON) or 2 (IMAGE_CURSOR).</p>
+</dd>
+</dl>
+<h2 id="Return_Value">Return Value</h2>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>This function returns a <a href="../misc/ImageHandles.htm">bitmap or icon
+handle</a> depending on whether a picture or icon
+is specified and whether the <em>&amp;OutImageType</em> parameter is present or
+not. If there are any errors, the function returns 0.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>LoadPicture also supports <a href="../misc/ImageHandles.htm">the handle syntax</a>,
+such as for creating a resized image based on an icon or bitmap which
+has already been loaded into memory, or converting an icon to a bitmap
+by omitting <em>&amp;OutImageType</em>.</p>
+<p>If the image needs to be freed from memory, call whichever function is
+appropriate for the type of handle.</p>
+<pre class="codehilite"><code>if (not OutImageType)  ; IMAGE_BITMAP (0) or the OutImageType parameter was omitted.
+    DllCall(&quot;DeleteObject&quot;, &quot;ptr&quot;, Handle)
+else if (OutImageType = 1)  ; IMAGE_ICON
+    DllCall(&quot;DestroyIcon&quot;, &quot;ptr&quot;, Handle)
+else if (OutImageType = 2)  ; IMAGE_CURSOR
+    DllCall(&quot;DestroyCursor&quot;, &quot;ptr&quot;, Handle)
+</code></pre>
+
+<h2 id="Related">Related</h2>
+<p><a href="../misc/ImageHandles.htm">Image Handles</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExSlideShow .ex}
+<a class="ex_number" href="#ExSlideShow"></a> Pre-loads and reuses some images.</p>
+<pre class="codehilite"><code>Pics := []
+; Find some pictures to display.
+Loop Files, A_WinDir &quot;\Web\Wallpaper\*.jpg&quot;, &quot;R&quot;
+{
+    ; Load each picture and add it to the array.
+    Pics.Push(LoadPicture(A_LoopFileFullPath))
+}
+if !Pics.Length
+{
+    ; If this happens, edit the path on the Loop line above.
+    MsgBox(&quot;No pictures found! Try a different directory.&quot;)
+    ExitApp
+}
+; Add the picture control, preserving the aspect ratio of the first picture.
+MyGui := Gui()
+Pic := MyGui.Add(&quot;Pic&quot;, &quot;w600 h-1 +Border&quot;, &quot;HBITMAP:*&quot; Pics[1])
+MyGui.OnEvent(&quot;Escape&quot;, (*) =&gt; ExitApp())
+MyGui.OnEvent(&quot;Close&quot;, (*) =&gt; ExitApp())
+MyGui.Show()
+Loop 
+{
+    ; Switch pictures!
+    Pic.Value := &quot;HBITMAP:*&quot; Pics[Mod(A_Index, Pics.Length)+1]
+    Sleep 3000
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/LoadPicture.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#loadpicture">LoadPicture</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Return_Value">Return Value</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

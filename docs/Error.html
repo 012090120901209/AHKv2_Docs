@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Object | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="``` NoIndent">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>Error</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="error-object">Error Object</h1>
+<pre class="codehilite"><code class="language-NoIndent">class Error extends Object
+</code></pre>
+
+<p>Error objects are <a href="Throw.htm">thrown</a> by built-in code when a runtime
+error occurs, and may also be thrown explicitly by the script.</p>
+<h2 id="toc">Table of Contents</h2>
+<ul>
+<li><a href="#Standard_Properties">Standard Properties</a></li>
+<li><a href="#new">Error()</a></li>
+<li><a href="#error-types">Error Types</a></li>
+<li><a href="#Related">Related</a></li>
+</ul>
+<h2 id="Standard_Properties">Standard Properties</h2>
+<p><strong>Message:</strong> An error message.</p>
+<p><strong>What:</strong> What threw the exception. This is usually the name of a
+function, but is blank for exceptions thrown due to an error in an
+expression (such as using a math operator on a non-numeric value).</p>
+<p><strong>Extra:</strong> A string value relating to the error, if available. If this
+value can be converted to a non-empty string, the standard error dialog
+displays a line with \"Specifically:\" followed by this string.</p>
+<p><strong>File:</strong> The full path of the script file which contains the line at
+which the error occurred, or at which the Error object was constructed.</p>
+<p><strong>Line:</strong> The line number at which the error occurred, or at which the
+Error object was constructed.</p>
+<p><strong>Stack:</strong> A string representing the call stack at the time the Error
+object was constructed. Each line may be formatted as follows:</p>
+<dl>
+<dt><em><code>File</code></em><code>(</code><em><code>Line</code></em><code>) : [</code><em><code>What</code></em><code>]</code><em><code>SourceCode</code></em><code>`r`n</code></dt>
+<dd>Represents a call to the function <em>What</em>. <em>File</em> and <em>Line</em> indicate
+the current script line at this stack depth. <em>SourceCode</em> is an
+approximation of the source code at that line, as it would be shown
+in <a href="ListLines.htm">ListLines</a>.</dd>
+<dt><code>&gt;</code><em><code>What</code></em><code>`r`n</code></dt>
+<dd>Represents the launching of a thread, typically the direct cause of
+the function call above it.</dd>
+<dt><code>...</code><em><code>N</code></em><code>more</code></dt>
+<dd>Indicates that the stack trace was truncated, and there are <em>N</em> more
+stack entries not shown. Currently the <code>Stack</code> property cannot
+exceed 2047 characters.</dd>
+</dl>
+<p><strong>Note:</strong> The standard error dialog requires <em>Message</em>, <em>Extra</em>, <em>File</em>
+and <em>Line</em> to be <a href="Object.htm">own value properties</a>.</p>
+<h2 id="new">Error()</h2>
+<p>Creates an Error object.</p>
+<pre class="codehilite"><code class="language-Syntax">NewError := Error(Message , What, Extra)
+</code></pre>
+
+<p><strong><em>Error</em></strong> may be replaced with one of the subclasses listed under
+<a href="#error-types">Error Types</a>, although some subclasses may take different
+parameters.</p>
+<p>The parameters directly correspond to properties described above, but
+may differ for Error subclasses which override the __New method.</p>
+<p><em>Message</em> and <em>Extra</em> are converted to strings. These are displayed by
+an error dialog if the exception is thrown and not caught.</p>
+<p><em>What</em> indicates the source of the error. It can be an arbitrary string,
+but should be a negative integer or the name of a running function.
+Specifying -1 indicates the current function, -2 indicates the function
+which called it, and so on. If the script is
+<a href="../Scripts.htm#ahk2exe">compiled</a> or the value does not identify a
+valid stack frame, the value is merely converted to a string and
+assigned to <code>NewError.What</code>. Otherwise, the identified stack frame is
+used as follows to determine the other properties:</p>
+<ul>
+<li><code>NewError.What</code> contains the name of the function.</li>
+<li><code>NewError.Line</code> and <code>NewError.File</code> indicate the line which <em>called</em>
+    the function.</li>
+<li><code>NewError.Stack</code> contains a partial stack trace, with the indicated
+    stack frame at the top.</li>
+</ul>
+<p>Use of the <em>What</em> parameter can allow a complex function to use helper
+functions to perform its work or parameter validation, while omitting
+those internal details from any reported error information. For example:</p>
+<pre class="codehilite"><code>MyFunction(a, b) {
+    CheckArg &quot;a&quot;, a
+    CheckArg &quot;b&quot;, b
+    ;...
+    CheckArg(name, value) {
+        if value &lt; 0
+            throw ValueError(name &quot; is negative&quot;, &quot;myfunction&quot;, value)
+    }
+}
+
+try
+    MyFunction(1, -1)  ; err.Line indicates this line.
+catch ValueError as err
+    MsgBox Format(&quot;{1}: {2}.`n`nFile:`t{3}`nLine:`t{4}`nWhat:`t{5}`nStack:`n{6}&quot;
+        , type(err), err.Message, err.File, err.Line, err.What, err.Stack)
+
+try
+    SomeFunction()
+catch as e
+    MsgBox(type(e) &quot; in &quot; e.What &quot;, which was called at line &quot; e.Line)
+
+SomeFunction() {
+    throw Error(&quot;Fail&quot;, -1)
+}
+</code></pre>
+
+<h2 id="error-types">Error Types</h2>
+<p>The following subclasses of <strong>Error</strong> are predefined:</p>
+<ul>
+<li>[<strong>MemoryError:</strong> A memory allocation failed.]{#MemoryError}</li>
+<li>[<strong>OSError:</strong> An internal function call to a Win32 function failed.
+    <strong>Message</strong> includes an error code and description generated by the
+    operating system. OSErrors have an additional <strong>Number</strong> property
+    which contains the error code. Calling <code>OSError(Code)</code> where <em>Code</em>
+    is numeric sets <em>Number</em> and <em>Message</em> based on the given OS-defined
+    error code. If <em>Code</em> is omitted, it defaults to
+    <a href="../Variables.htm#LastError">A_LastError</a>. For example,
+    <code>OSError(5).Message</code> returns \"(5) Access is denied.\"]{#OSError}</li>
+<li>[<strong>TargetError:</strong> A function failed because its target could not be
+    found. <strong>Message</strong> indicates what kind of target, such as a window,
+    control, menu or status bar.]{#TargetError}</li>
+<li>[<strong>TimeoutError:</strong> <a href="SendMessage.htm">SendMessage</a> timed
+    out.]{#TimeoutError}</li>
+<li>[<strong>TypeError:</strong> An unexpected type of value was used as input for a
+    function, property assignment, or some other operation. Usually
+    <strong>Message</strong> indicates the expected and actual type, and <strong>Extra</strong>
+    contains a string representing the errant value.]{#TypeError}</li>
+<li>[<strong>UnsetError:</strong> An attempt was made to read the value of a
+    variable, property or item, but there was no value.]{#UnsetError}<ul>
+<li>[<strong>MemberError</strong>]{#MemberError}<ul>
+<li>[<strong>PropertyError</strong>]{#PropertyError}</li>
+<li>[<strong>MethodError</strong>]{#MethodError}</li>
+</ul>
+</li>
+<li>[<strong>UnsetItemError</strong>]{#UnsetItemError}</li>
+</ul>
+</li>
+<li>[<strong>ValueError:</strong> An unexpected value was used as input for a
+    function, property assignment, or some other operation. Usually
+    <strong>Message</strong> indicates which expectation was broken, and <strong>Extra</strong>
+    contains a string representing the errant value.]{#ValueError}<ul>
+<li>[<strong>IndexError:</strong> The index parameter of an object\'s <a href="../Objects.htm#__Item">__Item
+    property</a> was invalid or out of
+    range.]{#IndexError}</li>
+</ul>
+</li>
+<li>[<strong>ZeroDivisionError:</strong> Division by zero was attempted in an
+    expression or with the Mod function.]{#ZeroDivisionError}</li>
+</ul>
+<p>Errors are also thrown using the base Error class.</p>
+<h2 id="Related">Related</h2>
+<p><a href="Throw.htm">Throw</a>, <a href="Try.htm">Try</a>, <a href="Catch.htm">Catch</a>,
+<a href="Finally.htm">Finally</a>, <a href="OnError.htm">OnError</a></p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/Error.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#error-object">Error Object</a><ul>
+<li><a href="#toc">Table of Contents</a></li>
+<li><a href="#Standard_Properties">Standard Properties</a></li>
+<li><a href="#new">Error()</a></li>
+<li><a href="#error-types">Error Types</a></li>
+<li><a href="#Related">Related</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

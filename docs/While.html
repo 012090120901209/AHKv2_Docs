@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While-loop | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Performs one or more [statements](../Concepts.htm#statement) repeatedly">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>While</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="while-loop">While-loop</h1>
+<p>Performs one or more <a href="../Concepts.htm#statement">statements</a> repeatedly
+until the specified <a href="../Variables.htm#Expressions">expression</a> evaluates
+to false.</p>
+<pre class="codehilite"><code class="language-Syntax">While Expression
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>Expression</dt>
+<dd>
+<p>Any valid <a href="../Variables.htm#Expressions">expression</a>. For example:
+<code>while x &lt; y</code>.</p>
+</dd>
+</dl>
+<h2 id="Remarks">Remarks</h2>
+<p>The space or tab after <code>While</code> is optional if the expression is enclosed
+in parentheses, as in <code>While(expression)</code>.</p>
+<p>The expression is evaluated once before each iteration. If the
+expression evaluates to true (which is any result other than an empty
+string or the number 0), the body of the loop is executed; otherwise,
+execution jumps to the line following the loop\'s body.</p>
+<p>A while-loop is usually followed by a <a href="Block.htm">block</a>, which is a
+collection of statements that form the <em>body</em> of the loop. However, a
+loop with only a single statement does not require a block (an \"if\"
+and its \"else\" count as a single statement for this purpose).</p>
+<p>The One True Brace (OTB) style may optionally be used, which allows the
+open-brace to appear on the same line rather than underneath. For
+example: <code>while x &lt; y {</code>.</p>
+<p>The built-in variable <strong>A_Index</strong> contains the number of the current
+loop iteration. It contains 1 the first time the loop\'s expression and
+body are executed. For the second time, it contains 2; and so on. If an
+inner loop is enclosed by an outer loop, the inner loop takes
+precedence. A_Index works inside all types of loops, but contains 0
+outside of a loop.</p>
+<p>As with all loops, <a href="Break.htm">Break</a> may be used to exit the loop
+prematurely. Also, <a href="Continue.htm">Continue</a> may be used to skip the rest
+of the current iteration, at which time A_Index is increased by 1 and
+the while-loop\'s expression is re-evaluated. If it is still true, a new
+iteration begins; otherwise, the loop ends.</p>
+<p>The loop may optionally be followed by an <a href="Else.htm">Else</a> statement,
+which is executed if the loop had zero iterations.</p>
+<p>Specialized loops: Loops can be used to automatically retrieve files,
+folders, or registry items (one at a time). See <a href="LoopFiles.htm">file
+loop</a> and <a href="LoopReg.htm">registry loop</a> for details. In
+addition, <a href="LoopRead.htm">file-reading loops</a> can operate on the entire
+contents of a file, one line at a time. Finally, <a href="LoopParse.htm">parsing
+loops</a> can operate on the individual fields contained
+inside a delimited string.</p>
+<h2 id="Related">Related</h2>
+<p><a href="Until.htm">Until</a>, <a href="Break.htm">Break</a>, <a href="Continue.htm">Continue</a>,
+<a href="Block.htm">Blocks</a>, <a href="Loop.htm">Loop</a>, <a href="For.htm">For-loop</a>,
+<a href="LoopFiles.htm">Files-and-folders loop</a>, <a href="LoopReg.htm">Registry loop</a>,
+<a href="LoopRead.htm">File-reading loop</a>, <a href="LoopParse.htm">Parsing loop</a>,
+<a href="If.htm">If</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExBasic .ex}
+<a class="ex_number" href="#ExBasic"></a> As the user drags the left mouse button, a
+tooltip displays the size of the region inside the drag-area.</p>
+<pre class="codehilite"><code>CoordMode &quot;Mouse&quot;, &quot;Screen&quot;
+
+~LButton::
+{
+    MouseGetPos &amp;begin_x, &amp;begin_y
+    while GetKeyState(&quot;LButton&quot;)
+    {
+        MouseGetPos &amp;x, &amp;y
+        ToolTip begin_x &quot;, &quot; begin_y &quot;`n&quot; Abs(begin_x-x) &quot; x &quot; Abs(begin_y-y)
+        Sleep 10
+    }
+    ToolTip
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/While.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#while-loop">While-loop</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

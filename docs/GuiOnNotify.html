@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnNotify | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Registers a function or method to be called when a control notification">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>GuiOnNotify</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="onnotify">OnNotify</h1>
+<p>Registers a function or method to be called when a control notification
+is received via the <a href="#WM_NOTIFY">WM_NOTIFY</a> message.</p>
+<pre class="codehilite"><code class="language-Syntax">GuiCtrl.OnNotify(NotifyCode, Callback , AddRemove)
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>NotifyCode</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>The control-defined notification code to monitor.</p>
+</dd>
+<dt>Callback</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a> or <a href="../misc/Functor.htm">Function
+Object</a></p>
+<p>The function, method or object to call when the event is raised.</p>
+<p>If the GUI has an event sink (that is, if <a href="Gui.htm#Call">Gui()</a>\'s
+<em>EventObj</em> parameter was specified), this parameter may be the name
+of a method belonging to the event sink. Otherwise, this parameter
+must be a <a href="../misc/Functor.htm">function object</a>.</p>
+<p>The callback accepts two parameters and can be
+<a href="../Functions.htm#intro">defined</a> as follows:</p>
+<p><code>NoIndent
+MyCallback(GuiCtrl, lParam) { ...</code></p>
+<p>Although the names you give the parameters do not matter, the
+following values are sequentially assigned to them:</p>
+<ol>
+<li>The <a href="GuiControl.htm">GuiControl object</a> of the current GUI
+    control.</li>
+<li>The address of a notification structure derived from
+    <a href="https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-nmhdr">NMHDR</a>.
+    Its exact type depends on the type of control and notification
+    code. If the structure contains additional information about the
+    notification, the callback can retrieve it with
+    <a href="NumGet.htm">NumGet</a> and/or <a href="StrGet.htm">StrGet</a>.</li>
+</ol>
+<p>You can omit one or more parameters from the end of the callback\'s
+parameter list if the corresponding information is not needed, but
+in this case an asterisk must be specified as the final parameter,
+e.g. <code>MyCallback(Param1, *)</code>.</p>
+<p>The <a href="GuiOnEvent.htm#Callback_Parameters">notes for OnEvent</a>
+regarding <code>this</code> and bound functions also apply to OnNotify.</p>
+<p>If multiple callbacks have been registered for an event, a callback
+may return a non-empty value to prevent any remaining callbacks from
+being called.</p>
+<p>The callback\'s return value may have additional meaning, depending
+on the notification. For example, the ListView notification
+<a href="https://learn.microsoft.com/windows/win32/controls/lvn-beginlabeledit">LVN_BEGINLABELEDIT</a>
+(-175 or -105) prevents the user from editing the label if the
+callback returns TRUE (1).</p>
+</dd>
+<dt>AddRemove</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 1. Otherwise, specify one of the
+following numbers:</p>
+<ul>
+<li>1 = Call the callback after any previously registered callbacks.</li>
+<li>-1 = Call the callback before any previously registered
+    callbacks.</li>
+<li>0 = Do not call the callback.</li>
+</ul>
+</dd>
+</dl>
+<h2 id="WM_NOTIFY">WM_NOTIFY</h2>
+<p>Certain types of controls send a
+<a href="https://learn.microsoft.com/windows/win32/controls/wm-notify">WM_NOTIFY</a>
+message whenever an interesting event occurs or the control requires
+information from the program. The <em>lParam</em> parameter of this message
+contains a pointer to a structure containing information about the
+notification. The type of structure depends on the notification code and
+the type of control which raised the notification, but is always based
+on
+<a href="https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-nmhdr">NMHDR</a>.</p>
+<p>To determine which notifications are available (if any), what type of
+structure they provide and how they interpret the return value, refer to
+the control\'s documentation. <a href="https://learn.microsoft.com/windows/win32/controls/individual-control-info">Control Library (Microsoft
+Docs)</a>
+contains links to each of the Windows common controls. The notification
+codes (numbers) can be found in the Windows SDK, or by searching the
+Internet.</p>
+<p>AutoHotkey uses the <em>idFrom</em> and <em>hwndFrom</em> fields to identify which
+control sent the notification, in order to dispatch it to the
+appropriate object. The <em>code</em> field contains the notification code.
+Since these must match up to <em>GuiCtrl</em> and <em>NotifyCode</em> used to register
+the callback, they are rarely useful to the script.</p>
+<h2 id="Related">Related</h2>
+<p>These notes for <a href="GuiOnEvent.htm">OnEvent</a> also apply to OnNotify:
+<a href="GuiOnEvent.htm#Threads">Threads</a>, <a href="GuiOnEvent.htm#Destroying_the_GUI">Destroying the
+GUI</a>.</p>
+<p><a href="GuiOnCommand.htm">OnCommand</a> can be used for notifications which are
+sent as a WM_COMMAND message.</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/GuiOnNotify.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#onnotify">OnNotify</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#WM_NOTIFY">WM_NOTIFY</a></li>
+<li><a href="#Related">Related</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>

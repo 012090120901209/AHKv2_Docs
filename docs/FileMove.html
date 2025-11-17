@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileMove | AutoHotkey v2 Documentation</title>
+    <meta name="description" content="Moves or renames one or more files.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">AutoHotkey v2</span>
+                </a>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search documentation..." autocomplete="off">
+                    <kbd class="search-hint">Ctrl+K</kbd>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="https://github.com/012090120901209/AHKv2_Docs" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" id="searchResults" style="display: none;"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Category Navigation -->
+                <div class="sidebar-section">
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-book"></i>
+                            <span>Getting Started</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/guides/Tutorial.html">Tutorial</a></li>
+                            <li><a href="/guides/FAQ.html">FAQ</a></li>
+                            <li><a href="/guides/Concepts.html">Concepts</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-code"></i>
+                            <span>Functions</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/functions/string/">String Functions</a></li>
+                            <li><a href="/functions/window/">Window Functions</a></li>
+                            <li><a href="/functions/file/">File Operations</a></li>
+                            <li><a href="/functions/system/">System Functions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-cube"></i>
+                            <span>Objects</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/objects/Array.html">Array</a></li>
+                            <li><a href="/objects/Map.html">Map</a></li>
+                            <li><a href="/objects/Object.html">Object</a></li>
+                            <li><a href="/objects/Gui.html">Gui</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Directives</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/directives/_Include.html">#Include</a></li>
+                            <li><a href="/directives/_Requires.html">#Requires</a></li>
+                            <li><a href="/directives/_HotIf.html">#HotIf</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-category">
+                        <div class="category-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Reference</span>
+                        </div>
+                        <ul class="category-items">
+                            <li><a href="/reference/KeyList.html">Key List</a></li>
+                            <li><a href="/reference/Hotkeys.html">Hotkeys</a></li>
+                            <li><a href="/reference/Variables.html">Variables</a></li>
+                            <li><a href="/reference/Language.html">Language</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a> <i class="fas fa-chevron-right"></i> <span>FileMove</span>
+                </nav>
+
+                <!-- Document Content -->
+                <article class="markdown-body">
+                    <h1 id="filemove">FileMove</h1>
+<p>Moves or renames one or more files.</p>
+<pre class="codehilite"><code class="language-Syntax">FileMove SourcePattern, DestPattern , Overwrite
+</code></pre>
+
+<h2 id="Parameters">Parameters</h2>
+<dl>
+<dt>SourcePattern</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name of a single file or a wildcard pattern such as
+<code>"C:\Temp\*.tmp"</code>. <em>SourcePattern</em> is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified.</p>
+<p>Both asterisks (<code>*</code>) and question marks (<code>?</code>) are supported as
+wildcards. <code>*</code> matches zero or more characters and <code>?</code> matches any
+single character. Usage examples:</p>
+<ul>
+<li><code>*.*</code> or <code>*</code> matches all files.</li>
+<li><code>*.htm</code> matches files with the extension .htm, .html, etc.</li>
+<li><code>*.</code> matches files without an extension.</li>
+<li><code>log?.txt</code> matches e.g. log1.txt but not log10.txt.</li>
+<li><code>*report*</code> matches any filename containing the word \"report\".</li>
+</ul>
+</dd>
+<dt>DestPattern</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#strings">String</a></p>
+<p>The name or pattern of the destination, which is assumed to be in
+<a href="../Variables.htm#WorkingDir">A_WorkingDir</a> if an absolute path
+isn\'t specified.</p>
+<p>If present, the first asterisk (<code>*</code>) in the filename is replaced
+with the source filename excluding its extension, while the first
+asterisk after the last full stop (<code>.</code>) is replaced with the source
+file\'s extension. If an asterisk is present but the extension is
+omitted, the source file\'s extension is used.</p>
+<p>To perform a simple move -- retaining the existing file name(s) --
+specify only the folder name as shown in these mostly equivalent
+examples:</p>
+<pre class="codehilite"><code>FileMove &quot;C:\*.txt&quot;, &quot;C:\My Folder&quot;
+
+FileMove &quot;C:\*.txt&quot;, &quot;C:\My Folder\*.*&quot;
+</code></pre>
+
+<p>The destination directory must already exist. If <em>My Folder</em> does
+not exist, the first example above will use \"My Folder\" as the
+target filename, while the second example will move no files.</p>
+</dd>
+<dt>Overwrite</dt>
+<dd>
+<p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
+<p>If omitted, it defaults to 0. Otherwise, specify one of the
+following numbers to indicate whether to overwrite files if they
+already exist:</p>
+<p><strong>0:</strong> Do not overwrite existing files. The operation will fail and
+have no effect if <em>DestPattern</em> already exists as a file or
+directory.</p>
+<p><strong>1:</strong> Overwrite existing files. However, any files or subfolders
+inside <em>DestPattern</em> that do not have a counterpart in
+<em>SourcePattern</em> will not be deleted.</p>
+<p>Other values are reserved for future use.</p>
+</dd>
+</dl>
+<h2 id="Error_Handling">Error Handling</h2>
+<p>An <a href="Error.htm">Error</a> is thrown if any files failed to be moved, with
+its <a href="Error.htm#Extra">Extra</a> property set to the number of failures. If
+no files were found, an exception is thrown only if <em>SourcePattern</em>
+lacks the wildcards <code>*</code> and <code>?</code>. In other words, moving a wildcard
+pattern such as <code>"*.txt"</code> is considered a success when it does not match
+any files.</p>
+<p>Unlike <a href="FileCopy.htm">FileCopy</a>, moving a file onto itself is always
+considered successful, even if the overwrite mode is not in effect.</p>
+<p>If files were found, <a href="../Variables.htm#LastError">A_LastError</a> is set to
+0 (zero) or the result of the operating system\'s GetLastError()
+function immediately after the last failure. Otherwise A_LastError
+contains an error code that might indicate why no files were found.</p>
+<h2 id="Remarks">Remarks</h2>
+<p>FileMove moves files only. To instead move the contents of a folder (all
+its files and subfolders), see the examples section below. To move or
+rename a single folder, use <a href="DirMove.htm">DirMove</a>.</p>
+<p>The operation will continue even if error(s) are encountered.</p>
+<p>Although this function is capable of moving files to a different volume,
+the operation will take longer than a same-volume move. This is because
+a same-volume move is similar to a rename, and therefore much faster.</p>
+<h2 id="Related">Related</h2>
+<p><a href="FileCopy.htm">FileCopy</a>, <a href="DirCopy.htm">DirCopy</a>,
+<a href="DirMove.htm">DirMove</a>, <a href="FileDelete.htm">FileDelete</a></p>
+<h2 id="Examples">Examples</h2>
+<p>::: {#ExNoRename .ex}
+<a class="ex_number" href="#ExNoRename"></a> Moves a file without renaming it.</p>
+<pre class="codehilite"><code>FileMove &quot;C:\My Documents\List1.txt&quot;, &quot;D:\Main Backup\&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExRename .ex}
+<a class="ex_number" href="#ExRename"></a> Renames a single file.</p>
+<pre class="codehilite"><code>FileMove &quot;C:\File Before.txt&quot;, &quot;C:\File After.txt&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExNewExt .ex}
+<a class="ex_number" href="#ExNewExt"></a> Moves text files to a new location and gives
+them a new extension.</p>
+<pre class="codehilite"><code>FileMove &quot;C:\Folder1\*.txt&quot;, &quot;D:\New Folder\*.bkp&quot;
+</code></pre>
+
+<p>:::</p>
+<p>::: {#ExMoveAll .ex}
+<a class="ex_number" href="#ExMoveAll"></a> Moves all files and folders inside a folder
+to a different folder.</p>
+<pre class="codehilite"><code>ErrorCount := MoveFilesAndFolders(&quot;C:\My Folder\*.*&quot;, &quot;D:\Folder to receive all files &amp; folders&quot;)
+if ErrorCount != 0
+    MsgBox ErrorCount &quot; files/folders could not be moved.&quot;
+
+MoveFilesAndFolders(SourcePattern, DestinationFolder, DoOverwrite := false)
+; Moves all files and folders matching SourcePattern into the folder named DestinationFolder and
+; returns the number of files/folders that could not be moved.
+{
+    ErrorCount := 0
+    if DoOverwrite = 1
+        DoOverwrite := 2  ; See DirMove for description of mode 2 vs. 1.
+    ; First move all the files (but not the folders):
+    try
+        FileMove SourcePattern, DestinationFolder, DoOverwrite
+    catch as Err
+        ErrorCount := Err.Extra
+    ; Now move all the folders:
+    Loop Files, SourcePattern, &quot;D&quot;  ; D means &quot;retrieve folders only&quot;.
+    {
+        try
+            DirMove A_LoopFilePath, DestinationFolder &quot;\&quot; A_LoopFileName, DoOverwrite
+        catch
+        {
+            ErrorCount += 1
+            ; Report each problem folder by name.
+            MsgBox &quot;Could not move &quot; A_LoopFilePath &quot; into &quot; DestinationFolder
+        }
+    }
+    return ErrorCount
+}
+</code></pre>
+
+<p>:::</p>
+                </article>
+
+                <!-- Footer Navigation -->
+                <div class="doc-pagination">
+                    
+                    
+                </div>
+
+                <!-- Edit on GitHub -->
+                <div class="edit-page">
+                    <a href="https://github.com/012090120901209/AHKv2_Docs/edit/main/FileMove.md" target="_blank" rel="noopener">
+                        <i class="fas fa-edit"></i> Edit this page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <div class="toc">
+<ul>
+<li><a href="#filemove">FileMove</a><ul>
+<li><a href="#Parameters">Parameters</a></li>
+<li><a href="#Error_Handling">Error Handling</a></li>
+<li><a href="#Remarks">Remarks</a></li>
+<li><a href="#Related">Related</a></li>
+<li><a href="#Examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+                    </nav>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/toc.js"></script>
+    <script src="/js/syntax.js"></script>
+</body>
+</html>
