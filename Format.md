@@ -27,7 +27,7 @@ FormatStr
     preceded by `:`. Specify empty braces to use the next input value
     with default formatting: `{}`
 
-    Use `{{}` and `{}}` to include literal braces in the string. Any
+    Use `{ {` and `} }` (double braces) to include literal braces in the string. Any
     other invalid placeholders are included in the result as is.
 
     Whitespace inside the braces is not permitted (except as a flag).
