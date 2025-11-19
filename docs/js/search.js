@@ -7,7 +7,8 @@ let searchInput = document.getElementById('searchInput');
 // Load search index
 async function loadSearchIndex() {
     try {
-        const response = await fetch('/search-index.json');
+        const baseUrl = window.BASE_URL || '';
+        const response = await fetch(`${baseUrl}/search-index.json`);
         searchIndex = await response.json();
     } catch (error) {
         console.error('Failed to load search index:', error);
