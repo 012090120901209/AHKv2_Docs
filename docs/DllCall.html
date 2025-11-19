@@ -208,345 +208,744 @@ below. The <a href="#asterisk">asterisk suffix</a> is also supported.</p>
 is of a type that does not return a value, the result is an undefined
 value of the specified return type (integer by default).</p>
 <h2 id="types">Types of Arguments and Return Values</h2>
-<p>+-----------------------------------+-----------------------------------+
-| Type                              | Description                       |
-+===================================+===================================+
-| Str                               | A string such as <code>"Blue"</code> or      |
-|                                   | <code>MyVar</code>, or a                     |
-|                                   | <a href="../                      |
-|                                   | Concepts.htm#variable-references">VarRef</a> |
-|                                   | such as <code>&amp;MyVar</code>. If the called   |
-|                                   | function modifies the string and  |
-|                                   | the argument is a naked variable  |
-|                                   | or VarRef, its contents will be   |
-|                                   | updated. For example, the         |
-|                                   | following call would convert the  |
-|                                   | contents of <em>MyVar</em> to uppercase: |
-|                                   | <code>DllCall("                        |
-|                                   | CharUpper", "Str",</code><em><code>MyVar</code></em><code>)</code>. |
-|                                   |                                   |
-|                                   | If the function is designed to    |
-|                                   | store a string longer than the    |
-|                                   | parameter\'s input value (or if   |
-|                                   | the parameter is for output       |
-|                                   | only), the recommended approach   |
-|                                   | is to create a                    |
-|                                   | <a href="Buffer.htm">Buffer</a>, use the     |
-|                                   | <a href="#ptr">Ptr</a> type to pass it, and  |
-|                                   | use <a href="StrGet.htm">StrGet</a> to       |
-|                                   | retrieve the string after the     |
-|                                   | function returns, as in the       |
-|                                   | <a href="#ExWsprintf">wsprintf example</a>.  |
-|                                   |                                   |
-|                                   | Otherwise, ensure that the        |
-|                                   | variable is large enough before   |
-|                                   | calling the function. This can be |
-|                                   | achieved by calling               |
-|                                   | <a href="VarSe       |
-|                                   | tStrCapacity.htm"><code>VarSetStrCapacity</code></a><code>(&amp;MyVar, 123)</code>, |
-|                                   | where 123 is the number of 16-bit |
-|                                   | units (loosely referred to as     |
-|                                   | characters) that <em>MyVar</em> must be  |
-|                                   | able to hold. If the variable is  |
-|                                   | not null-terminated upon return,  |
-|                                   | an error message is shown and the |
-|                                   | program exits as it is likely     |
-|                                   | that memory has been corrupted    |
-|                                   | via buffer overrun. This would    |
-|                                   | typically indicate that the       |
-|                                   | variable\'s capacity was          |
-|                                   | insufficient.                     |
-|                                   |                                   |
-|                                   | A <em>Str</em> argument must not be an   |
-|                                   | <a href="../Variables.htm#Expressions">expressi                         |
-|                                   | on</a> |
-|                                   | that evaluates to a number (such  |
-|                                   | as <code>i+1</code>). If it is, the function |
-|                                   | is not called and a               |
-|                                   | <a href="Error.htm#TypeError">TypeError</a>  |
-|                                   | is thrown.                        |
-|                                   |                                   |
-|                                   | The rarely-used                   |
-|                                   | <a href="#asterisk">Str*</a> arg type       |
-|                                   | passes the address of a temporary |
-|                                   | variable containing the address   |
-|                                   | of the string. If the function    |
-|                                   | writes a new address into the     |
-|                                   | temporary variable, the new       |
-|                                   | string is copied into the         |
-|                                   | script\'s variable, if a          |
-|                                   | <a href="../                      |
-|                                   | Concepts.htm#variable-references">VarRef</a> |
-|                                   | was passed. This can be used with |
-|                                   | functions that expect something   |
-|                                   | like \"TCHAR **\" or \"LPTSTR   |
-|                                   | *\". However, if the function    |
-|                                   | allocates memory and expects the  |
-|                                   | caller to free it (such as by     |
-|                                   | calling                           |
-|                                   | <a href="https://learn.microso |
-|                                   | ft.com/windows/win32/api/combasea |
-|                                   | pi/nf-combaseapi-cotaskmemfree">CoT                              |
-|                                   | askMemFree</a>), |
-|                                   | the <code>Ptr*</code> arg type must be used  |
-|                                   | instead.                          |
-|                                   |                                   |
-|                                   | <strong>Note:</strong> When passing a string   |
-|                                   | to a function, be aware what      |
-|                                   | <a href="../Compat.htm#DllCall"><em>type</em> of                        |
-|                                   | string</a>    |
-|                                   | the function expects.             |
-+-----------------------------------+-----------------------------------+
-| []{#wstr}WStr                     | Since AutoHotkey uses UTF-16      |
-|                                   | natively, WStr (wide character    |
-|                                   | string) is equivalent to Str.     |
-+-----------------------------------+-----------------------------------+
-| []{#astr}AStr                     | AStr causes the input value to be |
-|                                   | automatically converted to ANSI.  |
-|                                   | Since the temporary memory used   |
-|                                   | for this conversion is only large |
-|                                   | enough for the converted input    |
-|                                   | string, any value written to it   |
-|                                   | by the function is discarded. To  |
-|                                   | receive an ANSI string as an      |
-|                                   | output parameter, follow this     |
-|                                   | example:                          |
-|                                   |                                   |
-|                                   |     buf := Buffer(leng            |
-|                                   | th)  ; Allocate temporary buffer. |
-|                                   |     DllCall("Function", "ptr",    |
-|                                   |  buf)  ; Pass buffer to function. |
-|                                   |     str := StrGet(buf, "cp0")  ;  |
-|                                   | Retrieve ANSI string from buffer. |
-|                                   |                                   |
-|                                   | The rarely-used                   |
-|                                   | <a href="#asterisk">AStr*</a> arg type is   |
-|                                   | also supported and behaves        |
-|                                   | similarly to the <a href="#strp">Str*</a>   |
-|                                   | type, except that any new string  |
-|                                   | is converted from ANSI to the     |
-|                                   | native format, UTF-16.            |
-|                                   |                                   |
-|                                   | See <a href="../Compat.htm#DllCall">Binary                       |
-|                                   | Comp                              |
-|                                   | atibility</a> |
-|                                   | for equivalent Win32 types and    |
-|                                   | other details.                    |
-+-----------------------------------+-----------------------------------+
-| Int64                             | A 64-bit integer, whose range is  |
-|                                   | -9223372036854775808              |
-|                                   | (-0x8000000000000000) to          |
-|                                   | 9223372036854775807               |
-|                                   | (0x7FFFFFFFFFFFFFFF).             |
-+-----------------------------------+-----------------------------------+
-| Int                               | A 32-bit integer (the most common |
-|                                   | integer type), whose range is     |
-|                                   | -2147483648 (-0x80000000) to      |
-|                                   | 2147483647 (0x7FFFFFFF). An Int   |
-|                                   | is sometimes called a \"Long\".   |
-|                                   |                                   |
-|                                   | An Int should also be used for    |
-|                                   | each BOOL argument expected by a  |
-|                                   | function (a BOOL value should be  |
-|                                   | either 1 or 0).                   |
-|                                   |                                   |
-|                                   | An <a href="#unsigned">unsigned</a> Int      |
-|                                   | (UInt) is also used quite         |
-|                                   | frequently, such as for DWORD.    |
-+-----------------------------------+-----------------------------------+
-| Short                             | A 16-bit integer, whose range is  |
-|                                   | -32768 (-0x8000) to 32767         |
-|                                   | (0x7FFF). An                      |
-|                                   | <a href="#unsigned">unsigned</a> Short       |
-|                                   | (UShort) can be used with         |
-|                                   | functions that expect a WORD.     |
-+-----------------------------------+-----------------------------------+
-| Char                              | An 8-bit integer, whose range is  |
-|                                   | -128 (-0x80) to 127 (0x7F). An    |
-|                                   | <a href="#unsigned">unsigned</a> character   |
-|                                   | (UChar) can be used with          |
-|                                   | functions that expect a BYTE.     |
-+-----------------------------------+-----------------------------------+
-| Float                             | A 32-bit floating point number,   |
-|                                   | which provides 6 digits of        |
-|                                   | precision.                        |
-+-----------------------------------+-----------------------------------+
-| Double                            | A 64-bit floating point number,   |
-|                                   | which provides 15 digits of       |
-|                                   | precision.                        |
-+-----------------------------------+-----------------------------------+
-| Ptr                               | A                                 |
-|                                   | <a href="../Variables.htm#PtrSize">pointer                          |
-|                                   | -sized</a> |
-|                                   | integer, equivalent to Int or     |
-|                                   | Int64 depending on whether the    |
-|                                   | exe running the script is 32-bit  |
-|                                   | or 64-bit. <em>Ptr</em> should be used   |
-|                                   | for pointers to arrays or         |
-|                                   | structures (such as RECT* or     |
-|                                   | LPPOINT) and almost all handles   |
-|                                   | (such as HWND, HBRUSH or          |
-|                                   | HBITMAP). If the parameter is a   |
-|                                   | pointer to a single numeric value |
-|                                   | such as LPDWORD or int*,         |
-|                                   | generally the * or P suffix      |
-|                                   | should be used instead of         |
-|                                   | \"Ptr\".                          |
-|                                   |                                   |
-|                                   | If an object is passed to a Ptr   |
-|                                   | parameter, the value of the       |
-|                                   | object\'s <code>Ptr</code> property is used. |
-|                                   | If no such property exists, a     |
-|                                   | <a href="Error.htm#PropertyError">Proper                           |
-|                                   | tyError</a> |
-|                                   | is thrown. Typically the object   |
-|                                   | would be a <a href="Buffer.htm">Buffer</a>.  |
-|                                   |                                   |
-|                                   | If an object is passed to a Ptr* |
-|                                   | parameter, the value of the       |
-|                                   | object\'s <code>Ptr</code> property is       |
-|                                   | retrieved before the call and the |
-|                                   | address of a temporary variable   |
-|                                   | containing this value is passed   |
-|                                   | to the function. After the        |
-|                                   | function returns, the new value   |
-|                                   | is assigned back to the object\'s |
-|                                   | <code>Ptr</code> property.                   |
-|                                   |                                   |
-|                                   | <em>Ptr</em> can also be used with the   |
-|                                   | * or P suffix; it should be used |
-|                                   | with functions that output a      |
-|                                   | pointer via LPVOID* or similar.  |
-|                                   |                                   |
-|                                   | <em>UPtr</em> is also valid, with the    |
-|                                   | following limitations:            |
-|                                   |                                   |
-|                                   | -   It is only unsigned in 32-bit |
-|                                   |     builds as AutoHotkey does not |
-|                                   |     support unsigned 64-bit       |
-|                                   |     integers.                     |
-|                                   | -   Objects are not permitted.    |
-|                                   |                                   |
-|                                   | <strong>Note:</strong> To pass a <strong>NULL</strong>      |
-|                                   | handle or pointer, pass the       |
-|                                   | integer 0.                        |
-+-----------------------------------+-----------------------------------+
-| * or P\                          | Append an asterisk (with optional |
-| (suffix)                          | preceding space) to any of the    |
-|                                   | above types to cause the address  |
-|                                   | of the argument to be passed      |
-|                                   | rather than the value itself (the |
-|                                   | called function must be designed  |
-|                                   | to accept it). Since the value of |
-|                                   | such an argument might be         |
-|                                   | modified by the function,         |
-|                                   | whenever a                        |
-|                                   | <a href="../                      |
-|                                   | Concepts.htm#variable-references">VarRef</a> |
-|                                   | is passed as the argument, the    |
-|                                   | variable\'s contents will be      |
-|                                   | updated after the function        |
-|                                   | returns. For example, the         |
-|                                   | following call would pass the     |
-|                                   | contents of MyVar to MyFunction   |
-|                                   | by address, but would also update |
-|                                   | MyVar to reflect any changes made |
-|                                   | to it by MyFunction:              |
-|                                   | <code>DllCall("MyD                     |
-|                                   | ll\MyFunction", "Int*", &amp;MyVar)</code>. |
-|                                   |                                   |
-|                                   | In general, an asterisk is used   |
-|                                   | whenever a function has an        |
-|                                   | argument type or return type that |
-|                                   | starts with \"LP\". The most      |
-|                                   | common example is LPDWORD, which  |
-|                                   | is a pointer to a DWORD. Since a  |
-|                                   | DWORD is an unsigned 32-bit       |
-|                                   | integer, use \"UInt*\" or        |
-|                                   | \"UIntP\" to represent LPDWORD.   |
-|                                   | An asterisk should not be used    |
-|                                   | for string types such as LPTSTR,  |
-|                                   | pointers to structures such as    |
-|                                   | LPRECT, or arrays; for these,     |
-|                                   | <a href="#str">\"Str\"</a> or                |
-|                                   | <a href="#ptr">\"Ptr\"</a> should be used,   |
-|                                   | depending on whether you pass a   |
-|                                   | string, address or                |
-|                                   | <a href="Buffer.htm">Buffer</a>.             |
-|                                   |                                   |
-|                                   | <strong>Note:</strong> \"Char*\" is not the   |
-|                                   | same as <a href="#str">\"Str\"</a> because   |
-|                                   | \"Char*\" passes the address of  |
-|                                   | an 8-bit number, whereas          |
-|                                   | <a href="#str">\"Str\"</a> passes the        |
-|                                   | address of a series of            |
-|                                   | characters, which may be either   |
-|                                   | 16-bit (Unicode) or 8-bit (for    |
-|                                   | \"AStr\"), depending on the       |
-|                                   | version of AutoHotkey. Similarly, |
-|                                   | \"UInt*\" passes the address of  |
-|                                   | a 32-bit number, so should not be |
-|                                   | used if the function expects an   |
-|                                   | array of values or a structure    |
-|                                   | larger than 32 bits.              |
-|                                   |                                   |
-|                                   | Since variables in AutoHotkey     |
-|                                   | have no fixed type, the address   |
-|                                   | passed to the function points to  |
-|                                   | temporary memory rather than the  |
-|                                   | caller\'s variable.               |
-+-----------------------------------+-----------------------------------+
-| U (prefix)                        | Prepend the letter U to any of    |
-|                                   | the integer types above to        |
-|                                   | interpret it as an unsigned       |
-|                                   | integer (UInt64, UInt, UShort,    |
-|                                   | and UChar). Strictly speaking,    |
-|                                   | this is necessary only for return |
-|                                   | values and <a href="#asterisk">asterisk              |
-|                                   | variables</a> because it  |
-|                                   | does not matter whether an        |
-|                                   | argument passed by value is       |
-|                                   | unsigned or signed (except for    |
-|                                   | Int64).                           |
-|                                   |                                   |
-|                                   | If a negative integer is          |
-|                                   | specified for an unsigned         |
-|                                   | argument, the integer wraps       |
-|                                   | around into the unsigned domain.  |
-|                                   | For example, when -1 is sent as a |
-|                                   | UInt, it would become 0xFFFFFFFF. |
-|                                   |                                   |
-|                                   | <em>Unsigned</em> 64-bit integers        |
-|                                   | produced by a function are not    |
-|                                   | supported. Therefore, to work     |
-|                                   | with numbers greater or equal to  |
-|                                   | 0x8000000000000000, omit the U    |
-|                                   | prefix and interpret any negative |
-|                                   | values received from the function |
-|                                   | as large integers. For example, a |
-|                                   | function that yields -1 as an     |
-|                                   | Int64 is really yielding          |
-|                                   | 0xFFFFFFFFFFFFFFFF if it is       |
-|                                   | designed to yield a UInt64.       |
-+-----------------------------------+-----------------------------------+
-| HRESULT                           | A 32-bit integer. This is         |
-|                                   | generally used with COM functions |
-|                                   | and is valid only as a return     |
-|                                   | type without any prefix or        |
-|                                   | suffix. Error values (as defined  |
-|                                   | by the <a href="https://l                  |
-|                                   | earn.microsoft.com/windows/win32/ |
-|                                   | api/winerror/nf-winerror-failed">FAILED                    |
-|                                   | macro</a>) |
-|                                   | are never returned; instead, an   |
-|                                   | <a href="Error.htm#OSError">OSError</a> is   |
-|                                   | thrown. Therefore, the return     |
-|                                   | value is a success code in the    |
-|                                   | range 0 to 2147483647.            |
-|                                   |                                   |
-|                                   | HRESULT is the default return     |
-|                                   | type for <a href="ComCall.htm">ComCall</a>.  |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Type</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Str<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A string such as <code>"Blue"</code> or<br />
+<code>MyVar</code>, or a<br />
+<a href="../  
+Concepts.htm#variable-references">VarRef</a><br />
+such as <code>&amp;MyVar</code>. If the called<br />
+function modifies the string and<br />
+the argument is a naked variable<br />
+or VarRef, its contents will be<br />
+updated. For example, the<br />
+following call would convert the<br />
+contents of <em>MyVar</em> to uppercase:<br />
+<code>DllCall("  
+CharUpper", "Str",</code><em><code>MyVar</code></em><code>)</code>.<br />
+<br />
+If the function is designed to<br />
+store a string longer than the<br />
+parameter\'s input value (or if<br />
+the parameter is for output<br />
+only), the recommended approach<br />
+is to create a<br />
+<a href="Buffer.htm">Buffer</a>, use the<br />
+<a href="#ptr">Ptr</a> type to pass it, and<br />
+use <a href="StrGet.htm">StrGet</a> to<br />
+retrieve the string after the<br />
+function returns, as in the<br />
+<a href="#ExWsprintf">wsprintf example</a>.<br />
+<br />
+Otherwise, ensure that the<br />
+variable is large enough before<br />
+calling the function. This can be<br />
+achieved by calling<br />
+<a href="VarSe  
+tStrCapacity.htm"><code>VarSetStrCapacity</code></a><code>(&amp;MyVar, 123)</code>,<br />
+where 123 is the number of 16-bit<br />
+units (loosely referred to as<br />
+characters) that <em>MyVar</em> must be<br />
+able to hold. If the variable is<br />
+not null-terminated upon return,<br />
+an error message is shown and the<br />
+program exits as it is likely<br />
+that memory has been corrupted<br />
+via buffer overrun. This would<br />
+typically indicate that the<br />
+variable\'s capacity was<br />
+insufficient.<br />
+<br />
+A <em>Str</em> argument must not be an<br />
+<a href="../Variables.htm#Expressions">expressi<br />
+on</a><br />
+that evaluates to a number (such<br />
+as <code>i+1</code>). If it is, the function<br />
+is not called and a<br />
+<a href="Error.htm#TypeError">TypeError</a><br />
+is thrown.<br />
+<br />
+The rarely-used<br />
+<a href="#asterisk">Str*</a> arg type<br />
+passes the address of a temporary<br />
+variable containing the address<br />
+of the string. If the function<br />
+writes a new address into the<br />
+temporary variable, the new<br />
+string is copied into the<br />
+script\'s variable, if a<br />
+<a href="../  
+Concepts.htm#variable-references">VarRef</a><br />
+was passed. This can be used with<br />
+functions that expect something<br />
+like \"TCHAR **\" or \"LPTSTR<br />
+*\". However, if the function<br />
+allocates memory and expects the<br />
+caller to free it (such as by<br />
+calling<br />
+<a href="https://learn.microso  
+ft.com/windows/win32/api/combasea  
+pi/nf-combaseapi-cotaskmemfree">CoT<br />
+askMemFree</a>),<br />
+the <code>Ptr*</code> arg type must be used<br />
+instead.<br />
+<br />
+<strong>Note:</strong> When passing a string<br />
+to a function, be aware what<br />
+<a href="../Compat.htm#DllCall"><em>type</em> of<br />
+string</a><br />
+the function expects.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>[]{#wstr}WStr<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Since AutoHotkey uses UTF-16<br />
+natively, WStr (wide character<br />
+string) is equivalent to Str.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>[]{#astr}AStr<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>AStr causes the input value to be<br />
+automatically converted to ANSI.<br />
+Since the temporary memory used<br />
+for this conversion is only large<br />
+enough for the converted input<br />
+string, any value written to it<br />
+by the function is discarded. To<br />
+receive an ANSI string as an<br />
+output parameter, follow this<br />
+example:<br />
+<br />
+    buf := Buffer(leng<br />
+th)  ; Allocate temporary buffer.<br />
+    DllCall("Function", "ptr",<br />
+ buf)  ; Pass buffer to function.<br />
+    str := StrGet(buf, "cp0")  ;<br />
+Retrieve ANSI string from buffer.<br />
+<br />
+The rarely-used<br />
+<a href="#asterisk">AStr*</a> arg type is<br />
+also supported and behaves<br />
+similarly to the <a href="#strp">Str*</a><br />
+type, except that any new string<br />
+is converted from ANSI to the<br />
+native format, UTF-16.<br />
+<br />
+See <a href="../Compat.htm#DllCall">Binary<br />
+Comp<br />
+atibility</a><br />
+for equivalent Win32 types and<br />
+other details.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Int64<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A 64-bit integer, whose range is<br />
+-9223372036854775808<br />
+(-0x8000000000000000) to<br />
+9223372036854775807<br />
+(0x7FFFFFFFFFFFFFFF).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Int<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A 32-bit integer (the most common<br />
+integer type), whose range is<br />
+-2147483648 (-0x80000000) to<br />
+2147483647 (0x7FFFFFFF). An Int<br />
+is sometimes called a \"Long\".<br />
+<br />
+An Int should also be used for<br />
+each BOOL argument expected by a<br />
+function (a BOOL value should be<br />
+either 1 or 0).<br />
+<br />
+An <a href="#unsigned">unsigned</a> Int<br />
+(UInt) is also used quite<br />
+frequently, such as for DWORD.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Short<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A 16-bit integer, whose range is<br />
+-32768 (-0x8000) to 32767<br />
+(0x7FFF). An<br />
+<a href="#unsigned">unsigned</a> Short<br />
+(UShort) can be used with<br />
+functions that expect a WORD.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Char<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>An 8-bit integer, whose range is<br />
+-128 (-0x80) to 127 (0x7F). An<br />
+<a href="#unsigned">unsigned</a> character<br />
+(UChar) can be used with<br />
+functions that expect a BYTE.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Float<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A 32-bit floating point number,<br />
+which provides 6 digits of<br />
+precision.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Double<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A 64-bit floating point number,<br />
+which provides 15 digits of<br />
+precision.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Ptr<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A<br />
+<a href="../Variables.htm#PtrSize">pointer<br />
+-sized</a><br />
+integer, equivalent to Int or<br />
+Int64 depending on whether the<br />
+exe running the script is 32-bit<br />
+or 64-bit. <em>Ptr</em> should be used<br />
+for pointers to arrays or<br />
+structures (such as RECT* or<br />
+LPPOINT) and almost all handles<br />
+(such as HWND, HBRUSH or<br />
+HBITMAP). If the parameter is a<br />
+pointer to a single numeric value<br />
+such as LPDWORD or int*,<br />
+generally the * or P suffix<br />
+should be used instead of<br />
+\"Ptr\".<br />
+<br />
+If an object is passed to a Ptr<br />
+parameter, the value of the<br />
+object\'s <code>Ptr</code> property is used.<br />
+If no such property exists, a<br />
+<a href="Error.htm#PropertyError">Proper<br />
+tyError</a><br />
+is thrown. Typically the object<br />
+would be a <a href="Buffer.htm">Buffer</a>.<br />
+<br />
+If an object is passed to a Ptr*<br />
+parameter, the value of the<br />
+object\'s <code>Ptr</code> property is<br />
+retrieved before the call and the<br />
+address of a temporary variable<br />
+containing this value is passed<br />
+to the function. After the<br />
+function returns, the new value<br />
+is assigned back to the object\'s<br />
+<code>Ptr</code> property.<br />
+<br />
+<em>Ptr</em> can also be used with the<br />
+* or P suffix; it should be used<br />
+with functions that output a<br />
+pointer via LPVOID* or similar.<br />
+<br />
+<em>UPtr</em> is also valid, with the<br />
+following limitations:<br />
+<br />
+-   It is only unsigned in 32-bit<br />
+    builds as AutoHotkey does not<br />
+    support unsigned 64-bit<br />
+    integers.<br />
+-   Objects are not permitted.<br />
+<br />
+<strong>Note:</strong> To pass a <strong>NULL</strong><br />
+handle or pointer, pass the<br />
+integer 0.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>* or P\<br />
+(suffix)<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Append an asterisk (with optional<br />
+preceding space) to any of the<br />
+above types to cause the address<br />
+of the argument to be passed<br />
+rather than the value itself (the<br />
+called function must be designed<br />
+to accept it). Since the value of<br />
+such an argument might be<br />
+modified by the function,<br />
+whenever a<br />
+<a href="../  
+Concepts.htm#variable-references">VarRef</a><br />
+is passed as the argument, the<br />
+variable\'s contents will be<br />
+updated after the function<br />
+returns. For example, the<br />
+following call would pass the<br />
+contents of MyVar to MyFunction<br />
+by address, but would also update<br />
+MyVar to reflect any changes made<br />
+to it by MyFunction:<br />
+<code>DllCall("MyD  
+ll\MyFunction", "Int*", &amp;MyVar)</code>.<br />
+<br />
+In general, an asterisk is used<br />
+whenever a function has an<br />
+argument type or return type that<br />
+starts with \"LP\". The most<br />
+common example is LPDWORD, which<br />
+is a pointer to a DWORD. Since a<br />
+DWORD is an unsigned 32-bit<br />
+integer, use \"UInt*\" or<br />
+\"UIntP\" to represent LPDWORD.<br />
+An asterisk should not be used<br />
+for string types such as LPTSTR,<br />
+pointers to structures such as<br />
+LPRECT, or arrays; for these,<br />
+<a href="#str">\"Str\"</a> or<br />
+<a href="#ptr">\"Ptr\"</a> should be used,<br />
+depending on whether you pass a<br />
+string, address or<br />
+<a href="Buffer.htm">Buffer</a>.<br />
+<br />
+<strong>Note:</strong> \"Char*\" is not the<br />
+same as <a href="#str">\"Str\"</a> because<br />
+\"Char*\" passes the address of<br />
+an 8-bit number, whereas<br />
+<a href="#str">\"Str\"</a> passes the<br />
+address of a series of<br />
+characters, which may be either<br />
+16-bit (Unicode) or 8-bit (for<br />
+\"AStr\"), depending on the<br />
+version of AutoHotkey. Similarly,<br />
+\"UInt*\" passes the address of<br />
+a 32-bit number, so should not be<br />
+used if the function expects an<br />
+array of values or a structure<br />
+larger than 32 bits.<br />
+<br />
+Since variables in AutoHotkey<br />
+have no fixed type, the address<br />
+passed to the function points to<br />
+temporary memory rather than the<br />
+caller\'s variable.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>U (prefix)<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Prepend the letter U to any of<br />
+the integer types above to<br />
+interpret it as an unsigned<br />
+integer (UInt64, UInt, UShort,<br />
+and UChar). Strictly speaking,<br />
+this is necessary only for return<br />
+values and <a href="#asterisk">asterisk<br />
+variables</a> because it<br />
+does not matter whether an<br />
+argument passed by value is<br />
+unsigned or signed (except for<br />
+Int64).<br />
+<br />
+If a negative integer is<br />
+specified for an unsigned<br />
+argument, the integer wraps<br />
+around into the unsigned domain.<br />
+For example, when -1 is sent as a<br />
+UInt, it would become 0xFFFFFFFF.<br />
+<br />
+<em>Unsigned</em> 64-bit integers<br />
+produced by a function are not<br />
+supported. Therefore, to work<br />
+with numbers greater or equal to<br />
+0x8000000000000000, omit the U<br />
+prefix and interpret any negative<br />
+values received from the function<br />
+as large integers. For example, a<br />
+function that yields -1 as an<br />
+Int64 is really yielding<br />
+0xFFFFFFFFFFFFFFFF if it is<br />
+designed to yield a UInt64.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>HRESULT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A 32-bit integer. This is<br />
+generally used with COM functions<br />
+and is valid only as a return<br />
+type without any prefix or<br />
+suffix. Error values (as defined<br />
+by the <a href="https://l  
+earn.microsoft.com/windows/win32/  
+api/winerror/nf-winerror-failed">FAILED<br />
+macro</a>)<br />
+are never returned; instead, an<br />
+<a href="Error.htm#OSError">OSError</a> is<br />
+thrown. Therefore, the return<br />
+value is a success code in the<br />
+range 0 to 2147483647.<br />
+<br />
+HRESULT is the default return<br />
+type for <a href="ComCall.htm">ComCall</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="error">Errors</h2>
 <p>DllCall throws an <a href="Error.htm">Error</a> under any of the following
 conditions:</p>

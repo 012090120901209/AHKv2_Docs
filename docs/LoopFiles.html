@@ -194,131 +194,320 @@ letters:</p>
 <p>The following variables exist within any file loop. If an inner file
 loop is enclosed by an outer file loop, the innermost loop\'s file will
 take precedence:</p>
-<p>+-----------------------------------+-----------------------------------+
-| Variable                          | Description                       |
-+===================================+===================================+
-| A_LoopFileName                    | The name of the file or folder    |
-|                                   | currently retrieved (without the  |
-|                                   | path).                            |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileExt                     | The file\'s extension (e.g. TXT,  |
-|                                   | DOC, or EXE). The period (.) is   |
-|                                   | not included.                     |
-+-----------------------------------+-----------------------------------+
-| A_LoopFilePath                    | The path and name of the          |
-|                                   | file/folder currently retrieved.  |
-|                                   | If <em>FilePattern</em> contains a       |
-|                                   | relative path rather than an      |
-|                                   | absolute path, the path here will |
-|                                   | also be relative. In addition,    |
-|                                   | any short (8.3) folder names in   |
-|                                   | <em>FilePattern</em> will still be short |
-|                                   | (see next item to get the long    |
-|                                   | version).                         |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileFullPath                | This is different than            |
-|                                   | A_LoopFilePath in the following   |
-|                                   | ways: 1) It always contains the   |
-|                                   | absolute/complete path of the     |
-|                                   | file even if <em>FilePattern</em>        |
-|                                   | contains a relative path; 2) Any  |
-|                                   | short (8.3) folder names in       |
-|                                   | <em>FilePattern</em> itself are          |
-|                                   | converted to their long names; 3) |
-|                                   | Characters in <em>FilePattern</em> are   |
-|                                   | converted to uppercase or         |
-|                                   | lowercase to match the case       |
-|                                   | stored in the file system. This   |
-|                                   | is useful for converting file     |
-|                                   | names -- such as those passed    |
-|                                   | into a script as command line     |
-|                                   | parameters -- to their exact     |
-|                                   | path names as shown by Explorer.  |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileShortPath               | The 8.3 short path and name of    |
-|                                   | the file/folder currently         |
-|                                   | retrieved. For example:           |
-|                                   | C:\MYDOCU\~1\ADDRES\~1.txt. If  |
-|                                   | <em>FilePattern</em> contains a relative |
-|                                   | path rather than an absolute      |
-|                                   | path, the path here will also be  |
-|                                   | relative.                         |
-|                                   |                                   |
-|                                   | To retrieve the complete 8.3 path |
-|                                   | and name for a single file or     |
-|                                   | folder, follow this example:      |
-|                                   |                                   |
-|                                   |     Loop Files, "                 |
-|                                   | C:\My Documents\Address List.txt" |
-|                                   |         Sho                       |
-|                                   | rtPathName := A_LoopFileShortPath |
-|                                   |                                   |
-|                                   | <strong>Note:</strong> This variable will be   |
-|                                   | [blank]{.underline} if the file   |
-|                                   | does not have a short name, which |
-|                                   | can happen on systems where       |
-|                                   | NtfsDisable8dot3NameCreation has  |
-|                                   | been set in the registry. It will |
-|                                   | also be blank if <em>FilePattern</em>    |
-|                                   | contains a relative path and the  |
-|                                   | body of the loop uses             |
-|                                   | <a href="SetWorkingDir.htm">                                 |
-|                                   | SetWorkingDir</a> |
-|                                   | to switch away from the working   |
-|                                   | directory in effect for the loop  |
-|                                   | itself.                           |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileShortName               | The 8.3 short name or alternate   |
-|                                   | name of the file. If the file     |
-|                                   | doesn\'t have one (due to the     |
-|                                   | long name being shorter than 8.3  |
-|                                   | or perhaps because short-name     |
-|                                   | generation is disabled on an NTFS |
-|                                   | file system), <em>A_LoopFileName</em>    |
-|                                   | will be retrieved instead.        |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileDir                     | The path of the directory in      |
-|                                   | which <em>A_LoopFileName</em> resides.   |
-|                                   | If <em>FilePattern</em> contains a       |
-|                                   | relative path rather than an      |
-|                                   | absolute path, the path here will |
-|                                   | also be relative. A root          |
-|                                   | directory will not contain a      |
-|                                   | trailing backslash. For example:  |
-|                                   | C:                                |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileTimeModified            | The time the file was last        |
-|                                   | modified. Format                  |
-|                                   | <a href="FileSetTime.htm">YY                               |
-|                                   | YYMMDDHH24MISS</a>. |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileTimeCreated             | The time the file was created.    |
-|                                   | Format                            |
-|                                   | <a href="FileSetTime.htm">YY                               |
-|                                   | YYMMDDHH24MISS</a>. |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileTimeAccessed            | The time the file was last        |
-|                                   | accessed. Format                  |
-|                                   | <a href="FileSetTime.htm">YY                               |
-|                                   | YYMMDDHH24MISS</a>. |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileAttrib                  | The                               |
-|                                   | <a href="FileGetAttrib.htm">attributes</a>   |
-|                                   | of the file currently retrieved.  |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileSize                    | The size in bytes of the file     |
-|                                   | currently retrieved. Files larger |
-|                                   | than 4 gigabytes are also         |
-|                                   | supported.                        |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileSizeKB                  | The size in Kbytes of the file    |
-|                                   | currently retrieved, rounded down |
-|                                   | to the nearest integer.           |
-+-----------------------------------+-----------------------------------+
-| A_LoopFileSizeMB                  | The size in Mbytes of the file    |
-|                                   | currently retrieved, rounded down |
-|                                   | to the nearest integer.           |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Variable</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileName<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The name of the file or folder<br />
+currently retrieved (without the<br />
+path).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileExt<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The file\'s extension (e.g. TXT,<br />
+DOC, or EXE). The period (.) is<br />
+not included.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFilePath<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The path and name of the<br />
+file/folder currently retrieved.<br />
+If <em>FilePattern</em> contains a<br />
+relative path rather than an<br />
+absolute path, the path here will<br />
+also be relative. In addition,<br />
+any short (8.3) folder names in<br />
+<em>FilePattern</em> will still be short<br />
+(see next item to get the long<br />
+version).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileFullPath<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>This is different than<br />
+A_LoopFilePath in the following<br />
+ways: 1) It always contains the<br />
+absolute/complete path of the<br />
+file even if <em>FilePattern</em><br />
+contains a relative path; 2) Any<br />
+short (8.3) folder names in<br />
+<em>FilePattern</em> itself are<br />
+converted to their long names; 3)<br />
+Characters in <em>FilePattern</em> are<br />
+converted to uppercase or<br />
+lowercase to match the case<br />
+stored in the file system. This<br />
+is useful for converting file<br />
+names -- such as those passed<br />
+into a script as command line<br />
+parameters -- to their exact<br />
+path names as shown by Explorer.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileShortPath<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The 8.3 short path and name of<br />
+the file/folder currently<br />
+retrieved. For example:<br />
+C:\MYDOCU\~1\ADDRES\~1.txt. If<br />
+<em>FilePattern</em> contains a relative<br />
+path rather than an absolute<br />
+path, the path here will also be<br />
+relative.<br />
+<br />
+To retrieve the complete 8.3 path<br />
+and name for a single file or<br />
+folder, follow this example:<br />
+<br />
+    Loop Files, "<br />
+C:\My Documents\Address List.txt"<br />
+        Sho<br />
+rtPathName := A_LoopFileShortPath<br />
+<br />
+<strong>Note:</strong> This variable will be<br />
+[blank]{.underline} if the file<br />
+does not have a short name, which<br />
+can happen on systems where<br />
+NtfsDisable8dot3NameCreation has<br />
+been set in the registry. It will<br />
+also be blank if <em>FilePattern</em><br />
+contains a relative path and the<br />
+body of the loop uses<br />
+<a href="SetWorkingDir.htm"><br />
+SetWorkingDir</a><br />
+to switch away from the working<br />
+directory in effect for the loop<br />
+itself.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileShortName<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The 8.3 short name or alternate<br />
+name of the file. If the file<br />
+doesn\'t have one (due to the<br />
+long name being shorter than 8.3<br />
+or perhaps because short-name<br />
+generation is disabled on an NTFS<br />
+file system), <em>A_LoopFileName</em><br />
+will be retrieved instead.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileDir<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The path of the directory in<br />
+which <em>A_LoopFileName</em> resides.<br />
+If <em>FilePattern</em> contains a<br />
+relative path rather than an<br />
+absolute path, the path here will<br />
+also be relative. A root<br />
+directory will not contain a<br />
+trailing backslash. For example:<br />
+C:</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileTimeModified<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The time the file was last<br />
+modified. Format<br />
+<a href="FileSetTime.htm">YY<br />
+YYMMDDHH24MISS</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileTimeCreated<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The time the file was created.<br />
+Format<br />
+<a href="FileSetTime.htm">YY<br />
+YYMMDDHH24MISS</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileTimeAccessed<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The time the file was last<br />
+accessed. Format<br />
+<a href="FileSetTime.htm">YY<br />
+YYMMDDHH24MISS</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileAttrib<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The<br />
+<a href="FileGetAttrib.htm">attributes</a><br />
+of the file currently retrieved.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileSize<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The size in bytes of the file<br />
+currently retrieved. Files larger<br />
+than 4 gigabytes are also<br />
+supported.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileSizeKB<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The size in Kbytes of the file<br />
+currently retrieved, rounded down<br />
+to the nearest integer.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A_LoopFileSizeMB<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The size in Mbytes of the file<br />
+currently retrieved, rounded down<br />
+to the nearest integer.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Remarks">Remarks</h2>
 <p>A file loop is useful when you want to operate on a collection of files
 and/or folders, one at a time.</p>

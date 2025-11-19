@@ -177,111 +177,256 @@ reference.</p>
 <h2 id="cat-string">String</h2>
 <p>Check whether a string matches a specific pattern. <em>Value</em> must be a
 string, otherwise a <a href="Error.htm#TypeError">TypeError</a> is thrown.</p>
-<p>+-----------------------------------+-----------------------------------+
-| Function                          | Description                       |
-+===================================+===================================+
-| IsDigit                           | True if <em>Value</em> is a positive     |
-|                                   | integer, an empty string, or a    |
-|                                   | string which contains only the    |
-|                                   | characters 0 through 9. Other     |
-|                                   | characters such as the following  |
-|                                   | are not allowed: spaces, tabs,    |
-|                                   | plus signs, minus signs, decimal  |
-|                                   | points, hexadecimal digits, and   |
-|                                   | the 0x prefix.                    |
-+-----------------------------------+-----------------------------------+
-| IsXDigit                          | Hexadecimal digit: Same as        |
-|                                   | <a href="#digit">IsDigit</a> except the      |
-|                                   | characters A through F (uppercase |
-|                                   | or lowercase) are also allowed. A |
-|                                   | prefix of 0x is tolerated if      |
-|                                   | present.                          |
-+-----------------------------------+-----------------------------------+
-| IsAlpha                           | True if <em>Value</em> is a string and   |
-|                                   | is empty or contains only         |
-|                                   | alphabetic characters. False if   |
-|                                   | there are any digits, spaces,     |
-|                                   | tabs, punctuation, or other       |
-|                                   | non-alphabetic characters         |
-|                                   | anywhere in the string. For       |
-|                                   | example, if <em>Value</em> contains a    |
-|                                   | space followed by a letter, it is |
-|                                   | <em>not</em> considered to be <em>alpha</em>.   |
-|                                   |                                   |
-|                                   | By default, only ASCII letters    |
-|                                   | are considered. To instead        |
-|                                   | perform the check according to    |
-|                                   | the rules of the current user\'s  |
-|                                   | locale, use                       |
-|                                   | <code>IsAlpha(Value, "Locale")</code>.       |
-+-----------------------------------+-----------------------------------+
-| IsUpper                           | True if <em>Value</em> is a string and   |
-|                                   | is empty or contains only         |
-|                                   | uppercase characters. False if    |
-|                                   | there are any digits, spaces,     |
-|                                   | tabs, punctuation, or other       |
-|                                   | non-uppercase characters anywhere |
-|                                   | in the string.                    |
-|                                   |                                   |
-|                                   | By default, only ASCII letters    |
-|                                   | are considered. To instead        |
-|                                   | perform the check according to    |
-|                                   | the rules of the current user\'s  |
-|                                   | locale, use                       |
-|                                   | <code>IsUpper(Value, "Locale")</code>.       |
-+-----------------------------------+-----------------------------------+
-| IsLower                           | True if <em>Value</em> is a string and   |
-|                                   | is empty or contains only         |
-|                                   | lowercase characters. False if    |
-|                                   | there are any digits, spaces,     |
-|                                   | tabs, punctuation, or other       |
-|                                   | non-lowercase characters anywhere |
-|                                   | in the string.                    |
-|                                   |                                   |
-|                                   | By default, only ASCII letters    |
-|                                   | are considered. To instead        |
-|                                   | perform the check according to    |
-|                                   | the rules of the current user\'s  |
-|                                   | locale, use                       |
-|                                   | <code>IsLower(Value, "Locale")</code>.       |
-+-----------------------------------+-----------------------------------+
-| IsAlnum                           | Same as <a href="#alpha">IsAlpha</a> except  |
-|                                   | that integers and characters 0    |
-|                                   | through 9 are also allowed.       |
-+-----------------------------------+-----------------------------------+
-| IsSpace                           | True if <em>Value</em> is a string and   |
-|                                   | is empty or contains only         |
-|                                   | whitespace consisting of the      |
-|                                   | following characters: space       |
-|                                   | (<a href="../Variables.htm">A_Space</a> or   |
-|                                   | `s), tab                         |
-|                                   | (<a href="../Variables.htm">A_Tab</a> or     |
-|                                   | `t), linefeed (`n), return      |
-|                                   | (`r), vertical tab (`v), and    |
-|                                   | formfeed (`f).                   |
-+-----------------------------------+-----------------------------------+
-| IsTime                            | True if <em>Value</em> is a valid        |
-|                                   | date-time stamp, which can be all |
-|                                   | or just the leading part of the   |
-|                                   | <a href="FileSetTime.htm#YYYYMMDD">YYYYMMDDHH                       |
-|                                   | 24MISS</a> |
-|                                   | format. For example, a 4-digit    |
-|                                   | string such as 2004 is considered |
-|                                   | valid. Use <a href="StrLen.htm">StrLen</a>   |
-|                                   | to determine whether additional   |
-|                                   | time components are present.      |
-|                                   |                                   |
-|                                   | <em>Value</em> must have an even number  |
-|                                   | of digits between 4 and 14        |
-|                                   | (inclusive) to be considered      |
-|                                   | valid.                            |
-|                                   |                                   |
-|                                   | Years less than 1601 are not      |
-|                                   | considered valid because the      |
-|                                   | operating system generally does   |
-|                                   | not support them. The maximum     |
-|                                   | year considered valid is 9999.    |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Function</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>IsDigit<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>True if <em>Value</em> is a positive<br />
+integer, an empty string, or a<br />
+string which contains only the<br />
+characters 0 through 9. Other<br />
+characters such as the following<br />
+are not allowed: spaces, tabs,<br />
+plus signs, minus signs, decimal<br />
+points, hexadecimal digits, and<br />
+the 0x prefix.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>IsXDigit<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Hexadecimal digit: Same as<br />
+<a href="#digit">IsDigit</a> except the<br />
+characters A through F (uppercase<br />
+or lowercase) are also allowed. A<br />
+prefix of 0x is tolerated if<br />
+present.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>IsAlpha<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>True if <em>Value</em> is a string and<br />
+is empty or contains only<br />
+alphabetic characters. False if<br />
+there are any digits, spaces,<br />
+tabs, punctuation, or other<br />
+non-alphabetic characters<br />
+anywhere in the string. For<br />
+example, if <em>Value</em> contains a<br />
+space followed by a letter, it is<br />
+<em>not</em> considered to be <em>alpha</em>.<br />
+<br />
+By default, only ASCII letters<br />
+are considered. To instead<br />
+perform the check according to<br />
+the rules of the current user\'s<br />
+locale, use<br />
+<code>IsAlpha(Value, "Locale")</code>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>IsUpper<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>True if <em>Value</em> is a string and<br />
+is empty or contains only<br />
+uppercase characters. False if<br />
+there are any digits, spaces,<br />
+tabs, punctuation, or other<br />
+non-uppercase characters anywhere<br />
+in the string.<br />
+<br />
+By default, only ASCII letters<br />
+are considered. To instead<br />
+perform the check according to<br />
+the rules of the current user\'s<br />
+locale, use<br />
+<code>IsUpper(Value, "Locale")</code>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>IsLower<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>True if <em>Value</em> is a string and<br />
+is empty or contains only<br />
+lowercase characters. False if<br />
+there are any digits, spaces,<br />
+tabs, punctuation, or other<br />
+non-lowercase characters anywhere<br />
+in the string.<br />
+<br />
+By default, only ASCII letters<br />
+are considered. To instead<br />
+perform the check according to<br />
+the rules of the current user\'s<br />
+locale, use<br />
+<code>IsLower(Value, "Locale")</code>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>IsAlnum<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Same as <a href="#alpha">IsAlpha</a> except<br />
+that integers and characters 0<br />
+through 9 are also allowed.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>IsSpace<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>True if <em>Value</em> is a string and<br />
+is empty or contains only<br />
+whitespace consisting of the<br />
+following characters: space<br />
+(<a href="../Variables.htm">A_Space</a> or<br />
+`s), tab<br />
+(<a href="../Variables.htm">A_Tab</a> or<br />
+`t), linefeed (`n), return<br />
+(`r), vertical tab (`v), and<br />
+formfeed (`f).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>IsTime<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>True if <em>Value</em> is a valid<br />
+date-time stamp, which can be all<br />
+or just the leading part of the<br />
+<a href="FileSetTime.htm#YYYYMMDD">YYYYMMDDHH<br />
+24MISS</a><br />
+format. For example, a 4-digit<br />
+string such as 2004 is considered<br />
+valid. Use <a href="StrLen.htm">StrLen</a><br />
+to determine whether additional<br />
+time components are present.<br />
+<br />
+<em>Value</em> must have an even number<br />
+of digits between 4 and 14<br />
+(inclusive) to be considered<br />
+valid.<br />
+<br />
+Years less than 1601 are not<br />
+considered valid because the<br />
+operating system generally does<br />
+not support them. The maximum<br />
+year considered valid is 9999.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Remarks">Remarks</h2>
 <p>Since literal numbers such as <code>128</code>, <code>0x7F</code> and <code>1.0</code> are converted to
 pure numbers before the script begins executing, the format of the

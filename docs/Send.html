@@ -309,384 +309,1129 @@ Win).</p>
 <h2 id="keynames">Key names</h2>
 <p>The following table lists the special keys that can be sent (each key
 name must be enclosed in braces):</p>
-<p>+-----------------------------------+-----------------------------------+
-| Key name                          | Description                       |
-+===================================+===================================+
-| {F1} - {F24}                      | Function keys. For example: {F12} |
-|                                   | is [F12]{.kbd}.                   |
-+-----------------------------------+-----------------------------------+
-| {!}                               | !                                 |
-+-----------------------------------+-----------------------------------+
-| {#}                               | #                                |
-+-----------------------------------+-----------------------------------+
-| {+}                               | +                                |
-+-----------------------------------+-----------------------------------+
-| {\^}                              | \^                                |
-+-----------------------------------+-----------------------------------+
-| <code>{ {</code>                             | {                                 |
-+-----------------------------------+-----------------------------------+
-| <code>} }</code>                             | }                                 |
-+-----------------------------------+-----------------------------------+
-| {Enter}                           | [Enter]{.kbd} on the main         |
-|                                   | keyboard                          |
-+-----------------------------------+-----------------------------------+
-| {Escape} or {Esc}                 | [Esc]{.kbd}                       |
-+-----------------------------------+-----------------------------------+
-| {Space}                           | [Space]{.kbd} (this is only       |
-|                                   | needed for spaces that appear     |
-|                                   | either at the beginning or the    |
-|                                   | end of the string to be sent --  |
-|                                   | ones in the middle can be literal |
-|                                   | spaces)                           |
-+-----------------------------------+-----------------------------------+
-| {Tab}                             | [Tab]{.kbd}                       |
-+-----------------------------------+-----------------------------------+
-| {Backspace} or {BS}               | [Backspace]{.kbd}                 |
-+-----------------------------------+-----------------------------------+
-| {Delete} or {Del}                 | [Del]{.kbd}                       |
-+-----------------------------------+-----------------------------------+
-| {Insert} or {Ins}                 | [Ins]{.kbd}                       |
-+-----------------------------------+-----------------------------------+
-| {Up}                              | [↑]{.kbd} (up arrow) on main      |
-|                                   | keyboard                          |
-+-----------------------------------+-----------------------------------+
-| {Down}                            | [↓]{.kbd} (down arrow) on main    |
-|                                   | keyboard                          |
-+-----------------------------------+-----------------------------------+
-| {Left}                            | [←]{.kbd} (left arrow) on main    |
-|                                   | keyboard                          |
-+-----------------------------------+-----------------------------------+
-| {Right}                           | [→]{.kbd} (right arrow) on main   |
-|                                   | keyboard                          |
-+-----------------------------------+-----------------------------------+
-| {Home}                            | [Home]{.kbd} on main keyboard     |
-+-----------------------------------+-----------------------------------+
-| {End}                             | [End]{.kbd} on main keyboard      |
-+-----------------------------------+-----------------------------------+
-| {PgUp}                            | [PgUp]{.kbd} on main keyboard     |
-+-----------------------------------+-----------------------------------+
-| {PgDn}                            | [PgDn]{.kbd} on main keyboard     |
-+-----------------------------------+-----------------------------------+
-| {CapsLock}                        | [CapsLock]{.kbd} (using           |
-|                                   | <a href="SetNumScrollCapsLockState.htm">SetCapsLockStat                  |
-|                                   | e</a> |
-|                                   | is more reliable). Sending        |
-|                                   | {CapsLock} might require          |
-|                                   | <a href="|
-|                                   | SetStoreCapsLockMode.htm"><code>SetStoreCapsLockMode</code></a><code>False</code> |
-|                                   | beforehand.                       |
-+-----------------------------------+-----------------------------------+
-| {ScrollLock}                      | [ScrollLock]{.kbd} (see also:     |
-|                                   | <a href="SetNumScrollCapsLockState.htm">SetScrollLockState               |
-|                                   | </a>) |
-+-----------------------------------+-----------------------------------+
-| {NumLock}                         | [NumLock]{.kbd} (see also:        |
-|                                   | <a href="SetNumScrollCapsLockState.htm">SetNumLockState                  |
-|                                   | </a>) |
-+-----------------------------------+-----------------------------------+
-| {Control} or {Ctrl}               | [Ctrl]{.kbd} (technical info:     |
-|                                   | sends the neutral virtual key but |
-|                                   | the left scan code)               |
-+-----------------------------------+-----------------------------------+
-| {LControl} or {LCtrl}             | Left [Ctrl]{.kbd} (technical      |
-|                                   | info: sends the left virtual key  |
-|                                   | rather than the neutral one)      |
-+-----------------------------------+-----------------------------------+
-| {RControl} or {RCtrl}             | Right [Ctrl]{.kbd}                |
-+-----------------------------------+-----------------------------------+
-| {Control down} or {Ctrl down}     | Holds [Ctrl]{.kbd} down until     |
-|                                   | {Ctrl up} is sent. To hold down   |
-|                                   | the left or right key instead,    |
-|                                   | replace Ctrl with LCtrl or RCtrl. |
-+-----------------------------------+-----------------------------------+
-| {Alt}                             | [Alt]{.kbd} (technical info:      |
-|                                   | sends the neutral virtual key but |
-|                                   | the left scan code)               |
-+-----------------------------------+-----------------------------------+
-| {LAlt}                            | Left [Alt]{.kbd} (technical info: |
-|                                   | sends the left virtual key rather |
-|                                   | than the neutral one)             |
-+-----------------------------------+-----------------------------------+
-| {RAlt}                            | Right [Alt]{.kbd} (or             |
-|                                   | [AltGr]{.kbd}, depending on       |
-|                                   | keyboard layout)                  |
-+-----------------------------------+-----------------------------------+
-| {Alt down}                        | Holds [Alt]{.kbd} down until {Alt |
-|                                   | up} is sent. To hold down the     |
-|                                   | left or right key instead,        |
-|                                   | replace Alt with LAlt or RAlt.    |
-+-----------------------------------+-----------------------------------+
-| {Shift}                           | [Shift]{.kbd} (technical info:    |
-|                                   | sends the neutral virtual key but |
-|                                   | the left scan code)               |
-+-----------------------------------+-----------------------------------+
-| {LShift}                          | Left [Shift]{.kbd} (technical     |
-|                                   | info: sends the left virtual key  |
-|                                   | rather than the neutral one)      |
-+-----------------------------------+-----------------------------------+
-| {RShift}                          | Right [Shift]{.kbd}               |
-+-----------------------------------+-----------------------------------+
-| {Shift down}                      | Holds [Shift]{.kbd} down until    |
-|                                   | {Shift up} is sent. To hold down  |
-|                                   | the left or right key instead,    |
-|                                   | replace Shift with LShift or      |
-|                                   | RShift.                           |
-+-----------------------------------+-----------------------------------+
-| {LWin}                            | Left [Win]{.kbd}                  |
-+-----------------------------------+-----------------------------------+
-| {RWin}                            | Right [Win]{.kbd}                 |
-+-----------------------------------+-----------------------------------+
-| {LWin down}                       | Holds the left [Win]{.kbd} down   |
-|                                   | until {LWin up} is sent           |
-+-----------------------------------+-----------------------------------+
-| {RWin down}                       | Holds the right [Win]{.kbd} down  |
-|                                   | until {RWin up} is sent           |
-+-----------------------------------+-----------------------------------+
-| {AppsKey}                         | [Menu]{.kbd} (invokes the         |
-|                                   | right-click or context menu)      |
-+-----------------------------------+-----------------------------------+
-| {Sleep}                           | [Sleep]{.kbd}                     |
-+-----------------------------------+-----------------------------------+
-| {ASC nnnnn}                       | Sends an [Alt]{.kbd}+nnnnn keypad |
-|                                   | combination, which can be used to |
-|                                   | generate special characters that  |
-|                                   | don\'t exist on the keyboard. To  |
-|                                   | generate printable ASCII          |
-|                                   | characters or other characters    |
-|                                   | from <a href="https://en.w                 |
-|                                   | ikipedia.org/wiki/Code_page_437">code page                   |
-|                                   | 437</a>, |
-|                                   | specify a number between 1 and    |
-|                                   | 255. To generate ANSI characters  |
-|                                   | (standard in most languages),     |
-|                                   | specify a number between 128 and  |
-|                                   | 255, but precede it with a        |
-|                                   | leading zero, e.g. {Asc 0133}.    |
-|                                   |                                   |
-|                                   | Unicode characters may be         |
-|                                   | generated by specifying a number  |
-|                                   | between 256 and 65535 (without a  |
-|                                   | leading zero). However, this is   |
-|                                   | not supported by all              |
-|                                   | applications. For alternatives,   |
-|                                   | see the section below.            |
-+-----------------------------------+-----------------------------------+
-| {U+nnnn}                          | Sends a Unicode character where   |
-|                                   | <em>nnnn</em> is the hexadecimal value   |
-|                                   | of the character excluding the 0x |
-|                                   | prefix. This typically isn\'t     |
-|                                   | needed, because Send and          |
-|                                   | ControlSend automatically support |
-|                                   | Unicode text.                     |
-|                                   |                                   |
-|                                   | <a href="https://l           |
-|                                   | earn.microsoft.com/windows/win32/ |
-|                                   | api/winuser/nf-winuser-sendinput">SendInput()</a> |
-|                                   | or                                |
-|                                   | <a href="https://learn.microsoft.co |
-|                                   | m/windows/win32/inputdev/wm-char">WM                               |
-|                                   | _CHAR</a> |
-|                                   | is used to send the character and |
-|                                   | the current Send mode has no      |
-|                                   | effect. Characters sent this way  |
-|                                   | usually do not trigger shortcut   |
-|                                   | keys or hotkeys.                  |
-+-----------------------------------+-----------------------------------+
-| {vkXX}\                           | Sends a keystroke that has        |
-| {scYYY}\                          | virtual key XX and scan code YYY. |
-| {vkXXscYYY}                       | For example:                      |
-|                                   | <code>Send "{vkFFsc159}"</code>. If the sc   |
-|                                   | or vk portion is omitted, the     |
-|                                   | most appropriate value is sent in |
-|                                   | its place.                        |
-|                                   |                                   |
-|                                   | The values for XX and YYY are     |
-|                                   | hexadecimal and can usually be    |
-|                                   | determined from the <a href="../Program.htm#main-window">main         |
-|                                   | windo                             |
-|                                   | w</a>\'s |
-|                                   | View-&gt;<a href="KeyHistory.htm">Key                       |
-|                                   | history</a> menu     |
-|                                   | item. See also: <a href="../KeyList.htm#SpecialKeys">Special          |
-|                                   | Keys</a> |
-|                                   |                                   |
-|                                   | <strong>Warning:</strong> Combining vk and sc  |
-|                                   | in this manner is valid only with |
-|                                   | Send.                             |
-+-----------------------------------+-----------------------------------+
-| {Numpad0} - {Numpad9}             | Numpad digit keys (as seen when   |
-|                                   | [NumLock]{.kbd} is ON). For       |
-|                                   | example: {Numpad5} is [5]{.kbd}.  |
-+-----------------------------------+-----------------------------------+
-| {NumpadDot}                       | [.]{.kbd} (numpad period) (as     |
-|                                   | seen when [NumLock]{.kbd} is ON). |
-+-----------------------------------+-----------------------------------+
-| {NumpadEnter}                     | [Enter]{.kbd} on keypad           |
-+-----------------------------------+-----------------------------------+
-| {NumpadMult}                      | [*]{.kbd} (numpad                |
-|                                   | multiplication)                   |
-+-----------------------------------+-----------------------------------+
-| {NumpadDiv}                       | [/]{.kbd} (numpad division)       |
-+-----------------------------------+-----------------------------------+
-| {NumpadAdd}                       | [+]{.kbd} (numpad addition)       |
-+-----------------------------------+-----------------------------------+
-| {NumpadSub}                       | [-]{.kbd} (numpad subtraction)    |
-+-----------------------------------+-----------------------------------+
-| {NumpadDel}                       | [Del]{.kbd} on keypad (this key   |
-|                                   | and the following Numpad keys are |
-|                                   | used when [NumLock]{.kbd} is OFF) |
-+-----------------------------------+-----------------------------------+
-| {NumpadIns}                       | [Ins]{.kbd} on keypad             |
-+-----------------------------------+-----------------------------------+
-| {NumpadClear}                     | Clear key on keypad (usually      |
-|                                   | [5]{.kbd} when [NumLock]{.kbd} is |
-|                                   | OFF).                             |
-+-----------------------------------+-----------------------------------+
-| {NumpadUp}                        | [↑]{.kbd} (up arrow) on keypad    |
-+-----------------------------------+-----------------------------------+
-| {NumpadDown}                      | [↓]{.kbd} (down arrow) on keypad  |
-+-----------------------------------+-----------------------------------+
-| {NumpadLeft}                      | [←]{.kbd} (left arrow) on keypad  |
-+-----------------------------------+-----------------------------------+
-| {NumpadRight}                     | [→]{.kbd} (right arrow) on keypad |
-+-----------------------------------+-----------------------------------+
-| {NumpadHome}                      | [Home]{.kbd} on keypad            |
-+-----------------------------------+-----------------------------------+
-| {NumpadEnd}                       | [End]{.kbd} on keypad             |
-+-----------------------------------+-----------------------------------+
-| {NumpadPgUp}                      | [PgUp]{.kbd} on keypad            |
-+-----------------------------------+-----------------------------------+
-| {NumpadPgDn}                      | [PgDn]{.kbd} on keypad            |
-+-----------------------------------+-----------------------------------+
-| {Browser_Back}                    | Select the browser \"back\"       |
-|                                   | button                            |
-+-----------------------------------+-----------------------------------+
-| {Browser_Forward}                 | Select the browser \"forward\"    |
-|                                   | button                            |
-+-----------------------------------+-----------------------------------+
-| {Browser_Refresh}                 | Select the browser \"refresh\"    |
-|                                   | button                            |
-+-----------------------------------+-----------------------------------+
-| {Browser_Stop}                    | Select the browser \"stop\"       |
-|                                   | button                            |
-+-----------------------------------+-----------------------------------+
-| {Browser_Search}                  | Select the browser \"search\"     |
-|                                   | button                            |
-+-----------------------------------+-----------------------------------+
-| {Browser_Favorites}               | Select the browser \"favorites\"  |
-|                                   | button                            |
-+-----------------------------------+-----------------------------------+
-| {Browser_Home}                    | Launch the browser and go to the  |
-|                                   | home page                         |
-+-----------------------------------+-----------------------------------+
-| {Volume_Mute}                     | Mute/unmute the master volume.    |
-|                                   | Usually equivalent to             |
-|                                   | <a href="SoundSetMute.htm"><code>Sound                           |
-|                                   | SetMute</code></a><code>-1</code>. |
-+-----------------------------------+-----------------------------------+
-| {Volume_Down}                     | Reduce the master volume. Usually |
-|                                   | equivalent to                     |
-|                                   | <a href="SoundSetVolume.htm"><code>SoundSetV                       |
-|                                   | olume</code></a><code>-5</code>. |
-+-----------------------------------+-----------------------------------+
-| {Volume_Up}                       | Increase the master volume.       |
-|                                   | Usually equivalent to             |
-|                                   | <a href="SoundSetVolume.htm"><code>SoundSetVol                     |
-|                                   | ume</code></a><code>"+5"</code>. |
-+-----------------------------------+-----------------------------------+
-| {Media_Next}                      | Select next track in media player |
-+-----------------------------------+-----------------------------------+
-| {Media_Prev}                      | Select previous track in media    |
-|                                   | player                            |
-+-----------------------------------+-----------------------------------+
-| {Media_Stop}                      | Stop media player                 |
-+-----------------------------------+-----------------------------------+
-| {Media_Play_Pause}                | Play/pause media player           |
-+-----------------------------------+-----------------------------------+
-| {Launch_Mail}                     | Launch the email application      |
-+-----------------------------------+-----------------------------------+
-| {Launch_Media}                    | Launch media player               |
-+-----------------------------------+-----------------------------------+
-| {Launch_App1}                     | Launch user app1                  |
-+-----------------------------------+-----------------------------------+
-| {Launch_App2}                     | Launch user app2                  |
-+-----------------------------------+-----------------------------------+
-| {PrintScreen}                     | [PrtSc]{.kbd}                     |
-+-----------------------------------+-----------------------------------+
-| {CtrlBreak}                       | [Ctrl]{.kbd}+[Pause]{.kbd}        |
-+-----------------------------------+-----------------------------------+
-| {Pause}                           | [Pause]{.kbd}                     |
-+-----------------------------------+-----------------------------------+
-| {Click [Options]}               | Sends a mouse click using the     |
-|                                   | same options available in the     |
-|                                   | <a href="Click.htm">Click function</a>. For  |
-|                                   | example, <code>Send "{Click}"</code> would   |
-|                                   | click the left mouse button once  |
-|                                   | at the mouse cursor\'s current    |
-|                                   | position, and                     |
-|                                   | <code>Send "{Click 100 200}"</code> would    |
-|                                   | click at coordinates 100, 200     |
-|                                   | (based on                         |
-|                                   | <a href="CoordMode.htm">CoordMode</a>). To   |
-|                                   | move the mouse without clicking,  |
-|                                   | specify 0 after the coordinates;  |
-|                                   | for example:                      |
-|                                   | <code>Send "{Click 100 200 0}"</code>. The   |
-|                                   | delay between mouse clicks is     |
-|                                   | determined by                     |
-|                                   | <a href="SetMouseDelay.htm">                                 |
-|                                   | SetMouseDelay</a> |
-|                                   | (not                              |
-|                                   | <a href="SetKeyDelay.htm">SetKeyDelay</a>).  |
-+-----------------------------------+-----------------------------------+
-| {WheelDown}, {WheelUp},           | Sends a mouse button event at the |
-| {WheelLeft}, {WheelRight},        | cursor\'s current position (to    |
-| {LButton}, {RButton}, {MButton},  | have control over position and    |
-| {XButton1}, {XButton2}            | other options, use                |
-|                                   | <a href="Click.htm">{Click}</a> above). The  |
-|                                   | delay between mouse clicks is     |
-|                                   | determined by                     |
-|                                   | <a href="SetMouseDelay.htm">S                                |
-|                                   | etMouseDelay</a>. |
-|                                   |                                   |
-|                                   | LButton and RButton correspond to |
-|                                   | the primary and secondary mouse   |
-|                                   | buttons. Normally the primary     |
-|                                   | mouse button (LButton) is on the  |
-|                                   | left, but the user may swap the   |
-|                                   | buttons via system settings.      |
-+-----------------------------------+-----------------------------------+
-| {Blind}                           | Enables the <a href="#blind">Blind mode</a>, |
-|                                   | which gives the script more       |
-|                                   | control by disabling a number of  |
-|                                   | things that are normally done     |
-|                                   | automatically to make things      |
-|                                   | generally work as expected.       |
-|                                   | <code>{Blind}</code> must occur at the       |
-|                                   | beginning of the string.          |
-+-----------------------------------+-----------------------------------+
-| {Raw}                             | Enables the <a href="#SendRaw">Raw mode</a>, |
-|                                   | which causes the following        |
-|                                   | characters to be interpreted      |
-|                                   | literally: <code>^+!#{}</code>. Although     |
-|                                   | <code>{Raw}</code> need not occur at the     |
-|                                   | beginning of the string, once     |
-|                                   | specified, it stays in effect for |
-|                                   | the remainder of the string.      |
-+-----------------------------------+-----------------------------------+
-| {Text}                            | Enables the <a href="#SendText">Text                 |
-|                                   | mode</a>, which sends a   |
-|                                   | stream of characters rather than  |
-|                                   | keystrokes. Like the Raw mode,    |
-|                                   | the Text mode causes the          |
-|                                   | following characters to be        |
-|                                   | interpreted literally: <code>^+!#{}</code>.  |
-|                                   | Although <code>{Text}</code> need not occur  |
-|                                   | at the beginning of the string,   |
-|                                   | once specified, it stays in       |
-|                                   | effect for the remainder of the   |
-|                                   | string.                           |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Key name</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{F1} - {F24}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Function keys. For example: {F12}<br />
+is [F12]{.kbd}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{!}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>!</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{#}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>#</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{+}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{\^}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>\^</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>{ {</code></p>
+</td>
+<td colspan="1" rowspan="1">
+<p>{</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>} }</code></p>
+</td>
+<td colspan="1" rowspan="1">
+<p>}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Enter}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Enter]{.kbd} on the main<br />
+keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Escape} or {Esc}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Esc]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Space}<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Space]{.kbd} (this is only<br />
+needed for spaces that appear<br />
+either at the beginning or the<br />
+end of the string to be sent --<br />
+ones in the middle can be literal<br />
+spaces)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Tab}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Tab]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Backspace} or {BS}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Backspace]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Delete} or {Del}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Del]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Insert} or {Ins}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Ins]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Up}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[↑]{.kbd} (up arrow) on main<br />
+keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Down}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[↓]{.kbd} (down arrow) on main<br />
+keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Left}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[←]{.kbd} (left arrow) on main<br />
+keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Right}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[→]{.kbd} (right arrow) on main<br />
+keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Home}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Home]{.kbd} on main keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{End}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[End]{.kbd} on main keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{PgUp}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[PgUp]{.kbd} on main keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{PgDn}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[PgDn]{.kbd} on main keyboard</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{CapsLock}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[CapsLock]{.kbd} (using<br />
+<a href="SetNumScrollCapsLockState.htm">SetCapsLockStat<br />
+e</a><br />
+is more reliable). Sending<br />
+{CapsLock} might require<br />
+<a href="SetStoreCapsLockMode.htm"><code>SetStoreCapsLockMode</code></a><code>False</code><br />
+beforehand.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{ScrollLock}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[ScrollLock]{.kbd} (see also:<br />
+<a href="SetNumScrollCapsLockState.htm">SetScrollLockState<br />
+</a>)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumLock}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[NumLock]{.kbd} (see also:<br />
+<a href="SetNumScrollCapsLockState.htm">SetNumLockState<br />
+</a>)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Control} or {Ctrl}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Ctrl]{.kbd} (technical info:<br />
+sends the neutral virtual key but<br />
+the left scan code)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{LControl} or {LCtrl}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Left [Ctrl]{.kbd} (technical<br />
+info: sends the left virtual key<br />
+rather than the neutral one)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{RControl} or {RCtrl}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Right [Ctrl]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Control down} or {Ctrl down}<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Holds [Ctrl]{.kbd} down until<br />
+{Ctrl up} is sent. To hold down<br />
+the left or right key instead,<br />
+replace Ctrl with LCtrl or RCtrl.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Alt}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Alt]{.kbd} (technical info:<br />
+sends the neutral virtual key but<br />
+the left scan code)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{LAlt}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Left [Alt]{.kbd} (technical info:<br />
+sends the left virtual key rather<br />
+than the neutral one)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{RAlt}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Right [Alt]{.kbd} (or<br />
+[AltGr]{.kbd}, depending on<br />
+keyboard layout)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Alt down}<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Holds [Alt]{.kbd} down until {Alt<br />
+up} is sent. To hold down the<br />
+left or right key instead,<br />
+replace Alt with LAlt or RAlt.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Shift}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Shift]{.kbd} (technical info:<br />
+sends the neutral virtual key but<br />
+the left scan code)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{LShift}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Left [Shift]{.kbd} (technical<br />
+info: sends the left virtual key<br />
+rather than the neutral one)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{RShift}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Right [Shift]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Shift down}<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Holds [Shift]{.kbd} down until<br />
+{Shift up} is sent. To hold down<br />
+the left or right key instead,<br />
+replace Shift with LShift or<br />
+RShift.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{LWin}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Left [Win]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{RWin}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Right [Win]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{LWin down}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Holds the left [Win]{.kbd} down<br />
+until {LWin up} is sent</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{RWin down}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Holds the right [Win]{.kbd} down<br />
+until {RWin up} is sent</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{AppsKey}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Menu]{.kbd} (invokes the<br />
+right-click or context menu)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Sleep}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Sleep]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{ASC nnnnn}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Sends an [Alt]{.kbd}+nnnnn keypad<br />
+combination, which can be used to<br />
+generate special characters that<br />
+don\'t exist on the keyboard. To<br />
+generate printable ASCII<br />
+characters or other characters<br />
+from <a href="https://en.w  
+ikipedia.org/wiki/Code_page_437">code page<br />
+437</a>,<br />
+specify a number between 1 and<br />
+255. To generate ANSI characters<br />
+(standard in most languages),<br />
+specify a number between 128 and<br />
+255, but precede it with a<br />
+leading zero, e.g. {Asc 0133}.<br />
+<br />
+Unicode characters may be<br />
+generated by specifying a number<br />
+between 256 and 65535 (without a<br />
+leading zero). However, this is<br />
+not supported by all<br />
+applications. For alternatives,<br />
+see the section below.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{U+nnnn}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Sends a Unicode character where<br />
+<em>nnnn</em> is the hexadecimal value<br />
+of the character excluding the 0x<br />
+prefix. This typically isn\'t<br />
+needed, because Send and<br />
+ControlSend automatically support<br />
+Unicode text.<br />
+<br />
+<a href="https://l  
+earn.microsoft.com/windows/win32/  
+api/winuser/nf-winuser-sendinput">SendInput()</a><br />
+or<br />
+<a href="https://learn.microsoft.co  
+m/windows/win32/inputdev/wm-char">WM<br />
+_CHAR</a><br />
+is used to send the character and<br />
+the current Send mode has no<br />
+effect. Characters sent this way<br />
+usually do not trigger shortcut<br />
+keys or hotkeys.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{vkXX}\<br />
+{scYYY}\<br />
+{vkXXscYYY}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Sends a keystroke that has<br />
+virtual key XX and scan code YYY.<br />
+For example:<br />
+<code>Send "{vkFFsc159}"</code>. If the sc<br />
+or vk portion is omitted, the<br />
+most appropriate value is sent in<br />
+its place.<br />
+<br />
+The values for XX and YYY are<br />
+hexadecimal and can usually be<br />
+determined from the <a href="../Program.htm#main-window">main<br />
+windo<br />
+w</a>\'s<br />
+View-&gt;<a href="KeyHistory.htm">Key<br />
+history</a> menu<br />
+item. See also: <a href="../KeyList.htm#SpecialKeys">Special<br />
+Keys</a><br />
+<br />
+<strong>Warning:</strong> Combining vk and sc<br />
+in this manner is valid only with<br />
+Send.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Numpad0} - {Numpad9}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Numpad digit keys (as seen when<br />
+[NumLock]{.kbd} is ON). For<br />
+example: {Numpad5} is [5]{.kbd}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadDot}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[.]{.kbd} (numpad period) (as<br />
+seen when [NumLock]{.kbd} is ON).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadEnter}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Enter]{.kbd} on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadMult}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[*]{.kbd} (numpad<br />
+multiplication)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadDiv}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[/]{.kbd} (numpad division)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadAdd}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[+]{.kbd} (numpad addition)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadSub}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[-]{.kbd} (numpad subtraction)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadDel}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Del]{.kbd} on keypad (this key<br />
+and the following Numpad keys are<br />
+used when [NumLock]{.kbd} is OFF)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadIns}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Ins]{.kbd} on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadClear}<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Clear key on keypad (usually<br />
+[5]{.kbd} when [NumLock]{.kbd} is<br />
+OFF).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadUp}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[↑]{.kbd} (up arrow) on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadDown}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[↓]{.kbd} (down arrow) on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadLeft}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[←]{.kbd} (left arrow) on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadRight}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[→]{.kbd} (right arrow) on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadHome}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Home]{.kbd} on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadEnd}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[End]{.kbd} on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadPgUp}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[PgUp]{.kbd} on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{NumpadPgDn}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[PgDn]{.kbd} on keypad</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Browser_Back}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Select the browser \"back\"<br />
+button</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Browser_Forward}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Select the browser \"forward\"<br />
+button</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Browser_Refresh}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Select the browser \"refresh\"<br />
+button</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Browser_Stop}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Select the browser \"stop\"<br />
+button</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Browser_Search}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Select the browser \"search\"<br />
+button</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Browser_Favorites}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Select the browser \"favorites\"<br />
+button</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Browser_Home}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Launch the browser and go to the<br />
+home page</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Volume_Mute}<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Mute/unmute the master volume.<br />
+Usually equivalent to<br />
+<a href="SoundSetMute.htm"><code>Sound  
+SetMute</code></a><code>-1</code>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Volume_Down}<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Reduce the master volume. Usually<br />
+equivalent to<br />
+<a href="SoundSetVolume.htm"><code>SoundSetV  
+olume</code></a><code>-5</code>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Volume_Up}<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Increase the master volume.<br />
+Usually equivalent to<br />
+<a href="SoundSetVolume.htm"><code>SoundSetVol  
+ume</code></a><code>"+5"</code>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Media_Next}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Select next track in media player</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Media_Prev}<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Select previous track in media<br />
+player</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Media_Stop}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Stop media player</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Media_Play_Pause}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Play/pause media player</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Launch_Mail}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Launch the email application</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Launch_Media}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Launch media player</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Launch_App1}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Launch user app1</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Launch_App2}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Launch user app2</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{PrintScreen}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[PrtSc]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{CtrlBreak}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Ctrl]{.kbd}+[Pause]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Pause}</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Pause]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Click [Options]}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Sends a mouse click using the<br />
+same options available in the<br />
+<a href="Click.htm">Click function</a>. For<br />
+example, <code>Send "{Click}"</code> would<br />
+click the left mouse button once<br />
+at the mouse cursor\'s current<br />
+position, and<br />
+<code>Send "{Click 100 200}"</code> would<br />
+click at coordinates 100, 200<br />
+(based on<br />
+<a href="CoordMode.htm">CoordMode</a>). To<br />
+move the mouse without clicking,<br />
+specify 0 after the coordinates;<br />
+for example:<br />
+<code>Send "{Click 100 200 0}"</code>. The<br />
+delay between mouse clicks is<br />
+determined by<br />
+<a href="SetMouseDelay.htm"><br />
+SetMouseDelay</a><br />
+(not<br />
+<a href="SetKeyDelay.htm">SetKeyDelay</a>).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{WheelDown}, {WheelUp},<br />
+{WheelLeft}, {WheelRight},<br />
+{LButton}, {RButton}, {MButton},<br />
+{XButton1}, {XButton2}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Sends a mouse button event at the<br />
+cursor\'s current position (to<br />
+have control over position and<br />
+other options, use<br />
+<a href="Click.htm">{Click}</a> above). The<br />
+delay between mouse clicks is<br />
+determined by<br />
+<a href="SetMouseDelay.htm">S<br />
+etMouseDelay</a>.<br />
+<br />
+LButton and RButton correspond to<br />
+the primary and secondary mouse<br />
+buttons. Normally the primary<br />
+mouse button (LButton) is on the<br />
+left, but the user may swap the<br />
+buttons via system settings.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Blind}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Enables the <a href="#blind">Blind mode</a>,<br />
+which gives the script more<br />
+control by disabling a number of<br />
+things that are normally done<br />
+automatically to make things<br />
+generally work as expected.<br />
+<code>{Blind}</code> must occur at the<br />
+beginning of the string.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Raw}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Enables the <a href="#SendRaw">Raw mode</a>,<br />
+which causes the following<br />
+characters to be interpreted<br />
+literally: <code>^+!#{}</code>. Although<br />
+<code>{Raw}</code> need not occur at the<br />
+beginning of the string, once<br />
+specified, it stays in effect for<br />
+the remainder of the string.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{Text}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Enables the <a href="#SendText">Text<br />
+mode</a>, which sends a<br />
+stream of characters rather than<br />
+keystrokes. Like the Raw mode,<br />
+the Text mode causes the<br />
+following characters to be<br />
+interpreted literally: <code>^+!#{}</code>.<br />
+Although <code>{Text}</code> need not occur<br />
+at the beginning of the string,<br />
+once specified, it stays in<br />
+effect for the remainder of the<br />
+string.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Repeating_or_Holding_Down_a_Key">Repeating or Holding Down a Key</h2>
 <p><strong>To repeat a keystroke:</strong> Enclose in braces the name of the key
 followed by the number of times to repeat it. For example:</p>

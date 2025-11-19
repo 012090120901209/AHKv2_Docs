@@ -171,30 +171,66 @@ remove.</p>
 <p>A <a href="Error.htm#TypeError">TypeError</a> is thrown if <em>ComObj</em> is not a COM
 wrapper object.</p>
 <h2 id="Flags">Flags</h2>
-<p>+-----------------------------------+-----------------------------------+
-| Flag                              | Effect                            |
-+===================================+===================================+
-| 1                                 | F_OWNVALUE                        |
-|                                   |                                   |
-|                                   | <strong>SafeArray:</strong> If the flag is     |
-|                                   | set, the SafeArray is destroyed   |
-|                                   | when the wrapper object is freed. |
-|                                   | Since SafeArrays have no          |
-|                                   | reference counting mechanism, if  |
-|                                   | a SafeArray with this flag is     |
-|                                   | assigned to an element of another |
-|                                   | SafeArray, a separate copy is     |
-|                                   | created.                          |
-|                                   |                                   |
-|                                   | <strong>BSTR:</strong> If the flag is set, the |
-|                                   | BSTR is freed when the wrapper    |
-|                                   | object is freed. The flag is set  |
-|                                   | automatically when a BSTR is      |
-|                                   | allocated as a result of type     |
-|                                   | conversion performed by           |
-|                                   | <a href="ComValue.htm">ComValue</a>, such as |
-|                                   | <code>ComValue(8, "example")</code>.         |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Flag</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Effect</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>1<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>F_OWNVALUE<br />
+<br />
+<strong>SafeArray:</strong> If the flag is<br />
+set, the SafeArray is destroyed<br />
+when the wrapper object is freed.<br />
+Since SafeArrays have no<br />
+reference counting mechanism, if<br />
+a SafeArray with this flag is<br />
+assigned to an element of another<br />
+SafeArray, a separate copy is<br />
+created.<br />
+<br />
+<strong>BSTR:</strong> If the flag is set, the<br />
+BSTR is freed when the wrapper<br />
+object is freed. The flag is set<br />
+automatically when a BSTR is<br />
+allocated as a result of type<br />
+conversion performed by<br />
+<a href="ComValue.htm">ComValue</a>, such as<br />
+<code>ComValue(8, "example")</code>.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Remarks">Remarks</h2>
 <p>If <em>Mask</em> is omitted, <em>NewFlags</em> specifies the flags to add (if
 positive) or remove (if negative). For example, <code>ComObjFlags(obj, -1)</code>

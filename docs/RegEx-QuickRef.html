@@ -171,540 +171,1211 @@ it requires no special delimiters (such as forward-slash), and thus
 there is no need to escape such delimiters inside the pattern. In
 addition, performance is improved because the options are easier to
 parse.</p>
-<p>+-----------------------------------+-----------------------------------+
-| Option                            | Description                       |
-+===================================+===================================+
-| i                                 | Case-insensitive matching, which  |
-|                                   | treats the letters A through Z as |
-|                                   | identical to their lowercase      |
-|                                   | counterparts.                     |
-+-----------------------------------+-----------------------------------+
-| m                                 | Multiline. Views <em>Haystack</em> as a  |
-|                                   | collection of individual lines    |
-|                                   | (if it contains newlines) rather  |
-|                                   | than as a single continuous line. |
-|                                   | Specifically, it changes the      |
-|                                   | following:                        |
-|                                   |                                   |
-|                                   | 1) Circumflex (\^) matches       |
-|                                   | immediately after all internal    |
-|                                   | newlines -- as well as at the    |
-|                                   | start of <em>Haystack</em> where it      |
-|                                   | always matches (but it does not   |
-|                                   | match after a newline <em>at the     |
-|                                   | very end</em> of <em>Haystack</em>).         |
-|                                   |                                   |
-|                                   | 2) Dollar-sign (\$) matches      |
-|                                   | before any newlines in <em>Haystack</em> |
-|                                   | (as well as at the very end where |
-|                                   | it always matches).               |
-|                                   |                                   |
-|                                   | For example, the pattern          |
-|                                   | [[m)]{.red}\^abc\$]{.regex}       |
-|                                   | matches xyz`r`n[abc]{.subj}.    |
-|                                   | But without the \"m\" option, it  |
-|                                   | wouldn\'t match.                  |
-|                                   |                                   |
-|                                   | The \"D\" option is ignored when  |
-|                                   | \"m\" is present.                 |
-+-----------------------------------+-----------------------------------+
-| s                                 | DotAll. This causes a period (.)  |
-|                                   | to match all characters including |
-|                                   | newlines (normally, it does not   |
-|                                   | match newlines). However, two     |
-|                                   | dots are required to match a CRLF |
-|                                   | newline sequence (`r`n), not    |
-|                                   | one. Regardless of this option, a |
-|                                   | negative class such as            |
-|                                   | [[\^a]]{.regex} always matches  |
-|                                   | newlines.                         |
-+-----------------------------------+-----------------------------------+
-| x                                 | Ignores whitespace characters in  |
-|                                   | the pattern except when escaped   |
-|                                   | or inside a character class. The  |
-|                                   | characters `n and `t are among  |
-|                                   | those ignored because by the time |
-|                                   | they get to PCRE, they are        |
-|                                   | already raw/literal whitespace    |
-|                                   | characters (by contrast, \n and  |
-|                                   | \t are not ignored because they  |
-|                                   | are PCRE escape sequences). The   |
-|                                   | \"x\" option also ignores         |
-|                                   | characters between a non-escaped  |
-|                                   | # outside a character class and  |
-|                                   | the next newline character,       |
-|                                   | inclusive. This makes it possible |
-|                                   | to include comments inside        |
-|                                   | complicated patterns. However,    |
-|                                   | this applies only to data         |
-|                                   | characters; whitespace may never  |
-|                                   | appear within special character   |
-|                                   | sequences such as (?(, which      |
-|                                   | begins a conditional subpattern.  |
-+-----------------------------------+-----------------------------------+
-| A                                 | Forces the pattern to be          |
-|                                   | anchored; that is, it can match   |
-|                                   | only at the start of <em>Haystack</em>.  |
-|                                   | Under most conditions, this is    |
-|                                   | equivalent to explicitly          |
-|                                   | anchoring the pattern by means    |
-|                                   | such as \"\^\".                   |
-+-----------------------------------+-----------------------------------+
-| D                                 | Forces dollar-sign (\$) to match  |
-|                                   | at the very end of <em>Haystack</em>,    |
-|                                   | even if <em>Haystack</em>\'s last item   |
-|                                   | is a newline. Without this        |
-|                                   | option, \$ instead matches right  |
-|                                   | before the final newline (if      |
-|                                   | there is one). Note: This option  |
-|                                   | is ignored when the \"m\" option  |
-|                                   | is present.                       |
-+-----------------------------------+-----------------------------------+
-| J                                 | Allows duplicate <a href="..                   |
-|                                   | /lib/RegExMatch.htm#NamedSubPat">named           |
-|                                   | subpatterns</a>. |
-|                                   | This can be useful for patterns   |
-|                                   | in which only one of a collection |
-|                                   | of identically-named subpatterns  |
-|                                   | can match. Note: If more than one |
-|                                   | instance of a particular name     |
-|                                   | matches something, only the       |
-|                                   | leftmost one is stored. Also,     |
-|                                   | variable names are not            |
-|                                   | case-sensitive.                   |
-+-----------------------------------+-----------------------------------+
-| U                                 | Ungreedy. Makes the quantifiers   |
-|                                   | <strong>*</strong>, <strong>?</strong>, <strong>+</strong> and          |
-|                                   | <strong>{min,max}</strong> consume only those  |
-|                                   | characters absolutely necessary   |
-|                                   | to form a match, leaving the      |
-|                                   | remaining ones available for the  |
-|                                   | next part of the pattern. When    |
-|                                   | the \"U\" option is not in        |
-|                                   | effect, an individual quantifier  |
-|                                   | can be made non-greedy by         |
-|                                   | following it with a question      |
-|                                   | mark. Conversely, when \"U\" <em>is</em> |
-|                                   | in effect, the question mark      |
-|                                   | makes an individual quantifier    |
-|                                   | greedy.                           |
-+-----------------------------------+-----------------------------------+
-| X                                 | PCRE_EXTRA. Enables PCRE features |
-|                                   | that are incompatible with Perl.  |
-|                                   | Currently, the only such feature  |
-|                                   | is that any backslash in a        |
-|                                   | pattern that is followed by a     |
-|                                   | letter that has no special        |
-|                                   | meaning causes an exception to be |
-|                                   | thrown. This option helps reserve |
-|                                   | unused backslash sequences for    |
-|                                   | future use. Without this option,  |
-|                                   | a backslash followed by a letter  |
-|                                   | with no special meaning is        |
-|                                   | treated as a literal (e.g. \g    |
-|                                   | and g are both recognized as a    |
-|                                   | literal g). Regardless of this    |
-|                                   | option, non-alphabetic backslash  |
-|                                   | sequences that have no special    |
-|                                   | meaning are always treated as     |
-|                                   | literals (e.g. \/ and / are both |
-|                                   | recognized as forward-slash).     |
-+-----------------------------------+-----------------------------------+
-| S                                 | Studies the pattern to try        |
-|                                   | improve its performance. This is  |
-|                                   | useful when a particular pattern  |
-|                                   | (especially a complex one) will   |
-|                                   | be executed many times. If PCRE   |
-|                                   | finds a way to improve            |
-|                                   | performance, that discovery is    |
-|                                   | stored alongside the pattern in   |
-|                                   | the cache for use by subsequent   |
-|                                   | executions of the same pattern    |
-|                                   | (subsequent uses of that pattern  |
-|                                   | should also specify the S option  |
-|                                   | because finding a match in the    |
-|                                   | cache requires that the option    |
-|                                   | letters exactly match, including  |
-|                                   | their order).                     |
-+-----------------------------------+-----------------------------------+
-| C                                 | Enables the auto-callout mode.    |
-|                                   | See <a href="RegExCallout.htm#auto">Regular Expression           |
-|                                   | Callouts</a>  |
-|                                   | for more info.                    |
-+-----------------------------------+-----------------------------------+
-| `a                               | Enables recognition of additional |
-|                                   | newline markers. By default, only |
-|                                   | `r`n, `n and `r are           |
-|                                   | recognized. With this option      |
-|                                   | enabled, `v/VT/vertical          |
-|                                   | tab/chr(0xB),                     |
-|                                   | `f/FF/formfeed/chr(0xC),         |
-|                                   | NEL/next-line/chr(0x85), LS/line  |
-|                                   | separator/chr(0x2028) and         |
-|                                   | PS/paragraph                      |
-|                                   | separator/chr(0x2029) are also    |
-|                                   | recognized.                       |
-|                                   |                                   |
-|                                   | The `a, `n and `r options      |
-|                                   | affect the behavior of <a href="#anchor">anchors   |
-|                                   | (\^ and \$)</a> and the     |
-|                                   | <a href="#dot">dot/period pattern</a>.       |
-|                                   |                                   |
-|                                   | `a also puts (*BSR_UNICODE)     |
-|                                   | into effect, which causes \R to  |
-|                                   | match any kind of newline. By     |
-|                                   | default, \R matches `n, `r and |
-|                                   | `r`n; this behaviour can be     |
-|                                   | restored by combining options as  |
-|                                   | follows: `a)(*BSR_ANYCRLF)      |
-+-----------------------------------+-----------------------------------+
-| `n                               | Causes a solitary linefeed (`n)  |
-|                                   | to be the only recognized newline |
-|                                   | marker (see above).               |
-+-----------------------------------+-----------------------------------+
-| `r                               | Causes a solitary carriage return |
-|                                   | (`r) to be the only recognized   |
-|                                   | newline marker (see above).       |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Option</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>i<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Case-insensitive matching, which<br />
+treats the letters A through Z as<br />
+identical to their lowercase<br />
+counterparts.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>m<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Multiline. Views <em>Haystack</em> as a<br />
+collection of individual lines<br />
+(if it contains newlines) rather<br />
+than as a single continuous line.<br />
+Specifically, it changes the<br />
+following:<br />
+<br />
+1) Circumflex (\^) matches<br />
+immediately after all internal<br />
+newlines -- as well as at the<br />
+start of <em>Haystack</em> where it<br />
+always matches (but it does not<br />
+match after a newline <em>at the<br />
+very end</em> of <em>Haystack</em>).<br />
+<br />
+2) Dollar-sign (\$) matches<br />
+before any newlines in <em>Haystack</em><br />
+(as well as at the very end where<br />
+it always matches).<br />
+<br />
+For example, the pattern<br />
+[[m)]{.red}\^abc\$]{.regex}<br />
+matches xyz`r`n[abc]{.subj}.<br />
+But without the \"m\" option, it<br />
+wouldn\'t match.<br />
+<br />
+The \"D\" option is ignored when<br />
+\"m\" is present.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>s<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>DotAll. This causes a period (.)<br />
+to match all characters including<br />
+newlines (normally, it does not<br />
+match newlines). However, two<br />
+dots are required to match a CRLF<br />
+newline sequence (`r`n), not<br />
+one. Regardless of this option, a<br />
+negative class such as<br />
+[[\^a]]{.regex} always matches<br />
+newlines.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>x<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Ignores whitespace characters in<br />
+the pattern except when escaped<br />
+or inside a character class. The<br />
+characters `n and `t are among<br />
+those ignored because by the time<br />
+they get to PCRE, they are<br />
+already raw/literal whitespace<br />
+characters (by contrast, \n and<br />
+\t are not ignored because they<br />
+are PCRE escape sequences). The<br />
+\"x\" option also ignores<br />
+characters between a non-escaped<br />
+# outside a character class and<br />
+the next newline character,<br />
+inclusive. This makes it possible<br />
+to include comments inside<br />
+complicated patterns. However,<br />
+this applies only to data<br />
+characters; whitespace may never<br />
+appear within special character<br />
+sequences such as (?(, which<br />
+begins a conditional subpattern.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>A<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Forces the pattern to be<br />
+anchored; that is, it can match<br />
+only at the start of <em>Haystack</em>.<br />
+Under most conditions, this is<br />
+equivalent to explicitly<br />
+anchoring the pattern by means<br />
+such as \"\^\".</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>D<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Forces dollar-sign (\$) to match<br />
+at the very end of <em>Haystack</em>,<br />
+even if <em>Haystack</em>\'s last item<br />
+is a newline. Without this<br />
+option, \$ instead matches right<br />
+before the final newline (if<br />
+there is one). Note: This option<br />
+is ignored when the \"m\" option<br />
+is present.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>J<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Allows duplicate <a href="..  
+/lib/RegExMatch.htm#NamedSubPat">named<br />
+subpatterns</a>.<br />
+This can be useful for patterns<br />
+in which only one of a collection<br />
+of identically-named subpatterns<br />
+can match. Note: If more than one<br />
+instance of a particular name<br />
+matches something, only the<br />
+leftmost one is stored. Also,<br />
+variable names are not<br />
+case-sensitive.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>U<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Ungreedy. Makes the quantifiers<br />
+<strong>*</strong>, <strong>?</strong>, <strong>+</strong> and<br />
+<strong>{min,max}</strong> consume only those<br />
+characters absolutely necessary<br />
+to form a match, leaving the<br />
+remaining ones available for the<br />
+next part of the pattern. When<br />
+the \"U\" option is not in<br />
+effect, an individual quantifier<br />
+can be made non-greedy by<br />
+following it with a question<br />
+mark. Conversely, when \"U\" <em>is</em><br />
+in effect, the question mark<br />
+makes an individual quantifier<br />
+greedy.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>X<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>PCRE_EXTRA. Enables PCRE features<br />
+that are incompatible with Perl.<br />
+Currently, the only such feature<br />
+is that any backslash in a<br />
+pattern that is followed by a<br />
+letter that has no special<br />
+meaning causes an exception to be<br />
+thrown. This option helps reserve<br />
+unused backslash sequences for<br />
+future use. Without this option,<br />
+a backslash followed by a letter<br />
+with no special meaning is<br />
+treated as a literal (e.g. \g<br />
+and g are both recognized as a<br />
+literal g). Regardless of this<br />
+option, non-alphabetic backslash<br />
+sequences that have no special<br />
+meaning are always treated as<br />
+literals (e.g. \/ and / are both<br />
+recognized as forward-slash).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>S<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Studies the pattern to try<br />
+improve its performance. This is<br />
+useful when a particular pattern<br />
+(especially a complex one) will<br />
+be executed many times. If PCRE<br />
+finds a way to improve<br />
+performance, that discovery is<br />
+stored alongside the pattern in<br />
+the cache for use by subsequent<br />
+executions of the same pattern<br />
+(subsequent uses of that pattern<br />
+should also specify the S option<br />
+because finding a match in the<br />
+cache requires that the option<br />
+letters exactly match, including<br />
+their order).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>C<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Enables the auto-callout mode.<br />
+See <a href="RegExCallout.htm#auto">Regular Expression<br />
+Callouts</a><br />
+for more info.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>`a<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Enables recognition of additional<br />
+newline markers. By default, only<br />
+`r`n, `n and `r are<br />
+recognized. With this option<br />
+enabled, `v/VT/vertical<br />
+tab/chr(0xB),<br />
+`f/FF/formfeed/chr(0xC),<br />
+NEL/next-line/chr(0x85), LS/line<br />
+separator/chr(0x2028) and<br />
+PS/paragraph<br />
+separator/chr(0x2029) are also<br />
+recognized.<br />
+<br />
+The `a, `n and `r options<br />
+affect the behavior of <a href="#anchor">anchors<br />
+(\^ and \$)</a> and the<br />
+<a href="#dot">dot/period pattern</a>.<br />
+<br />
+`a also puts (*BSR_UNICODE)<br />
+into effect, which causes \R to<br />
+match any kind of newline. By<br />
+default, \R matches `n, `r and<br />
+`r`n; this behaviour can be<br />
+restored by combining options as<br />
+follows: `a)(*BSR_ANYCRLF)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>`n<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Causes a solitary linefeed (`n)<br />
+to be the only recognized newline<br />
+marker (see above).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>`r<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Causes a solitary carriage return<br />
+(`r) to be the only recognized<br />
+newline marker (see above).</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Note:</strong> Spaces and tabs may optionally be used to separate each option
 from the next.</p>
 <h2 id="Common">Commonly Used Symbols and Syntax</h2>
-<p>+-----------------------------------+-----------------------------------+
-| Element                           | Description                       |
-+===================================+===================================+
-| .                                 | By default, a dot matches any     |
-|                                   | single character except `r       |
-|                                   | (carriage return) or `n          |
-|                                   | (linefeed), but this can be       |
-|                                   | changed by using the <a href="#opt_s">DotAll      |
-|                                   | (s)</a>, <a href="#opt_esc_n">linefeed           |
-|                                   | (`n)</a>, <a href="#opt_esc_r">carriage     |
-|                                   | return (`r)</a>, or     |
-|                                   | <a href="#NEWLINE_ANY">`a</a> options. For  |
-|                                   | example, [ab.]{.regex} matches    |
-|                                   | [abc]{.subj} and [abz]{.subj} and |
-|                                   | [ab_]{.subj}.                    |
-+-----------------------------------+-----------------------------------+
-| *                                | An asterisk matches zero or more  |
-|                                   | of the preceding character,       |
-|                                   | <a href="#class">class</a>, or               |
-|                                   | <a href="#subpat">subpattern</a>. For        |
-|                                   | example, [a*]{.regex} matches    |
-|                                   | [a]{.subj}b and [aaa]{.subj}b. It |
-|                                   | also matches at the very          |
-|                                   | beginning of any string that      |
-|                                   | contains no \"a\" at all.         |
-|                                   |                                   |
-|                                   | <strong>Wildcard:</strong> The dot-star        |
-|                                   | pattern [.*]{.regex} is one of   |
-|                                   | the most permissive because it    |
-|                                   | matches zero or more occurrences  |
-|                                   | of <em>any</em> character (except        |
-|                                   | newline: `r and `n). For        |
-|                                   | example, [abc.*123]{.regex}      |
-|                                   | matches [abcAnything123]{.subj}   |
-|                                   | as well as [abc123]{.subj}.       |
-+-----------------------------------+-----------------------------------+
-| ?                                 | A question mark matches zero or   |
-|                                   | one of the preceding character,   |
-|                                   | <a href="#class">class</a>, or               |
-|                                   | <a href="#subpat">subpattern</a>. Think of   |
-|                                   | this as \"the preceding item is   |
-|                                   | optional\". For example,          |
-|                                   | [colou?r]{.regex} matches both    |
-|                                   | [color]{.subj} and                |
-|                                   | [colour]{.subj} because the \"u\" |
-|                                   | is optional.                      |
-+-----------------------------------+-----------------------------------+
-| +                                | A plus sign matches one or more   |
-|                                   | of the preceding character,       |
-|                                   | <a href="#class">class</a>, or               |
-|                                   | <a href="#subpat">subpattern</a>. For        |
-|                                   | example [a+]{.regex} matches      |
-|                                   | [a]{.subj}b and [aaa]{.subj}b.    |
-|                                   | But unlike [a*]{.regex} and      |
-|                                   | [a?]{.regex}, the pattern         |
-|                                   | [a+]{.regex} does not match at    |
-|                                   | the beginning of strings that     |
-|                                   | lack an \"a\" character.          |
-+-----------------------------------+-----------------------------------+
-| {min,max}                         | Matches between <em>min</em> and <em>max</em>   |
-|                                   | occurrences of the preceding      |
-|                                   | character, <a href="#class">class</a>, or    |
-|                                   | <a href="#subpat">subpattern</a>. For        |
-|                                   | example, [a{1,2}]{.regex} matches |
-|                                   | [a]{.subj}b but only the first    |
-|                                   | two a\'s in [aa]{.subj}ab.        |
-|                                   |                                   |
-|                                   | Also, {3} means exactly 3         |
-|                                   | occurrences, and {3<strong>,</strong>} means 3 |
-|                                   | or more occurrences. Note: The    |
-|                                   | specified numbers must be less    |
-|                                   | than 65536, and the first must be |
-|                                   | less than or equal to the second. |
-+-----------------------------------+-----------------------------------+
-| [...]                          | <strong>Classes of characters:</strong> The    |
-|                                   | square brackets enclose a list or |
-|                                   | range of characters (or both).    |
-|                                   | For example, [[abc]]{.regex}    |
-|                                   | means \"any single character that |
-|                                   | is either a, b or c\". Using a    |
-|                                   | dash in between creates a range;  |
-|                                   | for example, [[a-z]]{.regex}    |
-|                                   | means \"any single character that |
-|                                   | is between lowercase a and z      |
-|                                   | (inclusive)\". Lists and ranges   |
-|                                   | may be combined; for example      |
-|                                   | [[a-zA-Z0-9_]]{.regex} means   |
-|                                   | \"any single character that is    |
-|                                   | alphanumeric or underscore\".     |
-|                                   |                                   |
-|                                   | A character class may be followed |
-|                                   | by <strong>*</strong>, <strong>?</strong>, <strong>+</strong>, or       |
-|                                   | <strong>{min,max}</strong>. For example,       |
-|                                   | [[0-9]+]{.regex} matches one or |
-|                                   | more occurrence of any digit;     |
-|                                   | thus it matches xyz[123]{.subj}   |
-|                                   | but not abcxyz.                   |
-|                                   |                                   |
-|                                   | The following POSIX named sets    |
-|                                   | are also supported via the form   |
-|                                   | <strong>[[:xxx:]]</strong>, where xxx is   |
-|                                   | one of the following words:       |
-|                                   | alnum, alpha, ascii (0-127),      |
-|                                   | blank (space or tab), cntrl       |
-|                                   | (control character), digit (0-9), |
-|                                   | xdigit (hex digit), print, graph  |
-|                                   | (print excluding space), punct,   |
-|                                   | lower, upper, space (whitespace), |
-|                                   | word (same as <a href="#word">\w</a>).      |
-|                                   |                                   |
-|                                   | Within a character class,         |
-|                                   | characters do not need to be      |
-|                                   | escaped except when they have     |
-|                                   | special meaning inside a class;   |
-|                                   | e.g. [[\\^a]]{.regex},         |
-|                                   | [[a\-b]]{.regex},              |
-|                                   | [[a\]]]{.regex}, and          |
-|                                   | [[\\a]]{.regex}.              |
-+-----------------------------------+-----------------------------------+
-| [\^...]                        | Matches any single character that |
-|                                   | is <strong>not</strong> in the class. For      |
-|                                   | example, [[\^/]*]{.regex}      |
-|                                   | matches zero or more occurrences  |
-|                                   | of any character that is <em>not</em> a  |
-|                                   | forward-slash, such as            |
-|                                   | [http:]{.subj}//. Similarly,      |
-|                                   | [[\^0-9xyz]]{.regex} matches    |
-|                                   | any single character that isn\'t  |
-|                                   | a digit and isn\'t the letter x,  |
-|                                   | y, or z.                          |
-+-----------------------------------+-----------------------------------+
-| \d                               | Matches any single digit          |
-|                                   | (equivalent to the class          |
-|                                   | [[0-9]]{.regex}). Conversely,   |
-|                                   | capital <strong>\D</strong> means \"any       |
-|                                   | <em>non</em>-digit\". This and the other |
-|                                   | two below can also be used inside |
-|                                   | a <a href="#class">class</a>; for example,   |
-|                                   | [[\d.-]]{.regex} means \"any   |
-|                                   | single digit, period, or minus    |
-|                                   | sign\".                           |
-+-----------------------------------+-----------------------------------+
-| \s                               | Matches any single whitespace     |
-|                                   | character, mainly space, tab, and |
-|                                   | newline (`r and `n).            |
-|                                   | Conversely, capital <strong>\S</strong> means |
-|                                   | \"any <em>non</em>-whitespace            |
-|                                   | character\".                      |
-+-----------------------------------+-----------------------------------+
-| \w                               | Matches any single \"word\"       |
-|                                   | character, namely alphanumeric or |
-|                                   | underscore. This is equivalent to |
-|                                   | [[a-zA-Z0-9_]]{.regex}.        |
-|                                   | Conversely, capital <strong>\W</strong> means |
-|                                   | \"any <em>non</em>-word character\".     |
-+-----------------------------------+-----------------------------------+
-| \^\                               | Circumflex (\^) and dollar sign   |
-| \$                                | (\$) are called <em>anchors</em> because |
-|                                   | they don\'t consume any           |
-|                                   | characters; instead, they tie the |
-|                                   | pattern to the beginning or end   |
-|                                   | of the string being searched.     |
-|                                   |                                   |
-|                                   | <strong>\^</strong> may appear at the          |
-|                                   | beginning of a pattern to require |
-|                                   | the match to occur at the very    |
-|                                   | beginning of a line. For example, |
-|                                   | [\^abc]{.regex} matches           |
-|                                   | [abc]{.subj}123 but not 123abc.   |
-|                                   |                                   |
-|                                   | <strong>\$</strong> may appear at the end of a |
-|                                   | pattern to require the match to   |
-|                                   | occur at the very end of a line.  |
-|                                   | For example, [abc\$]{.regex}      |
-|                                   | matches 123[abc]{.subj} but not   |
-|                                   | abc123.                           |
-|                                   |                                   |
-|                                   | The two anchors may be combined.  |
-|                                   | For example, [\^abc\$]{.regex}    |
-|                                   | matches only [abc]{.subj} (i.e.   |
-|                                   | there must be no other characters |
-|                                   | before or after it).              |
-|                                   |                                   |
-|                                   | If the text being searched        |
-|                                   | contains multiple lines, the      |
-|                                   | anchors can be made to apply to   |
-|                                   | each line rather than the text as |
-|                                   | a whole by means of the <a href="#Multiline">\"m\"    |
-|                                   | option</a>. For example, |
-|                                   | [m)\^abc\$]{.regex} matches       |
-|                                   | 123`r`n[abc]{.subj}`r`n789.   |
-|                                   | But without the \"m\" option, it  |
-|                                   | wouldn\'t match.                  |
-+-----------------------------------+-----------------------------------+
-| \b                               | <strong>\b</strong> means \"word boundary\",  |
-|                                   | which is like an anchor because   |
-|                                   | it doesn\'t consume any           |
-|                                   | characters. It requires the       |
-|                                   | current character\'s <a href="#word">status as a |
-|                                   | word character (\w)</a> to   |
-|                                   | be the opposite of the previous   |
-|                                   | character\'s. It is typically     |
-|                                   | used to avoid accidentally        |
-|                                   | matching a word that appears      |
-|                                   | inside some other word. For       |
-|                                   | example, [\bcat\b]{.regex}      |
-|                                   | doesn\'t match catfish, but it    |
-|                                   | matches [cat]{.subj} regardless   |
-|                                   | of what punctuation and           |
-|                                   | whitespace surrounds it. Capital  |
-|                                   | <strong>\B</strong> is the opposite: it       |
-|                                   | requires that the current         |
-|                                   | character <em>not</em> be at a word      |
-|                                   | boundary.                         |
-+-----------------------------------+-----------------------------------+
-| |                                | The vertical bar separates two or |
-|                                   | more alternatives. A match occurs |
-|                                   | if <em>any</em> of the alternatives is   |
-|                                   | satisfied. For example,           |
-|                                   | [gray|grey]{.regex} matches both |
-|                                   | [gray]{.subj} and [grey]{.subj}.  |
-|                                   | Similarly, the pattern            |
-|                                   | [gr(a|e)y]{.regex} does the same |
-|                                   | thing with the help of the        |
-|                                   | parentheses described below.      |
-+-----------------------------------+-----------------------------------+
-| (...)                            | Items enclosed in parentheses are |
-|                                   | most commonly used to:            |
-|                                   |                                   |
-|                                   | -   Determine the order of        |
-|                                   |     evaluation. For example,      |
-|                                   |     [(Sun|Mon|Tues|Wedne       |
-|                                   | s|Thurs|Fri|Satur)day]{.regex} |
-|                                   |     matches the name of any day.  |
-|                                   | -   Apply <strong>*</strong>, <strong>?</strong>, <strong>+</strong>,   |
-|                                   |     or <strong>{min,max}</strong> to a         |
-|                                   |     <em>series</em> of characters rather |
-|                                   |     than just one. For example,   |
-|                                   |     [(abc)+]{.regex} matches one  |
-|                                   |     or more occurrences of the    |
-|                                   |     string \"abc\"; thus it       |
-|                                   |     matches [abcabc]{.subj}123    |
-|                                   |     but not ab123 or bc123.       |
-|                                   | -   [Capture a subpattern such as |
-|                                   |     the dot-star in               |
-|                                   |                                   |
-|                                   |    [abc[(.*)]{.red}xyz]{.regex}. |
-|                                   |     For example,                  |
-|                                   |     <a href="../lib/RegExMatch.htm">R                            |
-|                                   | egExMatch</a> |
-|                                   |     stores the substring that     |
-|                                   |     matches each subpattern in    |
-|                                   |     its <a href="..                     |
-|                                   | /lib/RegExMatch.htm#MatchObject">output                   |
-|                                   |     array</a>. |
-|                                   |     Similarly,                    |
-|                                   |     <a href="../lib/RegExReplace.htm">RegEx                        |
-|                                   | Replace</a> |
-|                                   |     allows the substring that     |
-|                                   |     matches each subpattern to be |
-|                                   |     reinserted into the result    |
-|                                   |     via                           |
-|                                   |     [backreferences]              |
-|                                   | (../lib/RegExReplace.htm#BackRef) |
-|                                   |     like \$1. To use the          |
-|                                   |     parentheses without the       |
-|                                   |     side-effect of capturing a    |
-|                                   |     subpattern, specify <strong>?:</strong> as |
-|                                   |     the first two characters      |
-|                                   |     inside the parentheses; for   |
-|                                   |     example:                      |
-|                                   |     [([                           |
-|                                   | ?:]{.red}.*)]{.regex}]{#capture} |
-|                                   | -   Change <a href="#Options">options</a>    |
-|                                   |     on-the-fly. For example,      |
-|                                   |     [(?im)]{.regex} turns on the  |
-|                                   |     case-insensitive and          |
-|                                   |     multiline options for the     |
-|                                   |     remainder of the pattern (or  |
-|                                   |     subpattern if it occurs       |
-|                                   |     inside a subpattern).         |
-|                                   |     Conversely, [(?-im)]{.regex}  |
-|                                   |     would turn them both off. All |
-|                                   |     options are supported except  |
-|                                   |     DPS`r`n`a.                 |
-+-----------------------------------+-----------------------------------+
-| \t\                              | These escape sequences stand for  |
-| \r\                              | special characters. The most      |
-| etc.                              | common ones are <strong>\t</strong> (tab),    |
-|                                   | <strong>\r</strong> (carriage return), and    |
-|                                   | <strong>\n</strong> (linefeed). In            |
-|                                   | AutoHotkey, an accent (`) may    |
-|                                   | optionally be used in place of    |
-|                                   | the backslash in these cases.     |
-|                                   | Escape sequences in the form      |
-|                                   | <strong>\xhh</strong> are also supported, in  |
-|                                   | which <em>hh</em> is the hex code of any |
-|                                   | ANSI character between 00 and FF. |
-|                                   |                                   |
-|                                   | <strong>\R</strong> matches <code>`r`n</code>,       |
-|                                   | <code>`n</code> and <code>`r</code> (however,   |
-|                                   | \R inside a <a href="#class">character           |
-|                                   | class</a> is merely the      |
-|                                   | letter \"R\").                    |
-+-----------------------------------+-----------------------------------+
-| \p{xx}\                          | Unicode character properties.     |
-| \P{xx}\                          | <strong>\p{xx}</strong> matches a character   |
-| \X                               | with the xx property while        |
-|                                   | <strong>\P{xx}</strong> matches any character |
-|                                   | <em>without</em> the xx property. For    |
-|                                   | example, [\pL]{.regex} matches   |
-|                                   | any letter and [\p{Lu}]{.regex}  |
-|                                   | matches any upper-case letter.    |
-|                                   | <strong>\X</strong> matches any number of     |
-|                                   | characters that form an extended  |
-|                                   | Unicode sequence.                 |
-|                                   |                                   |
-|                                   | For a full list of supported      |
-|                                   | property names and other details, |
-|                                   | search for \"\p{xx}\" at         |
-|                                   | <a href="http://www.pcre.org/pcre.txt">www.pcre.org/pcre.tx             |
-|                                   | t</a>. |
-+-----------------------------------+-----------------------------------+
-| (*UCP)                           | For performance, \d, \D, \s,   |
-|                                   | \S, \w, \W, \b and \B        |
-|                                   | recognize only ASCII characters   |
-|                                   | by default. If the pattern begins |
-|                                   | with <strong>(*UCP)</strong>, Unicode         |
-|                                   | properties will be used to        |
-|                                   | determine which characters match. |
-|                                   | For example, \w becomes          |
-|                                   | equivalent to                     |
-|                                   | [[\p{L}\p{N}_]]{.regex} and  |
-|                                   | \d becomes equivalent to         |
-|                                   | [\p{Nd}]{.regex}.                |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Element</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>.<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>By default, a dot matches any<br />
+single character except `r<br />
+(carriage return) or `n<br />
+(linefeed), but this can be<br />
+changed by using the <a href="#opt_s">DotAll<br />
+(s)</a>, <a href="#opt_esc_n">linefeed<br />
+(`n)</a>, <a href="#opt_esc_r">carriage<br />
+return (`r)</a>, or<br />
+<a href="#NEWLINE_ANY">`a</a> options. For<br />
+example, [ab.]{.regex} matches<br />
+[abc]{.subj} and [abz]{.subj} and<br />
+[ab_]{.subj}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>*<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>An asterisk matches zero or more<br />
+of the preceding character,<br />
+<a href="#class">class</a>, or<br />
+<a href="#subpat">subpattern</a>. For<br />
+example, [a*]{.regex} matches<br />
+[a]{.subj}b and [aaa]{.subj}b. It<br />
+also matches at the very<br />
+beginning of any string that<br />
+contains no \"a\" at all.<br />
+<br />
+<strong>Wildcard:</strong> The dot-star<br />
+pattern [.*]{.regex} is one of<br />
+the most permissive because it<br />
+matches zero or more occurrences<br />
+of <em>any</em> character (except<br />
+newline: `r and `n). For<br />
+example, [abc.*123]{.regex}<br />
+matches [abcAnything123]{.subj}<br />
+as well as [abc123]{.subj}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>?<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A question mark matches zero or<br />
+one of the preceding character,<br />
+<a href="#class">class</a>, or<br />
+<a href="#subpat">subpattern</a>. Think of<br />
+this as \"the preceding item is<br />
+optional\". For example,<br />
+[colou?r]{.regex} matches both<br />
+[color]{.subj} and<br />
+[colour]{.subj} because the \"u\"<br />
+is optional.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A plus sign matches one or more<br />
+of the preceding character,<br />
+<a href="#class">class</a>, or<br />
+<a href="#subpat">subpattern</a>. For<br />
+example [a+]{.regex} matches<br />
+[a]{.subj}b and [aaa]{.subj}b.<br />
+But unlike [a*]{.regex} and<br />
+[a?]{.regex}, the pattern<br />
+[a+]{.regex} does not match at<br />
+the beginning of strings that<br />
+lack an \"a\" character.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>{min,max}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Matches between <em>min</em> and <em>max</em><br />
+occurrences of the preceding<br />
+character, <a href="#class">class</a>, or<br />
+<a href="#subpat">subpattern</a>. For<br />
+example, [a{1,2}]{.regex} matches<br />
+[a]{.subj}b but only the first<br />
+two a\'s in [aa]{.subj}ab.<br />
+<br />
+Also, {3} means exactly 3<br />
+occurrences, and {3<strong>,</strong>} means 3<br />
+or more occurrences. Note: The<br />
+specified numbers must be less<br />
+than 65536, and the first must be<br />
+less than or equal to the second.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>[...]<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p><strong>Classes of characters:</strong> The<br />
+square brackets enclose a list or<br />
+range of characters (or both).<br />
+For example, [[abc]]{.regex}<br />
+means \"any single character that<br />
+is either a, b or c\". Using a<br />
+dash in between creates a range;<br />
+for example, [[a-z]]{.regex}<br />
+means \"any single character that<br />
+is between lowercase a and z<br />
+(inclusive)\". Lists and ranges<br />
+may be combined; for example<br />
+[[a-zA-Z0-9_]]{.regex} means<br />
+\"any single character that is<br />
+alphanumeric or underscore\".<br />
+<br />
+A character class may be followed<br />
+by <strong>*</strong>, <strong>?</strong>, <strong>+</strong>, or<br />
+<strong>{min,max}</strong>. For example,<br />
+[[0-9]+]{.regex} matches one or<br />
+more occurrence of any digit;<br />
+thus it matches xyz[123]{.subj}<br />
+but not abcxyz.<br />
+<br />
+The following POSIX named sets<br />
+are also supported via the form<br />
+<strong>[[:xxx:]]</strong>, where xxx is<br />
+one of the following words:<br />
+alnum, alpha, ascii (0-127),<br />
+blank (space or tab), cntrl<br />
+(control character), digit (0-9),<br />
+xdigit (hex digit), print, graph<br />
+(print excluding space), punct,<br />
+lower, upper, space (whitespace),<br />
+word (same as <a href="#word">\w</a>).<br />
+<br />
+Within a character class,<br />
+characters do not need to be<br />
+escaped except when they have<br />
+special meaning inside a class;<br />
+e.g. [[\\^a]]{.regex},<br />
+[[a\-b]]{.regex},<br />
+[[a\]]]{.regex}, and<br />
+[[\\a]]{.regex}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>[\^...]<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Matches any single character that<br />
+is <strong>not</strong> in the class. For<br />
+example, [[\^/]*]{.regex}<br />
+matches zero or more occurrences<br />
+of any character that is <em>not</em> a<br />
+forward-slash, such as<br />
+[http:]{.subj}//. Similarly,<br />
+[[\^0-9xyz]]{.regex} matches<br />
+any single character that isn\'t<br />
+a digit and isn\'t the letter x,<br />
+y, or z.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\d<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Matches any single digit<br />
+(equivalent to the class<br />
+[[0-9]]{.regex}). Conversely,<br />
+capital <strong>\D</strong> means \"any<br />
+<em>non</em>-digit\". This and the other<br />
+two below can also be used inside<br />
+a <a href="#class">class</a>; for example,<br />
+[[\d.-]]{.regex} means \"any<br />
+single digit, period, or minus<br />
+sign\".</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\s<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Matches any single whitespace<br />
+character, mainly space, tab, and<br />
+newline (`r and `n).<br />
+Conversely, capital <strong>\S</strong> means<br />
+\"any <em>non</em>-whitespace<br />
+character\".</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\w<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Matches any single \"word\"<br />
+character, namely alphanumeric or<br />
+underscore. This is equivalent to<br />
+[[a-zA-Z0-9_]]{.regex}.<br />
+Conversely, capital <strong>\W</strong> means<br />
+\"any <em>non</em>-word character\".</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\^\<br />
+\$<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Circumflex (\^) and dollar sign<br />
+(\$) are called <em>anchors</em> because<br />
+they don\'t consume any<br />
+characters; instead, they tie the<br />
+pattern to the beginning or end<br />
+of the string being searched.<br />
+<br />
+<strong>\^</strong> may appear at the<br />
+beginning of a pattern to require<br />
+the match to occur at the very<br />
+beginning of a line. For example,<br />
+[\^abc]{.regex} matches<br />
+[abc]{.subj}123 but not 123abc.<br />
+<br />
+<strong>\$</strong> may appear at the end of a<br />
+pattern to require the match to<br />
+occur at the very end of a line.<br />
+For example, [abc\$]{.regex}<br />
+matches 123[abc]{.subj} but not<br />
+abc123.<br />
+<br />
+The two anchors may be combined.<br />
+For example, [\^abc\$]{.regex}<br />
+matches only [abc]{.subj} (i.e.<br />
+there must be no other characters<br />
+before or after it).<br />
+<br />
+If the text being searched<br />
+contains multiple lines, the<br />
+anchors can be made to apply to<br />
+each line rather than the text as<br />
+a whole by means of the <a href="#Multiline">\"m\"<br />
+option</a>. For example,<br />
+[m)\^abc\$]{.regex} matches<br />
+123`r`n[abc]{.subj}`r`n789.<br />
+But without the \"m\" option, it<br />
+wouldn\'t match.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\b<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p><strong>\b</strong> means \"word boundary\",<br />
+which is like an anchor because<br />
+it doesn\'t consume any<br />
+characters. It requires the<br />
+current character\'s <a href="#word">status as a<br />
+word character (\w)</a> to<br />
+be the opposite of the previous<br />
+character\'s. It is typically<br />
+used to avoid accidentally<br />
+matching a word that appears<br />
+inside some other word. For<br />
+example, [\bcat\b]{.regex}<br />
+doesn\'t match catfish, but it<br />
+matches [cat]{.subj} regardless<br />
+of what punctuation and<br />
+whitespace surrounds it. Capital<br />
+<strong>\B</strong> is the opposite: it<br />
+requires that the current<br />
+character <em>not</em> be at a word<br />
+boundary.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>|<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The vertical bar separates two or<br />
+more alternatives. A match occurs<br />
+if <em>any</em> of the alternatives is<br />
+satisfied. For example,<br />
+[gray|grey]{.regex} matches both<br />
+[gray]{.subj} and [grey]{.subj}.<br />
+Similarly, the pattern<br />
+[gr(a|e)y]{.regex} does the same<br />
+thing with the help of the<br />
+parentheses described below.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>(...)<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Items enclosed in parentheses are<br />
+most commonly used to:<br />
+<br />
+-   Determine the order of<br />
+    evaluation. For example,<br />
+    [(Sun|Mon|Tues|Wedne<br />
+s|Thurs|Fri|Satur)day]{.regex}<br />
+    matches the name of any day.<br />
+-   Apply <strong>*</strong>, <strong>?</strong>, <strong>+</strong>,<br />
+    or <strong>{min,max}</strong> to a<br />
+<em>series</em> of characters rather<br />
+    than just one. For example,<br />
+    [(abc)+]{.regex} matches one<br />
+    or more occurrences of the<br />
+    string \"abc\"; thus it<br />
+    matches [abcabc]{.subj}123<br />
+    but not ab123 or bc123.<br />
+-   [Capture a subpattern such as<br />
+    the dot-star in<br />
+<br />
+   [abc[(.*)]{.red}xyz]{.regex}.<br />
+    For example,<br />
+<a href="../lib/RegExMatch.htm">R<br />
+egExMatch</a><br />
+    stores the substring that<br />
+    matches each subpattern in<br />
+    its <a href="..  
+/lib/RegExMatch.htm#MatchObject">output<br />
+    array</a>.<br />
+    Similarly,<br />
+<a href="../lib/RegExReplace.htm">RegEx<br />
+Replace</a><br />
+    allows the substring that<br />
+    matches each subpattern to be<br />
+    reinserted into the result<br />
+    via<br />
+    [backreferences]<br />
+(../lib/RegExReplace.htm#BackRef)<br />
+    like \$1. To use the<br />
+    parentheses without the<br />
+    side-effect of capturing a<br />
+    subpattern, specify <strong>?:</strong> as<br />
+    the first two characters<br />
+    inside the parentheses; for<br />
+    example:<br />
+    [([<br />
+?:]{.red}.*)]{.regex}]{#capture}<br />
+-   Change <a href="#Options">options</a><br />
+    on-the-fly. For example,<br />
+    [(?im)]{.regex} turns on the<br />
+    case-insensitive and<br />
+    multiline options for the<br />
+    remainder of the pattern (or<br />
+    subpattern if it occurs<br />
+    inside a subpattern).<br />
+    Conversely, [(?-im)]{.regex}<br />
+    would turn them both off. All<br />
+    options are supported except<br />
+    DPS`r`n`a.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\t\<br />
+\r\<br />
+etc.<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>These escape sequences stand for<br />
+special characters. The most<br />
+common ones are <strong>\t</strong> (tab),<br />
+<strong>\r</strong> (carriage return), and<br />
+<strong>\n</strong> (linefeed). In<br />
+AutoHotkey, an accent (`) may<br />
+optionally be used in place of<br />
+the backslash in these cases.<br />
+Escape sequences in the form<br />
+<strong>\xhh</strong> are also supported, in<br />
+which <em>hh</em> is the hex code of any<br />
+ANSI character between 00 and FF.<br />
+<br />
+<strong>\R</strong> matches <code>`r`n</code>,<br />
+<code>`n</code> and <code>`r</code> (however,<br />
+\R inside a <a href="#class">character<br />
+class</a> is merely the<br />
+letter \"R\").</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\p{xx}\<br />
+\P{xx}\<br />
+\X<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Unicode character properties.<br />
+<strong>\p{xx}</strong> matches a character<br />
+with the xx property while<br />
+<strong>\P{xx}</strong> matches any character<br />
+<em>without</em> the xx property. For<br />
+example, [\pL]{.regex} matches<br />
+any letter and [\p{Lu}]{.regex}<br />
+matches any upper-case letter.<br />
+<strong>\X</strong> matches any number of<br />
+characters that form an extended<br />
+Unicode sequence.<br />
+<br />
+For a full list of supported<br />
+property names and other details,<br />
+search for \"\p{xx}\" at<br />
+<a href="http://www.pcre.org/pcre.txt">www.pcre.org/pcre.tx<br />
+t</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>(*UCP)<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>For performance, \d, \D, \s,<br />
+\S, \w, \W, \b and \B<br />
+recognize only ASCII characters<br />
+by default. If the pattern begins<br />
+with <strong>(*UCP)</strong>, Unicode<br />
+properties will be used to<br />
+determine which characters match.<br />
+For example, \w becomes<br />
+equivalent to<br />
+[[\p{L}\p{N}_]]{.regex} and<br />
+\d becomes equivalent to<br />
+[\p{Nd}]{.regex}.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Greed:</strong> By default, <strong>*</strong>, <strong>?</strong>, <strong>+</strong>, and <strong>{min,max}</strong> are
 greedy because they consume all characters up through the <em>last</em>
 possible one that still satisfies the entire pattern. To instead have

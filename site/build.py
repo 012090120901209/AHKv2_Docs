@@ -34,6 +34,7 @@ class SiteBuilder:
             'codehilite',
             'toc',
             'tables',
+            'markdown_grid_tables',
             'fenced_code',
             'attr_list',
             'def_list',
