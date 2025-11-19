@@ -622,64 +622,178 @@ of the order they are specified.</p>
 <dd>
 <p>The name of the property to change. Must be one of those listed
 below.</p>
-<p>+-----------------------------------+-----------------------------------+
-| Property                          | Description                       |
-+===================================+===================================+
-| CompanyName                       | Changes the company name.         |
-+-----------------------------------+-----------------------------------+
-| Copyright                         | Changes the legal copyright       |
-|                                   | information.                      |
-+-----------------------------------+-----------------------------------+
-| Description                       | Changes the file description. On  |
-|                                   | Windows 8 and above, this also    |
-|                                   | changes the script\'s name in     |
-|                                   | Task Manager under \"Processes\". |
-+-----------------------------------+-----------------------------------+
-| FileVersion                       | Changes the file version, in both |
-|                                   | text and raw binary format. (See  |
-|                                   | <em>Version</em> below, for more         |
-|                                   | details.)                         |
-+-----------------------------------+-----------------------------------+
-| InternalName                      | Changes the internal name.        |
-+-----------------------------------+-----------------------------------+
-| Language                          | Changes the <a href="Languages.htm">language             |
-|                                   | code</a>. Please note |
-|                                   | that hexadecimal numbers must     |
-|                                   | have an <code>0x</code> prefix.              |
-+-----------------------------------+-----------------------------------+
-| LegalTrademarks                   | Changes the legal trademarks      |
-|                                   | information.                      |
-+-----------------------------------+-----------------------------------+
-| Name                              | Changes the product name and the  |
-|                                   | internal name.                    |
-+-----------------------------------+-----------------------------------+
-| OrigFilename                      | Changes the original filename     |
-|                                   | information.                      |
-+-----------------------------------+-----------------------------------+
-| ProductName                       | Changes the product name.         |
-+-----------------------------------+-----------------------------------+
-| ProductVersion                    | Changes the product version, in   |
-|                                   | both text and raw binary format.  |
-|                                   | (See <em>Version</em> below, for more    |
-|                                   | details.)                         |
-+-----------------------------------+-----------------------------------+
-| Version                           | Changes the file version and the  |
-|                                   | product version, in both text and |
-|                                   | raw binary format.                |
-|                                   |                                   |
-|                                   | Ahk2Exe fills the binary version  |
-|                                   | fields with the period-delimited  |
-|                                   | numbers (up to four) that may     |
-|                                   | appear at the beginning of the    |
-|                                   | version text. Unfilled fields are |
-|                                   | set to zero. For example,         |
-|                                   | <code>1.3-alpha</code> would produce a       |
-|                                   | binary version number of          |
-|                                   | <code>1.3.0.0</code>. If this property is    |
-|                                   | not modified, it defaults to the  |
-|                                   | AutoHotkey version used to        |
-|                                   | compile the script.               |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Property</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>CompanyName</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the company name.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Copyright<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the legal copyright<br />
+information.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Description<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the file description. On<br />
+Windows 8 and above, this also<br />
+changes the script\'s name in<br />
+Task Manager under \"Processes\".</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>FileVersion<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the file version, in both<br />
+text and raw binary format. (See<br />
+<em>Version</em> below, for more<br />
+details.)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>InternalName</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the internal name.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Language<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the <a href="Languages.htm">language<br />
+code</a>. Please note<br />
+that hexadecimal numbers must<br />
+have an <code>0x</code> prefix.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LegalTrademarks<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the legal trademarks<br />
+information.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Name<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the product name and the<br />
+internal name.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>OrigFilename<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the original filename<br />
+information.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>ProductName</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the product name.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>ProductVersion<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the product version, in<br />
+both text and raw binary format.<br />
+(See <em>Version</em> below, for more<br />
+details.)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Version<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Changes the file version and the<br />
+product version, in both text and<br />
+raw binary format.<br />
+<br />
+Ahk2Exe fills the binary version<br />
+fields with the period-delimited<br />
+numbers (up to four) that may<br />
+appear at the beginning of the<br />
+version text. Unfilled fields are<br />
+set to zero. For example,<br />
+<code>1.3-alpha</code> would produce a<br />
+binary version number of<br />
+<code>1.3.0.0</code>. If this property is<br />
+not modified, it defaults to the<br />
+AutoHotkey version used to<br />
+compile the script.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd>
 <dt>Value</dt>
 <dd>The value to set the property to.</dd>

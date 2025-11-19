@@ -219,82 +219,186 @@ but <code>u</code> is reserved for unsigned integers.</p>
 <p><strong>Type:</strong> A character from the <a href="#Types">type table</a> below indicating how
 the input value should be interpreted. If omitted, it defaults to <code>s</code>.</p>
 <h2 id="Flags">Flags</h2>
-<p>+-----------------------------------+-----------------------------------+
-| Flag                              | Meaning                           |
-+===================================+===================================+
-| <code>-</code>                               | Left align the result within the  |
-|                                   | given field width (insert spaces  |
-|                                   | to the right if needed). For      |
-|                                   | example, <code>Format("{:-10}", 1)</code>    |
-|                                   | returns <code>1</code>{.no-highlight        |
-|                                   | style="white-space: pre"}.        |
-|                                   |                                   |
-|                                   | If omitted, the result is right   |
-|                                   | aligned within the given field    |
-|                                   | width.                            |
-+-----------------------------------+-----------------------------------+
-| <code>+</code>                               | Use a sign (+ or -) to prefix the |
-|                                   | output value if it is of a signed |
-|                                   | type. For example,                |
-|                                   | <code>Format("{:+d}", 1)</code> returns      |
-|                                   | <code class="no-highlight">+1</code>.              |
-|                                   |                                   |
-|                                   | If omitted, a sign appears only   |
-|                                   | for negative signed values (-).   |
-+-----------------------------------+-----------------------------------+
-| <code class="no-highlight">0</code>                | If <em>width</em> is prefixed by 0,      |
-|                                   | leading zeros are added until the |
-|                                   | minimum width is reached. For     |
-|                                   | example, <code>Format("{:010}", 1)</code>    |
-|                                   | returns                           |
-|                                   | <code class="no-highlight">0000000001</code>. If   |
-|                                   | both <code class="no-highlight">0</code> and <code>-</code>   |
-|                                   | appear, the 0 is ignored. If 0 is |
-|                                   | specified as an integer format    |
-|                                   | (i, u, x, X, o, d) and a          |
-|                                   | precision specification is also   |
-|                                   | present - for example,            |
-|                                   | <code class="no-highlight">{:04.d}</code> - the 0  |
-|                                   | is ignored.                       |
-|                                   |                                   |
-|                                   | If omitted, no padding occurs.    |
-+-----------------------------------+-----------------------------------+
-| <code></code>                               | Use a space to prefix the output  |
-|                                   | value with a <em>single</em> space if it |
-|                                   | is signed and positive. The space |
-|                                   | is ignored if both <code></code> and <code>+</code>    |
-|                                   | flags appear. For example,        |
-|                                   | <code>Format("{: 05d}", 1)</code> returns    |
-|                                   | <code class="no-highlight">0001</code>.           |
-|                                   |                                   |
-|                                   | If omitted, no space appears.     |
-+-----------------------------------+-----------------------------------+
-| <code>#</code>                               | When it\'s used with the o, x, or |
-|                                   | X format, the # flag uses        |
-|                                   | <code class="no-highlight">0</code>,               |
-|                                   | <code class="no-highlight">0x</code>, or           |
-|                                   | <code class="no-highlight">0X</code>,              |
-|                                   | respectively, to prefix any       |
-|                                   | nonzero output value. For         |
-|                                   | example, <code>Format("{:#x}", 1)</code>     |
-|                                   | returns <code class="no-highlight">0x1</code>.     |
-|                                   |                                   |
-|                                   | When it\'s used with the e, E, f, |
-|                                   | a or A format, the # flag forces |
-|                                   | the output value to contain a     |
-|                                   | decimal point. For example,       |
-|                                   | <code>Format("{:#.0f}", 1)</code> returns    |
-|                                   | <code class="no-highlight">1.</code>.              |
-|                                   |                                   |
-|                                   | When it\'s used with the g or G   |
-|                                   | format, the # flag forces the    |
-|                                   | output value to contain a decimal |
-|                                   | point and prevents the truncation |
-|                                   | of trailing zeros.                |
-|                                   |                                   |
-|                                   | Ignored when used with c, d, i,   |
-|                                   | u, or s.                          |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Flag</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Meaning</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>-</code><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Left align the result within the<br />
+given field width (insert spaces<br />
+to the right if needed). For<br />
+example, <code>Format("{:-10}", 1)</code><br />
+returns <code>1</code>{.no-highlight<br />
+style="white-space: pre"}.<br />
+<br />
+If omitted, the result is right<br />
+aligned within the given field<br />
+width.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>+</code><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Use a sign (+ or -) to prefix the<br />
+output value if it is of a signed<br />
+type. For example,<br />
+<code>Format("{:+d}", 1)</code> returns<br />
+<code class="no-highlight">+1</code>.<br />
+<br />
+If omitted, a sign appears only<br />
+for negative signed values (-).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code class="no-highlight">0</code><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>If <em>width</em> is prefixed by 0,<br />
+leading zeros are added until the<br />
+minimum width is reached. For<br />
+example, <code>Format("{:010}", 1)</code><br />
+returns<br />
+<code class="no-highlight">0000000001</code>. If<br />
+both <code class="no-highlight">0</code> and <code>-</code><br />
+appear, the 0 is ignored. If 0 is<br />
+specified as an integer format<br />
+(i, u, x, X, o, d) and a<br />
+precision specification is also<br />
+present - for example,<br />
+<code class="no-highlight">{:04.d}</code> - the 0<br />
+is ignored.<br />
+<br />
+If omitted, no padding occurs.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code></code><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Use a space to prefix the output<br />
+value with a <em>single</em> space if it<br />
+is signed and positive. The space<br />
+is ignored if both <code></code> and <code>+</code><br />
+flags appear. For example,<br />
+<code>Format("{: 05d}", 1)</code> returns<br />
+<code class="no-highlight">0001</code>.<br />
+<br />
+If omitted, no space appears.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>#</code><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>When it\'s used with the o, x, or<br />
+X format, the # flag uses<br />
+<code class="no-highlight">0</code>,<br />
+<code class="no-highlight">0x</code>, or<br />
+<code class="no-highlight">0X</code>,<br />
+respectively, to prefix any<br />
+nonzero output value. For<br />
+example, <code>Format("{:#x}", 1)</code><br />
+returns <code class="no-highlight">0x1</code>.<br />
+<br />
+When it\'s used with the e, E, f,<br />
+a or A format, the # flag forces<br />
+the output value to contain a<br />
+decimal point. For example,<br />
+<code>Format("{:#.0f}", 1)</code> returns<br />
+<code class="no-highlight">1.</code>.<br />
+<br />
+When it\'s used with the g or G<br />
+format, the # flag forces the<br />
+output value to contain a decimal<br />
+point and prevents the truncation<br />
+of trailing zeros.<br />
+<br />
+Ignored when used with c, d, i,<br />
+u, or s.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Types">Types</h2>
 <p>Type Character   Argument         Output format</p>
 <hr />

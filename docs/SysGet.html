@@ -178,229 +178,596 @@ corresponding value.</p>
   23       SM_SWAPBUTTON: Nonzero if the meanings of the left and right mouse buttons are swapped; zero otherwise.
   76, 77   SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN: Coordinates for the left side and the top of the virtual screen. The virtual screen is the bounding rectangle of all display monitors. By contrast, the SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN metrics (further above) are the width and height of the virtual screen.</p>
 <h2 id="Not_Commonly_Used">Not Commonly Used</h2>
-<p>+-----------------------------------+-----------------------------------+
-| Number                            | Description                       |
-+===================================+===================================+
-| 56                                | SM_ARRANGE: Flags specifying how  |
-|                                   | the system arranged minimized     |
-|                                   | windows. See Microsoft Docs for   |
-|                                   | more information.                 |
-+-----------------------------------+-----------------------------------+
-| 67                                | SM_CLEANBOOT: Specifies how the   |
-|                                   | system was started:               |
-|                                   |                                   |
-|                                   | -   0 = Normal boot               |
-|                                   | -   1 = Fail-safe boot            |
-|                                   | -   2 = Fail-safe with network    |
-|                                   |     boot                          |
-+-----------------------------------+-----------------------------------+
-| 5, 6                              | SM_CXBORDER, SM_CYBORDER: Width   |
-|                                   | and height of a window border, in |
-|                                   | pixels. This is equivalent to the |
-|                                   | SM_CXEDGE value for windows with  |
-|                                   | the 3-D look.                     |
-+-----------------------------------+-----------------------------------+
-| 13, 14                            | SM_CXCURSOR, SM_CYCURSOR: Width   |
-|                                   | and height of a cursor, in        |
-|                                   | pixels. The system cannot create  |
-|                                   | cursors of other sizes.           |
-+-----------------------------------+-----------------------------------+
-| 36, 37                            | SM_CXDOUBLECLK, SM_CYDOUBLECLK:   |
-|                                   | Width and height of the rectangle |
-|                                   | around the location of a first    |
-|                                   | click in a double-click sequence, |
-|                                   | in pixels. The second click must  |
-|                                   | occur within this rectangle for   |
-|                                   | the system to consider the two    |
-|                                   | clicks a double-click. (The two   |
-|                                   | clicks must also occur within a   |
-|                                   | specified time.)                  |
-+-----------------------------------+-----------------------------------+
-| 68, 69                            | SM_CXDRAG, SM_CYDRAG: Width and   |
-|                                   | height of a rectangle centered on |
-|                                   | a drag point to allow for limited |
-|                                   | movement of the mouse pointer     |
-|                                   | before a drag operation begins.   |
-|                                   | These values are in pixels. It    |
-|                                   | allows the user to click and      |
-|                                   | release the mouse button easily   |
-|                                   | without unintentionally starting  |
-|                                   | a drag operation.                 |
-+-----------------------------------+-----------------------------------+
-| 45, 46                            | SM_CXEDGE, SM_CYEDGE: Dimensions  |
-|                                   | of a 3-D border, in pixels. These |
-|                                   | are the 3-D counterparts of       |
-|                                   | SM_CXBORDER and SM_CYBORDER.      |
-+-----------------------------------+-----------------------------------+
-| 7, 8                              | SM_CXFIXEDFRAME, SM_CYFIXEDFRAME  |
-|                                   | (synonymous with SM_CXDLGFRAME,   |
-|                                   | SM_CYDLGFRAME): Thickness of the  |
-|                                   | frame around the perimeter of a   |
-|                                   | window that has a caption but is  |
-|                                   | not sizable, in pixels.           |
-|                                   | SM_CXFIXEDFRAME is the height of  |
-|                                   | the horizontal border and         |
-|                                   | SM_CYFIXEDFRAME is the width of   |
-|                                   | the vertical border.              |
-+-----------------------------------+-----------------------------------+
-| 83, 84                            | SM_CXFOCUSBORDER,                 |
-|                                   | SM_CYFOCUSBORDER: Width (in       |
-|                                   | pixels) of the left and right     |
-|                                   | edges and the height of the top   |
-|                                   | and bottom edges of a control\'s  |
-|                                   | focus rectangle. <strong>Windows        |
-|                                   | 2000:</strong> The retrieved value is    |
-|                                   | always 0.                         |
-+-----------------------------------+-----------------------------------+
-| 21, 3                             | SM_CXHSCROLL, SM_CYHSCROLL: Width |
-|                                   | of the arrow bitmap on a          |
-|                                   | horizontal scroll bar, in pixels; |
-|                                   | and height of a horizontal scroll |
-|                                   | bar, in pixels.                   |
-+-----------------------------------+-----------------------------------+
-| 10                                | SM_CXHTHUMB: Width of the thumb   |
-|                                   | box in a horizontal scroll bar,   |
-|                                   | in pixels.                        |
-+-----------------------------------+-----------------------------------+
-| 11, 12                            | SM_CXICON, SM_CYICON: Default     |
-|                                   | width and height of an icon, in   |
-|                                   | pixels.                           |
-+-----------------------------------+-----------------------------------+
-| 38, 39                            | SM_CXICONSPACING,                 |
-|                                   | SM_CYICONSPACING: Dimensions of a |
-|                                   | grid cell for items in large icon |
-|                                   | view, in pixels. Each item fits   |
-|                                   | into a rectangle of this size     |
-|                                   | when arranged. These values are   |
-|                                   | always greater than or equal to   |
-|                                   | SM_CXICON and SM_CYICON.          |
-+-----------------------------------+-----------------------------------+
-| 71, 72                            | SM_CXMENUCHECK, SM_CYMENUCHECK:   |
-|                                   | Dimensions of the default menu    |
-|                                   | check-mark bitmap, in pixels.     |
-+-----------------------------------+-----------------------------------+
-| 54, 55                            | SM_CXMENUSIZE, SM_CYMENUSIZE:     |
-|                                   | Dimensions of menu bar buttons,   |
-|                                   | such as the child window close    |
-|                                   | button used in the multiple       |
-|                                   | document interface, in pixels.    |
-+-----------------------------------+-----------------------------------+
-| 47, 48                            | SM_CXMINSPACING, SM_CYMINSPACING: |
-|                                   | Dimensions of a grid cell for a   |
-|                                   | minimized window, in pixels. Each |
-|                                   | minimized window fits into a      |
-|                                   | rectangle this size when          |
-|                                   | arranged. These values are always |
-|                                   | greater than or equal to          |
-|                                   | SM_CXMINIMIZED and                |
-|                                   | SM_CYMINIMIZED.                   |
-+-----------------------------------+-----------------------------------+
-| 30, 31                            | SM_CXSIZE, SM_CYSIZE: Width and   |
-|                                   | height of a button in a window\'s |
-|                                   | caption or title bar, in pixels.  |
-+-----------------------------------+-----------------------------------+
-| 32, 33                            | SM_CXSIZEFRAME, SM_CYSIZEFRAME:   |
-|                                   | Thickness of the sizing border    |
-|                                   | around the perimeter of a window  |
-|                                   | that can be resized, in pixels.   |
-|                                   | SM_CXSIZEFRAME is the width of    |
-|                                   | the horizontal border, and        |
-|                                   | SM_CYSIZEFRAME is the height of   |
-|                                   | the vertical border. Synonymous   |
-|                                   | with SM_CXFRAME and SM_CYFRAME.   |
-+-----------------------------------+-----------------------------------+
-| 49, 50                            | SM_CXSMICON, SM_CYSMICON:         |
-|                                   | Recommended dimensions of a small |
-|                                   | icon, in pixels. Small icons      |
-|                                   | typically appear in window        |
-|                                   | captions and in small icon view.  |
-+-----------------------------------+-----------------------------------+
-| 52, 53                            | SM_CXSMSIZE SM_CYSMSIZE:          |
-|                                   | Dimensions of small caption       |
-|                                   | buttons, in pixels.               |
-+-----------------------------------+-----------------------------------+
-| 2, 20                             | SM_CXVSCROLL, SM_CYVSCROLL: Width |
-|                                   | of a vertical scroll bar, in      |
-|                                   | pixels; and height of the arrow   |
-|                                   | bitmap on a vertical scroll bar,  |
-|                                   | in pixels.                        |
-+-----------------------------------+-----------------------------------+
-| 4                                 | SM_CYCAPTION: Height of a caption |
-|                                   | area, in pixels.                  |
-+-----------------------------------+-----------------------------------+
-| 18                                | SM_CYKANJIWINDOW: For double byte |
-|                                   | character set versions of the     |
-|                                   | system, this is the height of the |
-|                                   | Kanji window at the bottom of the |
-|                                   | screen, in pixels.                |
-+-----------------------------------+-----------------------------------+
-| 15                                | SM_CYMENU: Height of a            |
-|                                   | single-line menu bar, in pixels.  |
-+-----------------------------------+-----------------------------------+
-| 51                                | SM_CYSMCAPTION: Height of a small |
-|                                   | caption, in pixels.               |
-+-----------------------------------+-----------------------------------+
-| 9                                 | SM_CYVTHUMB: Height of the thumb  |
-|                                   | box in a vertical scroll bar, in  |
-|                                   | pixels.                           |
-+-----------------------------------+-----------------------------------+
-| 42                                | SM_DBCSENABLED: Nonzero if        |
-|                                   | User32.dll supports DBCS; zero    |
-|                                   | otherwise.                        |
-+-----------------------------------+-----------------------------------+
-| 22                                | SM_DEBUG: Nonzero if the debug    |
-|                                   | version of User.exe is installed; |
-|                                   | zero otherwise.                   |
-+-----------------------------------+-----------------------------------+
-| 82                                | SM_IMMENABLED: Nonzero if Input   |
-|                                   | Method Manager/Input Method       |
-|                                   | Editor features are enabled; zero |
-|                                   | otherwise.                        |
-|                                   |                                   |
-|                                   | SM_IMMENABLED indicates whether   |
-|                                   | the system is ready to use a      |
-|                                   | Unicode-based IME on a Unicode    |
-|                                   | application. To ensure that a     |
-|                                   | language-dependent IME works,     |
-|                                   | check SM_DBCSENABLED and the      |
-|                                   | system ANSI code page. Otherwise  |
-|                                   | the ANSI-to-Unicode conversion    |
-|                                   | may not be performed correctly,   |
-|                                   | or some components like fonts or  |
-|                                   | registry setting may not be       |
-|                                   | present.                          |
-+-----------------------------------+-----------------------------------+
-| 40                                | SM_MENUDROPALIGNMENT: Nonzero if  |
-|                                   | drop-down menus are right-aligned |
-|                                   | with the corresponding menu-bar   |
-|                                   | item; zero if the menus are       |
-|                                   | left-aligned.                     |
-+-----------------------------------+-----------------------------------+
-| 74                                | SM_MIDEASTENABLED: Nonzero if the |
-|                                   | system is enabled for Hebrew and  |
-|                                   | Arabic languages, zero if not.    |
-+-----------------------------------+-----------------------------------+
-| 41                                | SM_PENWINDOWS: Nonzero if the     |
-|                                   | Microsoft Windows for Pen         |
-|                                   | computing extensions are          |
-|                                   | installed; zero otherwise.        |
-+-----------------------------------+-----------------------------------+
-| 44                                | SM_SECURE: Nonzero if security is |
-|                                   | present; zero otherwise.          |
-+-----------------------------------+-----------------------------------+
-| 81                                | SM_SAMEDISPLAYFORMAT: Nonzero if  |
-|                                   | all the display monitors have the |
-|                                   | same color format, zero           |
-|                                   | otherwise. Note that two displays |
-|                                   | can have the same bit depth, but  |
-|                                   | different color formats. For      |
-|                                   | example, the red, green, and blue |
-|                                   | pixels can be encoded with        |
-|                                   | different numbers of bits, or     |
-|                                   | those bits can be located in      |
-|                                   | different places in a pixel\'s    |
-|                                   | color value.                      |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Number</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>56<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_ARRANGE: Flags specifying how<br />
+the system arranged minimized<br />
+windows. See Microsoft Docs for<br />
+more information.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>67<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CLEANBOOT: Specifies how the<br />
+system was started:<br />
+<br />
+-   0 = Normal boot<br />
+-   1 = Fail-safe boot<br />
+-   2 = Fail-safe with network<br />
+    boot</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>5, 6<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXBORDER, SM_CYBORDER: Width<br />
+and height of a window border, in<br />
+pixels. This is equivalent to the<br />
+SM_CXEDGE value for windows with<br />
+the 3-D look.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>13, 14<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXCURSOR, SM_CYCURSOR: Width<br />
+and height of a cursor, in<br />
+pixels. The system cannot create<br />
+cursors of other sizes.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>36, 37<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXDOUBLECLK, SM_CYDOUBLECLK:<br />
+Width and height of the rectangle<br />
+around the location of a first<br />
+click in a double-click sequence,<br />
+in pixels. The second click must<br />
+occur within this rectangle for<br />
+the system to consider the two<br />
+clicks a double-click. (The two<br />
+clicks must also occur within a<br />
+specified time.)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>68, 69<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXDRAG, SM_CYDRAG: Width and<br />
+height of a rectangle centered on<br />
+a drag point to allow for limited<br />
+movement of the mouse pointer<br />
+before a drag operation begins.<br />
+These values are in pixels. It<br />
+allows the user to click and<br />
+release the mouse button easily<br />
+without unintentionally starting<br />
+a drag operation.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>45, 46<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXEDGE, SM_CYEDGE: Dimensions<br />
+of a 3-D border, in pixels. These<br />
+are the 3-D counterparts of<br />
+SM_CXBORDER and SM_CYBORDER.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>7, 8<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXFIXEDFRAME, SM_CYFIXEDFRAME<br />
+(synonymous with SM_CXDLGFRAME,<br />
+SM_CYDLGFRAME): Thickness of the<br />
+frame around the perimeter of a<br />
+window that has a caption but is<br />
+not sizable, in pixels.<br />
+SM_CXFIXEDFRAME is the height of<br />
+the horizontal border and<br />
+SM_CYFIXEDFRAME is the width of<br />
+the vertical border.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>83, 84<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXFOCUSBORDER,<br />
+SM_CYFOCUSBORDER: Width (in<br />
+pixels) of the left and right<br />
+edges and the height of the top<br />
+and bottom edges of a control\'s<br />
+focus rectangle. <strong>Windows<br />
+2000:</strong> The retrieved value is<br />
+always 0.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>21, 3<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXHSCROLL, SM_CYHSCROLL: Width<br />
+of the arrow bitmap on a<br />
+horizontal scroll bar, in pixels;<br />
+and height of a horizontal scroll<br />
+bar, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>10<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXHTHUMB: Width of the thumb<br />
+box in a horizontal scroll bar,<br />
+in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>11, 12<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXICON, SM_CYICON: Default<br />
+width and height of an icon, in<br />
+pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>38, 39<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXICONSPACING,<br />
+SM_CYICONSPACING: Dimensions of a<br />
+grid cell for items in large icon<br />
+view, in pixels. Each item fits<br />
+into a rectangle of this size<br />
+when arranged. These values are<br />
+always greater than or equal to<br />
+SM_CXICON and SM_CYICON.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>71, 72<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXMENUCHECK, SM_CYMENUCHECK:<br />
+Dimensions of the default menu<br />
+check-mark bitmap, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>54, 55<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXMENUSIZE, SM_CYMENUSIZE:<br />
+Dimensions of menu bar buttons,<br />
+such as the child window close<br />
+button used in the multiple<br />
+document interface, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>47, 48<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXMINSPACING, SM_CYMINSPACING:<br />
+Dimensions of a grid cell for a<br />
+minimized window, in pixels. Each<br />
+minimized window fits into a<br />
+rectangle this size when<br />
+arranged. These values are always<br />
+greater than or equal to<br />
+SM_CXMINIMIZED and<br />
+SM_CYMINIMIZED.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>30, 31<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXSIZE, SM_CYSIZE: Width and<br />
+height of a button in a window\'s<br />
+caption or title bar, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>32, 33<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXSIZEFRAME, SM_CYSIZEFRAME:<br />
+Thickness of the sizing border<br />
+around the perimeter of a window<br />
+that can be resized, in pixels.<br />
+SM_CXSIZEFRAME is the width of<br />
+the horizontal border, and<br />
+SM_CYSIZEFRAME is the height of<br />
+the vertical border. Synonymous<br />
+with SM_CXFRAME and SM_CYFRAME.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>49, 50<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXSMICON, SM_CYSMICON:<br />
+Recommended dimensions of a small<br />
+icon, in pixels. Small icons<br />
+typically appear in window<br />
+captions and in small icon view.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>52, 53<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXSMSIZE SM_CYSMSIZE:<br />
+Dimensions of small caption<br />
+buttons, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>2, 20<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CXVSCROLL, SM_CYVSCROLL: Width<br />
+of a vertical scroll bar, in<br />
+pixels; and height of the arrow<br />
+bitmap on a vertical scroll bar,<br />
+in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>4<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CYCAPTION: Height of a caption<br />
+area, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>18<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CYKANJIWINDOW: For double byte<br />
+character set versions of the<br />
+system, this is the height of the<br />
+Kanji window at the bottom of the<br />
+screen, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>15<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CYMENU: Height of a<br />
+single-line menu bar, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>51<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CYSMCAPTION: Height of a small<br />
+caption, in pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>9<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_CYVTHUMB: Height of the thumb<br />
+box in a vertical scroll bar, in<br />
+pixels.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>42<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_DBCSENABLED: Nonzero if<br />
+User32.dll supports DBCS; zero<br />
+otherwise.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>22<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_DEBUG: Nonzero if the debug<br />
+version of User.exe is installed;<br />
+zero otherwise.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>82<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_IMMENABLED: Nonzero if Input<br />
+Method Manager/Input Method<br />
+Editor features are enabled; zero<br />
+otherwise.<br />
+<br />
+SM_IMMENABLED indicates whether<br />
+the system is ready to use a<br />
+Unicode-based IME on a Unicode<br />
+application. To ensure that a<br />
+language-dependent IME works,<br />
+check SM_DBCSENABLED and the<br />
+system ANSI code page. Otherwise<br />
+the ANSI-to-Unicode conversion<br />
+may not be performed correctly,<br />
+or some components like fonts or<br />
+registry setting may not be<br />
+present.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>40<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_MENUDROPALIGNMENT: Nonzero if<br />
+drop-down menus are right-aligned<br />
+with the corresponding menu-bar<br />
+item; zero if the menus are<br />
+left-aligned.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>74<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_MIDEASTENABLED: Nonzero if the<br />
+system is enabled for Hebrew and<br />
+Arabic languages, zero if not.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>41<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_PENWINDOWS: Nonzero if the<br />
+Microsoft Windows for Pen<br />
+computing extensions are<br />
+installed; zero otherwise.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>44<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_SECURE: Nonzero if security is<br />
+present; zero otherwise.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>81<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>SM_SAMEDISPLAYFORMAT: Nonzero if<br />
+all the display monitors have the<br />
+same color format, zero<br />
+otherwise. Note that two displays<br />
+can have the same bit depth, but<br />
+different color formats. For<br />
+example, the red, green, and blue<br />
+pixels can be encoded with<br />
+different numbers of bits, or<br />
+those bits can be located in<br />
+different places in a pixel\'s<br />
+color value.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Remarks">Remarks</h2>
 <p>SysGet simply calls the
 <a href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getsystemmetrics">GetSystemMetrics</a>

@@ -215,75 +215,184 @@ exit or calls ExitApp.</p>
 the default values for settings such as <a href="SendMode.htm">SendMode</a>. These
 defaults can be changed during <a href="../Scripts.htm#auto">script startup</a>.</p>
 <h2 id="ExitReason">Exit Reasons</h2>
-<p>+-----------------------------------+-----------------------------------+
-| Reason                            | Description                       |
-+===================================+===================================+
-| Logoff                            | The user is logging off.          |
-+-----------------------------------+-----------------------------------+
-| Shutdown                          | The system is being shut down or  |
-|                                   | restarted, such as by the         |
-|                                   | <a href="Shutdown.htm">Shutdown</a>          |
-|                                   | function.                         |
-+-----------------------------------+-----------------------------------+
-| Close                             | The script was sent a WM_CLOSE or |
-|                                   | WM_QUIT message, had a critical   |
-|                                   | error, or is being closed in some |
-|                                   | other way. Although all of these  |
-|                                   | are unusual, WM_CLOSE might be    |
-|                                   | caused by                         |
-|                                   | <a href="WinClose.htm">WinClose</a> having   |
-|                                   | been used on the script\'s main   |
-|                                   | window. To close (hide) the       |
-|                                   | window without terminating the    |
-|                                   | script, use                       |
-|                                   | <a href="WinHide.htm">WinHide</a>.           |
-|                                   |                                   |
-|                                   | If the script is exiting due to a |
-|                                   | critical error or its <a href="../Program.htm#main-window">main       |
-|                                   | wi                                |
-|                                   | ndow</a> |
-|                                   | being destroyed, it will          |
-|                                   | unconditionally terminate after   |
-|                                   | the OnExit thread completes.      |
-|                                   |                                   |
-|                                   | If the main window is being       |
-|                                   | destroyed, it may still exist but |
-|                                   | cannot be displayed. This         |
-|                                   | condition can be detected by      |
-|                                   | monitoring the WM_DESTROY message |
-|                                   | with <a href="OnMessage.htm">OnMessage</a>.  |
-+-----------------------------------+-----------------------------------+
-| Error                             | A runtime error occurred in a     |
-|                                   | script that is not                |
-|                                   | <a href="../Scripts.htm#persistent">persis                           |
-|                                   | tent</a>. |
-|                                   | An example of a runtime error is  |
-|                                   | <a href="Run.htm">Run/RunWait</a> being      |
-|                                   | unable to launch the specified    |
-|                                   | program or document.              |
-+-----------------------------------+-----------------------------------+
-| Menu                              | The user selected Exit from the   |
-|                                   | <a href="../Program.htm#main-window">main                             |
-|                                   | windo                             |
-|                                   | w</a>\'s |
-|                                   | menu or from the <a href="../Program.htm#tray-icon">standard tray   |
-|                                   | menu</a>.  |
-+-----------------------------------+-----------------------------------+
-| Exit                              | <a href="Exit.htm">Exit</a> or               |
-|                                   | <a href="ExitApp.htm">ExitApp</a> was used   |
-|                                   | (includes <a href="Menu.htm">custom menu            |
-|                                   | items</a>).                |
-+-----------------------------------+-----------------------------------+
-| Reload                            | The script is being reloaded via  |
-|                                   | the <a href="Reload.htm">Reload</a> function |
-|                                   | or menu item.                     |
-+-----------------------------------+-----------------------------------+
-| Single                            | The script is being replaced by a |
-|                                   | new instance of itself as a       |
-|                                   | result of                         |
-|                                   | <a href="_SingleInstance.htm">#Sing                            |
-|                                   | leInstance</a>. |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Reason</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Logoff</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The user is logging off.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Shutdown<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The system is being shut down or<br />
+restarted, such as by the<br />
+<a href="Shutdown.htm">Shutdown</a><br />
+function.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Close<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The script was sent a WM_CLOSE or<br />
+WM_QUIT message, had a critical<br />
+error, or is being closed in some<br />
+other way. Although all of these<br />
+are unusual, WM_CLOSE might be<br />
+caused by<br />
+<a href="WinClose.htm">WinClose</a> having<br />
+been used on the script\'s main<br />
+window. To close (hide) the<br />
+window without terminating the<br />
+script, use<br />
+<a href="WinHide.htm">WinHide</a>.<br />
+<br />
+If the script is exiting due to a<br />
+critical error or its <a href="../Program.htm#main-window">main<br />
+wi<br />
+ndow</a><br />
+being destroyed, it will<br />
+unconditionally terminate after<br />
+the OnExit thread completes.<br />
+<br />
+If the main window is being<br />
+destroyed, it may still exist but<br />
+cannot be displayed. This<br />
+condition can be detected by<br />
+monitoring the WM_DESTROY message<br />
+with <a href="OnMessage.htm">OnMessage</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Error<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>A runtime error occurred in a<br />
+script that is not<br />
+<a href="../Scripts.htm#persistent">persis<br />
+tent</a>.<br />
+An example of a runtime error is<br />
+<a href="Run.htm">Run/RunWait</a> being<br />
+unable to launch the specified<br />
+program or document.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Menu<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The user selected Exit from the<br />
+<a href="../Program.htm#main-window">main<br />
+windo<br />
+w</a>\'s<br />
+menu or from the <a href="../Program.htm#tray-icon">standard tray<br />
+menu</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Exit<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p><a href="Exit.htm">Exit</a> or<br />
+<a href="ExitApp.htm">ExitApp</a> was used<br />
+(includes <a href="Menu.htm">custom menu<br />
+items</a>).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Reload<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The script is being reloaded via<br />
+the <a href="Reload.htm">Reload</a> function<br />
+or menu item.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>Single<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The script is being replaced by a<br />
+new instance of itself as a<br />
+result of<br />
+<a href="_SingleInstance.htm">#Sing<br />
+leInstance</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Related">Related</h2>
 <p><a href="OnError.htm">OnError</a>, <a href="OnMessage.htm">OnMessage</a>,
 <a href="CallbackCreate.htm">CallbackCreate</a>,

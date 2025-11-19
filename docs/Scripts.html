@@ -693,163 +693,527 @@ of the base file selected by the user for the compile.</p>
 </code></pre>
 
 <p><strong>Switches:</strong> Zero or more of the following:</p>
-<p>+-----------------------+-----------------------+-----------------------+
-| Switch                | Meaning               | Works compiled?       |
-+=======================+=======================+=======================+
-| /force                | Launch                | Yes                   |
-|                       | unconditionally,      |                       |
-|                       | skipping any warning  |                       |
-|                       | dialogs. This has the |                       |
-|                       | same effect as        |                       |
-|                       | <a href="lib/             |                       |
-|                       | _SingleInstance.htm">#SingleInstance      |                       |
-|                       | Off</a>. |                       |
-+-----------------------+-----------------------+-----------------------+
-| /restart              | Indicate that the     | Yes                   |
-|                       | script is being       |                       |
-|                       | restarted and should  |                       |
-|                       | attempt to close a    |                       |
-|                       | previous instance of  |                       |
-|                       | the script (this is   |                       |
-|                       | also used by the      |                       |
-|                       | <a href="lib/Reload.htm">Re                   |                       |
-|                       | load</a> |                       |
-|                       | function,             |                       |
-|                       | internally).          |                       |
-+-----------------------+-----------------------+-----------------------+
-| /ErrorStdOut\         | Send syntax errors    | No                    |
-| \                     | that prevent a script |                       |
-| /E                    | from launching to the |                       |
-| rrorStdOut=<em>Encoding</em> | standard error stream |                       |
-|                       | (stderr) rather than  |                       |
-|                       | displaying a dialog.  |                       |
-|                       | See                   |                       |
-|                       | <a href="|                       |
-|                       | lib/_ErrorStdOut.htm">#ErrorStdOut</a> |                       |
-|                       | for details.          |                       |
-|                       |                       |                       |
-|                       | An                    |                       |
-|                       | <a href="|                       |
-|                       | lib/FileEncoding.htm">encoding</a> |                       |
-|                       | can optionally be     |                       |
-|                       | specified. For        |                       |
-|                       | example,              |                       |
-|                       | <code class="no-highlight">/ErrorStdOut=        |                       |
-|                       | UTF-8</code> |                       |
-|                       | encodes messages as   |                       |
-|                       | UTF-8 before writing  |                       |
-|                       | them to stderr.       |                       |
-+-----------------------+-----------------------+-----------------------+
-| /Debug                | Connect to a          | No                    |
-|                       | debugging client. For |                       |
-|                       | more details, see     |                       |
-|                       | <a href="#idebug">Interactive          |                       |
-|                       | Debugging</a>.  |                       |
-+-----------------------+-----------------------+-----------------------+
-| /CP<em>n</em>                | Overrides the default | No                    |
-|                       | codepage used to read |                       |
-|                       | script files. For     |                       |
-|                       | more details, see     |                       |
-|                       | <a href="#cp">Script File          |                       |
-|                       | Codepage</a>.       |                       |
-+-----------------------+-----------------------+-----------------------+
-| /Validate             | AutoHotkey loads the  | No                    |
-|                       | script and then exits |                       |
-|                       | instead of running    |                       |
-|                       | it.                   |                       |
-|                       |                       |                       |
-|                       | By default, load-time |                       |
-|                       | errors and warnings   |                       |
-|                       | are displayed as      |                       |
-|                       | usual. The            |                       |
-|                       | <a href="#ErrorStdOut">/Error               |                       |
-|                       | StdOut</a> |                       |
-|                       | switch can be used to |                       |
-|                       | suppress or capture   |                       |
-|                       | any error messages.   |                       |
-|                       |                       |                       |
-|                       | The process exit code |                       |
-|                       | is zero if the script |                       |
-|                       | successfully loaded,  |                       |
-|                       | or non-zero if there  |                       |
-|                       | was an error.         |                       |
-+-----------------------+-----------------------+-----------------------+
-| /iLib <em>\"OutFile\"</em>   | <strong>Deprecated:</strong>       | No                    |
-|                       | Equivalent to         |                       |
-|                       | <a href="#validate">/                    |                       |
-|                       | validate</a>; |                       |
-|                       | use that instead.     |                       |
-|                       |                       |                       |
-|                       | <em>\"OutFile\"</em> must be |                       |
-|                       | specified but is      |                       |
-|                       | ignored. In previous  |                       |
-|                       | versions of           |                       |
-|                       | AutoHotkey, filenames |                       |
-|                       | of auto-included      |                       |
-|                       | files were written to |                       |
-|                       | the file specified by |                       |
-|                       | <em>OutFile</em>, formatted  |                       |
-|                       | as #Include           |                       |
-|                       | directives.           |                       |
-+-----------------------+-----------------------+-----------------------+
-| /include              | <a href="lib/_Include.htm">Includ               | No                    |
-| <em>\"IncFile\"</em>         | es</a> |                       |
-|                       | a file prior to the   |                       |
-|                       | main script. Only a   |                       |
-|                       | single file can be    |                       |
-|                       | included by this      |                       |
-|                       | method. When the      |                       |
-|                       | script is             |                       |
-|                       | <a href="lib/Reload.htm">reloa                |                       |
-|                       | ded</a>, |                       |
-|                       | this switch is        |                       |
-|                       | automatically passed  |                       |
-|                       | to the new instance.  |                       |
-+-----------------------+-----------------------+-----------------------+
-| /script               | When used with a      | N/A                   |
-|                       | compiled script based |                       |
-|                       | on an .exe file, this |                       |
-|                       | switch causes the     |                       |
-|                       | program to ignore the |                       |
-|                       | main embedded script. |                       |
-|                       | This allows a         |                       |
-|                       | compiled script .exe  |                       |
-|                       | to execute external   |                       |
-|                       | script files or       |                       |
-|                       | embedded scripts      |                       |
-|                       | other than the main   |                       |
-|                       | one. Other switches   |                       |
-|                       | not normally          |                       |
-|                       | supported by compiled |                       |
-|                       | scripts can be used   |                       |
-|                       | but must be listed to |                       |
-|                       | the right of this     |                       |
-|                       | switch. For example:  |                       |
-|                       |                       |                       |
-|                       | <code>no-highlight      |                       |
-|                       | Compil                |                       |
-|                       | edScript.exe /script  |                       |
-|                       | /ErrorStdOut MyScript |                       |
-|                       | .ahk "Script's arg 1" |                       |
-|                       |</code>                   |                       |
-|                       |                       |                       |
-|                       | If the current        |                       |
-|                       | executable file does  |                       |
-|                       | not have an embedded  |                       |
-|                       | script, this switch   |                       |
-|                       | is permitted but has  |                       |
-|                       | no effect.            |                       |
-|                       |                       |                       |
-|                       | This switch is not    |                       |
-|                       | supported by compiled |                       |
-|                       | scripts which are     |                       |
-|                       | based on a .bin file. |                       |
-|                       |                       |                       |
-|                       | See also: <a href="#ahk2exe-base">Base       |                       |
-|                       | Executable File       |                       |
-|                       | (Ahk                  |                       |
-|                       | 2Exe)</a> |                       |
-+-----------------------+-----------------------+-----------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Switch</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Meaning</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Works compiled?</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/force<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Launch<br />
+unconditionally,<br />
+skipping any warning<br />
+dialogs. This has the<br />
+same effect as<br />
+<a href="lib/  
+_SingleInstance.htm">#SingleInstance<br />
+Off</a>.</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Yes<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/restart<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Indicate that the<br />
+script is being<br />
+restarted and should<br />
+attempt to close a<br />
+previous instance of<br />
+the script (this is<br />
+also used by the<br />
+<a href="lib/Reload.htm">Re<br />
+load</a><br />
+function,<br />
+internally).</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Yes<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/ErrorStdOut\<br />
+\<br />
+/E<br />
+rrorStdOut=<em>Encoding</em><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Send syntax errors<br />
+that prevent a script<br />
+from launching to the<br />
+standard error stream<br />
+(stderr) rather than<br />
+displaying a dialog.<br />
+See<br />
+<a href="lib/_ErrorStdOut.htm">#ErrorStdOut</a><br />
+for details.<br />
+<br />
+An<br />
+<a href="lib/FileEncoding.htm">encoding</a><br />
+can optionally be<br />
+specified. For<br />
+example,<br />
+<code class="no-highlight">/ErrorStdOut=  
+UTF-8</code><br />
+encodes messages as<br />
+UTF-8 before writing<br />
+them to stderr.</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>No<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/Debug<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Connect to a<br />
+debugging client. For<br />
+more details, see<br />
+<a href="#idebug">Interactive<br />
+Debugging</a>.</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>No<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/CP<em>n</em><br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Overrides the default<br />
+codepage used to read<br />
+script files. For<br />
+more details, see<br />
+<a href="#cp">Script File<br />
+Codepage</a>.</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>No<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/Validate<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>AutoHotkey loads the<br />
+script and then exits<br />
+instead of running<br />
+it.<br />
+<br />
+By default, load-time<br />
+errors and warnings<br />
+are displayed as<br />
+usual. The<br />
+<a href="#ErrorStdOut">/Error<br />
+StdOut</a><br />
+switch can be used to<br />
+suppress or capture<br />
+any error messages.<br />
+<br />
+The process exit code<br />
+is zero if the script<br />
+successfully loaded,<br />
+or non-zero if there<br />
+was an error.</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>No<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/iLib <em>\"OutFile\"</em><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p><strong>Deprecated:</strong><br />
+Equivalent to<br />
+<a href="#validate">/<br />
+validate</a>;<br />
+use that instead.<br />
+<br />
+<em>\"OutFile\"</em> must be<br />
+specified but is<br />
+ignored. In previous<br />
+versions of<br />
+AutoHotkey, filenames<br />
+of auto-included<br />
+files were written to<br />
+the file specified by<br />
+<em>OutFile</em>, formatted<br />
+as #Include<br />
+directives.</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>No<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/include<br />
+<em>\"IncFile\"</em><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p><a href="lib/_Include.htm">Includ<br />
+es</a><br />
+a file prior to the<br />
+main script. Only a<br />
+single file can be<br />
+included by this<br />
+method. When the<br />
+script is<br />
+<a href="lib/Reload.htm">reloa<br />
+ded</a>,<br />
+this switch is<br />
+automatically passed<br />
+to the new instance.</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>No<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>/script<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>When used with a<br />
+compiled script based<br />
+on an .exe file, this<br />
+switch causes the<br />
+program to ignore the<br />
+main embedded script.<br />
+This allows a<br />
+compiled script .exe<br />
+to execute external<br />
+script files or<br />
+embedded scripts<br />
+other than the main<br />
+one. Other switches<br />
+not normally<br />
+supported by compiled<br />
+scripts can be used<br />
+but must be listed to<br />
+the right of this<br />
+switch. For example:<br />
+<br />
+<code>no-highlight  
+Compil  
+edScript.exe /script  
+/ErrorStdOut MyScript  
+.ahk "Script's arg 1"</code><br />
+<br />
+If the current<br />
+executable file does<br />
+not have an embedded<br />
+script, this switch<br />
+is permitted but has<br />
+no effect.<br />
+<br />
+This switch is not<br />
+supported by compiled<br />
+scripts which are<br />
+based on a .bin file.<br />
+<br />
+See also: <a href="#ahk2exe-base">Base<br />
+Executable File<br />
+(Ahk<br />
+2Exe)</a></p>
+</td>
+<td colspan="1" rowspan="1">
+<p>N/A<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Script Filename:</strong> This can be omitted if there are no <em>Script
 Parameters</em>. If omitted, it defaults to the path and name of the
 <a href="Variables.htm#AhkPath">AutoHotkey executable</a>, replacing \".exe\" with

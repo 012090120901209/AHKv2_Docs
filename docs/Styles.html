@@ -382,261 +382,869 @@ methods/properties. Some extended styles introduced in Windows XP or
 later versions are not listed here. For a full list, see <a href="https://learn.microsoft.com/windows/win32/controls/extended-list-view-styles">Microsoft
 Docs: Extended List-View
 Styles</a>.</p>
-<p>+-----------------------+-----------------------+-----------------------+
-| Extended Style        | Hex                   | Description           |
-+=======================+=======================+=======================+
-| LVS_EX_BORDERSELECT   | LV0x8000              | When an item is       |
-|                       |                       | selected, the border  |
-|                       |                       | color of the item     |
-|                       |                       | changes rather than   |
-|                       |                       | the item being        |
-|                       |                       | highlighted (might be |
-|                       |                       | non-functional in     |
-|                       |                       | recent operating      |
-|                       |                       | systems).             |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_CHECKBOXES     | LV0x4                 | +/-Checked. Displays  |
-|                       |                       | a checkbox with each  |
-|                       |                       | item. When set to     |
-|                       |                       | this style, the       |
-|                       |                       | control creates and   |
-|                       |                       | sets a state image    |
-|                       |                       | list with two images  |
-|                       |                       | using                 |
-|                       |                       | DrawFrameControl.     |
-|                       |                       | State image 1 is the  |
-|                       |                       | unchecked box, and    |
-|                       |                       | state image 2 is the  |
-|                       |                       | checked box. Setting  |
-|                       |                       | the state image to    |
-|                       |                       | zero removes the      |
-|                       |                       | check box altogether. |
-|                       |                       |                       |
-|                       |                       | Checkboxes are        |
-|                       |                       | visible and           |
-|                       |                       | functional with all   |
-|                       |                       | list-view modes       |
-|                       |                       | except the tile view  |
-|                       |                       | mode. Clicking a      |
-|                       |                       | checkbox in tile view |
-|                       |                       | mode only selects the |
-|                       |                       | item; the state does  |
-|                       |                       | not change.           |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_DOUBLEBUFFER   | LV0x10000             | Paints via            |
-|                       |                       | double-buffering,     |
-|                       |                       | which reduces         |
-|                       |                       | flicker. This         |
-|                       |                       | extended style also   |
-|                       |                       | enables alpha-blended |
-|                       |                       | marquee selection on  |
-|                       |                       | systems where it is   |
-|                       |                       | supported.            |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_FLATSB         | LV0x100               | Enables flat scroll   |
-|                       |                       | bars in the list      |
-|                       |                       | view.                 |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_FULLROWSELECT  | LV0x20                | When a row is         |
-|                       |                       | selected, all its     |
-|                       |                       | fields are            |
-|                       |                       | highlighted. This     |
-|                       |                       | style is available    |
-|                       |                       | only in conjunction   |
-|                       |                       | with the              |
-|                       |                       | <a href="#LVS_REPORT">LVS                  |
-|                       |                       | _REPORT</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_GRIDLINES      | LV0x1                 | +/-Grid. Displays     |
-|                       |                       | gridlines around rows |
-|                       |                       | and columns. This     |
-|                       |                       | style is available    |
-|                       |                       | only in conjunction   |
-|                       |                       | with the              |
-|                       |                       | <a href="#LVS_REPORT">LVS                  |
-|                       |                       | _REPORT</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_HEADERDRAGDROP | LV0x10                | Enables drag-and-drop |
-|                       |                       | reordering of columns |
-|                       |                       | in a list-view        |
-|                       |                       | control. This style   |
-|                       |                       | is only available to  |
-|                       |                       | list-view controls    |
-|                       |                       | that use the          |
-|                       |                       | <a href="#LVS_REPORT">LVS                  |
-|                       |                       | _REPORT</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_INFOTIP        | LV0x400               | When a list-view      |
-|                       |                       | control uses this     |
-|                       |                       | style, the            |
-|                       |                       | LVN_GETINFOTIP        |
-|                       |                       | notification message  |
-|                       |                       | is sent to the parent |
-|                       |                       | window before         |
-|                       |                       | displaying an item\'s |
-|                       |                       | ToolTip.              |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_LABELTIP       | LV0x4000              | If a partially hidden |
-|                       |                       | label in any          |
-|                       |                       | list-view mode lacks  |
-|                       |                       | ToolTip text, the     |
-|                       |                       | list-view control     |
-|                       |                       | will unfold the       |
-|                       |                       | label. If this style  |
-|                       |                       | is not set, the       |
-|                       |                       | list-view control     |
-|                       |                       | will unfold partly    |
-|                       |                       | hidden labels only    |
-|                       |                       | for the large icon    |
-|                       |                       | mode. Note: On some   |
-|                       |                       | versions of Windows,  |
-|                       |                       | this style might not  |
-|                       |                       | work properly if the  |
-|                       |                       | GUI window is set to  |
-|                       |                       | be always-on-top.     |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_MULTIWORKAREAS | LV0x2000              | If the list-view      |
-|                       |                       | control has the       |
-|                       |                       | <a href="#LVS_AUTOARRANGE">LVS_AUTOARRAN        |
-|                       |                       | GE</a> |
-|                       |                       | style, the control    |
-|                       |                       | will not autoarrange  |
-|                       |                       | its icons until one   |
-|                       |                       | or more work areas    |
-|                       |                       | are defined (see      |
-|                       |                       | LVM_SETWORKAREAS). To |
-|                       |                       | be effective, this    |
-|                       |                       | style must be set     |
-|                       |                       | before any work areas |
-|                       |                       | are defined and any   |
-|                       |                       | items have been added |
-|                       |                       | to the control.       |
-+-----------------------+-----------------------+-----------------------+
-| LV                    | LV0x40                | The list-view control |
-| S_EX_ONECLICKACTIVATE |                       | sends an              |
-|                       |                       | LVN_ITEMACTIVATE      |
-|                       |                       | notification message  |
-|                       |                       | to the parent window  |
-|                       |                       | when the user clicks  |
-|                       |                       | an item. This style   |
-|                       |                       | also enables hot      |
-|                       |                       | tracking in the       |
-|                       |                       | list-view control.    |
-|                       |                       | Hot tracking means    |
-|                       |                       | that when the cursor  |
-|                       |                       | moves over an item,   |
-|                       |                       | it is highlighted but |
-|                       |                       | not selected.         |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_REGIONAL       | LV0x200               | Sets the list-view    |
-|                       |                       | window region to      |
-|                       |                       | include only the item |
-|                       |                       | icons and text using  |
-|                       |                       | SetWindowRgn. Any     |
-|                       |                       | area that is not part |
-|                       |                       | of an item is         |
-|                       |                       | excluded from the     |
-|                       |                       | window region. This   |
-|                       |                       | style is only         |
-|                       |                       | available to          |
-|                       |                       | list-view controls    |
-|                       |                       | that use the          |
-|                       |                       | <a href="#LVS_ICON">LVS_ICON</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_SIMPLESELECT   | LV0x100000            | In icon view, moves   |
-|                       |                       | the state image of    |
-|                       |                       | the item to the top   |
-|                       |                       | right of the large    |
-|                       |                       | icon rendering. In    |
-|                       |                       | views other than icon |
-|                       |                       | view there is no      |
-|                       |                       | change. When the user |
-|                       |                       | changes the state by  |
-|                       |                       | using the space bar,  |
-|                       |                       | all selected items    |
-|                       |                       | cycle over, not the   |
-|                       |                       | item with the focus.  |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_SUBITEMIMAGES  | LV0x2                 | Allows images to be   |
-|                       |                       | displayed for fields  |
-|                       |                       | beyond the first.     |
-|                       |                       | This style is         |
-|                       |                       | available only in     |
-|                       |                       | conjunction with the  |
-|                       |                       | <a href="#LVS_REPORT">LVS                  |
-|                       |                       | _REPORT</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_TRACKSELECT    | LV0x8                 | Enables hot-track     |
-|                       |                       | selection in a        |
-|                       |                       | list-view control.    |
-|                       |                       | Hot track selection   |
-|                       |                       | means that an item is |
-|                       |                       | automatically         |
-|                       |                       | selected when the     |
-|                       |                       | cursor remains over   |
-|                       |                       | the item for a        |
-|                       |                       | certain period of     |
-|                       |                       | time. The delay can   |
-|                       |                       | be changed from the   |
-|                       |                       | default system        |
-|                       |                       | setting with a        |
-|                       |                       | LVM_SETHOVERTIME      |
-|                       |                       | message. This style   |
-|                       |                       | applies to all styles |
-|                       |                       | of list-view control. |
-|                       |                       | You can check whether |
-|                       |                       | hot-track selection   |
-|                       |                       | is enabled by calling |
-|                       |                       | SystemParametersInfo. |
-+-----------------------+-----------------------+-----------------------+
-| LV                    | LV0x80                | The list-view control |
-| S_EX_TWOCLICKACTIVATE |                       | sends an              |
-|                       |                       | LVN_ITEMACTIVATE      |
-|                       |                       | notification message  |
-|                       |                       | to the parent window  |
-|                       |                       | when the user         |
-|                       |                       | double-clicks an      |
-|                       |                       | item. This style also |
-|                       |                       | enables hot tracking  |
-|                       |                       | in the list-view      |
-|                       |                       | control. Hot tracking |
-|                       |                       | means that when the   |
-|                       |                       | cursor moves over an  |
-|                       |                       | item, it is           |
-|                       |                       | highlighted but not   |
-|                       |                       | selected.             |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_UNDERLINECOLD  | LV0x1000              | Causes those non-hot  |
-|                       |                       | items that may be     |
-|                       |                       | activated to be       |
-|                       |                       | displayed with        |
-|                       |                       | underlined text. This |
-|                       |                       | style requires that   |
-|                       |                       | <a href="#LVS |
-|                       |                       | _EX_TWOCLICKACTIVATE">LVS_EX_T             |
-|                       |                       | WOCLICKACTIVATE</a> |
-|                       |                       | be set also.          |
-+-----------------------+-----------------------+-----------------------+
-| LVS_EX_UNDERLINEHOT   | LV0x800               | Causes those hot      |
-|                       |                       | items that may be     |
-|                       |                       | activated to be       |
-|                       |                       | displayed with        |
-|                       |                       | underlined text. This |
-|                       |                       | style requires that   |
-|                       |                       | <a href="#LVS |
-|                       |                       | _EX_ONECLICKACTIVATE">LVS_EX_O             |
-|                       |                       | NECLICKACTIVATE</a> |
-|                       |                       | or                    |
-|                       |                       | <a href="#LVS |
-|                       |                       | _EX_TWOCLICKACTIVATE">LVS_EX_T             |
-|                       |                       | WOCLICKACTIVATE</a> |
-|                       |                       | also be set.          |
-+-----------------------+-----------------------+-----------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Extended Style</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Hex</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_BORDERSELECT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x8000<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>When an item is<br />
+selected, the border<br />
+color of the item<br />
+changes rather than<br />
+the item being<br />
+highlighted (might be<br />
+non-functional in<br />
+recent operating<br />
+systems).</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_CHECKBOXES<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x4<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Checked. Displays<br />
+a checkbox with each<br />
+item. When set to<br />
+this style, the<br />
+control creates and<br />
+sets a state image<br />
+list with two images<br />
+using<br />
+DrawFrameControl.<br />
+State image 1 is the<br />
+unchecked box, and<br />
+state image 2 is the<br />
+checked box. Setting<br />
+the state image to<br />
+zero removes the<br />
+check box altogether.<br />
+<br />
+Checkboxes are<br />
+visible and<br />
+functional with all<br />
+list-view modes<br />
+except the tile view<br />
+mode. Clicking a<br />
+checkbox in tile view<br />
+mode only selects the<br />
+item; the state does<br />
+not change.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_DOUBLEBUFFER<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x10000<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Paints via<br />
+double-buffering,<br />
+which reduces<br />
+flicker. This<br />
+extended style also<br />
+enables alpha-blended<br />
+marquee selection on<br />
+systems where it is<br />
+supported.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_FLATSB<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x100<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Enables flat scroll<br />
+bars in the list<br />
+view.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_FULLROWSELECT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x20<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>When a row is<br />
+selected, all its<br />
+fields are<br />
+highlighted. This<br />
+style is available<br />
+only in conjunction<br />
+with the<br />
+<a href="#LVS_REPORT">LVS<br />
+_REPORT</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_GRIDLINES<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x1<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Grid. Displays<br />
+gridlines around rows<br />
+and columns. This<br />
+style is available<br />
+only in conjunction<br />
+with the<br />
+<a href="#LVS_REPORT">LVS<br />
+_REPORT</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_HEADERDRAGDROP<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x10<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Enables drag-and-drop<br />
+reordering of columns<br />
+in a list-view<br />
+control. This style<br />
+is only available to<br />
+list-view controls<br />
+that use the<br />
+<a href="#LVS_REPORT">LVS<br />
+_REPORT</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_INFOTIP<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x400<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>When a list-view<br />
+control uses this<br />
+style, the<br />
+LVN_GETINFOTIP<br />
+notification message<br />
+is sent to the parent<br />
+window before<br />
+displaying an item\'s<br />
+ToolTip.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_LABELTIP<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x4000<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>If a partially hidden<br />
+label in any<br />
+list-view mode lacks<br />
+ToolTip text, the<br />
+list-view control<br />
+will unfold the<br />
+label. If this style<br />
+is not set, the<br />
+list-view control<br />
+will unfold partly<br />
+hidden labels only<br />
+for the large icon<br />
+mode. Note: On some<br />
+versions of Windows,<br />
+this style might not<br />
+work properly if the<br />
+GUI window is set to<br />
+be always-on-top.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_MULTIWORKAREAS<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x2000<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>If the list-view<br />
+control has the<br />
+<a href="#LVS_AUTOARRANGE">LVS_AUTOARRAN<br />
+GE</a><br />
+style, the control<br />
+will not autoarrange<br />
+its icons until one<br />
+or more work areas<br />
+are defined (see<br />
+LVM_SETWORKAREAS). To<br />
+be effective, this<br />
+style must be set<br />
+before any work areas<br />
+are defined and any<br />
+items have been added<br />
+to the control.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LV<br />
+S_EX_ONECLICKACTIVATE<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x40<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The list-view control<br />
+sends an<br />
+LVN_ITEMACTIVATE<br />
+notification message<br />
+to the parent window<br />
+when the user clicks<br />
+an item. This style<br />
+also enables hot<br />
+tracking in the<br />
+list-view control.<br />
+Hot tracking means<br />
+that when the cursor<br />
+moves over an item,<br />
+it is highlighted but<br />
+not selected.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_REGIONAL<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x200<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Sets the list-view<br />
+window region to<br />
+include only the item<br />
+icons and text using<br />
+SetWindowRgn. Any<br />
+area that is not part<br />
+of an item is<br />
+excluded from the<br />
+window region. This<br />
+style is only<br />
+available to<br />
+list-view controls<br />
+that use the<br />
+<a href="#LVS_ICON">LVS_ICON</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_SIMPLESELECT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x100000<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>In icon view, moves<br />
+the state image of<br />
+the item to the top<br />
+right of the large<br />
+icon rendering. In<br />
+views other than icon<br />
+view there is no<br />
+change. When the user<br />
+changes the state by<br />
+using the space bar,<br />
+all selected items<br />
+cycle over, not the<br />
+item with the focus.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_SUBITEMIMAGES<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x2<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Allows images to be<br />
+displayed for fields<br />
+beyond the first.<br />
+This style is<br />
+available only in<br />
+conjunction with the<br />
+<a href="#LVS_REPORT">LVS<br />
+_REPORT</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_TRACKSELECT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x8<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Enables hot-track<br />
+selection in a<br />
+list-view control.<br />
+Hot track selection<br />
+means that an item is<br />
+automatically<br />
+selected when the<br />
+cursor remains over<br />
+the item for a<br />
+certain period of<br />
+time. The delay can<br />
+be changed from the<br />
+default system<br />
+setting with a<br />
+LVM_SETHOVERTIME<br />
+message. This style<br />
+applies to all styles<br />
+of list-view control.<br />
+You can check whether<br />
+hot-track selection<br />
+is enabled by calling<br />
+SystemParametersInfo.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LV<br />
+S_EX_TWOCLICKACTIVATE<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x80<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The list-view control<br />
+sends an<br />
+LVN_ITEMACTIVATE<br />
+notification message<br />
+to the parent window<br />
+when the user<br />
+double-clicks an<br />
+item. This style also<br />
+enables hot tracking<br />
+in the list-view<br />
+control. Hot tracking<br />
+means that when the<br />
+cursor moves over an<br />
+item, it is<br />
+highlighted but not<br />
+selected.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_UNDERLINECOLD<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x1000<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Causes those non-hot<br />
+items that may be<br />
+activated to be<br />
+displayed with<br />
+underlined text. This<br />
+style requires that<br />
+<a href="#LVS  
+_EX_TWOCLICKACTIVATE">LVS_EX_T<br />
+WOCLICKACTIVATE</a><br />
+be set also.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>LVS_EX_UNDERLINEHOT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>LV0x800<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Causes those hot<br />
+items that may be<br />
+activated to be<br />
+displayed with<br />
+underlined text. This<br />
+style requires that<br />
+<a href="#LVS  
+_EX_ONECLICKACTIVATE">LVS_EX_O<br />
+NECLICKACTIVATE</a><br />
+or<br />
+<a href="#LVS  
+_EX_TWOCLICKACTIVATE">LVS_EX_T<br />
+WOCLICKACTIVATE</a><br />
+also be set.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="TreeView">TreeView Control Styles</h2>
 <p>These styles affect the <a href="../lib/TreeView.htm">TreeView</a> control. By
 default, it uses <a href="#WS_TABSTOP">WS_TABSTOP</a>,
@@ -680,235 +1288,805 @@ control. By default, it uses
 <p>These styles affect the <a href="../lib/GuiControls.htm#MonthCal">MonthCal</a>
 control. By default, it uses <a href="#WS_TABSTOP">WS_TABSTOP</a>. It has no forced
 styles.</p>
-<p>+-----------------------+-----------------------+-----------------------+
-| Style                 | Hex                   | Description           |
-+=======================+=======================+=======================+
-| MCS_DAYSTATE          | 0x1                   | Makes the control     |
-|                       |                       | send MCN_GETDAYSTATE  |
-|                       |                       | notifications to      |
-|                       |                       | request information   |
-|                       |                       | about which days      |
-|                       |                       | should be displayed   |
-|                       |                       | in bold. [Not yet    |
-|                       |                       | supported]           |
-+-----------------------+-----------------------+-----------------------+
-| MCS_MULTISELECT       | 0x2                   | Named option          |
-|                       |                       | \"Multi\". Allows the |
-|                       |                       | user to select a      |
-|                       |                       | range of dates rather |
-|                       |                       | than being limited to |
-|                       |                       | a single date. By     |
-|                       |                       | default, the maximum  |
-|                       |                       | range is 366 days,    |
-|                       |                       | which can be changed  |
-|                       |                       | by sending the        |
-|                       |                       | MCM_SETMAXSELCOUNT    |
-|                       |                       | message to the        |
-|                       |                       | control. For example: |
-|                       |                       |                       |
-|                       |                       |     SendM             |
-|                       |                       | essage 0x1004, 7, 0,  |
-|                       |                       | "SysMonthCal321", MyG |
-|                       |                       | ui ; 7 days. 0x1004 i |
-|                       |                       | s MCM_SETMAXSELCOUNT. |
-+-----------------------+-----------------------+-----------------------+
-| MCS_WEEKNUMBERS       | 0x4                   | Displays week numbers |
-|                       |                       | (1-52) to the left of |
-|                       |                       | each row of days.     |
-|                       |                       | Week 1 is defined as  |
-|                       |                       | the first week that   |
-|                       |                       | contains at least     |
-|                       |                       | four days.            |
-+-----------------------+-----------------------+-----------------------+
-| MCS_NOTODAYCIRCLE     | 0x8                   | Prevents the circling |
-|                       |                       | of today\'s date      |
-|                       |                       | within the control.   |
-+-----------------------+-----------------------+-----------------------+
-| MCS_NOTODAY           | 0x10                  | Prevents the display  |
-|                       |                       | of today\'s date at   |
-|                       |                       | the bottom of the     |
-|                       |                       | control.              |
-+-----------------------+-----------------------+-----------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Style</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Hex</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>MCS_DAYSTATE<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x1<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Makes the control<br />
+send MCN_GETDAYSTATE<br />
+notifications to<br />
+request information<br />
+about which days<br />
+should be displayed<br />
+in bold. [Not yet<br />
+supported]</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>MCS_MULTISELECT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x2<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Named option<br />
+\"Multi\". Allows the<br />
+user to select a<br />
+range of dates rather<br />
+than being limited to<br />
+a single date. By<br />
+default, the maximum<br />
+range is 366 days,<br />
+which can be changed<br />
+by sending the<br />
+MCM_SETMAXSELCOUNT<br />
+message to the<br />
+control. For example:<br />
+<br />
+    SendM<br />
+essage 0x1004, 7, 0,<br />
+"SysMonthCal321", MyG<br />
+ui ; 7 days. 0x1004 i<br />
+s MCM_SETMAXSELCOUNT.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>MCS_WEEKNUMBERS<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x4<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Displays week numbers<br />
+(1-52) to the left of<br />
+each row of days.<br />
+Week 1 is defined as<br />
+the first week that<br />
+contains at least<br />
+four days.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>MCS_NOTODAYCIRCLE<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x8<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Prevents the circling<br />
+of today\'s date<br />
+within the control.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>MCS_NOTODAY<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x10<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Prevents the display<br />
+of today\'s date at<br />
+the bottom of the<br />
+control.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Slider">Slider Control Styles</h2>
 <p>These styles affect the <a href="../lib/GuiControls.htm#Slider">Slider</a> control.
 By default, it uses <a href="#WS_TABSTOP">WS_TABSTOP</a>. It has no forced styles.</p>
-<p>+-----------------------+-----------------------+-----------------------+
-| Style                 | Hex                   | Description           |
-+=======================+=======================+=======================+
-| TBS_VERT              | 0x2                   | +/-Vertical. The      |
-|                       |                       | control is oriented   |
-|                       |                       | vertically.           |
-+-----------------------+-----------------------+-----------------------+
-| TBS_LEFT              | 0x4                   | +/-Left. The control  |
-|                       |                       | displays tick marks   |
-|                       |                       | at the top of the     |
-|                       |                       | control (or to its    |
-|                       |                       | left if               |
-|                       |                       | <a href="#TBS_VERT">TBS_VERT</a> |
-|                       |                       | is present). Same as  |
-|                       |                       | <a href="#TBS_TOP">TBS_TOP</a>.  |
-+-----------------------+-----------------------+-----------------------+
-| TBS_TOP               | 0x4                   | same as               |
-|                       |                       | <a href="#TBS_LEFT">                     |
-|                       |                       | TBS_LEFT</a>. |
-+-----------------------+-----------------------+-----------------------+
-| TBS_BOTH              | 0x8                   | +/-Center. The        |
-|                       |                       | control displays tick |
-|                       |                       | marks on both sides   |
-|                       |                       | of the control. This  |
-|                       |                       | will be both top and  |
-|                       |                       | bottom when used with |
-|                       |                       | TBS_HORZ or both left |
-|                       |                       | and right if used     |
-|                       |                       | with                  |
-|                       |                       | <a href="#TBS_VERT">                     |
-|                       |                       | TBS_VERT</a>. |
-+-----------------------+-----------------------+-----------------------+
-| TBS_AUTOTICKS         | 0x1                   | The control has a     |
-|                       |                       | tick mark for each    |
-|                       |                       | increment in its      |
-|                       |                       | range of values. Use  |
-|                       |                       | +/-TickInterval to    |
-|                       |                       | have more             |
-|                       |                       | flexibility.          |
-+-----------------------+-----------------------+-----------------------+
-| TBS_ENABLESELRANGE    | 0x20                  | The control displays  |
-|                       |                       | a selection range     |
-|                       |                       | only. The tick marks  |
-|                       |                       | at the starting and   |
-|                       |                       | ending positions of a |
-|                       |                       | selection range are   |
-|                       |                       | displayed as          |
-|                       |                       | triangles (instead of |
-|                       |                       | vertical dashes), and |
-|                       |                       | the selection range   |
-|                       |                       | is highlighted        |
-|                       |                       | (highlighting might   |
-|                       |                       | require that the      |
-|                       |                       | theme be removed via  |
-|                       |                       | <code>Gu                   |
-|                       |                       | iObj.Opt("-Theme")</code>). |
-|                       |                       |                       |
-|                       |                       | To set the selection  |
-|                       |                       | range, follow this    |
-|                       |                       | example, which sets   |
-|                       |                       | the starting position |
-|                       |                       | to 55 and the ending  |
-|                       |                       | position to 66:       |
-|                       |                       |                       |
-|                       |                       |     SendMessage 0x0   |
-|                       |                       | 40B, 1, 55, "msctls_t |
-|                       |                       | rackbar321", WinTitle |
-|                       |                       |     SendMessage 0x0   |
-|                       |                       | 40C, 1, 66, "msctls_t |
-|                       |                       | rackbar321", WinTitle |
-+-----------------------+-----------------------+-----------------------+
-| TBS_FIXEDLENGTH       | 0x40                  | +/-Thick. Allows the  |
-|                       |                       | thumb\'s size to be   |
-|                       |                       | changed.              |
-+-----------------------+-----------------------+-----------------------+
-| TBS_NOTHUMB           | 0x80                  | The control does not  |
-|                       |                       | display the moveable  |
-|                       |                       | bar.                  |
-+-----------------------+-----------------------+-----------------------+
-| TBS_NOTICKS           | 0x10                  | +/-NoTicks. The       |
-|                       |                       | control does not      |
-|                       |                       | display any tick      |
-|                       |                       | marks.                |
-+-----------------------+-----------------------+-----------------------+
-| TBS_TOOLTIPS          | 0x100                 | +/-ToolTip. The       |
-|                       |                       | control supports      |
-|                       |                       | tooltips. When a      |
-|                       |                       | control is created    |
-|                       |                       | using this style, it  |
-|                       |                       | automatically creates |
-|                       |                       | a default ToolTip     |
-|                       |                       | control that displays |
-|                       |                       | the slider\'s current |
-|                       |                       | position. You can     |
-|                       |                       | change where the      |
-|                       |                       | tooltips are          |
-|                       |                       | displayed by using    |
-|                       |                       | the TBM_SETTIPSIDE    |
-|                       |                       | message.              |
-+-----------------------+-----------------------+-----------------------+
-| TBS_REVERSED          | 0x200                 | Unfortunately, this   |
-|                       |                       | style has no effect   |
-|                       |                       | on the actual         |
-|                       |                       | behavior of the       |
-|                       |                       | control, so there is  |
-|                       |                       | probably no point in  |
-|                       |                       | using it (instead,    |
-|                       |                       | use +Invert in the    |
-|                       |                       | control\'s options to |
-|                       |                       | reverse it).          |
-|                       |                       | Depending on OS       |
-|                       |                       | version, this style   |
-|                       |                       | might require         |
-|                       |                       | Internet Explorer 5.0 |
-|                       |                       | or greater.           |
-+-----------------------+-----------------------+-----------------------+
-| TBS_DOWNISLEFT        | 0x400                 | Unfortunately, this   |
-|                       |                       | style has no effect   |
-|                       |                       | on the actual         |
-|                       |                       | behavior of the       |
-|                       |                       | control, so there is  |
-|                       |                       | probably no point in  |
-|                       |                       | using it. Depending   |
-|                       |                       | on OS version, this   |
-|                       |                       | style might require   |
-|                       |                       | Internet Explorer     |
-|                       |                       | 5.01 or greater.      |
-+-----------------------+-----------------------+-----------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Style</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Hex</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_VERT<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x2<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Vertical. The<br />
+control is oriented<br />
+vertically.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_LEFT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x4<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Left. The control<br />
+displays tick marks<br />
+at the top of the<br />
+control (or to its<br />
+left if<br />
+<a href="#TBS_VERT">TBS_VERT</a><br />
+is present). Same as<br />
+<a href="#TBS_TOP">TBS_TOP</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_TOP<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x4<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>same as<br />
+<a href="#TBS_LEFT"><br />
+TBS_LEFT</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_BOTH<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x8<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Center. The<br />
+control displays tick<br />
+marks on both sides<br />
+of the control. This<br />
+will be both top and<br />
+bottom when used with<br />
+TBS_HORZ or both left<br />
+and right if used<br />
+with<br />
+<a href="#TBS_VERT"><br />
+TBS_VERT</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_AUTOTICKS<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x1<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The control has a<br />
+tick mark for each<br />
+increment in its<br />
+range of values. Use<br />
++/-TickInterval to<br />
+have more<br />
+flexibility.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_ENABLESELRANGE<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x20<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The control displays<br />
+a selection range<br />
+only. The tick marks<br />
+at the starting and<br />
+ending positions of a<br />
+selection range are<br />
+displayed as<br />
+triangles (instead of<br />
+vertical dashes), and<br />
+the selection range<br />
+is highlighted<br />
+(highlighting might<br />
+require that the<br />
+theme be removed via<br />
+<code>Gu  
+iObj.Opt("-Theme")</code>).<br />
+<br />
+To set the selection<br />
+range, follow this<br />
+example, which sets<br />
+the starting position<br />
+to 55 and the ending<br />
+position to 66:<br />
+<br />
+    SendMessage 0x0<br />
+40B, 1, 55, "msctls_t<br />
+rackbar321", WinTitle<br />
+    SendMessage 0x0<br />
+40C, 1, 66, "msctls_t<br />
+rackbar321", WinTitle</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_FIXEDLENGTH<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x40<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Thick. Allows the<br />
+thumb\'s size to be<br />
+changed.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_NOTHUMB<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x80<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The control does not<br />
+display the moveable<br />
+bar.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_NOTICKS<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x10<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-NoTicks. The<br />
+control does not<br />
+display any tick<br />
+marks.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_TOOLTIPS<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x100<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-ToolTip. The<br />
+control supports<br />
+tooltips. When a<br />
+control is created<br />
+using this style, it<br />
+automatically creates<br />
+a default ToolTip<br />
+control that displays<br />
+the slider\'s current<br />
+position. You can<br />
+change where the<br />
+tooltips are<br />
+displayed by using<br />
+the TBM_SETTIPSIDE<br />
+message.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_REVERSED<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x200<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Unfortunately, this<br />
+style has no effect<br />
+on the actual<br />
+behavior of the<br />
+control, so there is<br />
+probably no point in<br />
+using it (instead,<br />
+use +Invert in the<br />
+control\'s options to<br />
+reverse it).<br />
+Depending on OS<br />
+version, this style<br />
+might require<br />
+Internet Explorer 5.0<br />
+or greater.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TBS_DOWNISLEFT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x400<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Unfortunately, this<br />
+style has no effect<br />
+on the actual<br />
+behavior of the<br />
+control, so there is<br />
+probably no point in<br />
+using it. Depending<br />
+on OS version, this<br />
+style might require<br />
+Internet Explorer<br />
+5.01 or greater.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Progress">Progress Control Styles</h2>
 <p>These styles affect the <a href="../lib/GuiControls.htm#Progress">Progress</a>
 control. It has neither default styles nor forced styles.</p>
-<p>+-----------------------+-----------------------+-----------------------+
-| Style                 | Hex                   | Description           |
-+=======================+=======================+=======================+
-| PBS_SMOOTH            | 0x1                   | +/-Smooth. The        |
-|                       |                       | progress bar displays |
-|                       |                       | progress status in a  |
-|                       |                       | smooth scrolling bar  |
-|                       |                       | instead of the        |
-|                       |                       | default segmented     |
-|                       |                       | bar. When this style  |
-|                       |                       | is present, the       |
-|                       |                       | control automatically |
-|                       |                       | reverts to the        |
-|                       |                       | Classic Theme         |
-|                       |                       | appearance.           |
-+-----------------------+-----------------------+-----------------------+
-| PBS_VERTICAL          | 0x4                   | +/-Vertical. The      |
-|                       |                       | progress bar displays |
-|                       |                       | progress status       |
-|                       |                       | vertically, from      |
-|                       |                       | bottom to top.        |
-+-----------------------+-----------------------+-----------------------+
-| PBS_MARQUEE           | 0x8                   | The progress bar      |
-|                       |                       | moves like a marquee; |
-|                       |                       | that is, each change  |
-|                       |                       | to its position       |
-|                       |                       | causes the bar to     |
-|                       |                       | slide further along   |
-|                       |                       | its available length  |
-|                       |                       | until it wraps around |
-|                       |                       | to the other side. A  |
-|                       |                       | bar with this style   |
-|                       |                       | has no defined        |
-|                       |                       | position. Each        |
-|                       |                       | attempt to change its |
-|                       |                       | position will instead |
-|                       |                       | slide the bar by one  |
-|                       |                       | increment.            |
-|                       |                       |                       |
-|                       |                       | This style is         |
-|                       |                       | typically used to     |
-|                       |                       | indicate an ongoing   |
-|                       |                       | operation whose       |
-|                       |                       | completion time is    |
-|                       |                       | unknown.              |
-+-----------------------+-----------------------+-----------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Style</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Hex</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>PBS_SMOOTH<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x1<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Smooth. The<br />
+progress bar displays<br />
+progress status in a<br />
+smooth scrolling bar<br />
+instead of the<br />
+default segmented<br />
+bar. When this style<br />
+is present, the<br />
+control automatically<br />
+reverts to the<br />
+Classic Theme<br />
+appearance.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>PBS_VERTICAL<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x4<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Vertical. The<br />
+progress bar displays<br />
+progress status<br />
+vertically, from<br />
+bottom to top.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>PBS_MARQUEE<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x8<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The progress bar<br />
+moves like a marquee;<br />
+that is, each change<br />
+to its position<br />
+causes the bar to<br />
+slide further along<br />
+its available length<br />
+until it wraps around<br />
+to the other side. A<br />
+bar with this style<br />
+has no defined<br />
+position. Each<br />
+attempt to change its<br />
+position will instead<br />
+slide the bar by one<br />
+increment.<br />
+<br />
+This style is<br />
+typically used to<br />
+indicate an ongoing<br />
+operation whose<br />
+completion time is<br />
+unknown.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Tab">Tab Control Styles</h2>
 <p>These styles affect the <a href="../lib/GuiControls.htm#Tab">Tab</a> control. By
 default, it uses <a href="#WS_TABSTOP">WS_TABSTOP</a> and
@@ -916,228 +2094,783 @@ default, it uses <a href="#WS_TABSTOP">WS_TABSTOP</a> and
 <a href="#WS_CLIPSIBLINGS">WS_CLIPSIBLINGS</a> is always enabled and cannot be
 disabled, while <a href="#TCS_OWNERDRAWFIXED">TCS_OWNERDRAWFIXED</a> is forced on
 or off as required by the control\'s background color and/or text color.</p>
-<p>+-----------------------+-----------------------+-----------------------+
-| Style                 | Hex                   | Description           |
-+=======================+=======================+=======================+
-| TCS_SCROLLOPPOSITE    | 0x1                   | Unneeded tabs scroll  |
-|                       |                       | to the opposite side  |
-|                       |                       | of the control when a |
-|                       |                       | tab is selected.      |
-+-----------------------+-----------------------+-----------------------+
-| TCS_BOTTOM            | 0x2                   | +/-Bottom. Tabs       |
-|                       |                       | appear at the bottom  |
-|                       |                       | of the control        |
-|                       |                       | instead of the top.   |
-+-----------------------+-----------------------+-----------------------+
-| TCS_RIGHT             | 0x2                   | Tabs appear           |
-|                       |                       | vertically on the     |
-|                       |                       | right side of         |
-|                       |                       | controls that use the |
-|                       |                       | <a href="#TCS_VERTICAL">TCS_VER              |
-|                       |                       | TICAL</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| TCS_MULTISELECT       | 0x4                   | Multiple tabs can be  |
-|                       |                       | selected by holding   |
-|                       |                       | down [Ctrl]{.kbd}     |
-|                       |                       | when clicking. This   |
-|                       |                       | style must be used    |
-|                       |                       | with the              |
-|                       |                       | <a href="#TCS_BUTTONS">TCS_B                |
-|                       |                       | UTTONS</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| TCS_FLATBUTTONS       | 0x8                   | Selected tabs appear  |
-|                       |                       | as being indented     |
-|                       |                       | into the background   |
-|                       |                       | while other tabs      |
-|                       |                       | appear as being on    |
-|                       |                       | the same plane as the |
-|                       |                       | background. This      |
-|                       |                       | style only affects    |
-|                       |                       | tab controls with the |
-|                       |                       | <a href="#TCS_BUTTONS">TCS_B                |
-|                       |                       | UTTONS</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| TCS_FORCEICONLEFT     | 0x10                  | Icons are aligned     |
-|                       |                       | with the left edge of |
-|                       |                       | each fixed-width tab. |
-|                       |                       | This style can only   |
-|                       |                       | be used with the      |
-|                       |                       | <a href="#TCS_FIXEDWIDTH">TCS_FIXEDWI          |
-|                       |                       | DTH</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| TCS_FORCELABELLEFT    | 0x20                  | Labels are aligned    |
-|                       |                       | with the left edge of |
-|                       |                       | each fixed-width tab; |
-|                       |                       | that is, the label is |
-|                       |                       | displayed immediately |
-|                       |                       | to the right of the   |
-|                       |                       | icon instead of being |
-|                       |                       | centered.             |
-|                       |                       |                       |
-|                       |                       | This style can only   |
-|                       |                       | be used with the      |
-|                       |                       | <a href="#TCS_FIXEDWIDTH">TCS_FIXEDWI          |
-|                       |                       | DTH</a> |
-|                       |                       | style, and it implies |
-|                       |                       | the                   |
-|                       |                       | <a href="#TCS_FORCEICONLEFT">TCS_FORCEICONLEFT    |
-|                       |                       | </a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| TCS_HOTTRACK          | 0x40                  | Items under the       |
-|                       |                       | pointer are           |
-|                       |                       | automatically         |
-|                       |                       | highlighted.          |
-+-----------------------+-----------------------+-----------------------+
-| TCS_VERTICAL          | 0x80                  | +/-Left or +/-Right.  |
-|                       |                       | Tabs appear at the    |
-|                       |                       | left side of the      |
-|                       |                       | control, with tab     |
-|                       |                       | text displayed        |
-|                       |                       | vertically. This      |
-|                       |                       | style is valid only   |
-|                       |                       | when used with the    |
-|                       |                       | <a href="#TCS_MULTILINE">TCS_MULTI            |
-|                       |                       | LINE</a> |
-|                       |                       | style. To make tabs   |
-|                       |                       | appear on the right   |
-|                       |                       | side of the control,  |
-|                       |                       | also use the          |
-|                       |                       | <a href="#TCS_RIGHT">T                    |
-|                       |                       | CS_RIGHT</a> |
-|                       |                       | style.                |
-|                       |                       |                       |
-|                       |                       | This style will not   |
-|                       |                       | correctly display the |
-|                       |                       | tabs if a custom      |
-|                       |                       | background color or   |
-|                       |                       | text color is in      |
-|                       |                       | effect. To workaround |
-|                       |                       | this, specify         |
-|                       |                       | -Background and/or    |
-|                       |                       | cDefault in the tab   |
-|                       |                       | control\'s options.   |
-+-----------------------+-----------------------+-----------------------+
-| TCS_BUTTONS           | 0x100                 | +/-Buttons. Tabs      |
-|                       |                       | appear as buttons,    |
-|                       |                       | and no border is      |
-|                       |                       | drawn around the      |
-|                       |                       | display area.         |
-+-----------------------+-----------------------+-----------------------+
-| TCS_SINGLELINE        | 0x0                   | +/-Wrap. Only one row |
-|                       |                       | of tabs is displayed. |
-|                       |                       | The user can scroll   |
-|                       |                       | to see more tabs, if  |
-|                       |                       | necessary. This style |
-|                       |                       | is the default.       |
-+-----------------------+-----------------------+-----------------------+
-| TCS_MULTILINE         | 0x200                 | +/-Wrap. Multiple     |
-|                       |                       | rows of tabs are      |
-|                       |                       | displayed, if         |
-|                       |                       | necessary, so all     |
-|                       |                       | tabs are visible at   |
-|                       |                       | once.                 |
-+-----------------------+-----------------------+-----------------------+
-| TCS_RIGHTJUSTIFY      | 0x0                   | This is the default.  |
-|                       |                       | The width of each tab |
-|                       |                       | is increased, if      |
-|                       |                       | necessary, so that    |
-|                       |                       | each row of tabs      |
-|                       |                       | fills the entire      |
-|                       |                       | width of the tab      |
-|                       |                       | control.              |
-|                       |                       |                       |
-|                       |                       | This window style is  |
-|                       |                       | ignored unless the    |
-|                       |                       | <a href="#TCS_MULTILINE">TCS_MULTI            |
-|                       |                       | LINE</a> |
-|                       |                       | style is also         |
-|                       |                       | specified.            |
-+-----------------------+-----------------------+-----------------------+
-| TCS_FIXEDWIDTH        | 0x400                 | All tabs are the same |
-|                       |                       | width. This style     |
-|                       |                       | cannot be combined    |
-|                       |                       | with the              |
-|                       |                       | <a href="#TCS_RIGHTJUSTIFY">TCS_RIGHTJUSTIF      |
-|                       |                       | Y</a> |
-|                       |                       | style.                |
-+-----------------------+-----------------------+-----------------------+
-| TCS_RAGGEDRIGHT       | 0x800                 | Rows of tabs will not |
-|                       |                       | be stretched to fill  |
-|                       |                       | the entire width of   |
-|                       |                       | the control. This     |
-|                       |                       | style is the default. |
-+-----------------------+-----------------------+-----------------------+
-| TCS_FOCUSONBUTTONDOWN | 0x1000                | The tab control       |
-|                       |                       | receives the input    |
-|                       |                       | focus when clicked.   |
-+-----------------------+-----------------------+-----------------------+
-| TCS_OWNERDRAWFIXED    | 0x2000                | The parent window is  |
-|                       |                       | responsible for       |
-|                       |                       | drawing tabs.         |
-+-----------------------+-----------------------+-----------------------+
-| TCS_TOOLTIPS          | 0x4000                | The tab control has a |
-|                       |                       | tooltip control       |
-|                       |                       | associated with it.   |
-+-----------------------+-----------------------+-----------------------+
-| TCS_FOCUSNEVER        | 0x8000                | The tab control does  |
-|                       |                       | not receive the input |
-|                       |                       | focus when clicked.   |
-+-----------------------+-----------------------+-----------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Style</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Hex</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_SCROLLOPPOSITE<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x1<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Unneeded tabs scroll<br />
+to the opposite side<br />
+of the control when a<br />
+tab is selected.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_BOTTOM<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x2<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Bottom. Tabs<br />
+appear at the bottom<br />
+of the control<br />
+instead of the top.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_RIGHT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x2<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Tabs appear<br />
+vertically on the<br />
+right side of<br />
+controls that use the<br />
+<a href="#TCS_VERTICAL">TCS_VER<br />
+TICAL</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_MULTISELECT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x4<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Multiple tabs can be<br />
+selected by holding<br />
+down [Ctrl]{.kbd}<br />
+when clicking. This<br />
+style must be used<br />
+with the<br />
+<a href="#TCS_BUTTONS">TCS_B<br />
+UTTONS</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_FLATBUTTONS<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x8<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Selected tabs appear<br />
+as being indented<br />
+into the background<br />
+while other tabs<br />
+appear as being on<br />
+the same plane as the<br />
+background. This<br />
+style only affects<br />
+tab controls with the<br />
+<a href="#TCS_BUTTONS">TCS_B<br />
+UTTONS</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_FORCEICONLEFT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x10<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Icons are aligned<br />
+with the left edge of<br />
+each fixed-width tab.<br />
+This style can only<br />
+be used with the<br />
+<a href="#TCS_FIXEDWIDTH">TCS_FIXEDWI<br />
+DTH</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_FORCELABELLEFT<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x20<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Labels are aligned<br />
+with the left edge of<br />
+each fixed-width tab;<br />
+that is, the label is<br />
+displayed immediately<br />
+to the right of the<br />
+icon instead of being<br />
+centered.<br />
+<br />
+This style can only<br />
+be used with the<br />
+<a href="#TCS_FIXEDWIDTH">TCS_FIXEDWI<br />
+DTH</a><br />
+style, and it implies<br />
+the<br />
+<a href="#TCS_FORCEICONLEFT">TCS_FORCEICONLEFT<br />
+</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_HOTTRACK<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x40<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Items under the<br />
+pointer are<br />
+automatically<br />
+highlighted.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_VERTICAL<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x80<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Left or +/-Right.<br />
+Tabs appear at the<br />
+left side of the<br />
+control, with tab<br />
+text displayed<br />
+vertically. This<br />
+style is valid only<br />
+when used with the<br />
+<a href="#TCS_MULTILINE">TCS_MULTI<br />
+LINE</a><br />
+style. To make tabs<br />
+appear on the right<br />
+side of the control,<br />
+also use the<br />
+<a href="#TCS_RIGHT">T<br />
+CS_RIGHT</a><br />
+style.<br />
+<br />
+This style will not<br />
+correctly display the<br />
+tabs if a custom<br />
+background color or<br />
+text color is in<br />
+effect. To workaround<br />
+this, specify<br />
+-Background and/or<br />
+cDefault in the tab<br />
+control\'s options.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_BUTTONS<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x100<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Buttons. Tabs<br />
+appear as buttons,<br />
+and no border is<br />
+drawn around the<br />
+display area.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_SINGLELINE<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x0<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Wrap. Only one row<br />
+of tabs is displayed.<br />
+The user can scroll<br />
+to see more tabs, if<br />
+necessary. This style<br />
+is the default.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_MULTILINE<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x200<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>+/-Wrap. Multiple<br />
+rows of tabs are<br />
+displayed, if<br />
+necessary, so all<br />
+tabs are visible at<br />
+once.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_RIGHTJUSTIFY<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x0<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>This is the default.<br />
+The width of each tab<br />
+is increased, if<br />
+necessary, so that<br />
+each row of tabs<br />
+fills the entire<br />
+width of the tab<br />
+control.<br />
+<br />
+This window style is<br />
+ignored unless the<br />
+<a href="#TCS_MULTILINE">TCS_MULTI<br />
+LINE</a><br />
+style is also<br />
+specified.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_FIXEDWIDTH<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x400<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>All tabs are the same<br />
+width. This style<br />
+cannot be combined<br />
+with the<br />
+<a href="#TCS_RIGHTJUSTIFY">TCS_RIGHTJUSTIF<br />
+Y</a><br />
+style.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_RAGGEDRIGHT<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x800<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Rows of tabs will not<br />
+be stretched to fill<br />
+the entire width of<br />
+the control. This<br />
+style is the default.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_FOCUSONBUTTONDOWN<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x1000<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The tab control<br />
+receives the input<br />
+focus when clicked.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_OWNERDRAWFIXED<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x2000<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The parent window is<br />
+responsible for<br />
+drawing tabs.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_TOOLTIPS<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x4000<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The tab control has a<br />
+tooltip control<br />
+associated with it.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>TCS_FOCUSNEVER<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x8000<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The tab control does<br />
+not receive the input<br />
+focus when clicked.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="StatusBar">StatusBar Control Styles</h2>
 <p>These styles affect the <a href="../lib/GuiControls.htm#StatusBar">StatusBar</a>
 control. By default, it uses <a href="#SBARS_TOOLTIPS">SBARS_TOOLTIPS</a> and
 <a href="#SBARS_SIZEGRIP">SBARS_SIZEGRIP</a> (the latter only if the window is
 resizable). It has no forced styles.</p>
-<p>+-----------------------+-----------------------+-----------------------+
-| Style                 | Hex                   | Description           |
-+=======================+=======================+=======================+
-| SBARS_TOOLTIPS        | 0x800                 | Displays a tooltip    |
-|                       |                       | when the mouse hovers |
-|                       |                       | over a part of the    |
-|                       |                       | status bar that: 1)   |
-|                       |                       | has too much text to  |
-|                       |                       | be fully displayed;   |
-|                       |                       | or 2) has an icon but |
-|                       |                       | no text.              |
-|                       |                       |                       |
-|                       |                       | The text of the       |
-|                       |                       | tooltip can be set    |
-|                       |                       | via:                  |
-|                       |                       |                       |
-|                       |                       |     S                 |
-|                       |                       | endMessage 0x0411, 0, |
-|                       |                       |  StrPtr("Text to disp |
-|                       |                       | lay"), "msctls_status |
-|                       |                       | bar321", MyGui ; 0x04 |
-|                       |                       | 11 is SB_SETTIPTEXTW. |
-|                       |                       |                       |
-|                       |                       | The bold <strong>0</strong> above  |
-|                       |                       | is the zero-based     |
-|                       |                       | part number. To use a |
-|                       |                       | part other than the   |
-|                       |                       | first, specify 1 for  |
-|                       |                       | second, 2 for the     |
-|                       |                       | third, etc. NOTE: The |
-|                       |                       | tooltip might never   |
-|                       |                       | appear on certain OS  |
-|                       |                       | versions.             |
-+-----------------------+-----------------------+-----------------------+
-| SBARS_SIZEGRIP        | 0x100                 | Includes a sizing     |
-|                       |                       | grip at the right end |
-|                       |                       | of the status bar. A  |
-|                       |                       | sizing grip is        |
-|                       |                       | similar to a sizing   |
-|                       |                       | border; it is a       |
-|                       |                       | rectangular area that |
-|                       |                       | the user can click    |
-|                       |                       | and drag to resize    |
-|                       |                       | the parent window.    |
-+-----------------------+-----------------------+-----------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Style</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Hex</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>SBARS_TOOLTIPS<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x800<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Displays a tooltip<br />
+when the mouse hovers<br />
+over a part of the<br />
+status bar that: 1)<br />
+has too much text to<br />
+be fully displayed;<br />
+or 2) has an icon but<br />
+no text.<br />
+<br />
+The text of the<br />
+tooltip can be set<br />
+via:<br />
+<br />
+    S<br />
+endMessage 0x0411, 0,<br />
+ StrPtr("Text to disp<br />
+lay"), "msctls_status<br />
+bar321", MyGui ; 0x04<br />
+11 is SB_SETTIPTEXTW.<br />
+<br />
+The bold <strong>0</strong> above<br />
+is the zero-based<br />
+part number. To use a<br />
+part other than the<br />
+first, specify 1 for<br />
+second, 2 for the<br />
+third, etc. NOTE: The<br />
+tooltip might never<br />
+appear on certain OS<br />
+versions.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>SBARS_SIZEGRIP<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>0x100<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Includes a sizing<br />
+grip at the right end<br />
+of the status bar. A<br />
+sizing grip is<br />
+similar to a sizing<br />
+border; it is a<br />
+rectangular area that<br />
+the user can click<br />
+and drag to resize<br />
+the parent window.</p>
+</td>
+</tr>
+</tbody>
+</table>
                 </article>
 
                 <!-- Footer Navigation -->

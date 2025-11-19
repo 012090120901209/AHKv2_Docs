@@ -699,7 +699,7 @@
     "title": "Escape Sequences",
     "url": "/AHKv2_Docs/EscapeChar.html",
     "path": "EscapeChar.md",
-    "content": "Escape Sequences\nThe escape character ` (back-tick or grave accent) is used to\nindicate that the character immediately following it should be\ninterpreted differently than it normally would. This character is at the\nupper left corner of most English keyboards.\nIn AutoHotkey the following escape sequences can be used:\n+-----------------------------------+-----------------------------------+\n| Sequence                          | Result                            |\n+================================="
+    "content": "Escape Sequences\nThe escape character ` (back-tick or grave accent) is used to\nindicate that the character immediately following it should be\ninterpreted differently than it normally would. This character is at the\nupper left corner of most English keyboards.\nIn AutoHotkey the following escape sequences can be used:\n\n\n\n\nSequence\n\n\nResult\n\n\n\n\n\n\n``\n\n\n\n\n\n` (literal accent; i.e. two\nconsecutive escape characters\nresult in a single literal\ncharacter)\n\n\n\n\n`;\n\n\n\n\n\n\n\n\n\n\n\n; (literal\nsemicolon)\n\nNote: It "
   },
   {
     "title": "Exit",
@@ -2475,7 +2475,7 @@
     "title": "Alphabetical Function Index",
     "url": "/AHKv2_Docs/index_1.html",
     "path": "index_1.md",
-    "content": "Alphabetical Function Index\nClick on a function name for details. Entries in [large font]{.larger}\nare the most commonly used.\nGo to entries starting with: E, \u00a0 I, \u00a0 M, \u00a0 S, \u00a0\nW, \u00a0 #\n+-----------------------------------+-----------------------------------+\n| Name                              | Description                       |\n+===================================+===================================+\n| { ... } (Block)     | Blocks are one or more            |\n|                                  "
+    "content": "Alphabetical Function Index\nClick on a function name for details. Entries in [large font]{.larger}\nare the most commonly used.\nGo to entries starting with: E, \u00a0 I, \u00a0 M, \u00a0 S, \u00a0\nW, \u00a0 #\n\n\n\n\nName\n\n\nDescription\n\n\n\n\n\n\n{ ... } (Block)\n\n\n\n\n\n\n\n\n\n\n\nBlocks are one or more\nstate\nments\nenclosed in braces. Typically\nused with function\ndefi\nnitions\nand control flow\nstatement\ns.\n\n\n\n\n{ ... } /\nObje\nct\n\n\nCreates an Object\nfrom a list of property name and\nvalue pairs.\n\n\n\n\n[ ... ] /\nArray\n\n\nCreates an Array\nfrom a "
   },
   {
     "title": "AutoHotkey Script Showcase",

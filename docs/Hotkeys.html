@@ -192,270 +192,590 @@ indicate [Ctrl]{.kbd}+[Alt]{.kbd}+[S]{.kbd}:</p>
 
 <h2 id="Symbols">Hotkey Modifier Symbols</h2>
 <p>You can use the following modifier symbols to define hotkeys:</p>
-<p>+-----------------------------------+-----------------------------------+
-| Symbol                            | Description                       |
-+===================================+===================================+
-| #                                | [Win]{.kbd} (Windows logo key).   |
-|                                   |                                   |
-|                                   | Hotkeys that include [Win]{.kbd}  |
-|                                   | (e.g. #a) will wait for           |
-|                                   | [Win]{.kbd} to be released before |
-|                                   | sending any text containing an    |
-|                                   | [L]{.kbd} keystroke. This         |
-|                                   | prevents usages of                |
-|                                   | <a href="lib/Send.htm">Send</a> within such  |
-|                                   | a hotkey from locking the PC.     |
-|                                   | This behavior applies to all      |
-|                                   | sending modes except              |
-|                                   | <a href="lib/Send.htm#SendPlayDetail">SendP                            |
-|                                   | lay</a> |
-|                                   | (which doesn\'t need it), <a href="lib/Send.htm#blind">blind  |
-|                                   | mode</a> and     |
-|                                   | <a href="lib/Send.htm#SendText">text                             |
-|                                   | mode</a>.     |
-|                                   |                                   |
-|                                   | <strong>Note:</strong> Pressing a hotkey which |
-|                                   | includes [Win]{.kbd} may result   |
-|                                   | in extra simulated keystrokes     |
-|                                   | ([Ctrl]{.kbd} by default). See    |
-|                                   | <a href="lib/A_MenuMaskKey.htm">A_Men                            |
-|                                   | uMaskKey</a>. |
-+-----------------------------------+-----------------------------------+
-| !                                 | [Alt]{.kbd}                       |
-|                                   |                                   |
-|                                   | <strong>Note:</strong> Pressing a hotkey which |
-|                                   | includes [Alt]{.kbd} may result   |
-|                                   | in extra simulated keystrokes     |
-|                                   | ([Ctrl]{.kbd} by default). See    |
-|                                   | <a href="lib/A_MenuMaskKey.htm">A_Men                            |
-|                                   | uMaskKey</a>. |
-+-----------------------------------+-----------------------------------+
-| \^                                | [Ctrl]{.kbd}                      |
-+-----------------------------------+-----------------------------------+
-| +                                | [Shift]{.kbd}                     |
-+-----------------------------------+-----------------------------------+
-| &amp;                                 | An ampersand may be used between  |
-|                                   | any two keys or mouse buttons to  |
-|                                   | combine them into a custom        |
-|                                   | hotkey. See <a href="#combo">below</a> for   |
-|                                   | details.                          |
-+-----------------------------------+-----------------------------------+
-| \&lt;                                | Use the left key of the pair.     |
-|                                   | e.g. \&lt;!a is the same as !a       |
-|                                   | except that only the left         |
-|                                   | [Alt]{.kbd} will trigger it.      |
-+-----------------------------------+-----------------------------------+
-| &gt;                                | Use the right key of the pair.    |
-+-----------------------------------+-----------------------------------+
-| \&lt;\^&gt;!                           | [AltGr]{.kbd} (<a href="https://e                |
-|                                   | n.wikipedia.org/wiki/AltGr_key">alternate graph,  |
-|                                   | or alternate                      |
-|                                   | graphic</a>). |
-|                                   | If your keyboard layout has       |
-|                                   | [AltGr]{.kbd} instead of a right  |
-|                                   | [Alt]{.kbd} key, this series of   |
-|                                   | symbols can usually be used to    |
-|                                   | stand for [AltGr]{.kbd}. For      |
-|                                   | example:                          |
-|                                   |                                   |
-|                                   |     &lt;^&gt;                           |
-|                                   | !m::MsgBox "You pressed AltGr+m." |
-|                                   |     &lt;^&lt;!m::MsgBox "Yo             |
-|                                   | u pressed LeftControl+LeftAlt+m." |
-|                                   |                                   |
-|                                   | Alternatively, to make            |
-|                                   | [AltGr]{.kbd} itself into a       |
-|                                   | hotkey, use the following hotkey  |
-|                                   | (without any hotkeys like the     |
-|                                   | above present):                   |
-|                                   |                                   |
-|                                   |     LControl &amp; RAlt::M            |
-|                                   | sgBox "You pressed AltGr itself." |
-+-----------------------------------+-----------------------------------+
-| *                                | Wildcard: Fire the hotkey even if |
-|                                   | extra modifiers are being held    |
-|                                   | down. This is often used in       |
-|                                   | conjunction with                  |
-|                                   | <a href="misc/Remap.htm">remapping</a> keys  |
-|                                   | or buttons. For example:          |
-|                                   |                                   |
-|                                   |     <em>#c::Run "calc.exe"  ;        |
-|                                   | Win+C, Shift+Win+C, Ctrl+Win+C, e |
-|                                   | tc. will all trigger this hotkey. |
-|                                   |     </em>ScrollLock                   |
-|                                   | ::Run "notepad"  ; Pressing Scrol |
-|                                   | lLock will trigger this hotkey ev |
-|                                   | en when modifier key(s) are down. |
-|                                   |                                   |
-|                                   | Wildcard hotkeys always use the   |
-|                                   | keyboard hook, as do any hotkeys  |
-|                                   | eclipsed by a wildcard hotkey.    |
-|                                   | For example, the presence of      |
-|                                   | <code>*a::</code> would cause <code>^a::</code> to      |
-|                                   | always use the hook.              |
-+-----------------------------------+-----------------------------------+
-| \~                                | When the hotkey fires, its key\'s |
-|                                   | native function will not be       |
-|                                   | blocked (hidden from the system). |
-|                                   | In both of the below examples,    |
-|                                   | the user\'s click of the mouse    |
-|                                   | button will be sent to the active |
-|                                   | window:                           |
-|                                   |                                   |
-|                                   |     ~RButton::MsgBox "You         |
-|                                   |  clicked the right mouse button." |
-|                                   |     ~RButton &amp; C:                 |
-|                                   | :MsgBox "You pressed C while hold |
-|                                   | ing down the right mouse button." |
-|                                   |                                   |
-|                                   | Unlike the other prefix symbols,  |
-|                                   | the tilde prefix is allowed to be |
-|                                   | present on some of a hotkey\'s    |
-|                                   | <a href="lib/_HotIf.htm#variant">                                 |
-|                                   | variants</a> |
-|                                   | but absent on others. However, if |
-|                                   | a tilde is applied to the <a href="#prefix">prefix |
-|                                   | key</a> of any custom       |
-|                                   | combination which has not been    |
-|                                   | turned off or suspended, it       |
-|                                   | affects the behavior of that      |
-|                                   | prefix key for <em>all</em>              |
-|                                   | combinations.                     |
-|                                   |                                   |
-|                                   | Special hotkeys that are          |
-|                                   | substitutes for                   |
-|                                   | <a href="#alttab">alt-tab</a> always ignore  |
-|                                   | the tilde prefix.                 |
-|                                   |                                   |
-|                                   | If the tilde prefix is applied to |
-|                                   | a custom modifier key (<a href="#prefix">prefix    |
-|                                   | key</a>) which is also used |
-|                                   | as its own hotkey, that hotkey    |
-|                                   | will fire when the key is pressed |
-|                                   | instead of being delayed until    |
-|                                   | the key is released. For example, |
-|                                   | the <em>\~RButton</em> hotkey above is   |
-|                                   | fired as soon as the button is    |
-|                                   | pressed.                          |
-|                                   |                                   |
-|                                   | If the tilde prefix is applied    |
-|                                   | only to the custom combination    |
-|                                   | and not the non-combination       |
-|                                   | hotkey, the key\'s native         |
-|                                   | function will still be blocked.   |
-|                                   | For example, in the script below, |
-|                                   | holding [Menu]{.kbd} will show    |
-|                                   | the tooltip and will not trigger  |
-|                                   | a context menu:                   |
-|                                   |                                   |
-|                                   |     AppsKey::ToolTip "Press       |
-|                                   | &lt; or &gt; to cycle through windows." |
-|                                   |     AppsKey Up::ToolTip           |
-|                                   |     ~AppsKey &amp; &lt;::Send "!+{Esc}"  |
-|                                   |     ~AppsKey &amp; &gt;::Send "!{Esc}"   |
-|                                   |                                   |
-|                                   | If at least one variant of a      |
-|                                   | keyboard hotkey has the tilde     |
-|                                   | modifier, that hotkey always uses |
-|                                   | the keyboard hook.                |
-+-----------------------------------+-----------------------------------+
-| \$                                | This is usually only necessary if |
-|                                   | the script uses the               |
-|                                   | <a href="lib/Send.htm">Send</a> function to  |
-|                                   | send the keys that comprise the   |
-|                                   | hotkey itself, which might        |
-|                                   | otherwise cause it to trigger     |
-|                                   | itself. The \$ prefix forces the  |
-|                                   | <a href="lib/InstallKeybdHook.htm">keyboard                         |
-|                                   | hook</a>   |
-|                                   | to be used to implement this      |
-|                                   | hotkey, which as a side-effect    |
-|                                   | prevents the <a href="lib/Send.htm">Send</a> |
-|                                   | function from triggering it. The  |
-|                                   | \$ prefix is equivalent to having |
-|                                   | specified                         |
-|                                   | <a href="lib/_UseHook.htm"><code>#UseHook</code></a>    |
-|                                   | somewhere above the definition of |
-|                                   | this hotkey.                      |
-|                                   |                                   |
-|                                   | The \$ prefix has no effect for   |
-|                                   | mouse hotkeys, since they always  |
-|                                   | use the mouse hook. It also has   |
-|                                   | no effect for hotkeys which       |
-|                                   | already require the keyboard      |
-|                                   | hook, including any keyboard      |
-|                                   | hotkeys with the <a href="#Tilde">tilde           |
-|                                   | (\~)</a> or <a href="#wildcard">wildcard        |
-|                                   | (*)</a> modifiers,       |
-|                                   | key-up hotkeys and custom         |
-|                                   | combinations. To determine        |
-|                                   | whether a particular hotkey uses  |
-|                                   | the keyboard hook, use            |
-|                                   | <a href="lib/ListHotkeys.htm">L                                |
-|                                   | istHotkeys</a>. |
-|                                   |                                   |
-|                                   | <a href="lib/_InputLevel.htm">                                 |
-|                                   | #InputLevel</a> |
-|                                   | and                               |
-|                                   | <a href="lib/SendLevel.htm">SendLevel</a>    |
-|                                   | provide additional control over   |
-|                                   | which hotkeys and hotstrings are  |
-|                                   | triggered by the Send function.   |
-+-----------------------------------+-----------------------------------+
-| UP                                | The word UP may follow the name   |
-|                                   | of a hotkey to cause the hotkey   |
-|                                   | to fire upon release of the key   |
-|                                   | rather than when the key is       |
-|                                   | pressed down. The following       |
-|                                   | example <a href="misc/Remap.htm">remaps</a>  |
-|                                   | the left [Win]{.kbd} to become    |
-|                                   | the left [Ctrl]{.kbd}:            |
-|                                   |                                   |
-|                                   |     <em>LWin::Send "{LControl down}" |
-|                                   |                                   |
-|                                   |    </em>LWin Up::Send "{LControl up}" |
-|                                   |                                   |
-|                                   | \"Up\" can also be used with      |
-|                                   | normal hotkeys as in this         |
-|                                   | example:                          |
-|                                   | <code>^!r Up::MsgBox "You p            |
-|                                   | ressed and released Ctrl+Alt+R"</code>. |
-|                                   | It also works with <a href="#combo">combination   |
-|                                   | hotkeys</a> (e.g.            |
-|                                   | <code>F1 &amp; e Up::</code>)                    |
-|                                   |                                   |
-|                                   | Limitations: 1) \"Up\" does not   |
-|                                   | work with <a href="KeyList.htm#Controller">controller             |
-|                                   | buttons</a>; |
-|                                   | and 2) An \"Up\" hotkey without a |
-|                                   | normal/down counterpart hotkey    |
-|                                   | will completely take over that    |
-|                                   | key to prevent it from getting    |
-|                                   | stuck down. One way to prevent    |
-|                                   | this is to add a <a href="#Tilde">tilde           |
-|                                   | prefix</a> (e.g.             |
-|                                   | <code>~LControl up::</code>)                 |
-|                                   |                                   |
-|                                   | \"Up\" hotkeys and their key-down |
-|                                   | counterparts (if any) always use  |
-|                                   | the keyboard hook.                |
-|                                   |                                   |
-|                                   | On a related note, a technique    |
-|                                   | similar to the above is to make a |
-|                                   | hotkey into a prefix key. The     |
-|                                   | advantage is that although the    |
-|                                   | hotkey will fire upon release, it |
-|                                   | will do so only if you did not    |
-|                                   | press any other key while it was  |
-|                                   | held down. For example:           |
-|                                   |                                   |
-|                                   |     LControl &amp; F1::return  ; Mak  |
-|                                   | e left-control a prefix by using  |
-|                                   | it in front of "&amp;" at least once. |
-|                                   |     LControl::MsgBox "You         |
-|                                   | released LControl without having  |
-|                                   | used it to modify any other key." |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Symbol</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>#<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Win]{.kbd} (Windows logo key).<br />
+<br />
+Hotkeys that include [Win]{.kbd}<br />
+(e.g. #a) will wait for<br />
+[Win]{.kbd} to be released before<br />
+sending any text containing an<br />
+[L]{.kbd} keystroke. This<br />
+prevents usages of<br />
+<a href="lib/Send.htm">Send</a> within such<br />
+a hotkey from locking the PC.<br />
+This behavior applies to all<br />
+sending modes except<br />
+<a href="lib/Send.htm#SendPlayDetail">SendP<br />
+lay</a><br />
+(which doesn\'t need it), <a href="lib/Send.htm#blind">blind<br />
+mode</a> and<br />
+<a href="lib/Send.htm#SendText">text<br />
+mode</a>.<br />
+<br />
+<strong>Note:</strong> Pressing a hotkey which<br />
+includes [Win]{.kbd} may result<br />
+in extra simulated keystrokes<br />
+([Ctrl]{.kbd} by default). See<br />
+<a href="lib/A_MenuMaskKey.htm">A_Men<br />
+uMaskKey</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>!<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Alt]{.kbd}<br />
+<br />
+<strong>Note:</strong> Pressing a hotkey which<br />
+includes [Alt]{.kbd} may result<br />
+in extra simulated keystrokes<br />
+([Ctrl]{.kbd} by default). See<br />
+<a href="lib/A_MenuMaskKey.htm">A_Men<br />
+uMaskKey</a>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\^</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Ctrl]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[Shift]{.kbd}</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>&amp;<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>An ampersand may be used between<br />
+any two keys or mouse buttons to<br />
+combine them into a custom<br />
+hotkey. See <a href="#combo">below</a> for<br />
+details.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\&lt;<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Use the left key of the pair.<br />
+e.g. \&lt;!a is the same as !a<br />
+except that only the left<br />
+[Alt]{.kbd} will trigger it.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>&gt;</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Use the right key of the pair.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\&lt;\^&gt;!<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[AltGr]{.kbd} (<a href="https://e  
+n.wikipedia.org/wiki/AltGr_key">alternate graph,<br />
+or alternate<br />
+graphic</a>).<br />
+If your keyboard layout has<br />
+[AltGr]{.kbd} instead of a right<br />
+[Alt]{.kbd} key, this series of<br />
+symbols can usually be used to<br />
+stand for [AltGr]{.kbd}. For<br />
+example:<br />
+<br />
+    &lt;^&gt;<br />
+!m::MsgBox "You pressed AltGr+m."<br />
+    &lt;^&lt;!m::MsgBox "Yo<br />
+u pressed LeftControl+LeftAlt+m."<br />
+<br />
+Alternatively, to make<br />
+[AltGr]{.kbd} itself into a<br />
+hotkey, use the following hotkey<br />
+(without any hotkeys like the<br />
+above present):<br />
+<br />
+    LControl &amp; RAlt::M<br />
+sgBox "You pressed AltGr itself."</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>*<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Wildcard: Fire the hotkey even if<br />
+extra modifiers are being held<br />
+down. This is often used in<br />
+conjunction with<br />
+<a href="misc/Remap.htm">remapping</a> keys<br />
+or buttons. For example:<br />
+<br />
+<em>#c::Run "calc.exe"  ;<br />
+Win+C, Shift+Win+C, Ctrl+Win+C, e<br />
+tc. will all trigger this hotkey.<br />
+</em>ScrollLock<br />
+::Run "notepad"  ; Pressing Scrol<br />
+lLock will trigger this hotkey ev<br />
+en when modifier key(s) are down.<br />
+<br />
+Wildcard hotkeys always use the<br />
+keyboard hook, as do any hotkeys<br />
+eclipsed by a wildcard hotkey.<br />
+For example, the presence of<br />
+<code>*a::</code> would cause <code>^a::</code> to<br />
+always use the hook.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\~<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>When the hotkey fires, its key\'s<br />
+native function will not be<br />
+blocked (hidden from the system).<br />
+In both of the below examples,<br />
+the user\'s click of the mouse<br />
+button will be sent to the active<br />
+window:<br />
+<br />
+    ~RButton::MsgBox "You<br />
+ clicked the right mouse button."<br />
+    ~RButton &amp; C:<br />
+:MsgBox "You pressed C while hold<br />
+ing down the right mouse button."<br />
+<br />
+Unlike the other prefix symbols,<br />
+the tilde prefix is allowed to be<br />
+present on some of a hotkey\'s<br />
+<a href="lib/_HotIf.htm#variant"><br />
+variants</a><br />
+but absent on others. However, if<br />
+a tilde is applied to the <a href="#prefix">prefix<br />
+key</a> of any custom<br />
+combination which has not been<br />
+turned off or suspended, it<br />
+affects the behavior of that<br />
+prefix key for <em>all</em><br />
+combinations.<br />
+<br />
+Special hotkeys that are<br />
+substitutes for<br />
+<a href="#alttab">alt-tab</a> always ignore<br />
+the tilde prefix.<br />
+<br />
+If the tilde prefix is applied to<br />
+a custom modifier key (<a href="#prefix">prefix<br />
+key</a>) which is also used<br />
+as its own hotkey, that hotkey<br />
+will fire when the key is pressed<br />
+instead of being delayed until<br />
+the key is released. For example,<br />
+the <em>\~RButton</em> hotkey above is<br />
+fired as soon as the button is<br />
+pressed.<br />
+<br />
+If the tilde prefix is applied<br />
+only to the custom combination<br />
+and not the non-combination<br />
+hotkey, the key\'s native<br />
+function will still be blocked.<br />
+For example, in the script below,<br />
+holding [Menu]{.kbd} will show<br />
+the tooltip and will not trigger<br />
+a context menu:<br />
+<br />
+    AppsKey::ToolTip "Press<br />
+&lt; or &gt; to cycle through windows."<br />
+    AppsKey Up::ToolTip<br />
+    ~AppsKey &amp; &lt;::Send "!+{Esc}"<br />
+    ~AppsKey &amp; &gt;::Send "!{Esc}"<br />
+<br />
+If at least one variant of a<br />
+keyboard hotkey has the tilde<br />
+modifier, that hotkey always uses<br />
+the keyboard hook.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>\$<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>This is usually only necessary if<br />
+the script uses the<br />
+<a href="lib/Send.htm">Send</a> function to<br />
+send the keys that comprise the<br />
+hotkey itself, which might<br />
+otherwise cause it to trigger<br />
+itself. The \$ prefix forces the<br />
+<a href="lib/InstallKeybdHook.htm">keyboard<br />
+hook</a><br />
+to be used to implement this<br />
+hotkey, which as a side-effect<br />
+prevents the <a href="lib/Send.htm">Send</a><br />
+function from triggering it. The<br />
+\$ prefix is equivalent to having<br />
+specified<br />
+<a href="lib/_UseHook.htm"><code>#UseHook</code></a><br />
+somewhere above the definition of<br />
+this hotkey.<br />
+<br />
+The \$ prefix has no effect for<br />
+mouse hotkeys, since they always<br />
+use the mouse hook. It also has<br />
+no effect for hotkeys which<br />
+already require the keyboard<br />
+hook, including any keyboard<br />
+hotkeys with the <a href="#Tilde">tilde<br />
+(\~)</a> or <a href="#wildcard">wildcard<br />
+(*)</a> modifiers,<br />
+key-up hotkeys and custom<br />
+combinations. To determine<br />
+whether a particular hotkey uses<br />
+the keyboard hook, use<br />
+<a href="lib/ListHotkeys.htm">L<br />
+istHotkeys</a>.<br />
+<br />
+[  </p>
+<h1 id="inputlevellib_inputlevelhtm">InputLevel](lib/_InputLevel.htm)</h1>
+<p>and<br />
+<a href="lib/SendLevel.htm">SendLevel</a><br />
+provide additional control over<br />
+which hotkeys and hotstrings are<br />
+triggered by the Send function.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>UP<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>The word UP may follow the name<br />
+of a hotkey to cause the hotkey<br />
+to fire upon release of the key<br />
+rather than when the key is<br />
+pressed down. The following<br />
+example <a href="misc/Remap.htm">remaps</a><br />
+the left [Win]{.kbd} to become<br />
+the left [Ctrl]{.kbd}:<br />
+<br />
+<em>LWin::Send "{LControl down}"<br />
+<br />
+</em>LWin Up::Send "{LControl up}"<br />
+<br />
+\"Up\" can also be used with<br />
+normal hotkeys as in this<br />
+example:<br />
+<code>^!r Up::MsgBox "You p  
+ressed and released Ctrl+Alt+R"</code>.<br />
+It also works with <a href="#combo">combination<br />
+hotkeys</a> (e.g.<br />
+<code>F1 &amp; e Up::</code>)<br />
+<br />
+Limitations: 1) \"Up\" does not<br />
+work with <a href="KeyList.htm#Controller">controller<br />
+buttons</a>;<br />
+and 2) An \"Up\" hotkey without a<br />
+normal/down counterpart hotkey<br />
+will completely take over that<br />
+key to prevent it from getting<br />
+stuck down. One way to prevent<br />
+this is to add a <a href="#Tilde">tilde<br />
+prefix</a> (e.g.<br />
+<code>~LControl up::</code>)<br />
+<br />
+\"Up\" hotkeys and their key-down<br />
+counterparts (if any) always use<br />
+the keyboard hook.<br />
+<br />
+On a related note, a technique<br />
+similar to the above is to make a<br />
+hotkey into a prefix key. The<br />
+advantage is that although the<br />
+hotkey will fire upon release, it<br />
+will do so only if you did not<br />
+press any other key while it was<br />
+held down. For example:<br />
+<br />
+    LControl &amp; F1::return  ; Mak<br />
+e left-control a prefix by using<br />
+it in front of "&amp;" at least once.<br />
+    LControl::MsgBox "You<br />
+released LControl without having<br />
+used it to modify any other key."</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Note:</strong> See the <a href="KeyList.htm">Key List</a> for a complete list of
 keyboard keys and mouse/controller buttons.</p>
 <p>Multiple hotkeys can be stacked vertically to have them perform the same
@@ -828,6 +1148,9 @@ function or function object to a hotkey.</p>
 <li><a href="#toc">Table of Contents</a></li>
 <li><a href="#Intro">Introduction and Simple Examples</a></li>
 <li><a href="#Symbols">Hotkey Modifier Symbols</a></li>
+</ul>
+</li>
+<li><a href="#inputlevellib_inputlevelhtm">InputLevel](lib/_InputLevel.htm)</a><ul>
 <li><a href="#Context">Context-sensitive Hotkeys</a></li>
 <li><a href="#combo">Custom Combinations</a></li>
 <li><a href="#Features">Other Features</a></li>

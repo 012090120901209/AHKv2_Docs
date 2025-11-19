@@ -144,78 +144,210 @@ indicate that the character immediately following it should be
 interpreted differently than it normally would. This character is at the
 upper left corner of most English keyboards.</p>
 <p>In AutoHotkey the following escape sequences can be used:</p>
-<p>+-----------------------------------+-----------------------------------+
-| Sequence                          | Result                            |
-+===================================+===================================+
-| <code>``</code>                        | <code>`</code> (literal accent; i.e. two |
-|                                   | consecutive escape characters     |
-|                                   | result in a single literal        |
-|                                   | character)                        |
-+-----------------------------------+-----------------------------------+
-| <code>`;</code>                          | <code class="no-highlight">;</code> (literal       |
-|                                   | semicolon)                        |
-|                                   |                                   |
-|                                   | <strong>Note:</strong> It is not necessary to  |
-|                                   | escape a semicolon which has any  |
-|                                   | character [other                  |
-|                                   | than]{.underline} space or tab to |
-|                                   | its immediate left, since it      |
-|                                   | would not be interpreted as a     |
-|                                   | comment anyway.                   |
-+-----------------------------------+-----------------------------------+
-| <code>`:</code>                          | <code>:</code> (literal colon). This is      |
-|                                   | necessary only in a hotstring\'s  |
-|                                   | triggering abbreviation.          |
-+-----------------------------------+-----------------------------------+
-| <code>`{</code>                          | [{]{.kbd} (keyboard key). This is |
-|                                   | only valid, and is required, when |
-|                                   | <a href="Remap.htm#EscapeBrace">                                 |
-|                                   | remapping</a> |
-|                                   | a key to [{]{.kbd}.               |
-+-----------------------------------+-----------------------------------+
-| <code>`n</code>                          | newline (linefeed/LF)             |
-+-----------------------------------+-----------------------------------+
-| <code>`r</code>                          | carriage return (CR)              |
-+-----------------------------------+-----------------------------------+
-| <code>`b</code>                          | backspace                         |
-+-----------------------------------+-----------------------------------+
-| <code>`t</code>                          | tab (the more typical horizontal  |
-|                                   | variety)                          |
-+-----------------------------------+-----------------------------------+
-| <code>`s</code>                          | space                             |
-+-----------------------------------+-----------------------------------+
-| <code>`v</code>                          | vertical tab -- corresponds to   |
-|                                   | Ascii value 11. It can also be    |
-|                                   | manifest in some applications by  |
-|                                   | typing [Ctrl]{.kbd}+[K]{.kbd}.    |
-+-----------------------------------+-----------------------------------+
-| <code>`a</code>                          | alert (bell) -- corresponds to   |
-|                                   | Ascii value 7. It can also be     |
-|                                   | manifest in some applications by  |
-|                                   | typing [Ctrl]{.kbd}+[G]{.kbd}.    |
-+-----------------------------------+-----------------------------------+
-| <code>`f</code>                          | formfeed -- corresponds to Ascii |
-|                                   | value 12. It can also be manifest |
-|                                   | in some applications by typing    |
-|                                   | [Ctrl]{.kbd}+[L]{.kbd}.           |
-+-----------------------------------+-----------------------------------+
-| <code>`"</code> or <code>`'</code>              | Single-quote marks (\') and       |
-|                                   | double-quote marks (\") function  |
-|                                   | identically, except that a string |
-|                                   | enclosed in single-quote marks    |
-|                                   | can contain literal double-quote  |
-|                                   | marks and vice versa. Therefore,  |
-|                                   | to include an actual quote mark   |
-|                                   | inside a literal string, escape   |
-|                                   | the quote mark or enclose the     |
-|                                   | string in the opposite type of    |
-|                                   | quote mark. For example:          |
-|                                   | <code>Var :=                         |
-|                                   | "The color `"red`" was found."</code> |
-|                                   | or                                |
-|                                   | <code>Var                              |
-|                                   | := 'The color "red" was found.'</code>. |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Sequence</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Result</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>``</code><br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p><code>`</code> (literal accent; i.e. two<br />
+consecutive escape characters<br />
+result in a single literal<br />
+character)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`;</code><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p><code class="no-highlight">;</code> (literal<br />
+semicolon)<br />
+<br />
+<strong>Note:</strong> It is not necessary to<br />
+escape a semicolon which has any<br />
+character [other<br />
+than]{.underline} space or tab to<br />
+its immediate left, since it<br />
+would not be interpreted as a<br />
+comment anyway.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`:</code><br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p><code>:</code> (literal colon). This is<br />
+necessary only in a hotstring\'s<br />
+triggering abbreviation.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`{</code><br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>[{]{.kbd} (keyboard key). This is<br />
+only valid, and is required, when<br />
+<a href="Remap.htm#EscapeBrace"><br />
+remapping</a><br />
+a key to [{]{.kbd}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`n</code></p>
+</td>
+<td colspan="1" rowspan="1">
+<p>newline (linefeed/LF)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`r</code></p>
+</td>
+<td colspan="1" rowspan="1">
+<p>carriage return (CR)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`b</code></p>
+</td>
+<td colspan="1" rowspan="1">
+<p>backspace</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`t</code><br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>tab (the more typical horizontal<br />
+variety)</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`s</code></p>
+</td>
+<td colspan="1" rowspan="1">
+<p>space</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`v</code><br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>vertical tab -- corresponds to<br />
+Ascii value 11. It can also be<br />
+manifest in some applications by<br />
+typing [Ctrl]{.kbd}+[K]{.kbd}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`a</code><br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>alert (bell) -- corresponds to<br />
+Ascii value 7. It can also be<br />
+manifest in some applications by<br />
+typing [Ctrl]{.kbd}+[G]{.kbd}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`f</code><br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>formfeed -- corresponds to Ascii<br />
+value 12. It can also be manifest<br />
+in some applications by typing<br />
+[Ctrl]{.kbd}+[L]{.kbd}.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p><code>`"</code> or <code>`'</code><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Single-quote marks (\') and<br />
+double-quote marks (\") function<br />
+identically, except that a string<br />
+enclosed in single-quote marks<br />
+can contain literal double-quote<br />
+marks and vice versa. Therefore,<br />
+to include an actual quote mark<br />
+inside a literal string, escape<br />
+the quote mark or enclose the<br />
+string in the opposite type of<br />
+quote mark. For example:<br />
+<code>Var :=  
+"The color `"red`" was found."</code><br />
+or<br />
+<code>Var  
+:= 'The color "red" was found.'</code>.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Examples">Examples</h2>
 <p>::: {#ExBasic .ex}
 <a class="ex_number" href="#ExBasic"></a> Reports a multi-line string. The lines are

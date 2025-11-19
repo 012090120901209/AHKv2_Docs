@@ -297,62 +297,154 @@ menu in the Explorer. If a file is launched without a verb, the default
 verb (usually \"open\") for that particular file type will be used. If
 specified, the verb should be followed by the name of the target file.
 The following verbs are currently supported:</p>
-<p>+-----------------------------------+-----------------------------------+
-| Verb                              | Description                       |
-+===================================+===================================+
-| *<em>verb</em>                          | Any system-defined or custom      |
-|                                   | verb. For example:                |
-|                                   | <code>R                                |
-|                                   | un "*Compile " A_ScriptFullPath</code>. |
-|                                   | The <a href="#RunAs">*RunAs</a> verb may be |
-|                                   | used in place of the <em>Run as      |
-|                                   | administrator</em> right-click menu   |
-|                                   | item.                             |
-+-----------------------------------+-----------------------------------+
-| properties                        | Displays the Explorer\'s          |
-|                                   | properties window for the         |
-|                                   | indicated file. For example:      |
-|                                   | <code>R                                |
-|                                   | un 'properties "C:\My File.txt"'</code> |
-|                                   |                                   |
-|                                   | <strong>Note:</strong> The properties window   |
-|                                   | will automatically close when the |
-|                                   | script terminates. To prevent     |
-|                                   | this, use <a href="WinWait.htm">WinWait</a>  |
-|                                   | to wait for the window to appear, |
-|                                   | then use                          |
-|                                   | <a href="WinWaitClose.htm">WinWaitClose</a>  |
-|                                   | to wait for the user to close it. |
-+-----------------------------------+-----------------------------------+
-| find                              | Opens an instance of the          |
-|                                   | Explorer\'s Search Companion or   |
-|                                   | Find File window at the indicated |
-|                                   | folder. For example:              |
-|                                   | <code>Run "find D:\"</code>                  |
-+-----------------------------------+-----------------------------------+
-| explore                           | Opens an instance of Explorer at  |
-|                                   | the indicated folder. For         |
-|                                   | example:                          |
-|                                   | <code>Run "explore " A_ProgramFiles</code>.  |
-+-----------------------------------+-----------------------------------+
-| edit                              | Opens the indicated file for      |
-|                                   | editing. It might not work if the |
-|                                   | indicated file\'s type does not   |
-|                                   | have an \"edit\" action           |
-|                                   | associated with it. For example:  |
-|                                   | <code>Run 'edit "C:\My File.txt"'</code>     |
-+-----------------------------------+-----------------------------------+
-| open                              | Opens the indicated file          |
-|                                   | (normally not needed because it   |
-|                                   | is the default action for most    |
-|                                   | file types). For example:         |
-|                                   | <code>Run 'open "My File.txt"'</code>.       |
-+-----------------------------------+-----------------------------------+
-| print                             | Prints the indicated file with    |
-|                                   | the associated application, if    |
-|                                   | any. For example:                 |
-|                                   | <code>Run 'print "My File.txt"'</code>       |
-+-----------------------------------+-----------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>Verb</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>Description</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="1">
+<p>*<em>verb</em><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Any system-defined or custom<br />
+verb. For example:<br />
+<code>R  
+un "*Compile " A_ScriptFullPath</code>.<br />
+The <a href="#RunAs">*RunAs</a> verb may be<br />
+used in place of the <em>Run as<br />
+administrator</em> right-click menu<br />
+item.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>properties<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Displays the Explorer\'s<br />
+properties window for the<br />
+indicated file. For example:<br />
+<code>R  
+un 'properties "C:\My File.txt"'</code><br />
+<br />
+<strong>Note:</strong> The properties window<br />
+will automatically close when the<br />
+script terminates. To prevent<br />
+this, use <a href="WinWait.htm">WinWait</a><br />
+to wait for the window to appear,<br />
+then use<br />
+<a href="WinWaitClose.htm">WinWaitClose</a><br />
+to wait for the user to close it.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>find<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Opens an instance of the<br />
+Explorer\'s Search Companion or<br />
+Find File window at the indicated<br />
+folder. For example:<br />
+<code>Run "find D:\"</code></p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>explore<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Opens an instance of Explorer at<br />
+the indicated folder. For<br />
+example:<br />
+<code>Run "explore " A_ProgramFiles</code>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>edit<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Opens the indicated file for<br />
+editing. It might not work if the<br />
+indicated file\'s type does not<br />
+have an \"edit\" action<br />
+associated with it. For example:<br />
+<code>Run 'edit "C:\My File.txt"'</code></p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>open<br />
+<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Opens the indicated file<br />
+(normally not needed because it<br />
+is the default action for most<br />
+file types). For example:<br />
+<code>Run 'open "My File.txt"'</code>.</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>print<br />
+<br />
+<br />
+</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>Prints the indicated file with<br />
+the associated application, if<br />
+any. For example:<br />
+<code>Run 'print "My File.txt"'</code></p>
+</td>
+</tr>
+</tbody>
+</table>
 <p>While RunWait is in a waiting state, new <a href="../misc/Threads.htm">threads</a>
 can be launched via <a href="../Hotkeys.htm">hotkey</a>, <a href="Menu.htm">custom menu
 item</a>, or <a href="SetTimer.htm">timer</a>.</p>
