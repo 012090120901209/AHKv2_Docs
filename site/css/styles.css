@@ -1,30 +1,31 @@
 /* Main Styles - Docusaurus-inspired */
 
 :root {
-    /* Colors - Light Mode */
-    --primary: #4a9eff;
-    --primary-dark: #3a8ee6;
-    --primary-light: #6eb3ff;
-    --secondary: #00c9a7;
+    /* Cursor IDE style greyscale - no colors */
+    --primary: #CCCCCC;
+    --primary-dark: #FFFFFF;
+    --primary-light: #D4D4D4;
+    --secondary: #969696;
 
-    --background: #ffffff;
-    --surface: #f8f9fa;
-    --sidebar-bg: #f8f9fa;
-    --navbar-bg: #ffffff;
+    /* Always dark mode - Cursor IDE style */
+    --background: #1E1E1E;
+    --surface: #252526;
+    --sidebar-bg: #252526;
+    --navbar-bg: #2D2D30;
 
-    --text-primary: #1c1e21;
-    --text-secondary: #525860;
-    --text-tertiary: #8c8f94;
+    --text-primary: #CCCCCC;
+    --text-secondary: #969696;
+    --text-tertiary: #6A6A6A;
 
-    --border: #e3e5e8;
-    --border-light: #f0f1f3;
+    --border: #3E3E42;
+    --border-light: #333333;
 
-    --code-bg: #f6f8fa;
-    --code-border: #e3e5e8;
+    --code-bg: #1E1E1E;
+    --code-border: #3E3E42;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.7);
 
     /* Fonts */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
@@ -39,26 +40,26 @@
     --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Mode */
+/* No light mode - always dark */
 [data-theme="dark"] {
-    --primary: #5ba2ff;
-    --primary-dark: #4a92ef;
-    --primary-light: #7bb8ff;
+    --primary: #CCCCCC;
+    --primary-dark: #FFFFFF;
+    --primary-light: #D4D4D4;
 
-    --background: #0d1117;
-    --surface: #161b22;
-    --sidebar-bg: #0d1117;
-    --navbar-bg: #161b22;
+    --background: #1E1E1E;
+    --surface: #252526;
+    --sidebar-bg: #252526;
+    --navbar-bg: #2D2D30;
 
-    --text-primary: #e6edf3;
-    --text-secondary: #8b949e;
-    --text-tertiary: #6e7681;
+    --text-primary: #CCCCCC;
+    --text-secondary: #969696;
+    --text-tertiary: #6A6A6A;
 
-    --border: #30363d;
-    --border-light: #21262d;
+    --border: #3E3E42;
+    --border-light: #333333;
 
-    --code-bg: #161b22;
-    --code-border: #30363d;
+    --code-bg: #1E1E1E;
+    --code-border: #3E3E42;
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.6);
@@ -236,9 +237,9 @@ pre code {
 
 #searchInput:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: var(--text-primary);
     background-color: var(--background);
-    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(204, 204, 204, 0.1);
 }
 
 .search-hint {
@@ -343,7 +344,7 @@ pre code {
 }
 
 .search-result-highlight {
-    background-color: rgba(74, 158, 255, 0.2);
+    background-color: rgba(204, 204, 204, 0.2);
     font-weight: 600;
 }
 
