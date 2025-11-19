@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoHotkey v2 Complete Documentation & Examples</title>
+    <title>AutoHotkey v2 Documentation</title>
     <style>
         * {
             margin: 0;
@@ -12,468 +12,455 @@
         }
 
         :root {
-            /* Ultra-dark backgrounds */
-            --bg-primary: #0C0C0F;
-            --bg-secondary: #1A1A1E;
-            --bg-tertiary: #232326;
-            --bg-card: #2A2A2E;
+            /* Cursor-style greyscale colors - no blue hue */
+            --bg-primary: #1E1E1E;
+            --bg-secondary: #252526;
+            --bg-tertiary: #2D2D30;
+            --bg-card: #2D2D30;
+            --bg-hover: #3E3E42;
 
-            /* Accent colors */
-            --blue: #3B82F6;
-            --purple: #8B5CF6;
-            --pink: #EC4899;
-            --teal: #14B8A6;
-            --orange: #F97316;
-            --indigo: #6366F1;
+            /* Text colors - pure greys */
+            --text-primary: #CCCCCC;
+            --text-secondary: #969696;
+            --text-muted: #6A6A6A;
+            --text-bright: #FFFFFF;
 
-            /* Text hierarchy */
-            --text-primary: #FFFFFF;
-            --text-secondary: #E5E5E5;
-            --text-muted: #A0A0A0;
-            --text-dim: #6B6B6B;
+            /* Borders */
+            --border: #3E3E42;
+            --border-light: #333333;
 
-            /* Semantic colors */
-            --success: #10B981;
-            --error: #EF4444;
-            --warning: #F59E0B;
-            --info: #3B82F6;
+            /* Accent - subtle grey */
+            --accent: #D4D4D4;
+            --accent-hover: #FFFFFF;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
         }
 
-        .header {
+        /* Navigation */
+        nav {
             background: var(--bg-secondary);
-            padding: 2rem 0;
-            border-bottom: 2px solid var(--bg-tertiary);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .container {
+        nav .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-bright);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
         }
 
         h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         .subtitle {
-            color: var(--text-secondary);
             font-size: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .stat {
-            background: var(--bg-card);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--bg-tertiary);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--blue);
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        .main-content {
-            padding: 3rem 0;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--bg-tertiary);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--blue), var(--purple));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
-            border-color: var(--blue);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .card p {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
         }
 
-        .card-accent-blue { border-top-color: var(--blue); }
-        .card-accent-purple { border-top-color: var(--purple); }
-        .card-accent-pink { border-top-color: var(--pink); }
-        .card-accent-teal { border-top-color: var(--teal); }
-        .card-accent-orange { border-top-color: var(--orange); }
-        .card-accent-indigo { border-top-color: var(--indigo); }
-
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid;
-        }
-
-        .btn-primary {
-            background: var(--blue);
-            color: white;
-            border-color: var(--blue);
-        }
-
-        .btn-primary:hover {
-            background: transparent;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border-color: var(--bg-tertiary);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--purple);
-            color: var(--purple);
-        }
-
-        .features {
-            margin-top: 3rem;
-        }
-
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .feature {
-            background: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--teal);
-        }
-
-        .feature h3 {
-            color: var(--teal);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .feature p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .quick-links {
+        /* Action Buttons */
+        .actions {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
+            margin-bottom: 4rem;
         }
 
-        .tag {
-            background: var(--bg-tertiary);
-            color: var(--text-secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .tag-count {
-            background: var(--bg-card);
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
-            font-weight: bold;
-            color: var(--blue);
+        .btn-primary {
+            background: var(--text-bright);
+            color: var(--bg-primary);
+            border-color: var(--text-bright);
         }
 
-        footer {
-            background: var(--bg-secondary);
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--bg-tertiary);
+        .btn-primary:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        /* Stats Grid */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin-bottom: 6rem;
+        }
+
+        .stat {
             text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Content Sections */
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 6rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 2rem;
+        }
+
+        /* Cards Grid */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .card:hover {
+            border-color: var(--text-muted);
+            background: var(--bg-hover);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
             color: var(--text-muted);
         }
 
-        code {
-            background: var(--bg-tertiary);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            color: var(--pink);
+        .card-arrow {
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            transition: transform 0.2s;
         }
 
+        .card:hover .card-arrow {
+            transform: translateX(4px);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: 1rem;
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text-bright);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
-            .grid {
-                grid-template-columns: 1fr;
+            .hero {
+                padding: 4rem 1.5rem 3rem;
             }
 
-            .stats {
+            section {
+                padding: 0 1.5rem 4rem;
+            }
+
+            .actions {
                 flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <nav>
         <div class="container">
-            <h1>AutoHotkey v2 Complete Documentation</h1>
-            <p class="subtitle">The most comprehensive AHK v2 resource with full documentation and 412 working examples</p>
+            <a href="index.html" class="logo">
+                <span>⚡</span>
+                AutoHotkey v2
+            </a>
+            <div class="nav-links">
+                <a href="docs/Tutorial.html">Docs</a>
+                <a href="examples/index.html">Examples</a>
+                <a href="https://github.com/012090120901209/AHKv2_Docs" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero">
+            <h1>AutoHotkey v2<br>Documentation</h1>
+            <p class="subtitle">
+                Complete reference documentation with 412 working examples for Windows automation
+            </p>
+
+            <div class="actions">
+                <a href="docs/Tutorial.html" class="btn btn-primary">
+                    Get Started
+                </a>
+                <a href="docs/DOCUMENTATION_INVENTORY.html" class="btn btn-secondary">
+                    Browse Docs
+                </a>
+                <a href="examples/index.html" class="btn btn-secondary">
+                    View Examples
+                </a>
+            </div>
 
             <div class="stats">
                 <div class="stat">
                     <div class="stat-value">411</div>
-                    <div class="stat-label">Documentation Files</div>
+                    <div class="stat-label">Doc Pages</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">412</div>
-                    <div class="stat-label">Working Examples</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">3,192</div>
-                    <div class="stat-label">Topics Covered</div>
+                    <div class="stat-label">Examples</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">19</div>
                     <div class="stat-label">Categories</div>
                 </div>
             </div>
-
-            <div class="quick-links">
-                <a href="docs/DOCUMENTATION_INVENTORY.html" class="btn btn-primary">📚 Browse Documentation</a>
-                <a href="examples/index.html" class="btn btn-secondary">💻 View Examples</a>
-                <a href="docs/EXAMPLES_SUMMARY.html" class="btn btn-secondary">📊 Examples Summary</a>
-            </div>
         </div>
-    </header>
 
-    <main class="main-content">
-        <div class="container">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Explore by Category</h2>
+        <section>
+            <h2>Quick Access</h2>
+            <div class="cards">
+                <a href="docs/Tutorial.html" class="card">
+                    <h3>Getting Started</h3>
+                    <p>Learn AutoHotkey basics, syntax, and core concepts</p>
+                    <div class="card-arrow">→</div>
+                </a>
 
-            <div class="grid">
-                <div class="card card-accent-blue">
-                    <h2>🪟 Window Management</h2>
-                    <p>Control windows, positions, sizes, and states</p>
-                    <div class="tag">
+                <a href="docs/Functions.html" class="card">
+                    <h3>Function Reference</h3>
+                    <p>200+ built-in functions for automation and scripting</p>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <a href="docs/Hotkeys.html" class="card">
+                    <h3>Hotkeys & Hotstrings</h3>
+                    <p>Create keyboard shortcuts and text expansion</p>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <a href="docs/Gui.html" class="card">
+                    <h3>GUI Creation</h3>
+                    <p>Build graphical user interfaces for your scripts</p>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <a href="examples/window-management/" class="card">
+                    <h3>Window Management</h3>
+                    <p>50 examples for controlling windows and applications</p>
+                    <div class="card-meta">
                         <span>50 examples</span>
-                        <span class="tag-count">585 topics</span>
                     </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/window-management/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
+                    <div class="card-arrow">→</div>
+                </a>
 
-                <div class="card card-accent-purple">
-                    <h2>🎮 Control Functions</h2>
-                    <p>Interact with window controls and GUI elements</p>
-                    <div class="tag">
-                        <span>34 examples</span>
-                        <span class="tag-count">299 topics</span>
-                    </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/control-functions/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
-
-                <div class="card card-accent-pink">
-                    <h2>📁 File & Directory</h2>
-                    <p>File operations, reading, writing, and management</p>
-                    <div class="tag">
-                        <span>31 examples</span>
-                        <span class="tag-count">242 topics</span>
-                    </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/file-directory/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
-
-                <div class="card card-accent-teal">
-                    <h2>⌨️ Keyboard & Hotkeys</h2>
-                    <p>Send keys, create hotkeys, and handle input</p>
-                    <div class="tag">
+                <a href="examples/keyboard-hotkeys/" class="card">
+                    <h3>Keyboard Automation</h3>
+                    <p>30 examples for hotkeys and keyboard control</p>
+                    <div class="card-meta">
                         <span>30 examples</span>
-                        <span class="tag-count">185 topics</span>
                     </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/keyboard-hotkeys/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
+                    <div class="card-arrow">→</div>
+                </a>
 
-                <div class="card card-accent-orange">
-                    <h2>🖱️ Mouse Functions</h2>
-                    <p>Mouse automation, clicks, and movements</p>
-                    <div class="tag">
-                        <span>8 examples</span>
-                        <span class="tag-count">42 topics</span>
+                <a href="examples/file-directory/" class="card">
+                    <h3>File Operations</h3>
+                    <p>31 examples for file and directory management</p>
+                    <div class="card-meta">
+                        <span>31 examples</span>
                     </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/mouse-functions/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
+                    <div class="card-arrow">→</div>
+                </a>
 
-                <div class="card card-accent-indigo">
-                    <h2>🎨 GUI Functions</h2>
-                    <p>Create graphical user interfaces</p>
-                    <div class="tag">
-                        <span>6 examples</span>
-                        <span class="tag-count">103 topics</span>
-                    </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/gui-functions/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
-
-                <div class="card card-accent-blue">
-                    <h2>🔤 String Functions</h2>
-                    <p>Text manipulation and processing</p>
-                    <div class="tag">
-                        <span>12 examples</span>
-                        <span class="tag-count">Multiple topics</span>
-                    </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/string-functions/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
-
-                <div class="card card-accent-purple">
-                    <h2>🔢 Math Functions</h2>
-                    <p>Mathematical operations and calculations</p>
-                    <div class="tag">
-                        <span>4 examples</span>
-                        <span class="tag-count">27 topics</span>
-                    </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/math-functions/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
-
-                <div class="card card-accent-pink">
-                    <h2>🔄 Flow Control</h2>
-                    <p>Loops, conditionals, and program flow</p>
-                    <div class="tag">
-                        <span>15 examples</span>
-                        <span class="tag-count">47 topics</span>
-                    </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="examples/flow-control/" class="btn btn-primary">View Examples</a>
-                    </div>
-                </div>
+                <a href="docs/EXAMPLES_SUMMARY.html" class="card">
+                    <h3>All Examples</h3>
+                    <p>Browse all 412 examples organized by category</p>
+                    <div class="card-arrow">→</div>
+                </a>
             </div>
+        </section>
 
+        <section>
+            <h2>Documentation Features</h2>
             <div class="features">
-                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Key Features</h2>
-
-                <div class="feature-list">
-                    <div class="feature">
-                        <h3>✅ Complete Coverage</h3>
-                        <p>Every documented function has a working example</p>
-                    </div>
-
-                    <div class="feature">
-                        <h3>📝 Well Commented</h3>
-                        <p>Clear explanations in every example</p>
-                    </div>
-
-                    <div class="feature">
-                        <h3>🏃 Runnable Code</h3>
-                        <p>All examples work out of the box</p>
-                    </div>
-
-                    <div class="feature">
-                        <h3>🗂️ Organized</h3>
-                        <p>Categorized by functionality</p>
-                    </div>
-
-                    <div class="feature">
-                        <h3>🔍 Searchable</h3>
-                        <p>Full inventory and index included</p>
-                    </div>
-
-                    <div class="feature">
-                        <h3>🎯 Practical</h3>
-                        <p>Real-world use cases demonstrated</p>
-                    </div>
+                <div class="feature">
+                    <div class="feature-title">Complete Coverage</div>
+                    <div class="feature-desc">Every function, object, and directive documented with examples</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Working Examples</div>
+                    <div class="feature-desc">412 tested examples you can run immediately</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Search Functionality</div>
+                    <div class="feature-desc">Fast client-side search across all documentation pages</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Well Organized</div>
+                    <div class="feature-desc">Categorized by functionality for easy navigation</div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>AutoHotkey v2 Complete Documentation & Examples</p>
-            <p style="margin-top: 0.5rem; font-size: 0.875rem;">
-                Created with ❤️ for the AHK community |
-                <a href="https://www.autohotkey.com/docs/v2/" style="color: var(--blue); text-decoration: none;">Official AHK Docs</a>
-            </p>
-        </div>
+        <p>
+            AutoHotkey v2 Documentation &nbsp;|&nbsp;
+            <a href="https://www.autohotkey.com/docs/v2/" target="_blank">Official Docs</a> &nbsp;|&nbsp;
+            <a href="https://github.com/012090120901209/AHKv2_Docs" target="_blank">GitHub</a>
+        </p>
     </footer>
 </body>
 </html>
